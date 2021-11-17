@@ -22,6 +22,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Sample application that demonstrates the use of JavaFX Canvas for a Game.
@@ -140,16 +144,32 @@ public class Main extends Application {
         gc.setFill(Color.GRAY);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        // x multiplier is grid width coord, grid height multiplier is y level.
-        for (int x = 0; x < GRID_WIDTH; x++) {
-            gc.drawImage(dirtImage, x * GRID_CELL_WIDTH, 0 * GRID_CELL_HEIGHT);
+        try {
+            File file = new File("TestMap.txt");
+            Scanner myReader = new Scanner(file);
+            int tempY = 0;
+            while (myReader.hasNextLine()) {
+                String[] data = myReader.nextLine().split(",");
+                for(int i = 0; i < 8; i++){
+                    Image tileType = null;
+                    if(data[i].equals("G")){
+                        tileType = grassImage;
+                    } else if (data[i].equals("T")){
+                        tileType = tunnelImage;
+                    }else if (data[i].equals("D")){
+                        tileType = dirtImage;
+                    }
+                    gc.drawImage(tileType, i * GRID_CELL_WIDTH, tempY * GRID_CELL_HEIGHT);
+                }
+                System.out.println(Arrays.toString(data));
+                tempY += 1;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
-        for (int x = 0; x < GRID_WIDTH; x++) {
-            gc.drawImage(grassImage, x * GRID_CELL_WIDTH, 1 * GRID_CELL_HEIGHT);
-        }
-        for (int x = 0; x < GRID_WIDTH; x++) {
-            gc.drawImage(dirtImage, x * GRID_CELL_WIDTH, 2 * GRID_CELL_HEIGHT);
-        }
+
 
         // Draw player at current location
         gc.drawImage(playerImage, playerX * GRID_CELL_WIDTH, playerY * GRID_CELL_HEIGHT);
@@ -220,7 +240,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
 
         // Create the canvas that we will draw on.
-        // We store this as a gloabl variable so other methods can access it.
+        // We store this as a global variable so other methods can access it.
         canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         root.setCenter(canvas);
 
