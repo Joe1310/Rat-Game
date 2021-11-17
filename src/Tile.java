@@ -25,5 +25,4 @@ public class Tile {
     public static String[] getMovementOptions(){
         return null;
     }
-
 }
