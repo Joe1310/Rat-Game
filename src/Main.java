@@ -144,11 +144,13 @@ public class Main extends Application {
         gc.setFill(Color.GRAY);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
+        // File reader to generate map.
         try {
             File file = new File("TestMap.txt");
             Scanner myReader = new Scanner(file);
             int tempY = 0;
             while (myReader.hasNextLine()) {
+                // Check the split line into separate letters. Set tile type based on what is found.
                 String[] data = myReader.nextLine().split(",");
                 for(int i = 0; i < 8; i++){
                     Image tileType = null;
