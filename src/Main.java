@@ -57,6 +57,8 @@ public class Main extends Application {
     // Loaded images
     private Image playerImage;
     private Image dirtImage;
+    private Image grassImage;
+    private Image tunnelImage;
     private Image iconImage;
 
     // X and Y coordinate of player on the grid.
@@ -73,7 +75,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         // Load images. Note we use png images with a transparent background.
         playerImage = new Image("player.png");
-        dirtImage = new Image("dirt.png");
+        dirtImage = new Image("Dirt.png");
+        grassImage = new Image("Grass.png");
+        tunnelImage = new Image("Tunnel.png");
         iconImage = new Image("icon.png");
 
         // Build the GUI
@@ -136,9 +140,13 @@ public class Main extends Application {
         gc.setFill(Color.GRAY);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        // Draw row of dirt images
-        // We multiply by the cell width and height to turn a coordinate in our grid into a pixel coordinate.
-        // We draw the row at y value 2.
+        // x multiplier is grid width coord, grid height multiplier is y level.
+        for (int x = 0; x < GRID_WIDTH; x++) {
+            gc.drawImage(dirtImage, x * GRID_CELL_WIDTH, 0 * GRID_CELL_HEIGHT);
+        }
+        for (int x = 0; x < GRID_WIDTH; x++) {
+            gc.drawImage(grassImage, x * GRID_CELL_WIDTH, 1 * GRID_CELL_HEIGHT);
+        }
         for (int x = 0; x < GRID_WIDTH; x++) {
             gc.drawImage(dirtImage, x * GRID_CELL_WIDTH, 2 * GRID_CELL_HEIGHT);
         }
