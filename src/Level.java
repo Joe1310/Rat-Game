@@ -14,14 +14,13 @@ public class Level {
 	int[] inventory;
 	int levelScore;
 	
-    //Main method to test the Level file and it's functions.
 	public static void main(String[] args) {
 		
-		Level("levelInfo.txt");
+		Levelinfo("levelInfo.txt");
 		
 	}
-    
-	public static void Level(String fn) {
+
+	public static void Levelinfo(String fn) {
 		
 		File filename = new File(fn);
 		
@@ -51,7 +50,7 @@ public class Level {
 		int rat;
 		String items;
 		int maxRats;
-		String levelData;
+		String levelData = "";
 		int parTime; //seconds
 		int itemSpawnRate; //seconds;
 		
@@ -60,16 +59,17 @@ public class Level {
 		grid = new String[row];
 		
 		for (int i = 0; i < row; i ++) {
-			grid[i] = scan.nextLine();
+			grid[i] = scan.next();
 		}
 		
 		rat = scan.nextInt();
+		
 		rats = new String[rat];
 		for(int i = 0; i < rat; i ++) {
-			rats[i] = scan.nextLine();
+			rats[i] = scan.next();
 		}
 		
-		items = scan.nextLine();
+		items = scan.next();
 		
 		maxRats = scan.nextInt();
 		
@@ -77,9 +77,16 @@ public class Level {
 		
 		itemSpawnRate = scan.nextInt();
 		
-		levelData = column + " " + row + "\n"
-				+ grid + "\n" + rats + "\n" + items + "\n"
-				+ maxRats + "\n";
+		levelData += "Column: " + column + "\nRow: " + row + "\nGrid: \n";
+		for(String str : grid) {
+			levelData += str + "\n";
+		}
+		levelData += "\nAlive Rats: " + rat + "\nRats: \n";
+		for(String str : rats) {
+			levelData += str + "\n";
+		}
+		levelData += "\nItems: " + items + "\nMaximum Rats: " + maxRats +
+				"\nParTime: " + parTime + "\nItem Spawn Rate: " + itemSpawnRate;
 		
 		return levelData;
 	}
@@ -89,6 +96,7 @@ public class Level {
 		
 		//This method uses JavaFx to construct the Map.
 	}
+	
 	
 	public void saveCurrent() {
 		//We might need playerID for storing different players ongoing game
