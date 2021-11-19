@@ -2,12 +2,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Rat {
-    private int health = 100;
-    private double speed;
-    private boolean sterile;
-    private int[] location;
-    private Char directionFacing;
-    private  int population;
+    protected int health = 100;
+    protected double speed;
+    protected boolean sterile;
+    protected int[] location;
+    protected Char directionFacing;
+    protected  int population;
     protected Rat[] Rats;
 
     public Rat(int health, double speed, boolean sterile, int[] location, Char directionFacing, int population){
@@ -32,6 +32,7 @@ public class Rat {
     private void move (){
         //move rat
         //waiting for movement options
+        
     }
     private getRats (){
         return Rats;
