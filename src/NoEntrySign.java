@@ -10,7 +10,7 @@ public class NoEntrySign extends Item {
 	}
 	
 	public void degrade() {
-		health = health - 1;
+		health--;
 		if (health == 0) {
 			remove();
 		}
