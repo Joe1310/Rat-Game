@@ -32,7 +32,6 @@ public class Rat {
     private void move (){
         //move rat
         //waiting for movement options
-        
     }
     private getRats (){
         return Rats;
