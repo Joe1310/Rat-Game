@@ -1,14 +1,21 @@
 public abstract class Entity {
 	
-	protected int[] location;
-	private Object entityType;
+	private Entity[] entities;
+	private int[] location;
+	private String imageName;
 	
-    public Entity(Object obj, int[] location){
-    	entityType = obj;
+    public Entity(int[] location) {
     	this.location = location;
+    	this 
     }
     
-    public abstract void draw();
+    public void draw(GraphicsContext gc) {
+    	gc.drawImage = new Image(imageName);
+    }
+    
+    public Entity[] getEntites() {
+    	return(entities);
+    }
     
     public void remove() {
     	
