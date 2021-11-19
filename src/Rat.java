@@ -8,9 +8,9 @@ public class Rat {
     protected int[] location;
     protected Char directionFacing;
     protected  int population;
-    protected Rat[] Rats;
+    protected static Rat[] Rats;
 
-    public Rat(int health, double speed, boolean sterile, int[] location, Char directionFacing, int population){
+    public Rat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population){
         this.health = health;
         this.speed = speed;
         this.sterile = sterile;
