@@ -1,5 +1,6 @@
 public class NoEntrySign extends Item {
 	private int health;
+	private int location[];
 	
 	public NoEntrySign() {
 		health = 5;
