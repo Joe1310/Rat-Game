@@ -33,7 +33,7 @@ public class Rat {
         //move rat
         //waiting for movement options
     }
-    private getRats (){
+    private Rat[] getRats (){
         return Rats;
     }
 
