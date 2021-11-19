@@ -6,7 +6,7 @@ public class DeathRat extends Rat {
     }
     private void killRat(){
         //removes rat that has been killed (need to research)
-        for(int i = 0; Rats.length; i ++){
+        for(int i = 0; Rats.length >= i; i ++){
             if (this.Rat.location = Rats[i].location){
                 //remove rat
                 numOfKilled = numOfKilled ++;               
