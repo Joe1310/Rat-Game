@@ -1,12 +1,12 @@
 public abstract class Entity {
 	
-	private Entity[] entities;
-	private int[] location;
+	private static Entity[] entities;
 	private String imageName;
+	private int[] location;
 	
     public Entity(int[] location) {
     	this.location = location;
-    	this 
+    	// something to add this entity to the entities array
     }
     
     public void draw(GraphicsContext gc) {

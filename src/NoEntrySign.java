@@ -1,12 +1,13 @@
 public class NoEntrySign extends Item {
 	private int health;
-	private int location[];
+	private int[] location;
 	
 	public NoEntrySign() {
 		health = 5;
 	}
 	
-	public NoEntrySign(int health) {
+	public NoEntrySign(int[] location, int health) {
+		super(location);
 		this.health = health;
 	}
 	
