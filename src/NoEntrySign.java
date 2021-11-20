@@ -1,8 +1,8 @@
-public class NoEntrySign extends Item {
+public class NoEntrySign extends Entity {
 	private int health;
-	private int[] location;
 	
-	public NoEntrySign() {
+	public NoEntrySign(int[] location) {
+		super(location);
 		health = 5;
 	}
 	
