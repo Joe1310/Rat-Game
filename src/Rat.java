@@ -1,51 +1,52 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Rat {
+public class Rat extends Entity{
     protected int health = 100;
     protected double speed;
     protected boolean sterile;
-    protected int[] location;
-    protected Char directionFacing;
-    protected  int population;
-    protected static Rat[] Rats;
+    protected char directionFacing;
+    protected int population;
+    protected static ArrayList<Rat> rats;
 
     public Rat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population){
-        this.health = health;
+        super(location);
+    	this.health = health;
         this.speed = speed;
         this.sterile = sterile;
-        this.location = location;
         this.directionFacing = directionFacing;
         this.population = population;
-        Rats += this.Rat;
-        populationUpdate(); 
+        rats.add(this);
+        populationUpdateAdd(); 
     }
 
-    public void modifySpeed(int newSpeed){ 
+    public void modifySpeed(int newSpeed) { 
         this.speed = newSpeed;
     }
 
-    public void modifyHealth(int newHealth){
+    public void modifyHealth(int newHealth) {
         this.health = newHealth;
     }
 
-    private void move (){
+    private void move() {
         //move rat
         //waiting for movement options
     }
-    private Rat[] getRats (){
-        return Rats;
+    
+    private ArrayList<Rat> getRats() {
+        return rats;
     }
 
-    private void ratDeath(){
-        this.Rat = null;
-
+    private void ratDeath() {
+        rats.remove(this);
+        removeEntity();
     }
-    public void populationUpdateAdd(){
+    
+    public void populationUpdateAdd() {
         population = population ++; 
     }
 
-    public void populationUpdateSub(){
+    public void populationUpdateSub() {
         population = population --; 
     }
 }

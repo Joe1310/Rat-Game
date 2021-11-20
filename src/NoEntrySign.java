@@ -14,7 +14,7 @@ public class NoEntrySign extends Entity {
 	public void degrade() {
 		health--;
 		if (health == 0) {
-			remove();
+			removeEntity(this);
 		}
 	}
 }

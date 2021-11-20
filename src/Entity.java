@@ -1,6 +1,10 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import java.util.ArrayList;
+
 public abstract class Entity {
 	
-	private static Entity[] entities;
+	private static ArrayList<Entity> entities;
 	private String imageName;
 	private int[] location;
 	
@@ -10,14 +14,14 @@ public abstract class Entity {
     }
     
     public void draw(GraphicsContext gc) {
-    	gc.drawImage = new Image(imageName);
+    	gc.drawImage(new Image(imageName), location[0], location[1]);
     }
     
-    public Entity[] getEntites() {
+    public ArrayList<Entity> getEntites() {
     	return(entities);
     }
     
-    public void remove() {
-    	
+    public void removeEntity() {
+    	entities.remove(this);
     }
 }
