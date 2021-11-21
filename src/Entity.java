@@ -8,9 +8,10 @@ public abstract class Entity {
 	private String imageName;
 	private int[] location;
 	
-    public Entity(int[] location) {
+    public Entity(int[] location, String imageName) {
     	this.location = location;
-    	// something to add this entity to the entities array
+    	this.imageName = imageName;
+    	entities.add(this);
     }
     
     public void draw(GraphicsContext gc) {
@@ -24,4 +25,6 @@ public abstract class Entity {
     public void removeEntity() {
     	entities.remove(this);
     }
+    
+    public abstract void act();
 }
