@@ -19,7 +19,7 @@ public class BabyRat extends Rat {
     }
     //in progress
     public void becomeAdult(){
-        Rat test = new Rat(this.health , 1 , this.sterile, this.location, this.directionFacing, this.population);// check if correct
+        Rat test = new Rat(this.health , 1 , this.sterile, this.location, this.directionFacing, this.population);// check if correct 
         this.BabyRat = null;  
     }
 
