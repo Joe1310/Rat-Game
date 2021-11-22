@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Map {
@@ -9,7 +6,7 @@ public class Map {
     private int[] entityLocations;
     private int maxRat;
     private String mapName;
-    private String[] tileLayout;
+    public static Tile[][] tileLayout;
     private String mapInfo;
 
     /**
@@ -19,7 +16,7 @@ public class Map {
      * @param itemSpawnRate has item spawn rate
      * @param entityLocations has the locations of both rats and items in entity
      */
-    public Map(String mapName, String[] tileLayout,int itemSpawnRate,
+    public Map(String mapName, Tile[][] tileLayout,int itemSpawnRate,
                int[] entityLocations, int maxRat) {
  //       File filename = new File(mapInfo);
  //       Scanner scan = null;
@@ -34,7 +31,7 @@ public class Map {
 //        mapInfo = mapLayout(scan)
 
         this.mapName = mapName;
-        this.tileLayout = tileLayout;
+        Map.tileLayout = tileLayout;
         this.itemSpawnRate = itemSpawnRate;
         this.entityLocations = entityLocations;
         this.maxRat = maxRat;
@@ -64,5 +61,23 @@ public class Map {
      *
      */
     public void spawnEntity(String ent) {
+    }
+
+    public static ArrayList<String> getMovementOptions(int x, int y){
+        ArrayList<String> movementOptions = new ArrayList<String>();
+        if(tileLayout[x + 1][y].getTileType().equals("Grass") ||
+                tileLayout[x + 1][y].getTileType().equals("Tunnel")){
+            movementOptions.add("right");
+        } else if(tileLayout[x - 1][y].getTileType().equals("Grass") ||
+                tileLayout[x - 1][y].getTileType().equals("Tunnel")){
+            movementOptions.add("left");
+        } else if(tileLayout[x][y - 1].getTileType().equals("Grass") ||
+                tileLayout[x][y - 1].getTileType().equals("Tunnel")){
+            movementOptions.add("up");
+        } else if(tileLayout[x][y + 1].getTileType().equals("Grass") ||
+                tileLayout[x][y + 1].getTileType().equals("Tunnel")){
+            movementOptions.add("down");
+        }
+        return movementOptions;
     }
 }

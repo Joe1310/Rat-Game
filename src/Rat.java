@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.random;
 
-public class Rat extends Entity{
+public abstract class Rat extends Entity{
     protected int health = 100;
     protected double speed;
     protected boolean sterile;
@@ -10,8 +10,8 @@ public class Rat extends Entity{
     protected int population;
     protected static ArrayList<Rat> Rats;
 
-    public Rat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population){
-        super(location);
+    public Rat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population, String image){
+        super(location, image);
     	this.health = health;
         this.speed = speed;
         this.sterile = sterile;
@@ -26,6 +26,8 @@ public class Rat extends Entity{
         int n = rand.nextInt(5);
         return n;
     }
+    
+    public abstract void act();
 
     public void modifySpeed(int newSpeed) { 
         this.speed = newSpeed;
