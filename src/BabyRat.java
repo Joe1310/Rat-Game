@@ -26,6 +26,8 @@ public class BabyRat extends Rat {
     public void becomeAdult(){
         Entity test = new AdultRat(this.health , 1 , this.sterile, this.location, this.directionFacing, this.population);// check if correct
         removeEntity(); 
+        Rat test = new Rat(this.health , 1 , this.sterile, this.location, this.directionFacing, this.population);// check if correct 
+        this.BabyRat = null;  
     }
 
 
