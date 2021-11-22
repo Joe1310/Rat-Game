@@ -69,13 +69,13 @@ public class Map {
                 tileLayout[x + 1][y].getTileType().equals("Tunnel")){
             movementOptions.add("right");
         } else if(tileLayout[x - 1][y].getTileType().equals("Grass") ||
-                tileLayout[x + 1][y].getTileType().equals("Tunnel")){
+                tileLayout[x - 1][y].getTileType().equals("Tunnel")){
             movementOptions.add("left");
         } else if(tileLayout[x][y - 1].getTileType().equals("Grass") ||
-                tileLayout[x + 1][y].getTileType().equals("Tunnel")){
+                tileLayout[x][y - 1].getTileType().equals("Tunnel")){
             movementOptions.add("up");
         } else if(tileLayout[x][y + 1].getTileType().equals("Grass") ||
-                tileLayout[x + 1][y].getTileType().equals("Tunnel")){
+                tileLayout[x][y - 1].getTileType().equals("Tunnel")){
             movementOptions.add("down");
         }
         return movementOptions;
