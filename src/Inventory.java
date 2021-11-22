@@ -18,13 +18,15 @@ public class Inventory {
     }
 
     // functions get'ItemName' returns the amount of them in the inventory
-    // functions add'ItemName' adds one to the amount of items
+    // functions add'ItemName' adds one to the amount of items, as long as its below 5 which is the item cap
     // functions remove'ItemName' takes one off the amount of them
     public int getGas() {
         return gasQuantity;
     }
     public void addGas() {
-        this.gasQuantity += 1;
+        if (this.gasQuantity < 5) {
+            this.gasQuantity += 1;
+        }
     }
     public void removeGas() {
         this.gasQuantity -= 1;
@@ -35,7 +37,9 @@ public class Inventory {
         return deathRatQuantity;
     }
     public void addDeathRat() {
-        this.deathRatQuantity += 1;
+        if (this.deathRatQuantity < 5) {
+            this.deathRatQuantity += 1;
+        }
     }
     public void removeDeathRat() {
         this.deathRatQuantity -= 1;
@@ -46,7 +50,9 @@ public class Inventory {
         return poisonQuantity;
     }
     public void addPoison() {
-        this.poisonQuantity += 1;
+        if (this.poisonQuantity < 5) {
+            this.poisonQuantity += 1;
+        }
     }
     public void removePoison() {
         this.poisonQuantity -= 1;
@@ -57,7 +63,9 @@ public class Inventory {
         return sterilizationQuantity;
     }
     public void addSterilization() {
-        this.sterilizationQuantity += 1;
+        if (this.sterilizationQuantity < 5) {
+            this.sterilizationQuantity += 1;
+        }
     }
     public void removeSterilization() {
         this.sterilizationQuantity -= 1;
@@ -68,7 +76,9 @@ public class Inventory {
         return sexChangeQuantity;
     }
     public void addSexChange() {
-        this.sexChangeQuantity += 1;
+        if (this.sexChangeQuantity < 5) {
+            this.sexChangeQuantity += 1;
+        }
     }
     public void removeSexChange() {
         this.sexChangeQuantity -= 1;
@@ -79,7 +89,9 @@ public class Inventory {
         return noEntrySignQuantity;
     }
     public void addNoEntrySign() {
-        this.noEntrySignQuantity += 1;
+        if (this.noEntrySignQuantity < 5) {
+            this.noEntrySignQuantity += 1;
+        }
     }
     public void removeNoEntrySign() {
         this.noEntrySignQuantity -= 1;
@@ -90,10 +102,13 @@ public class Inventory {
         return bombQuantity;
     }
     public void addBomb() {
-        this.bombQuantity += 1;
+        if (this.bombQuantity < 5) {
+            this.bombQuantity += 1;
+        }
     }
     public void removeBomb() {
         this.bombQuantity -= 1;
     }
+
 
 }

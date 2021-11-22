@@ -11,6 +11,7 @@ public class Controller {
         System.out.println("HighScores");
     }
     public void Quit(ActionEvent e){
-        System.out.println("Quit");
+        System.out.println("Quitting");
+        System.exit(0);
     }
 }
