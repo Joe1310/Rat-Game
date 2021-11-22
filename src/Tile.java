@@ -1,11 +1,12 @@
+import java.util.ArrayList;
+
 /**
  *
  */
 public class Tile {
-    private String tileType;
-    private int x;
-    private int y;
-    private String[] movementOptions;
+    private final String tileType;
+    private final int x;
+    private final int y;
 
     /**
      * @param tileType The type of tile (Grass, Tunnel, Path).
@@ -16,13 +17,17 @@ public class Tile {
         this.x = x;
         this.y = y;
         this.tileType = tileType;
-        movementOptions = getMovementOptions();
+        ArrayList<String> movementOptions = getMovementOptions();
     }
 
     /**
      * @return return a list of movement options from that tile.
      */
-    public static String[] getMovementOptions(){
-        return null;
+    public ArrayList<String> getMovementOptions(){
+        return Map.getMovementOptions(x, y);
+    }
+
+    public String getTileType(){
+        return this.tileType;
     }
 }
