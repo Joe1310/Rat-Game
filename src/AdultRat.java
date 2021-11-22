@@ -4,7 +4,7 @@ public class AdultRat extends Rat {
     private boolean isPregnant;
 
     public AdultRat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population, boolean sex, boolean isPregnant){
-        super(health, speed, sterile, location, directionFacing, population);
+        super(health, speed, sterile, location, directionFacing, population);//add image of rat for file
         this.sex = sex;
         this.isPregnant = isPregnant;
         Rats += this.AdultRat;
@@ -17,18 +17,13 @@ public class AdultRat extends Rat {
     }
 
     public void pregnancy(){
-        for(int i = 0; Rats.length >= i; i ++){
-            if (this.Rat.location = Rats[i].location && this.Rat.sex != Rats[i].sex && this.Rat.sex = false){// check if working
+        for(int i = 0; Rats.size() >= i; i ++){
+            if (this.Rat.location = Rats(i).location && this.Rat.sex != Rats(i).sex && this.Rat.sex = false){// check if working
                 procreate();                 
             }
         }
     }
-    private int randomize (){
-        Random rand = new Random();
-        // Obtain a number between [0 - 5].
-        int n = rand.nextInt(5);
-        return n;
-    }
+    
 
 
 

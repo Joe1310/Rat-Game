@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.random;
 
 public class Rat extends Entity{
     protected int health = 100;
@@ -7,7 +8,7 @@ public class Rat extends Entity{
     protected boolean sterile;
     protected char directionFacing;
     protected int population;
-    protected static ArrayList<Rat> rats;
+    protected static ArrayList<Rat> Rats;
 
     public Rat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population){
         super(location);
@@ -17,7 +18,13 @@ public class Rat extends Entity{
         this.directionFacing = directionFacing;
         this.population = population;
         rats.add(this);
-        populationUpdateAdd(); 
+        populationUpdateAdd();//add image of rat file 
+    }
+    public int randomize (){
+        Random rand = new Random();
+        // Obtain a number between [0 - 5].
+        int n = rand.nextInt(5);
+        return n;
     }
 
     public void modifySpeed(int newSpeed) { 
@@ -29,12 +36,11 @@ public class Rat extends Entity{
     }
 
     private void move() {
-        //move rat
-        //waiting for movement options
+        
     }
     
     private ArrayList<Rat> getRats() {
-        return rats;
+        return Rats;
     }
 
     private void ratDeath() {
