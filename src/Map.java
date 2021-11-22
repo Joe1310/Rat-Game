@@ -1,39 +1,20 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Scanner;
-
-
 public class Map {
     private int itemSpawnRate;
     private int[] entityLocations;
     private int maxRat;
-    private String mapName;
+
     private String[] tileLayout;
-    private String mapInfo;
+
 
     /**
      *
-     * @param mapName holds name of the map
      * @param tileLayout is a text file containing the tile layout
      * @param itemSpawnRate has item spawn rate
      * @param entityLocations has the locations of both rats and items in entity
      */
-    public Map(String mapName, String[] tileLayout,int itemSpawnRate,
+    public Map(String[] tileLayout,int itemSpawnRate,
                int[] entityLocations, int maxRat) {
- //       File filename = new File(mapInfo);
- //       Scanner scan = null;
 
-//        try {
-//            scan = new Scanner(filename);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("No File found");
-//            e.printStackTrace();
-//        }
-//        assert scan != null;
-//        mapInfo = mapLayout(scan)
-
-        this.mapName = mapName;
         this.tileLayout = tileLayout;
         this.itemSpawnRate = itemSpawnRate;
         this.entityLocations = entityLocations;
@@ -42,28 +23,18 @@ public class Map {
 
     /**
      *
-     * @param x imports scanner
-     * @return the tile layout
      */
-    //Will read tileLayout
- /**
-    public static String mapLayout(Scanner x) {
-        String[] tileLayout;
-        String map = "";
+    public int time = 0;
+    long t0, t1;
 
-        map += "Tile Layout: ";
-        while (x.hasNextLine()) {
-            tileLayout = x.nextLine().split(" ");
-            map += "\n" + (Arrays.toString(tileLayout));
+    public void entityTick(int[] args) {
+        for (int i = 2; i < 1; i++){
+            t0 = System.currentTimeMillis();
+            do {
+                t1 = System.currentTimeMillis();
+            }
+            while (t1 - t0 < 500);
+            time = time + 1;
         }
-        x.close();
-        return map;
-    }
-*/
-    /**
-     *
-     */
-    public void spawnEntity(String ent) {
-
     }
 }
