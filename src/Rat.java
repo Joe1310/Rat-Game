@@ -38,7 +38,7 @@ public abstract class Rat extends Entity{
     }
 
     private void move() {
-        
+    //    
     }
     
     private ArrayList<Rat> getRats() {
