@@ -64,5 +64,6 @@ public class Map {
      *
      */
     public void spawnEntity(String ent) {
+
     }
 }
