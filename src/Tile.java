@@ -17,7 +17,6 @@ public class Tile {
         this.x = x;
         this.y = y;
         this.tileType = tileType;
-        ArrayList<String> movementOptions = getMovementOptions();
     }
 
     /**

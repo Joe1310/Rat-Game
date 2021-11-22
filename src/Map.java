@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 
 public class Map {
-    private int itemSpawnRate;
+    private final int itemSpawnRate;
     private int[] entityLocations;
-    private int maxRat;
+    private final int maxRat;
     private String mapName;
     public static Tile[][] tileLayout;
     private String mapInfo;
@@ -65,17 +65,17 @@ public class Map {
 
     public static ArrayList<String> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
-        if(tileLayout[x + 1][y].getTileType().equals("Grass") ||
-                tileLayout[x + 1][y].getTileType().equals("Tunnel")){
+        if(tileLayout[y][x + 1].getTileType().equals("Path") ||
+                tileLayout[y][x + 1].getTileType().equals("Tunnel")){
             movementOptions.add("right");
-        } else if(tileLayout[x - 1][y].getTileType().equals("Grass") ||
-                tileLayout[x - 1][y].getTileType().equals("Tunnel")){
+        } else if(tileLayout[y][x - 1].getTileType().equals("Path") ||
+                tileLayout[y][x - 1].getTileType().equals("Tunnel")){
             movementOptions.add("left");
-        } else if(tileLayout[x][y - 1].getTileType().equals("Grass") ||
-                tileLayout[x][y - 1].getTileType().equals("Tunnel")){
+        } else if(tileLayout[y - 1][x].getTileType().equals("Path") ||
+                tileLayout[y - 1][x].getTileType().equals("Tunnel")){
             movementOptions.add("up");
-        } else if(tileLayout[x][y + 1].getTileType().equals("Grass") ||
-                tileLayout[x][y + 1].getTileType().equals("Tunnel")){
+        } else if(tileLayout[y + 1][x].getTileType().equals("Path") ||
+                tileLayout[y + 1][x].getTileType().equals("Tunnel")){
             movementOptions.add("down");
         }
         return movementOptions;
