@@ -26,5 +26,9 @@ public abstract class Entity {
     	entities.remove(this);
     }
     
+    public int[] getEntityLocation() {
+    	return location;
+    }
+    
     public abstract void act();
 }
