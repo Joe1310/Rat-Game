@@ -2,7 +2,7 @@ public class BabyRat extends Rat {
     private int age;
     
     public BabyRat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population){
-        super(health, speed, sterile, location, directionFacing, population);
+        super(health, speed, sterile, location, directionFacing, population);//add file for rat image
         this.age = 0;
         modifySpeed(2);
         Rats += this.BabyRat;
