@@ -20,23 +20,26 @@ public class Map {
         this.itemSpawnRate = itemSpawnRate;
         this.entityLocations = entityLocations;
         this.maxRat = maxRat;
+        time = entityTick();
     }
 
-    /**
-     *
-     */
     public int time = 0;
     long t0, t1;
 
-    public void entityTick(int[] args) {
+    /**
+     *
+     * @return the time which increases by one every 100 millisecond
+     */
+    public int entityTick() {
         for (int i = 2; i < 1; i++) {
             t0 = System.currentTimeMillis();
             do {
                 t1 = System.currentTimeMillis();
             }
-            while (t1 - t0 < 500);
+            while (t1 - t0 < 100);
             time = time + 1;
         }
+        return time;
     }
 
     public static ArrayList<String> getMovementOptions(int x, int y){
