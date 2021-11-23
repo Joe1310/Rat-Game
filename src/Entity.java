@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Entity {
 	
-	private static ArrayList<Entity> entities;
+	private static ArrayList<Entity> entities = new ArrayList<Entity>();
 	private String imageName;
 	protected int[] location;
 	

@@ -100,7 +100,6 @@ private Pane buildGUI() {
 		// Access the graphic context of the canvas
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
-		
 		Entity nes = new NoEntrySign(location);
 		nes.draw(gc);
 	}
