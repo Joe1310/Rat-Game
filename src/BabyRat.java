@@ -1,10 +1,11 @@
+import java.util.Random;
+
 public class BabyRat extends Rat {
     private int age;
     
-    public BabyRat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population, String image){
-        super(health, speed, sterile, location, directionFacing, population, "BabyRat.png");
+    public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing, int population){
+        super(health, 2.0, sterile, location, directionFacing, population, "BabyRat.png");
         this.age = 0;
-        modifySpeed(2);
     }
     
     public void act() {
@@ -23,10 +24,17 @@ public class BabyRat extends Rat {
     }
     //in progress
     public void becomeAdult(){
-        Entity test = new AdultRat(this.health , 1 , this.sterile, this.location, this.directionFacing, this.population);// check if correct
+        Entity test = new AdultRat(this.health, 1.0, this.sterile, this.location, this.directionFacing, this.population, randomSex(), false);// check if correct
         removeEntity(); 
     }
-
+    
+    public char randomSex() {
+    	if (randomize(2) > 1) {
+    		return 'm';
+    	} else {
+    		return 'f';
+    	}
+    }
 
     
     

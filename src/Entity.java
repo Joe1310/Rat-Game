@@ -6,7 +6,7 @@ public abstract class Entity {
 	
 	private static ArrayList<Entity> entities;
 	private String imageName;
-	private int[] location;
+	protected int[] location;
 	
     public Entity(int[] location, String imageName) {
     	this.location = location;
@@ -24,10 +24,6 @@ public abstract class Entity {
     
     public void removeEntity() {
     	entities.remove(this);
-    }
-    
-    public int[] getEntityLocation() {
-    	return location;
     }
     
     public abstract void act();

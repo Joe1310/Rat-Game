@@ -1,16 +1,16 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.random;
+import java.util.Random;
+import java.util.Random;
 
 public abstract class Rat extends Entity{
     protected int health = 100;
     protected double speed;
     protected boolean sterile;
-    protected char directionFacing;
+    protected String directionFacing;
     protected int population;
-    protected static ArrayList<Rat> Rats;
+    protected static ArrayList<Rat> rats;
 
-    public Rat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population, String image){
+    public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, int population, String image){
         super(location, image);
     	this.health = health;
         this.speed = speed;
@@ -20,10 +20,12 @@ public abstract class Rat extends Entity{
         rats.add(this);
         populationUpdateAdd();//add image of rat file 
     }
-    public int randomize (){
+    
+    //i changed this so you can set the max to whatever you want so it can be used for baby rat getting the random sex sorry if this messes something up - Elliot
+    public int randomize(int i){
         Random rand = new Random();
         // Obtain a number between [0 - 5].
-        int n = rand.nextInt(5);
+        int n = rand.nextInt(i);
         return n;
     }
     
@@ -37,55 +39,56 @@ public abstract class Rat extends Entity{
         this.health = newHealth;
     }
 
-    public Char getOpositeDirection (){
-        if (directionFacing == 'e'){
-            return 'w';
-        }else if ( directionFacing == 'w'){
-            return 'e';
-        }else if (directionFacing == 'n'){
-            return 's';
-        }else if (directionFacing == 's'){
-            return 'n';
+    public String getOpositeDirection() {
+        if (directionFacing == "e"){
+            return ("w");
+        }else if ( directionFacing == "w"){
+            return ("e");
+        }else if (directionFacing == "n"){
+            return ("s");
+        }else {
+        	return "n";
         }
     }
 
     protected void move() {
-        ArrayList<String> temp = getMovementOptions();
+        ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]);
         Random rand = new Random();
-        for (Char direction : temp ){
+        for (String direction : temp ){
             if (direction == getOpositeDirection () && temp.size() > 1 ){
                 temp.remove(direction);
             }    
         }
         // Obtain a number between [0 - 5].
         int n = rand.nextInt(temp.size());
-        switch (temp(n)){
+        switch (temp.get(n)){
             case "n":
                 location[1] = location[1] + 1;
-                this.directionFacing = 'n';
+                this.directionFacing = "n";
             break;
             case "s":
                 location[1] = location[1] - 1;
-                this.directionFacing = 's';
+                this.directionFacing = "s";
             break;
             case "w":
                 location[0] = location[0] - 1;
-                this.directionFacing = 'w';
+                this.directionFacing = "w";
             break;
             case "e":
                 location[0] = location[0] + 1;
-                this.directionFacing = 'e';
+                this.directionFacing = "e";
             break;    
         }
     }
-    
-    private ArrayList<Rat> getRats() {
-        return Rats;
-    }
 
-    private void ratDeath() {
+    protected void ratDeath() {
         rats.remove(this);
         removeEntity();
+        //code for player score increase
+    }
+    
+    protected ArrayList<Rat> getRats() {
+    	return rats;
     }
     
     public void populationUpdateAdd() {
