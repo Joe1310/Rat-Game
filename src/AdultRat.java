@@ -20,7 +20,7 @@ public class AdultRat extends Rat {
     //youre gonna have to add a way to check the rats are adult rats becuase you cant call a rats sex if it isnt an adult
     public void pregnancy(){
         for(int i = 0; rats.size() >= i; i ++){
-            if (this.location = rats.get(i).location && this.sex != rats.get(i).sex ){// check if working
+            if (this.location == rats.get(i).location && this.sex != rats.get(i).sex ){// check if working
                 procreate();                 
             }
         }
