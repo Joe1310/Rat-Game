@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Map {
     private int itemSpawnRate;
@@ -7,40 +9,44 @@ public class Map {
     private int maxRat;
     public static Tile[][] tileLayout;
 
+    public static void main(String[] args) {
+        entityTick();
+    }
+
     /**
      * @param tileLayout is a text file containing the tile layout
      * @param itemSpawnRate has item spawn rate
      * @param entityLocations has the locations of both rats and items in entity
      */
     public Map(Tile[][] tileLayout,int itemSpawnRate,
-               int[] entityLocations, int maxRat) {
+               int[] entityLocations, int maxRat, int time) {
 
 
         Map.tileLayout = tileLayout;
         this.itemSpawnRate = itemSpawnRate;
         this.entityLocations = entityLocations;
         this.maxRat = maxRat;
-        time = entityTick();
     }
-
-    public int time = 0;
-    long t0, t1;
 
     /**
      *
-     * @return the time which increases by one every 100 millisecond
+     * @return Tick which increases by 1 every 0.5 seconds
      */
-    public int entityTick() {
-        for (int i = 2; i < 1; i++) {
-            t0 = System.currentTimeMillis();
-            do {
-                t1 = System.currentTimeMillis();
+    public static int entityTick() {
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+        int tick = 0;
+        exec.scheduleWithFixedDelay(new Runnable() {
+            private int tick = 0;
+
+            @Override
+            public void run() {
+                tick++;
+                System.out.println(tick);
             }
-            while (t1 - t0 < 100);
-            time = time + 1;
-        }
-        return time;
+        }, 0, 500, TimeUnit.MILLISECONDS);
+        return tick;
     }
+
 
     public static ArrayList<String> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
