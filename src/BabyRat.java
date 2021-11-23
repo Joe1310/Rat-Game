@@ -1,16 +1,15 @@
 public class BabyRat extends Rat {
     private int age;
     
-    public BabyRat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population){
+    public BabyRat(int health, double speed, boolean sterile, int[] location, char directionFacing, int population, String image){
         super(health, speed, sterile, location, directionFacing, population, "BabyRat.png");
         this.age = 0;
         modifySpeed(2);
-        ;
     }
     
     public void act() {
     	move();
-    	increaseAge();
+    	//increaseAge();
     }
 
     public void increaseAge(){
@@ -19,7 +18,7 @@ public class BabyRat extends Rat {
             becomeAdult();
         }
     }
-    private void move (){
+    public void move (){
         increaseAge();      
     }
     //in progress

@@ -37,8 +37,46 @@ public abstract class Rat extends Entity{
         this.health = newHealth;
     }
 
-    private void move() {
-    //    
+    public Char getOpositeDirection (){
+        if (directionFacing == 'e'){
+            return 'w';
+        }else if ( directionFacing == 'w'){
+            return 'e';
+        }else if (directionFacing == 'n'){
+            return 's';
+        }else if (directionFacing == 's'){
+            return 'n';
+        }
+    }
+
+    protected void move() {
+        ArrayList<String> temp = getMovementOptions();
+        Random rand = new Random();
+        for (Char direction : temp ){
+            if (direction == getOpositeDirection () && temp.size() > 1 ){
+                temp.remove(direction);
+            }    
+        }
+        // Obtain a number between [0 - 5].
+        int n = rand.nextInt(temp.size());
+        switch (temp(n)){
+            case "n":
+                location[1] = location[1] + 1;
+                this.directionFacing = 'n';
+            break;
+            case "s":
+                location[1] = location[1] - 1;
+                this.directionFacing = 's';
+            break;
+            case "w":
+                location[0] = location[0] - 1;
+                this.directionFacing = 'w';
+            break;
+            case "e":
+                location[0] = location[0] + 1;
+                this.directionFacing = 'e';
+            break;    
+        }
     }
     
     private ArrayList<Rat> getRats() {

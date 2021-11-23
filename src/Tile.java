@@ -22,7 +22,7 @@ public class Tile {
     /**
      * @return return a list of movement options from that tile.
      */
-    public ArrayList<String> getMovementOptions(){
+    public ArrayList<Char> getMovementOptions(){
         return Map.getMovementOptions(x, y);
     }
 

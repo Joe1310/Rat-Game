@@ -42,20 +42,20 @@ public class Map {
         return time;
     }
 
-    public static ArrayList<String> getMovementOptions(int x, int y){
+    public static ArrayList<Char> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
-        if(tileLayout[x + 1][y].getTileType().equals("Grass") ||
+        if(tileLayout[x + 1][y].getTileType().equals("Path") ||
                 tileLayout[x + 1][y].getTileType().equals("Tunnel")){
-            movementOptions.add("right");
-        } else if(tileLayout[x - 1][y].getTileType().equals("Grass") ||
+            movementOptions.add("e");
+        } else if(tileLayout[x - 1][y].getTileType().equals("Path") ||
                 tileLayout[x - 1][y].getTileType().equals("Tunnel")){
-            movementOptions.add("left");
-        } else if(tileLayout[x][y - 1].getTileType().equals("Grass") ||
+            movementOptions.add("w");
+        } else if(tileLayout[x][y - 1].getTileType().equals("Path") ||
                 tileLayout[x][y - 1].getTileType().equals("Tunnel")){
-            movementOptions.add("up");
-        } else if(tileLayout[x][y + 1].getTileType().equals("Grass") ||
+            movementOptions.add("n");
+        } else if(tileLayout[x][y + 1].getTileType().equals("Path") ||
                 tileLayout[x][y + 1].getTileType().equals("Tunnel")){
-            movementOptions.add("down");
+            movementOptions.add("s");
         }
         return movementOptions;
     }
