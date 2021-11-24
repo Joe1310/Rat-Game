@@ -1,0 +1,7 @@
+250
+2 
+Male 3 2 100 East true false
+Female 2 4 100 South false false
+1234567
+5
+1

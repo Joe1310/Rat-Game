@@ -1,0 +1,19 @@
+Level files contain:
+
+1. parTime
+2. Max Rats
+3. Row Column
+4. tileLayout
+
+GameData file contain:
+
+1. remainingTime
+2. number of Alive rats
+3. List of properties of rats
+4. Inventory list with quatities of the items
+5. Player's score
+6. level Number
+
+Other notes:
+
+SavedGame files will be same as GameData file.
