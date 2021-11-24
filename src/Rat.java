@@ -10,6 +10,8 @@ public abstract class Rat extends Entity{
     protected static ArrayList<Rat> rats;
     protected int age;
 
+
+
     public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image){
         super(location, image);
     	this.health = health;

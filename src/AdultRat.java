@@ -6,6 +6,7 @@
 public class AdultRat extends Rat {
     private char sex;
     private boolean isPregnant;
+    private boolean isAdult;
 
     public AdultRat(int health, double speed, boolean sterile, int[] location, String directionFacing, char sex, boolean isPregnant){
         super(health, speed, sterile, location, directionFacing, "AdultRat.png");
@@ -26,14 +27,19 @@ public class AdultRat extends Rat {
     //youre gonna have to add a way to check the rats are adult rats becuase you cant call a rats sex if it isnt an adult
     public void pregnancy(){
         for(int i = 0; rats.size() >= i; i ++){
-            if (this.location == rats.get(i).location && this.sex != rats.get(i).sex ){// check if working
-                procreate();                 
+            if (this.location == rats.get(i).location){// check if working
+                if(this.sex != rats.get(i).)
+                procreate();
             }
         }
     }
 
     protected boolean checkAdult(){
-        if ()
+        if (rats.contains(AdultRat.this)){
+                return true;
+        } else {
+            return false;
+        }
     }
 
 
