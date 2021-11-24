@@ -16,7 +16,7 @@ public class Level {
 	int itemSpawnRate;
 	int[] entityLocations;
 	
-	int[] inventory;
+	String inventory;
 	int playerScore;
 	int levelScore = 0;
 	
@@ -51,27 +51,29 @@ public class Level {
 	}
 	
 	//Method reads Level data and creates level objects
-	public void readLevel(Scanner scan) {
+	public Level readLevel(Scanner scan) {
 		
 		int maxRats;
 		int row, column;
-		char[][] tileLayout;
+		Tile[][] tileLayout;
 		
 		parTime = scan.nextInt();
 		maxRats = scan.nextInt();
 		row = scan.nextInt();
 		column = scan.nextInt();
 		
-		tileLayout = new char[row][column];
+		tileLayout = new Tile[row][column];
 		for (int i = 0; i < row; i ++) {
 			String str = scan.next();
 			for (int j = 0; j < column; j ++) {
-				tileLayout[i][j] = str.charAt(j);
+				Tile tile = new Tile(str.charAt(j), i, j);
+				tileLayout[i][j] = tile;
 			}
 		}
 		
 		//Error: tileLayout is Tile type but while reading text it is char type
 		Level level = new Level((parTime - remainingTime), maxRats, tileLayout);
+		return level;
 	}
 	
 	//Method reads Game data using Scanner and creates objects
@@ -101,18 +103,15 @@ public class Level {
 			sterile = scan.nextBoolean();
 			isPregnant = scan.nextBoolean();
 			
-			Entity rat = new AdultRat(health, 5, sterile, location, direction, 1, sex, isPregnant);
+			Entity rat = new AdultRat(health, 5, sterile, location, direction, sex, isPregnant);
 		}
 		
 		inventory = scan.next();
+		this.inventory = inventory;
 		Inventory item = new Inventory(inventory.charAt(0), 
 				inventory.charAt(1), inventory.charAt(2), 
 				inventory.charAt(3), inventory.charAt(4), 
 				inventory.charAt(5), inventory.charAt(6));
-		
-		for(int i = 0; i < 7; i++) {
-			this.inventory[i] = inventory.charAt(i);
-		}
 		
 		this.playerScore = scan.nextInt();
 		levelNumber = scan.nextInt();
@@ -132,7 +131,7 @@ public class Level {
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(remainingTime + "\n");
 			saveGame.write("Alive Rats number\n <List> \n");
-			saveGame.write("<Inventory>\n");
+			saveGame.write(inventory);
 			saveGame.write(playerScore);
 			saveGame.write("\n<levelNumber>");
 			saveGame.close();
