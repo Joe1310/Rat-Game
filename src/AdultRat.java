@@ -35,4 +35,9 @@ public class AdultRat extends Rat {
     protected boolean checkAdult(){
         if ()
     }
+
+
+    public String toString(){
+        return this.sex + " " + speed + " " + sterile + " " + directionFacing + " " + age + " " + health + rats.size();
+    }
 }

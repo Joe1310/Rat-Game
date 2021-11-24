@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public abstract class Rat extends Entity{
@@ -60,12 +61,12 @@ public abstract class Rat extends Entity{
         // Obtain a number between [0 - 5].
         int n = rand.nextInt(temp.size());
         switch (temp.get(n)){
-            case "n":
-                location[1] = location[1] + 50; // 50 px is the size of the tile
+            case "n":       // at first the starting would be 0; for any direction like an array
+                location[0] = location[0] + 50; // 50 px is the size of the tile
                 this.directionFacing = "n";
             break;
             case "s":
-                location[1] = location[1] - 50;
+                location[0] = location[0] - 50;
                 this.directionFacing = "s";
             break;
             case "w":
@@ -86,11 +87,6 @@ public abstract class Rat extends Entity{
     
     protected ArrayList<Rat> getRats() {
     	return rats;
-    }
-
-
-    public String toString(){
-        return
     }
 
 

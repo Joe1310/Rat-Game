@@ -1,6 +1,7 @@
 
 public class BabyRat extends Rat {
-    protected boolean becomeAld = false;
+    private boolean becomeAld = false;
+    private String sex = null;
     
     public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing){
         super(health, 2.0, sterile, location, directionFacing, "BabyRat.png");
@@ -34,6 +35,9 @@ public class BabyRat extends Rat {
     	}
     }
 
+    public String toString(){
+        return sex + " " + speed + " " + sterile + " " + directionFacing + " " + age + " " + health + " " + rats.size();
+    }
     
     
 }
