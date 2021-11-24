@@ -18,7 +18,7 @@ public abstract class Entity {
     	gc.drawImage(new Image(imageName), location[0], location[1]);
     }
     
-    public ArrayList<Entity> getEntites() {
+    public static ArrayList<Entity> getEntities() {
     	return(entities);
     }
     

@@ -5,7 +5,7 @@ public class Bomb extends Entity{
     private ArrayList<Explosion> explosions;
 
     public Bomb(int[] location) {
-        super(location, "Explosion.png");
+        super(location, "Bomb.png");
         this.countdown = 5;
     }
 

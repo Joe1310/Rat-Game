@@ -12,7 +12,7 @@ public class NoEntrySign extends Entity {
 	}
 	
 	public void act() {
-		
+		degrade();
 	}
 	
 	public void degrade() {

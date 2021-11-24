@@ -5,6 +5,6 @@ public class Explosion extends Entity {
     }
 
     public void act() {
-
+    	removeEntity();
     }
 }

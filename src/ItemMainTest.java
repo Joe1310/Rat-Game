@@ -22,6 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * Sample application that demonstrates the use of JavaFX Canvas
  * @author Liam O'Reilly
@@ -74,13 +76,23 @@ private Pane buildGUI() {
 		sidebar.setPadding(new Insets(10, 10, 10, 10)); 
 		root.setLeft(sidebar);
 		
+		Button tick = new Button("Tick");
 		Button noEntryButton = new Button("NoEntrySign");
-		sidebar.getChildren().addAll(noEntryButton);
+		Button bombButton = new Button("Bomb!");
+		sidebar.getChildren().addAll(tick,noEntryButton,bombButton);
 
 		noEntryButton.setMaxWidth(Double.MAX_VALUE);
 		
 		noEntryButton.setOnAction(e -> {
 			createNES();
+		});
+		
+		tick.setOnAction(e -> {
+			tick();
+		});
+		
+		bombButton.setOnAction(e -> {
+			createBomb();
 		});
 		
 		return root;
@@ -102,6 +114,32 @@ private Pane buildGUI() {
 		
 		Entity nes = new NoEntrySign(location);
 		nes.draw(gc);
+	}
+	
+	private void createBomb() {
+		// Create a new random number generator
+				Random r = new Random();
+				
+				// Create a new coordinate
+				int x = r.nextInt(CANVAS_WIDTH);
+				int y = r.nextInt(CANVAS_HEIGHT);
+				int[] location = new int[2];
+				location[0] = 150;
+				location[1] = 150;
+				
+				// Access the graphic context of the canvas
+				GraphicsContext gc = canvas.getGraphicsContext2D();
+				
+				Entity bomb = new TestBomb(location);
+				bomb.draw(gc);
+	}
+	
+	private void tick() {
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		for(Entity ent : Entity.getEntities()) {
+			ent.act();
+			ent.draw(gc);
+		}
 	}
 }
 	
