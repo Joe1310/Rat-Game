@@ -7,6 +7,7 @@ public abstract class Rat extends Entity{
     protected boolean sterile;
     protected String directionFacing;
     protected static ArrayList<Rat> rats;
+    protected int age;
 
     public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image){
         super(location, image);
@@ -15,6 +16,9 @@ public abstract class Rat extends Entity{
         this.sterile = sterile;
         this.directionFacing = directionFacing;
         rats.add(this);
+    }
+    public void increaseAge(){
+        this.age = this.age ++;
     }
 
     public int randomize(int i){
@@ -84,6 +88,10 @@ public abstract class Rat extends Entity{
     	return rats;
     }
 
+
+    public String toString(){
+        return
+    }
 
 
 }

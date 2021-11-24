@@ -13,12 +13,13 @@ public class AdultRat extends Rat {
         this.isPregnant = isPregnant;
     }
     public void act() {
-    	//increaseAge();
+    	increaseAge();
         pregnancy();
     }
+
     public void procreate(){
         for (int i = 0; i < randomize(5); i++){
-            Entity test = new BabyRat(100, 2, sterile, this.location,this.directionFacing);// call constructor of baby rat
+            Entity newAdultRat = new BabyRat(100, 2, sterile, this.location,this.directionFacing);// call constructor of baby rat
         }          
     }
     
@@ -29,5 +30,9 @@ public class AdultRat extends Rat {
                 procreate();                 
             }
         }
+    }
+
+    protected boolean checkAdult(){
+        if ()
     }
 }

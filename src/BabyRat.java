@@ -1,7 +1,6 @@
-import java.util.Random;
 
 public class BabyRat extends Rat {
-    private int age;
+    protected boolean becomeAld = false;
     
     public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing){
         super(health, 2.0, sterile, location, directionFacing, "BabyRat.png");
@@ -13,16 +12,18 @@ public class BabyRat extends Rat {
         increaseAge();
     }
 
-    public void increaseAge(){
-        this.age = this.age ++;
-        if (age == 5) {
+    @Override
+    public void increaseAge() {
+        super.increaseAge();
+        if (this.age == 5) {
             becomeAdult();
         }
     }
 
     public void becomeAdult(){
-        Entity test = new AdultRat(this.health, 1.0, this.sterile, this.location, this.directionFacing, randomSex(), false);// check if correct
-        removeEntity(); 
+        Entity newBabyRat = new AdultRat(this.health, 1.0, this.sterile, this.location, this.directionFacing, randomSex(), false);// check if correct
+        removeEntity();
+        this.becomeAld = true;
     }
     
     public char randomSex() {
