@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class TestBomb extends Entity{
 
     public TestBomb(int[] location) {
