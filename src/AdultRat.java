@@ -1,9 +1,14 @@
+/* Mateing of rats - 3 sec.
+ After mateing the female rat takes 3.5 sec to start giving birth -- One at a time.
+
+ */
+
 public class AdultRat extends Rat {
     private char sex;
     private boolean isPregnant;
 
-    public AdultRat(int health, double speed, boolean sterile, int[] location, String directionFacing, int population, char sex, boolean isPregnant){
-        super(health, speed, sterile, location, directionFacing, population, "AdultRat.png");
+    public AdultRat(int health, double speed, boolean sterile, int[] location, String directionFacing, char sex, boolean isPregnant){
+        super(health, speed, sterile, location, directionFacing, "AdultRat.png");
         this.sex = sex;
         this.isPregnant = isPregnant;
     }
@@ -13,7 +18,7 @@ public class AdultRat extends Rat {
     }
     public void procreate(){
         for (int i = 0; i < randomize(5); i++){
-            Entity test = new BabyRat(100, 2, sterile, this.location,this.directionFacing, this.population);// call constructor of baby rat
+            Entity test = new BabyRat(100, 2, sterile, this.location,this.directionFacing);// call constructor of baby rat
         }          
     }
     

@@ -3,14 +3,14 @@ import java.util.Random;
 public class BabyRat extends Rat {
     private int age;
     
-    public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing, int population){
-        super(health, 2.0, sterile, location, directionFacing, population, "BabyRat.png");
+    public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing){
+        super(health, 2.0, sterile, location, directionFacing, "BabyRat.png");
         this.age = 0;
     }
     
     public void act() {
     	move();
-    	//increaseAge();
+        increaseAge();
     }
 
     public void increaseAge(){
@@ -19,12 +19,9 @@ public class BabyRat extends Rat {
             becomeAdult();
         }
     }
-    public void move (){
-        increaseAge();      
-    }
-    //in progress
+
     public void becomeAdult(){
-        Entity test = new AdultRat(this.health, 1.0, this.sterile, this.location, this.directionFacing, this.population, randomSex(), false);// check if correct
+        Entity test = new AdultRat(this.health, 1.0, this.sterile, this.location, this.directionFacing, randomSex(), false);// check if correct
         removeEntity(); 
     }
     
