@@ -28,7 +28,7 @@ public class AdultRat extends Rat {
     public void pregnancy(){
         for(int i = 0; rats.size() >= i; i ++){
             if (this.location == rats.get(i).location){// check if working
-                if(this.sex != rats.get(i).)
+                if(this.sex != rats.get(i).){
                 procreate();
             }
         }
