@@ -9,9 +9,9 @@ public class Map {
     private int maxRat;
     public static Tile[][] tileLayout;
 
-    public static void main(String[] args) {
-        entityTick();
-    }
+ //   public static void main(String[] args) {
+ //       entityTick();
+ //   }
 
     /**
      * @param tileLayout is a text file containing the tile layout
@@ -19,7 +19,7 @@ public class Map {
      * @param entityLocations has the locations of both rats and items in entity
      */
     public Map(Tile[][] tileLayout,int itemSpawnRate,
-               int[] entityLocations, int maxRat, int time) {
+               int[] entityLocations, int maxRat) {
 
 
         Map.tileLayout = tileLayout;
@@ -46,7 +46,6 @@ public class Map {
         }, 0, 500, TimeUnit.MILLISECONDS);
         return tick;
     }
-
 
     public static ArrayList<String> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
