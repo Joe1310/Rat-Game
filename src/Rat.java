@@ -53,7 +53,7 @@ public abstract class Rat extends Entity{
     }
 
     protected void move() {
-        ArrayList<String> temp = Map.getMovementOptions(location[0], location[0]); // from 0,1 to 0,0
+        ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
         Random rand = new Random();
         for (String direction : temp ){
             if (direction == getOpositeDirection() && temp.size() > 1 ){
@@ -87,7 +87,7 @@ public abstract class Rat extends Entity{
         removeEntity();
     }
     
-    protected ArrayList<Rat> getRats() {
+    protected static ArrayList<Rat> getRats() {
     	return rats;
     }
 

@@ -5,6 +5,11 @@ public class Poison extends Entity {
 	}
 	
 	public void act() {
-		//needs a way to detect rats or if rats dectect it then nothing?
+		for (Rat rat : Rat.getRats()) {
+			if (rat.location == this.location) {
+				rat.ratDeath();
+				removeEntity();
+			}
+		}
 	}
 }

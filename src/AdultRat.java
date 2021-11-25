@@ -41,6 +41,10 @@ public class AdultRat extends Rat {
             return false;
         }
     }
+    
+    public char getSex() {
+    	return sex;
+    }
 
 
     public String toString(){
