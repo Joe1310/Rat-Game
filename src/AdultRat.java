@@ -1,7 +1,3 @@
-/* Mateing of rats - 3 sec.
- After mateing the female rat takes 3.5 sec to start giving birth -- One at a time.
-
- */
 
 public class AdultRat extends Rat {
 
@@ -26,11 +22,11 @@ public class AdultRat extends Rat {
         }          
     }
     
-    //youre gonna have to add a way to check the rats are adult rats becuase you cant call a rats sex if it isnt an adult
+
     public void pregnancy() {
         for (int i = 0; rats.size() >= i; i++) {
             if ((this.location == rats.get(i).location) && (rats.get(i).sex != rats.get(i).sex))
-                if(rats.get(i).ratName == "adultRat") {// check if working
+                if(rats.get(i).ratName == "adultRat") {
                     procreate();
             }
         }
