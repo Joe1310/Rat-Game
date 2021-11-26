@@ -1,11 +1,18 @@
 public class MaleSexChange extends Entity {
-
-    public MaleSexChange(int[] location) {
-        super(location, "MSexChange.png");
-    }
-
-    public void act() {
-
-        //need to create a setter function in class AdultRat as sex is a private data member
-    }
+	
+	public MaleSexChange(int[] location) {
+		super(location, "MSexChange.png");
+	}
+	
+	public void act() {
+		for (Rat rat : Rat.getRats()) {
+			if (rat.location == this.location && rat.getRatType() == "adult") {
+				if (((AdultRat)rat).getSex() == "f") {
+				rat.ratDeath();
+				removeEntity();
+				}
+			}
+		}		
+	}
 }
+

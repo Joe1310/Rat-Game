@@ -7,7 +7,6 @@ public abstract class Rat extends Entity{
     protected boolean sterile;
     protected String directionFacing;
     protected static ArrayList<Rat> rats;
-    protected String ratName;
     private String ratType;
 
     public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image, String ratType){

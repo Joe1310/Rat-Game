@@ -4,11 +4,10 @@ public class AdultRat extends Rat {
     private String sex;
     private boolean isPregnant;
 
-    public AdultRat(int health, double speed, boolean sterile, int[] location, String directionFacing, String sex, boolean isPregnant){
-        super(health, speed, sterile, location, directionFacing, "AdultRat.png", "adult");
+    public AdultRat(int health, boolean sterile, int[] location, String directionFacing, String sex, boolean isPregnant){
+        super(health, 5, sterile, location, directionFacing, "AdultRat.png", "adult");
         this.sex = sex;
         this.isPregnant = isPregnant;
-        this.ratName = "adultRat";
     }
     
     public void act() {
@@ -24,7 +23,7 @@ public class AdultRat extends Rat {
     public void pregnancy() {
         for (int i = 0; rats.size() >= i; i++) {
             if ((this.location == rats.get(i).location) && (rats.get(i) != rats.get(i)))
-                if(rats.get(i).ratName == "adultRat") {
+                if(rats.get(i).getRatType() == "adultRat") {
                     procreate();
             }
         }
@@ -39,6 +38,6 @@ public class AdultRat extends Rat {
     }
 
     public String toString(){
-        return this.sex + " " + speed + " " + sterile + " " + directionFacing + " " + health;
+        return this.sex + " " + this.location[0] + " " + this.location[1] + " " + sterile + " " + directionFacing + " " + health;
     }
 }

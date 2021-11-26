@@ -1,12 +1,10 @@
 
 public class BabyRat extends Rat {
-    private String sex = null;
     private int age;
 
     public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing){
-        super(health, 2.0, sterile, location, directionFacing, "BabyRat.png", "baby");
+        super(health, 2, sterile, location, directionFacing, "BabyRat.png", "baby");
         this.age = 0;
-        this.ratName = "adultRat";
     }
     
     public void act() {
@@ -15,14 +13,14 @@ public class BabyRat extends Rat {
     }
 
     public void increaseAge() {
-        
-        if (this.age == 5) {
+        age++;
+        if (this.age == 10) {
             becomeAdult();
         }
     }
 
     public void becomeAdult(){
-        Entity newBabyRat = new AdultRat(this.health, 1.0, this.sterile, this.location, this.directionFacing, randomSex(), false);// check if correct
+        Entity newBabyRat = new AdultRat(this.health, this.sterile, this.location, this.directionFacing, randomSex(), false);// check if correct
         removeEntity();
     }
     
@@ -35,6 +33,6 @@ public class BabyRat extends Rat {
     }
 
     public String toString(){
-        return sex + " " + speed + " " + sterile + " " + directionFacing + " " + age + " " + health + " " + rats.size();
+        return "b" + " " + sterile + " " + directionFacing + " " + age + " " + health;
     }
 }
