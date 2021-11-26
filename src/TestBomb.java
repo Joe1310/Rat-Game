@@ -6,7 +6,7 @@ public class TestBomb extends Entity{
 
     public void act() {
         spawnExplosions();
-        removeEntity();
+        System.out.println("Bang!");
     }
 
     private void spawnExplosions() {
