@@ -8,24 +8,19 @@ public abstract class Rat extends Entity{
     protected boolean sterile;
     protected String directionFacing;
     protected static ArrayList<Rat> rats;
-    protected int age;
     protected String ratName;
-    protected String sex;
+    private String ratType;
 
-
-
-    public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image){
+    public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image, String ratType){
         super(location, image);
+        this.ratType = ratType;
     	this.health = health;
         this.speed = speed;
         this.sterile = sterile;
         this.directionFacing = directionFacing;
         rats.add(this);
     }
-    public void increaseAge(){
-        this.age = this.age ++;
-    }
-
+  
     public int randomize(int i){
         Random rand = new Random();
         int n = rand.nextInt(i);
@@ -66,11 +61,11 @@ public abstract class Rat extends Entity{
         int n = rand.nextInt(temp.size());
         switch (temp.get(n)){
             case "n":       // at first the starting would be 0; for any direction like an array
-                location[0] = location[1] + 50; // 50 px is the size of the tile
+                location[1] = location[1] + 50; // 50 px is the size of the tile
                 this.directionFacing = "n";
             break;
             case "s":
-                location[0] = location[1] + 50;
+                location[1] = location[1] + 50;
                 this.directionFacing = "s";
             break;
             case "w":
@@ -88,8 +83,10 @@ public abstract class Rat extends Entity{
         rats.remove(this);
         removeEntity();
     }
-
-
+    
+    public String getRatType() {
+    	return ratType;
+    }
     
     protected static ArrayList<Rat> getRats() {
     	return rats;

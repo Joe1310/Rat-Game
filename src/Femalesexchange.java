@@ -4,12 +4,7 @@ public class Femalesexchange extends Entity {
 		super(location, "FSexChange.png");
 	}
 
-
-	@Override
-	public void act(AdultRat rat) {
-		String sx = rat.getSex();
-		if (sx == "m"){
-			AdultRat.setSex("f");
-		}
+	public void act() {
+		
 	}
 }

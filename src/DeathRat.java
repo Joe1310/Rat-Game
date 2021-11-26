@@ -1,8 +1,8 @@
 public class DeathRat extends Rat {
     private int numOfKilled = 0;
     private int timeStationary = 0;
-    public DeathRat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image) {
-        super(health, speed, sterile, location, directionFacing, "DeathRat.png");//add file for rat image
+    public DeathRat(int health, double speed, boolean sterile, int[] location, String directionFacing) {
+        super(health, speed, sterile, location, directionFacing, "DeathRat.png", "death");//add file for rat image
     }
     private void killRat(){
         for(int i = 0; rats.size() >= i; i ++){
@@ -21,10 +21,5 @@ public class DeathRat extends Rat {
         if (timeStationary >= 5){
             move();
         } 
-    }
-
-    @Override
-    public void act(AdultRat rat) {
-
     }
 }
