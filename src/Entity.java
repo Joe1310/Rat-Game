@@ -5,13 +5,16 @@ import java.util.ArrayList;
 public abstract class Entity {
 	
 	private static ArrayList<Entity> entities = new ArrayList<Entity>();
+	private static ArrayList<Entity> toAdd = new ArrayList<Entity>();
+	private static ArrayList<Entity> toRemove = new ArrayList<Entity>();
+	protected int entityID;
 	private String imageName;
 	protected int[] location;
 	
     public Entity(int[] location, String imageName) {
     	this.location = location;
     	this.imageName = imageName;
-    	entities.add(this);
+    	toAdd.add(this);
     }
     
     public void draw(GraphicsContext gc) {
@@ -23,7 +26,12 @@ public abstract class Entity {
     }
     
     public void removeEntity() {
-    	entities.remove(this);
+    	toRemove.add(this);
+    }
+    
+    public static void updateEntities() {
+    	entities.removeAll(toRemove);
+    	entities.addAll(toAdd);
     }
     
     public abstract void act();

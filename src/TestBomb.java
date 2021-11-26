@@ -6,9 +6,9 @@ public class TestBomb extends Entity{
 
     public void act() {
         spawnExplosions();
-        System.out.println("Bang!");
     }
 
+    
     private void spawnExplosions() {
     	int[] temp = location;
         for (int i = 50; i <= 300; i+=50) {
@@ -27,5 +27,6 @@ public class TestBomb extends Entity{
             temp[0] -= i;
             Entity test = new Explosion(temp);
         }
+        
     }
 }
