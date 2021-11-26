@@ -49,17 +49,17 @@ public class Map {
 
     public static ArrayList<String> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
-        if(tileLayout[x + 1][y].getTileType().equals("Path") ||
-                tileLayout[x + 1][y].getTileType().equals("Tunnel")){
+        if(tileLayout[x + 1][y].getTileType() == 'p' ||
+                tileLayout[x + 1][y].getTileType() == 't'){
             movementOptions.add("e");
-        } else if(tileLayout[x - 1][y].getTileType().equals("Path") ||
-                tileLayout[x - 1][y].getTileType().equals("Tunnel")){
+        } else if(tileLayout[x - 1][y].getTileType() == 'p' ||
+                tileLayout[x - 1][y].getTileType() == 't'){
             movementOptions.add("w");
-        } else if(tileLayout[x][y - 1].getTileType().equals("Path") ||
-                tileLayout[x][y - 1].getTileType().equals("Tunnel")){
+        } else if(tileLayout[x][y - 1].getTileType() == 'p' ||
+                tileLayout[x][y - 1].getTileType() == 't'){
             movementOptions.add("n");
-        } else if(tileLayout[x][y + 1].getTileType().equals("Path") ||
-                tileLayout[x][y + 1].getTileType().equals("Tunnel")){
+        } else if(tileLayout[x][y + 1].getTileType() == 'p' ||
+                tileLayout[x][y + 1].getTileType() == 't'){
             movementOptions.add("s");
         }
         return movementOptions;
