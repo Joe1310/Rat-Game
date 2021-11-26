@@ -2,10 +2,12 @@
 public class BabyRat extends Rat {
     private boolean becomeAld = false;
     private String sex = null;
+
     
     public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing){
         super(health, 2.0, sterile, location, directionFacing, "BabyRat.png");
         this.age = 0;
+        this.ratName = "adultRat";
     }
     
     public void act() {
@@ -27,17 +29,21 @@ public class BabyRat extends Rat {
         this.becomeAld = true;
     }
     
-    public char randomSex() {
+    public String randomSex() {
     	if (randomize(2) > 1) {
-    		return 'm';
+    		return "m";
     	} else {
-    		return 'f';
+    		return "f";
     	}
     }
 
     public String toString(){
         return sex + " " + speed + " " + sterile + " " + directionFacing + " " + age + " " + health + " " + rats.size();
     }
-    
-    
+
+
+    @Override
+    public void act(AdultRat rat) {
+
+    }
 }

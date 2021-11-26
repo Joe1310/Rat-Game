@@ -4,14 +4,16 @@
  */
 
 public class AdultRat extends Rat {
-    private char sex;
-    private boolean isPregnant;
-    private boolean isAdult;
 
-    public AdultRat(int health, double speed, boolean sterile, int[] location, String directionFacing, char sex, boolean isPregnant){
+    private static String sex;
+    private boolean isPregnant;
+
+
+    public AdultRat(int health, double speed, boolean sterile, int[] location, String directionFacing, String sex, boolean isPregnant){
         super(health, speed, sterile, location, directionFacing, "AdultRat.png");
         this.sex = sex;
         this.isPregnant = isPregnant;
+        this.ratName = "adultRat";
     }
     public void act() {
     	increaseAge();
@@ -25,29 +27,31 @@ public class AdultRat extends Rat {
     }
     
     //youre gonna have to add a way to check the rats are adult rats becuase you cant call a rats sex if it isnt an adult
-    public void pregnancy(){
-        for(int i = 0; rats.size() >= i; i ++){
-            if (this.location == rats.get(i).location){// check if working
-                if(this.sex != rats.get(i).){
-                procreate();
+    public void pregnancy() {
+        for (int i = 0; rats.size() >= i; i++) {
+            if ((this.location == rats.get(i).location) && (rats.get(i).sex != rats.get(i).sex))
+                if(rats.get(i).ratName == "adultRat") {// check if working
+                    procreate();
             }
         }
     }
 
-    protected boolean checkAdult(){
-        if (rats.contains(AdultRat.this)){
-                return true;
-        } else {
-            return false;
-        }
-    }
     
-    public char getSex() {
-    	return sex;
+    public String getSex(){
+    	return this.sex;
     }
 
+
+    public static void setSex(String sex) {
+        AdultRat.sex = sex;
+    }
 
     public String toString(){
         return this.sex + " " + speed + " " + sterile + " " + directionFacing + " " + age + " " + health + rats.size();
+    }
+
+    @Override
+    public void act(AdultRat rat) {
+
     }
 }

@@ -26,5 +26,5 @@ public abstract class Entity {
     	entities.remove(this);
     }
     
-    public abstract void act();
+    public abstract void act(AdultRat rat);
 }

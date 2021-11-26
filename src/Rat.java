@@ -9,6 +9,8 @@ public abstract class Rat extends Entity{
     protected String directionFacing;
     protected static ArrayList<Rat> rats;
     protected int age;
+    protected String ratName;
+    protected String sex;
 
 
 
@@ -64,11 +66,11 @@ public abstract class Rat extends Entity{
         int n = rand.nextInt(temp.size());
         switch (temp.get(n)){
             case "n":       // at first the starting would be 0; for any direction like an array
-                location[0] = location[0] + 50; // 50 px is the size of the tile
+                location[0] = location[1] + 50; // 50 px is the size of the tile
                 this.directionFacing = "n";
             break;
             case "s":
-                location[0] = location[0] - 50;
+                location[0] = location[1] + 50;
                 this.directionFacing = "s";
             break;
             case "w":
@@ -86,6 +88,8 @@ public abstract class Rat extends Entity{
         rats.remove(this);
         removeEntity();
     }
+
+
     
     protected static ArrayList<Rat> getRats() {
     	return rats;
