@@ -103,7 +103,7 @@ public class Level {
 			sterile = scan.nextBoolean();
 			isPregnant = scan.nextBoolean();
 			
-			Entity rat = new AdultRat(health, 5, sterile, location, direction, sex, isPregnant);
+			Entity rat = new AdultRat(health, sterile, location, direction, sex, isPregnant);
 		}
 		
 		inventory = scan.next();
