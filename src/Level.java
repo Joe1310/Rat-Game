@@ -147,9 +147,6 @@ public class Level {
 	//This method creates map object and returns the object
 	public Map constructMap() {
 
-		Map levelMap = new Map(tileLayout, itemSpawnRate, entityLocations, maxRats);
-
-		return levelMap;
+		return new Map(tileLayout, itemSpawnRate, entityLocations, maxRats);
 	}
-
 }

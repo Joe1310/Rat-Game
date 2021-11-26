@@ -48,11 +48,11 @@ public abstract class Rat extends Entity{
         }
     }
 
-    protected void move() {
+    public void move() {
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
         Random rand = new Random();
         for (String direction : temp ){
-            if (direction == getOpositeDirection() && temp.size() > 1 ){
+            if (direction.equals(getOpositeDirection()) && temp.size() > 1 ){
                 temp.remove(direction);
             }
         }
