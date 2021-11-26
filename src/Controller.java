@@ -1,5 +1,8 @@
 import javafx.event.ActionEvent;
 
+/**
+ * Class to define how the buttons respond to mouse clicks.
+ */
 public class Controller {
     public void Start(ActionEvent e){
         System.out.println("Start");
