@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 public abstract class Rat extends Entity{
