@@ -1,6 +1,6 @@
-public class Femalesexchange extends Entity {
+public class FemaleSexChange extends Entity {
 	
-	public Femalesexchange(int[] location) {
+	public FemaleSexChange(int[] location) {
 		super(location, "FSexChange.png");
 	}
 
