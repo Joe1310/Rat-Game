@@ -1,18 +1,18 @@
 public class DeathRatSpawner extends Entity {
     private int countdown;
 
-    public DeathRatSpanwer(int[] location) {
+    public DeathRatSpawner(int[] location) {
         super(location, "DeathRat.png");
-        this.countdown = 3;
+        this.countdown = 6;
     }
-    public DeathRatSpanwer(int[] location, countdown) {
+    public DeathRatSpawner(int[] location, int countdown) {
         super(location, "DeathRat.png");
         this.countdown = countdown;
     }
 
     public void act() {
         if (countdown == 0) {
-            Entity deathRat = new DeathRat(1, 1, true, this.location, "n", 1, "DeathRat.png");
+            Entity deathRat = new DeathRat(1, 1, true, this.location, "n");
             removeEntity();
         }
         countdown -= 1;
