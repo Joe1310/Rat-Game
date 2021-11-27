@@ -123,29 +123,25 @@ private Pane buildGUI() {
 				// Create a new coordinate
 				int x = r.nextInt(CANVAS_WIDTH);
 				int y = r.nextInt(CANVAS_HEIGHT);
-				int[] location = new int[2];
-				location[0] = 150;
-				location[1] = 150;
+				int[] location = {x,y};
 				
 				// Access the graphic context of the canvas
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 				
 				Entity bomb = new TestBomb(location);
-				bomb.draw(gc);
 	}
 	
 	private void tick() {
 		System.out.println("Tick!");
 		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		
 		for(Entity ent : Entity.getEntities()) {
 			ent.act();
+		}
+		Entity.updateEntities();
+		for(Entity ent : Entity.getEntities()) {
 			ent.draw(gc);
 		}
-		
-		Entity.updateEntities();
 	}
 }
 	

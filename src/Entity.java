@@ -7,7 +7,6 @@ public abstract class Entity {
 	private static ArrayList<Entity> entities = new ArrayList<Entity>();
 	private static ArrayList<Entity> toAdd = new ArrayList<Entity>();
 	private static ArrayList<Entity> toRemove = new ArrayList<Entity>();
-	protected int entityID;
 	private String imageName;
 	protected int[] location;
 	
