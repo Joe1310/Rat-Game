@@ -7,13 +7,30 @@ public class TestBomb extends Entity{
     public void act() {
         spawnExplosions();
         System.out.println(this.location[0] + " " + this.location[1]);
+        removeEntity();
     }
 
     private void spawnExplosions() {
-    	int[] temp = this.location;
-    	temp[1] += 50;
-        Entity explo = new Explosion(temp);
-        temp = this.location;
+    	if (true) {
+    		int[] explosionLocation = {this.location[0], this.location[1] - 50};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    	if (true) {
+    		int[] explosionLocation = {this.location[0], this.location[1] + 50};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    	if (true) {
+    		int[] explosionLocation = {this.location[0] - 50, this.location[1]};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    	if (true) {
+    		int[] explosionLocation = {this.location[0] + 50, this.location[1]};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    }
+    
+    public String toString() {
+    	return ("Bomb");
     }
 
 }
