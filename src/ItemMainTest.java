@@ -121,7 +121,7 @@ private Pane buildGUI() {
 				// Create a new coordinate
 				int x = r.nextInt(CANVAS_WIDTH);
 				int y = r.nextInt(CANVAS_HEIGHT);
-				int[] location = {150,150};
+				int[] location = {x,y};
 				
 				// Access the graphic context of the canvas
 				GraphicsContext gc = canvas.getGraphicsContext2D();
