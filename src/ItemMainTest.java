@@ -37,9 +37,6 @@ public class ItemMainTest extends Application {
 	// The dimensions of the canvas
 	private static final int CANVAS_WIDTH = 400;
 	private static final int CANVAS_HEIGHT = 400;
-
-	// The size to draw the shapes
-	private static final int SHAPE_SIZE = 30;
 	
 	// The canvas in the GUI. This needs to be a global variable
 	// (in this setup) as we need to access it in different methods.
@@ -79,6 +76,7 @@ private Pane buildGUI() {
 		Button tick = new Button("Tick");
 		Button noEntryButton = new Button("NoEntrySign");
 		Button bombButton = new Button("Bomb!");
+		
 		sidebar.getChildren().addAll(tick,noEntryButton,bombButton);
 
 		noEntryButton.setMaxWidth(Double.MAX_VALUE);
@@ -123,9 +121,7 @@ private Pane buildGUI() {
 				// Create a new coordinate
 				int x = r.nextInt(CANVAS_WIDTH);
 				int y = r.nextInt(CANVAS_HEIGHT);
-				int[] location = new int[2];
-				location[0] = 150;
-				location[1] = 150;
+				int[] location = {150,150};
 				
 				// Access the graphic context of the canvas
 				GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -135,10 +131,17 @@ private Pane buildGUI() {
 	}
 	
 	private void tick() {
+		System.out.println("Tick!");
+		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		for(Entity ent : Entity.getEntities()) {
-			ent.act();
-			ent.draw(gc);
+		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		ArrayList<Entity> ents = Entity.getEntities();
+		int maxEntities = ents.size();
+		for (int i = 0; i < maxEntities; i++) {
+			if(ents.get(i) != null) {
+				ents.get(i).act();
+				ents.get(i).draw(gc);
+			}
 		}
 	}
 }

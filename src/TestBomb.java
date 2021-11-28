@@ -6,26 +6,31 @@ public class TestBomb extends Entity{
 
     public void act() {
         spawnExplosions();
-        System.out.println("Bang!");
+        System.out.println(this.location[0] + " " + this.location[1]);
+        removeEntity();
     }
 
     private void spawnExplosions() {
-    	int[] temp = location;
-        for (int i = 50; i <= 300; i+=50) {
-            temp[1] += i;
-            Entity test = new Explosion(temp);
-        }
-        for (int i = 50; i <= 300; i+=50) {
-            temp[1] -= i;
-            Entity test = new Explosion(temp);
-        }
-        for (int i = 50; i <= 300; i+=50) {
-        	temp[0] += i;
-        	Entity test = new Explosion(temp);
-        }
-        for (int i = 50; i <= 300; i+=50) {
-            temp[0] -= i;
-            Entity test = new Explosion(temp);
-        }
+    	if (true) {
+    		int[] explosionLocation = {this.location[0], this.location[1] - 50};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    	if (true) {
+    		int[] explosionLocation = {this.location[0], this.location[1] + 50};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    	if (true) {
+    		int[] explosionLocation = {this.location[0] - 50, this.location[1]};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
+    	if (true) {
+    		int[] explosionLocation = {this.location[0] + 50, this.location[1]};
+    		Entity explo = new Explosion(explosionLocation);
+    	}
     }
+    
+    public String toString() {
+    	return ("Bomb");
+    }
+
 }

@@ -19,7 +19,7 @@ public class NoEntrySign extends Entity {
 		health--;
 		if (health == 0) {
 			System.out.println("Bye!");
-			//removeEntity();
+			removeEntity();
 		}
 	}
 }

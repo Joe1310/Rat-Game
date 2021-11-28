@@ -1,12 +1,17 @@
-import java.util.ArrayList;
-
 public class Bomb extends Entity{
     private int countdown;
 
     public Bomb(int[] location) {
         super(location, "Bomb.png");
-        this.countdown = 5;
+        this.countdown = 10;
     }
+
+    public Bomb(int[] location, int countdown) {
+        super(location, "Bomb.png");
+        this.countdown = countdown;
+    }
+
+
 
     public void act() {
         if (countdown == 0) {

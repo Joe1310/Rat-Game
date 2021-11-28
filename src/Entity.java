@@ -19,7 +19,7 @@ public abstract class Entity {
     }
     
     public static ArrayList<Entity> getEntities() {
-    	return(entities);
+    	return entities;
     }
     
     public void removeEntity() {
