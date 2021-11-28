@@ -28,6 +28,6 @@ public class DeathRat extends Rat {
     }
 
     public String toString(){
-        return 'd' + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing + " " + sterile;
+        return "d" + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing + " " + sterile;
     }
 }
