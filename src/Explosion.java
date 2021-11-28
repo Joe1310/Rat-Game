@@ -1,5 +1,5 @@
 public class Explosion extends Entity {
-	private int wait = 2;
+	private int wait = 1;
 
     public Explosion(int[] location) {
         super(location, "Explosion.png");

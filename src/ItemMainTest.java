@@ -137,11 +137,17 @@ private Pane buildGUI() {
 		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		ArrayList<Entity> ents = Entity.getEntities();
 		int maxEntities = ents.size();
-		for (int i = 0; i < maxEntities; i++) {
-			if(ents.get(i) != null) {
+		
+		//for loop for acting
+		for (int i = maxEntities-1; i > -1; i--) {
+			if (maxEntities != i) {
 				ents.get(i).act();
-				ents.get(i).draw(gc);
+				maxEntities = ents.size();
 			}
+		}
+		//for loop for drawing
+		for (Entity ent : Entity.getEntities()) {
+			ent.draw(gc);
 		}
 	}
 }

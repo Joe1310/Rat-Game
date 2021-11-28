@@ -12,21 +12,66 @@ public class TestBomb extends Entity{
 
     private void spawnExplosions() {
     	if (true) {
-    		int[] explosionLocation = {this.location[0], this.location[1] - 50};
-    		Entity explo = new Explosion(explosionLocation);
+	    	if (true) {
+	    		int[] explosionLocation = {this.location[0], this.location[1]};
+	    		Entity explo = new Explosion(explosionLocation);
+	    	}
+	    	if (true) {
+	    		if (true) {
+	        		int[] explosionLocation = {this.location[0], this.location[1] - 50};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0], this.location[1] + 50};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0] - 50, this.location[1]};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0] + 50, this.location[1]};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	    	}
+	    	if (true) {
+	    		if (true) {
+	        		int[] explosionLocation = {this.location[0], this.location[1] - 100};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0], this.location[1] + 100};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0] - 100, this.location[1]};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0] + 100, this.location[1]};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	    	}
+	    	if (true) {
+	    		if (true) {
+	        		int[] explosionLocation = {this.location[0], this.location[1] - 150};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0], this.location[1] + 150};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0] - 150, this.location[1]};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	        	if (true) {
+	        		int[] explosionLocation = {this.location[0] + 150, this.location[1]};
+	        		Entity explo = new Explosion(explosionLocation);
+	        	}
+	    	}
     	}
-    	if (true) {
-    		int[] explosionLocation = {this.location[0], this.location[1] + 50};
-    		Entity explo = new Explosion(explosionLocation);
-    	}
-    	if (true) {
-    		int[] explosionLocation = {this.location[0] - 50, this.location[1]};
-    		Entity explo = new Explosion(explosionLocation);
-    	}
-    	if (true) {
-    		int[] explosionLocation = {this.location[0] + 50, this.location[1]};
-    		Entity explo = new Explosion(explosionLocation);
-    	}
+    	
     }
     
     public String toString() {
