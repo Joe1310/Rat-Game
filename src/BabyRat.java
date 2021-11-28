@@ -2,7 +2,7 @@
 public class BabyRat extends Rat {
     private int age;
 
-    public BabyRat(int health, double speed, boolean sterile, int[] location, String directionFacing){
+    public BabyRat(int health, boolean sterile, int[] location, String directionFacing){
         super(health, 2, sterile, location, directionFacing, "BabyRat.png", "baby");
         this.age = 0;
     }

@@ -3,7 +3,7 @@ public class DeathRat extends Rat {
     private int numOfKilled = 0;
     private int timeStationary = 0;
     
-    public DeathRat(int health, int speed, boolean sterile, int[] location, String directionFacing) {
+    public DeathRat(int health, boolean sterile, int[] location, String directionFacing) {
         super(health, 5, sterile, location, directionFacing, "DeathRat.png", "death");//add file for rat image
     }
     

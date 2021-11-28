@@ -16,7 +16,7 @@ public class AdultRat extends Rat {
 
     public void procreate(){
         for (int i = 0; i < randomize(5); i++){
-            Entity baby = new BabyRat(100, 2, sterile, this.location,this.directionFacing);// call constructor of baby rat
+            Entity baby = new BabyRat(100, sterile, this.location,this.directionFacing);// call constructor of baby rat
         }          
     }
 
