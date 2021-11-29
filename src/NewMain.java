@@ -4,9 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,39 +18,45 @@ public class NewMain extends Application {
     // Timeline which will cause tick method to be called periodically.
     private static Timeline tickTimeline;
 
+    // The width and height (in pixels) of each cell that makes up the game.
+    private static final int GRID_CELL_WIDTH = 50;
+    private static final int GRID_CELL_HEIGHT = 50;
+
+    private Canvas canvas;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Rat Game");
+        Stage menuWindow = new Stage();
+        menuWindow.setTitle("Rat Game");
         //Create view in Java
         Button startButton = new Button("START");
         Button loadButton = new Button("LOAD");
         Button highScoresButton = new Button("HIGH SCORES");
         Button quitButton = new Button("QUIT");
         startButton.setOnAction(event -> {
-            newWindow.close();
+            menuWindow.close();
             play(primaryStage);
         });
         loadButton.setOnAction(event -> {
-            newWindow.close();
+            menuWindow.close();
             load(primaryStage);
         });
         highScoresButton.setOnAction(event -> {
-            newWindow.close();
+            menuWindow.close();
             highScores(primaryStage);
         });
         quitButton.setOnAction(event -> {
-            newWindow.close();
+            menuWindow.close();
         });
         VBox container = new VBox(startButton, loadButton, highScoresButton, quitButton);
         //Style container
         container.setSpacing(15);
         container.setPadding(new Insets(25));
         //Set view in window
-        newWindow.setScene(new Scene(container));
+        menuWindow.setScene(new Scene(container));
         //Launch
-        newWindow.show();
+        menuWindow.show();
     }
 
     private void highScores(Stage primaryStage) {
@@ -62,37 +66,54 @@ public class NewMain extends Application {
     }
 
     public void play(Stage primaryStage){
-        Pane root = buildMap();
-        Scene gameScene = new Scene(root);
-        primaryStage.setScene(gameScene);
-        primaryStage.show();
+        Stage levelMenuWindow = new Stage();
+        levelMenuWindow.setTitle("Rat Game");
+        //Create view in Java
+        Label title = new Label("Select a level");
+        Button level1Button = new Button("LEVEL 1");
+        Button level2Button = new Button("LEVEL 2");
+        Button level3Button = new Button("LEVEL 3");
+        Button level4Button = new Button("LEVEL 4");
+        Button backButton = new Button("BACK");
+        level1Button.setOnAction(event -> {
+            levelMenuWindow.close();
+            level1();
+        });
+        level2Button.setOnAction(event -> {
+            levelMenuWindow.close();
+            //level2(primaryStage);
+        });
+        level3Button.setOnAction(event -> {
+            levelMenuWindow.close();
+            //level3(primaryStage);
+        });
+        level4Button.setOnAction(event -> {
+            levelMenuWindow.close();
+            //level4(primaryStage);
+        });
+        backButton.setOnAction(event -> {
+            levelMenuWindow.close();
+            try {
+                start(primaryStage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        VBox container = new VBox(title,level1Button,level2Button,level3Button,level4Button,backButton);
+        //Style container
+        container.setSpacing(15);
+        container.setPadding(new Insets(25));
+        //Set view in window
+        levelMenuWindow.setScene(new Scene(container));
+        //Launch
+        levelMenuWindow.show();
     }
 
-    /**
-     * Create the GUI.
-     * @return The panel that contains the created GUI.
-     */
-    private Pane buildMap() {
-        // Create top-level panel that will hold all GUI nodes.
-        BorderPane root = new BorderPane();
-
-        // Create the canvas that we will draw on.
-        // We store this as a global variable so other methods can access it.
-        // The canvas in the GUI. This needs to be a global variable
-        // (in this setup) as we need to access it in different methods.
-        // We could use FXML to place code in the controller instead.
-        Canvas canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-        root.setCenter(canvas);
-
-        // Create a toolbar with some nice padding and spacing
-        HBox toolbar = new HBox();
-        toolbar.setSpacing(10);
-        toolbar.setPadding(new Insets(10, 10, 10, 10));
-        root.setTop(toolbar);
-
-        // Finally, return the border pane we built up.
-        return root;
+    public void level1(){
+        Stage level1Stage = new Stage();
+        level1Stage.setTitle("RAT GAME : LVL1");
     }
+
 
     public static void main(String[] args) {
         launch(args);
