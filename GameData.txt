@@ -1,4 +1,4 @@
-2
+4
 BM 3 2 100 East true false
 BF 2 4 100 South false false
 M 3 2 100 East true false
