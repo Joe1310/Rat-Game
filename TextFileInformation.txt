@@ -2,18 +2,20 @@ Level files contain:
 
 1. parTime
 2. Max Rats
-3. Row Column
-4. tileLayout
+3. Item Spawn Rate
+4. Row Column
+5. tileLayout
+6. Number of Bot rats
+7. Rat Sex , Location , Direction
 
 GameData file contain:
 
-1. remainingTime
-2. number of Alive rats
-3. List of properties of rats
-4. Inventory list with quatities of the items
-5. Player's score
-6. level Number
-
-Other notes:
-
-SavedGame files will be same as GameData file.
+1. Alive Rats
+2. List of Rats
+3. Inventory
+4. Player's score
+5. remainingTime
+6. Max Rats
+7. Item Spawn Rate
+8. Row Column
+9. tileLayout
