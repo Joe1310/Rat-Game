@@ -1,7 +1,7 @@
 public class Poison extends Entity {
 	
 	public Poison(int[] location) {
-		super(location, "Poison.png");
+		super(location, "Poison.png", "Poison");
 	}
 	
 	public void act() {

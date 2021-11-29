@@ -10,7 +10,7 @@ public abstract class Rat extends Entity{
     private String ratType;
 
     public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image, String ratType){
-        super(location, image);
+        super(location, image, "Rat");
         this.ratType = ratType;
     	this.health = health;
         this.speed = speed;
@@ -48,6 +48,7 @@ public abstract class Rat extends Entity{
     }
 
     public void move() {
+    	checkNoEntry();
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
         Random rand = new Random();
         for (String direction : temp ){
@@ -55,23 +56,23 @@ public abstract class Rat extends Entity{
                 temp.remove(direction);
             }
         }
-        // Obtain a number between [0 - 5].
+        // Obtain a random direction available.
         int n = rand.nextInt(temp.size());
         switch (temp.get(n)){
             case "n":       // at first the starting would be 0; for any direction like an array
-                location[1] = location[1] + 50; // 50 px is the size of the tile
+                location[1] = location[1] - 1; // 50 px is the size of the tile
                 this.directionFacing = "n";
             break;
             case "s":
-                location[1] = location[1] + 50;
+                location[1] = location[1] + 1;
                 this.directionFacing = "s";
             break;
             case "w":
-                location[0] = location[0] - 50;
+                location[0] = location[0] - 1;
                 this.directionFacing = "w";
             break;
             case "e":
-                location[0] = location[0] + 50;
+                location[0] = location[0] + 1;
                 this.directionFacing = "e";
             break;    
         }
@@ -88,6 +89,30 @@ public abstract class Rat extends Entity{
     
     protected static ArrayList<Rat> getRats() {
     	return rats;
+    }
+    
+    private void checkNoEntry() {
+    	int[] tempLocation = this.location;
+    	switch (directionFacing){
+        case "n":
+        	tempLocation[1]--;
+        	break;
+        case "s":
+        	tempLocation[1]++;
+        	break;
+        case "w":
+        	tempLocation[0]--;
+        	break;
+        case "e":
+        	tempLocation[0]++;
+        	break;
+    	}
+    	for(Entity ent : getEntities()) {
+    		if (ent.location == tempLocation && ent.getType() == "NES") {
+    			((NoEntrySign)ent).degrade();
+    			this.directionFacing = getOpositeDirection();
+    		}
+    	}
     }
 
 

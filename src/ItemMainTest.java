@@ -101,8 +101,8 @@ private Pane buildGUI() {
 		Random r = new Random();
 		
 		// Create a new coordinate
-		int x = r.nextInt(CANVAS_WIDTH);
-		int y = r.nextInt(CANVAS_HEIGHT);
+		int x = r.nextInt(8);
+		int y = r.nextInt(8);
 		int[] location = new int[2];
 		location[0] = x;
 		location[1] = y;
@@ -119,8 +119,8 @@ private Pane buildGUI() {
 				Random r = new Random();
 				
 				// Create a new coordinate
-				int x = r.nextInt(CANVAS_WIDTH);
-				int y = r.nextInt(CANVAS_HEIGHT);
+				int x = r.nextInt(8);
+				int y = r.nextInt(8);
 				int[] location = {x,y};
 				
 				// Access the graphic context of the canvas

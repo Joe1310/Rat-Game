@@ -2,16 +2,14 @@ public class Bomb extends Entity{
     private int countdown;
 
     public Bomb(int[] location) {
-        super(location, "Bomb.png");
+        super(location, "Bomb.png", "Bomb");
         this.countdown = 10;
     }
 
     public Bomb(int[] location, int countdown) {
-        super(location, "Bomb.png");
+        super(location, "Bomb.png", "Bomb");
         this.countdown = countdown;
     }
-
-
 
     public void act() {
         if (countdown == 0) {
@@ -54,5 +52,3 @@ public class Bomb extends Entity{
         }
     }
 }
-
-

@@ -2,7 +2,7 @@ public class Explosion extends Entity {
 	private int wait = 1;
 
     public Explosion(int[] location) {
-        super(location, "Explosion.png");
+        super(location, "Explosion.png", "Explosion");
     }
 
     public void act() {

@@ -2,12 +2,12 @@ public class Gas extends Entity {
 	private int spread;
 	
 	public Gas(int[] location) {
-		super(location, "Gas.png");
+		super(location, "Gas.png", "Gas");
 		spread = 9;
 	}
 	
 	public Gas(int[] location, int spread) {
-		super(location, "Gas.png");
+		super(location, "Gas.png", "Gas");
 		this.spread = spread;
 	}
 	
@@ -17,7 +17,5 @@ public class Gas extends Entity {
 	
 	public void expand() {
 		Map.getMovementOptions(location[0], location[1]);
-		
 	}
-	
 }
