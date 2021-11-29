@@ -16,16 +16,19 @@ public class Level {
 	int itemSpawnRate;
 	int[] entityLocations;
 	
+	Inventory items;
 	String inventory;
 	int playerScore;
 	int levelScore = 0;
+	int levelNumber;
 	
 	
 	//Constructor
-	public Level(int parTime, int maxRats, Tile[][] tileLayout) {
+	public Level(int parTime, int maxRats, Tile[][] tileLayout, int levelNumber) {
 		this.tileLayout = tileLayout;
 		this.parTime = parTime;
 		this.maxRats = maxRats;
+		this.levelNumber = levelNumber;
 	}
 
 	//Method reads file and calls appropriate function while passing scanner to it
@@ -53,12 +56,11 @@ public class Level {
 	//Method reads Level data and creates level objects
 	public Level readLevel(Scanner scan) {
 		
-		int maxRats;
 		int row, column;
 		Tile[][] tileLayout;
 		
-		parTime = scan.nextInt();
-		maxRats = scan.nextInt();
+		this.parTime = scan.nextInt();
+		this.maxRats = scan.nextInt();
 		row = scan.nextInt();
 		column = scan.nextInt();
 		
@@ -72,7 +74,7 @@ public class Level {
 		}
 		
 		//Error: tileLayout is Tile type but while reading text it is char type
-		Level level = new Level((parTime - remainingTime), maxRats, tileLayout);
+		Level level = new Level((parTime - remainingTime), maxRats, tileLayout, levelNumber);
 		return level;
 	}
 	
@@ -80,45 +82,93 @@ public class Level {
 	public void readGame(Scanner scan) {
 		
 		int aliveRats;
-		String sex;
-		int x, y;
-		int health;
-		String direction;
-		boolean sterile, isPregnant;
-		String inventory;
-		int levelNumber;
 		
 		this.remainingTime = scan.nextInt();
-		
 		aliveRats = scan.nextInt();
 		
 		for (int i = 0; i < aliveRats; i ++) {
-			
-			sex = scan.next();
-			x = scan.nextInt();
-			y = scan.nextInt();
-			int[] location = {x,y};
-			health = scan.nextInt();
-			direction = scan.next();
-			sterile = scan.nextBoolean();
-			isPregnant = scan.nextBoolean();
-			
-			Entity rat = new AdultRat(health, sterile, location, direction, sex, isPregnant);
+			if(scan.hasNext("M") || scan.hasNext("F")){
+				MakeAdultRat(scan);
+			} else if(scan.hasNext("B")) {
+				MakeBabyRat(scan);
+			} else {
+				MakeDeadRat(scan);
+			}
 		}
 		
-		inventory = scan.next();
-		this.inventory = inventory;
-		Inventory item = new Inventory(inventory.charAt(0), 
+		this.inventory = scan.next();
+		this.items = new Inventory(inventory.charAt(0), 
 				inventory.charAt(1), inventory.charAt(2), 
 				inventory.charAt(3), inventory.charAt(4), 
 				inventory.charAt(5), inventory.charAt(6));
 		
 		this.playerScore = scan.nextInt();
-		levelNumber = scan.nextInt();
+		this.levelNumber = scan.nextInt();
 		
 		//Makes level object
-		readFile(levelNumber + "level.txt");
+		readFile(this.levelNumber + "level.txt");
 		
+	}
+	
+	//Reads Rat's properties using scanner and makes an object for Adult Rat
+	public void MakeAdultRat(Scanner scan) {
+		
+		String sex;
+		int x, y;
+		int health;
+		String direction;
+		boolean sterile, isPregnant;
+		
+		sex = scan.next();
+		x = scan.nextInt();
+		y = scan.nextInt();
+		int[] location = {x,y};
+		health = scan.nextInt();
+		direction = scan.next();
+		sterile = scan.nextBoolean();
+		isPregnant = scan.nextBoolean();
+		
+		Entity rat = new AdultRat(health, sterile, location, direction, sex, isPregnant);
+	}
+	
+	//Reads Rat's properties using scanner and makes an object for Baby Rat
+	public void MakeBabyRat(Scanner scan) {
+		
+		String sex;
+		int x, y;
+		int health;
+		String direction;
+		boolean sterile, isPregnant;
+		
+		sex = scan.next();
+		x = scan.nextInt();
+		y = scan.nextInt();
+		int[] location = {x,y};
+		health = scan.nextInt();
+		direction = scan.next();
+		sterile = scan.nextBoolean();
+		
+		Entity rat = new BabyRat(health, sterile, location, direction);
+	}
+	
+	//Reads Rat's properties using scanner and makes an object for Dead Rat
+	public void MakeDeadRat(Scanner scan) {
+		
+		String sex;
+		int x, y;
+		int health;
+		String direction;
+		boolean sterile, isPregnant;
+		
+		sex = scan.next();
+		x = scan.nextInt();
+		y = scan.nextInt();
+		int[] location = {x,y};
+		health = scan.nextInt();
+		direction = scan.next();
+		sterile = scan.nextBoolean();
+		
+		Entity rat = new DeathRat(health, sterile, location, direction);
 	}
 
 	//Method saves the ongoing Game using playerID
@@ -130,10 +180,13 @@ public class Level {
 			
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(remainingTime + "\n");
-			saveGame.write("Alive Rats number\n <List> \n");
-			saveGame.write(inventory);
-			saveGame.write(playerScore);
-			saveGame.write("\n<levelNumber>");
+			saveGame.write(Rat.getRats().size() + "\n");
+			for(int i = 0; i < Rat.getRats().size(); i ++) {
+				saveGame.write(Rat.getRats().toString() + "\n");
+			}
+			saveGame.write(this.inventory + "\n");
+			saveGame.write(playerScore + "\n");
+			saveGame.write(levelNumber + "\n");
 			saveGame.close();
 			
 		} catch (IOException e) {
@@ -146,7 +199,16 @@ public class Level {
 
 	//This method creates map object and returns the object
 	public Map constructMap() {
-
 		return new Map(tileLayout, itemSpawnRate, entityLocations, maxRats);
+	}
+	
+	//Get method for fetching items
+	public Inventory getInventory() {
+		return items;
+	}
+	
+	//Get method for fetching level score
+	public int getLevelScore() {
+		return levelScore;
 	}
 }
