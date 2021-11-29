@@ -1,7 +1,18 @@
-250
-2 
-Male 3 2 100 East true false
-Female 2 4 100 South false false
+2
+BM 3 2 100 East true false
+BF 2 4 100 South false false
+M 3 2 100 East true false
+F 2 4 100 South false false
 1234567
 5
-1
+250
+10
+5
+7 15
+GGGGGGGGGGGGGGG
+GPPPTTPPPTTPPPG
+GGGPGGGGPGGPGPG
+GPPPGGPPPGGPGPG
+GPGGGGGGPGGPGPG
+GPPPTTPPPTTPPPG
+GGGGGGGGGGGGGGG
