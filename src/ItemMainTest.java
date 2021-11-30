@@ -131,8 +131,6 @@ private Pane buildGUI() {
 	}
 	
 	private void tick() {
-		System.out.println("Tick!");
-		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		ArrayList<Entity> ents = Entity.getEntities();
