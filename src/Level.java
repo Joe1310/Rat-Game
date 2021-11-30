@@ -149,7 +149,7 @@ public class Level {
 			int[] location = {x,y};
 			direction = scan.next();
 			
-			Entity rat = new BabyRat(sex, 100, false, location, direction);
+			Entity rat = new BabyRat(100, false, location, direction);
 		}
 	}
 	
