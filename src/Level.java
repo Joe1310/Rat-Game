@@ -71,7 +71,7 @@ public class Level {
 			}
 		}
 		
-		map = new Map(tileLayout, itemSpawnRate, arrayOfLocation, maxRats);
+		map = new Map(tileLayout, maxRats);
 
 	}
 	
