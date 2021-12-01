@@ -66,7 +66,7 @@ public class Map {
                     ent.draw();
                 }
                 //for loop for acting
-                for (int i = maxEntities-1; i > -1; i--) {
+                for (int i = maxEntities-1; i >= 0; i--) {
                     if (maxEntities != i) {
                         ents.get(i).act();
                     }
@@ -82,13 +82,16 @@ public class Map {
         if(tileLayout[x + 1][y].getTileType() == 'P' ||
                 tileLayout[x + 1][y].getTileType() == 'T'){
             movementOptions.add("E");
-        } if(tileLayout[x - 1][y].getTileType() == 'P' ||
+        } 
+        if(tileLayout[x - 1][y].getTileType() == 'P' ||
                 tileLayout[x - 1][y].getTileType() == 'T'){
             movementOptions.add("W");
-        } if(tileLayout[x][y - 1].getTileType() == 'P' ||
+        } 
+        if(tileLayout[x][y - 1].getTileType() == 'P' ||
                 tileLayout[x][y - 1].getTileType() == 'T'){
             movementOptions.add("N");
-        } if(tileLayout[x][y + 1].getTileType() == 'P' ||
+        } 
+        if(tileLayout[x][y + 1].getTileType() == 'P' ||
                 tileLayout[x][y + 1].getTileType() == 'T'){
             movementOptions.add("S");
         }

@@ -36,14 +36,14 @@ public abstract class Rat extends Entity{
     }
 
     public String getOpositeDirection() {
-        if (directionFacing == "e"){
-            return ("w");
-        }else if ( directionFacing == "w"){
-            return ("e");
-        }else if (directionFacing == "n"){
-            return ("s");
+        if (directionFacing == "E"){
+            return ("W");
+        }else if ( directionFacing == "W"){
+            return ("E");
+        }else if (directionFacing == "N"){
+            return ("S");
         }else {
-            return "n";
+            return "N";
         }
     }
 
@@ -52,28 +52,28 @@ public abstract class Rat extends Entity{
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
         Random rand = new Random();
         for (String direction : temp ){
-            if (direction.equals(getOpositeDirection()) && temp.size() > 1 ){
+            if (direction.equals(getOpositeDirection()) && temp.size() > 1){
                 temp.remove(direction);
             }
         }
         // Obtain a random direction available.
         int n = rand.nextInt(temp.size());
         switch (temp.get(n)){
-            case "n":       // at first the starting would be 0; for any direction like an array
+            case "N":       // at first the starting would be 0; for any direction like an array
                 location[1] = location[1] - 1; // 50 px is the size of the tile
-                this.directionFacing = "n";
+                this.directionFacing = "N";
                 break;
-            case "s":
+            case "S":
                 location[1] = location[1] + 1;
-                this.directionFacing = "s";
+                this.directionFacing = "S";
                 break;
-            case "w":
+            case "W":
                 location[0] = location[0] - 1;
-                this.directionFacing = "w";
+                this.directionFacing = "W";
                 break;
-            case "e":
+            case "E":
                 location[0] = location[0] + 1;
-                this.directionFacing = "e";
+                this.directionFacing = "E";
                 break;
         }
     }
@@ -94,16 +94,16 @@ public abstract class Rat extends Entity{
     private void checkNoEntry() {
         int[] tempLocation = this.location;
         switch (directionFacing){
-            case "n":
+            case "N":
                 tempLocation[1]--;
                 break;
-            case "s":
+            case "S":
                 tempLocation[1]++;
                 break;
-            case "w":
+            case "W":
                 tempLocation[0]--;
                 break;
-            case "e":
+            case "E":
                 tempLocation[0]++;
                 break;
         }
