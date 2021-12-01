@@ -33,5 +33,9 @@ public abstract class Entity {
     	return entityType;
     }
     
+    protected void setImageName(String imageName) {
+    	this.imageName = imageName;
+    }
+    
     public abstract void act();
 }
