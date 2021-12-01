@@ -21,8 +21,7 @@ public abstract class Rat extends Entity{
 
     public int randomize(int i){
         Random rand = new Random();
-        int n = rand.nextInt(i);
-        return n;
+        return rand.nextInt(i);
     }
 
     public abstract void act();
@@ -36,28 +35,27 @@ public abstract class Rat extends Entity{
     }
 
     public String getOpositeDirection() {
-        if (directionFacing == "E"){
+        if (directionFacing.equals("E")){
             return ("W");
-        }else if ( directionFacing == "W"){
+        }else if (directionFacing.equals("W")){
             return ("E");
-        }else if (directionFacing == "N"){
+        }else if (directionFacing.equals("N")){
             return ("S");
         }else {
-            return "N";
+            return ("N");
         }
     }
 
     public void move() {
         //checkNoEntry();
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
-        Random rand = new Random();
         for (String direction : temp ){
             if (direction.equals(getOpositeDirection()) && temp.size() > 1){
                 temp.remove(direction);
             }
         }
         // Obtain a random direction available.
-        int n = rand.nextInt(temp.size());
+        int n = randomize(temp.size());
         switch (temp.get(n)){
             case "N":       // at first the starting would be 0; for any direction like an array
                 location[1] = location[1] - 1; // 50 px is the size of the tile

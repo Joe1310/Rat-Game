@@ -36,11 +36,11 @@ public class Map {
         for (int i = 0; i < (row); i++) {
             for (int j = 0; j < column; j++) {
                 Image tileImage = null;
-                if (Map.tileLayout[i][j].getTileType() == 'G') {
+                if (Map.tileLayout[j][i].getTileType() == 'G') {
                     tileImage = grassImage;
-                } else if (Map.tileLayout[i][j].getTileType() == 'T') {
+                } else if (Map.tileLayout[j][i].getTileType() == 'T') {
                     tileImage = pathImage;
-                } else if (Map.tileLayout[i][j].getTileType() == 'P') {
+                } else if (Map.tileLayout[j][i].getTileType() == 'P') {
                     tileImage = tunnelImage;
                 }
                 gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);

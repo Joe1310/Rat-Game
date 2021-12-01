@@ -60,24 +60,29 @@ public class Level {
 		maxRats = scan.nextInt();
 		itemSpawnRate = scan.nextInt();
 
+		//column = scan.nextInt();
+		//row = scan.nextInt();
+		//tileLayout = new Tile[row][column];
+		//for (int i = 0; i < row; i ++) {
+		//	line = scan.next();
+		//	for (int j = 0; j < column; j ++) {
+		//		Tile tile = new Tile(line.charAt(j), i, j);
+		//		tileLayout[i][j] = tile;
+		//	}
+		//}
+
 		column = scan.nextInt();
 		row = scan.nextInt();
-		tileLayout = new Tile[row][column];
-		for (int i = 0; i < row; i ++) {
+		tileLayout = new Tile[column][row];
+		for (int i = 0 ; i < row; i++){
 			line = scan.next();
-			for (int j = 0; j < column; j ++) {
-				Tile tile = new Tile(line.charAt(j), i, j);
-				tileLayout[i][j] = tile;
+			for(int j = 0 ; j < column; j++){
+				Tile tile = new Tile(line.charAt(j), j, i);
+				tileLayout[j][i] = tile;
 			}
 		}
 
 		map = new Map(tileLayout, row, column, maxRats);
-
-		for(int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
-				System.out.print(map.tileLayout[i][j].getTileType());
-			}
-		}
 	}
 
 	//Method reads Game data using Scanner and creates objects
