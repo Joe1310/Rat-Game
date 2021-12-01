@@ -9,7 +9,7 @@ public class AdultRat extends Rat {
         this.sex = sex;
         this.isPregnant = isPregnant;
     }
-    
+
     public void act() {
         pregnancy();
     }
@@ -17,7 +17,7 @@ public class AdultRat extends Rat {
     public void procreate(){
         for (int i = 0; i < randomize(5); i++){
             Entity baby = new BabyRat(100, sterile, this.location,this.directionFacing);// call constructor of baby rat
-        }          
+        }
     }
 
     public void pregnancy() {
@@ -25,12 +25,12 @@ public class AdultRat extends Rat {
             if ((this.location == rats.get(i).location) && (rats.get(i) != rats.get(i)))
                 if(rats.get(i).getRatType() == "adultRat") {
                     procreate();
-            }
+                }
         }
     }
 
     public String getSex(){
-    	return this.sex;
+        return this.sex;
     }
 
     public void setSex(String sex) {

@@ -1,44 +1,39 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Map {
- //   int itemSpawnRate;
-//    int[] entityLocations;
 
+
+
+public class Map {
     int maxRat;
     static Tile[][] tileLayout;
     public int tick;
     private Canvas canvas;
-
- //   public static void main(String[] args) {
-   // }
-
+    final int GRID_CELL_WIDTH = 50;
+    final int GRID_CELL_HEIGHT = 50;
+    Image grassImage;
+    Image dirtImage;
+    Image tunnelImage;
 
     /**
-     * @param tileLayout is a text file containing the tile layout
+     *
+     * @param tileLayout
+     * @param maxRat
      */
     public Map(Tile[][] tileLayout, int maxRat) {
 
-        this.tileLayout = tileOut(tileLayout);
+        this.tileLayout = tileLayout;
         this.maxRat = maxRat;
         tick = entityTick();
     }
 
     public Tile[][] tileOut(Tile[][] x) {
-        Image grassImage;
-        Image dirtImage;
-        Image tunnelImage;
-
-        final int GRID_CELL_WIDTH = 50;
-        final int GRID_CELL_HEIGHT = 50;
-
         grassImage = new Image("GrassTile(1).png");
         tunnelImage = new Image("Tunnel.png");
         dirtImage = new Image("Dirt.png");
@@ -102,7 +97,4 @@ public class Map {
         return movementOptions;
     }
 
-    public String toString () {
-        return tileLayout.toString();
-    }
 }

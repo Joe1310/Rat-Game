@@ -1,4 +1,3 @@
-
 public class BabyRat extends Rat {
     private int age;
     private String sex;
@@ -8,19 +7,19 @@ public class BabyRat extends Rat {
         this.age = 0;
         this.sex = randomSex();
     }
-    
+
     public BabyRat(String sex, int health, boolean sterile, int[] location, String directionFacing){
         super(health, 2, sterile, location, directionFacing, "BabyRat.png", "baby");
         this.age = 0;
         if (sex == "BF") {
-        	this.sex = "F";
+            this.sex = "F";
         } else {
-        	this.sex = "M";
+            this.sex = "M";
         }
     }
-    
+
     public void act() {
-    	move();
+        move();
         increaseAge();
     }
 
@@ -35,13 +34,13 @@ public class BabyRat extends Rat {
         Entity newBabyRat = new AdultRat(this.health, this.sterile, this.location, this.directionFacing, this.sex, false);// check if correct
         removeEntity();
     }
-    
+
     public String randomSex() {
-    	if (randomize(2) > 1) {
-    		return "M";
-    	} else {
-    		return "F";
-    	}
+        if (randomize(2) > 1) {
+            return "M";
+        } else {
+            return "F";
+        }
     }
 
     public String toString(){
