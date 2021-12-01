@@ -10,11 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.*;
 import javafx.stage.Stage;
-
-import java.util.EventListener;
-import java.util.ArrayList;
 
 
 public class ItemPlaceTestMain extends Application{
@@ -81,7 +77,7 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity gas = new Gas(getMouseLocation(event), false);
-				gas.draw(gc);
+				gas.draw();
 			}
 		});
 		
@@ -91,7 +87,7 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
-				deathRat.draw(gc);
+				deathRat.draw();
 			}
 		});
 		
@@ -101,19 +97,10 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity poison = new Poison(getMouseLocation(event));
-				poison.draw(gc);
+				poison.draw();
 			}
 		});
-		
-		sterilizationButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				
-				GraphicsContext gc = canvas.getGraphicsContext2D();
 
-				Entity sterilization = new Sterilization(getMouseLocation(event));
-				sterilization.draw(gc);
-			}
-		});
 
 		femaleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
@@ -121,7 +108,7 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
-				femaleSexChange.draw(gc);
+				femaleSexChange.draw();
 			}
 		});
 		
@@ -131,7 +118,7 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
-				maleSexChange.draw(gc);
+				maleSexChange.draw();
 			}
 		});
 		
@@ -141,7 +128,7 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
-				noEntrySign.draw(gc);
+				noEntrySign.draw();
 			}
 		});
 		
@@ -151,7 +138,7 @@ public class ItemPlaceTestMain extends Application{
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 
 				Entity bomb = new Bomb(getMouseLocation(event));
-				bomb.draw(gc);
+				bomb.draw();
 			}
 		});
 		

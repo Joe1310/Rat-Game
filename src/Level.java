@@ -95,11 +95,7 @@ public class Level {
 			}
 		}
 
-		items = scan.next();
-		inventory = new Inventory(items.charAt(0),
-				items.charAt(1), items.charAt(2),
-				items.charAt(3), items.charAt(4),
-				items.charAt(5), items.charAt(6));
+
 
 		playerScore = scan.nextInt();
 

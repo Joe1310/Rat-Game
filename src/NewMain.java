@@ -17,15 +17,12 @@ import java.io.IOException;
 
 public class NewMain extends Application {
     // The dimensions of the canvas
-    private static final int CANVAS_WIDTH = 800;
-    private static final int CANVAS_HEIGHT = 400;
+    private static final int TILE_SIZE = 50;
+    private static final int CANVAS_WIDTH = 1850;
+    private static final int CANVAS_HEIGHT = 1000;
 
     // Timeline which will cause tick method to be called periodically.
     private static Timeline tickTimeline;
-
-    // The width and height (in pixels) of each cell that makes up the game.
-    private static final int GRID_CELL_WIDTH = 50;
-    private static final int GRID_CELL_HEIGHT = 50;
 
     private Canvas canvas;
 
