@@ -60,8 +60,8 @@ public class Level {
 		maxRats = scan.nextInt();
 		itemSpawnRate = scan.nextInt();
 
-		row = scan.nextInt();
 		column = scan.nextInt();
+		row = scan.nextInt();
 		tileLayout = new Tile[row][column];
 		for (int i = 0; i < row; i ++) {
 			line = scan.next();

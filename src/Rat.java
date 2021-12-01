@@ -48,7 +48,7 @@ public abstract class Rat extends Entity{
     }
 
     public void move() {
-        checkNoEntry();
+        //checkNoEntry();
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
         Random rand = new Random();
         for (String direction : temp ){
@@ -107,7 +107,7 @@ public abstract class Rat extends Entity{
                 tempLocation[0]++;
                 break;
         }
-        for(Entity ent : getEntities()) {
+        for(Entity ent : Entity.getEntities()) {
             if (ent.location == tempLocation && ent.getType() == "NES") {
                 ((NoEntrySign)ent).degrade();
                 this.directionFacing = getOpositeDirection();

@@ -9,6 +9,8 @@ public abstract class Entity {
 	private String entityType;
 	protected int[] location;
 	final int IMAGE_SIZE = 50;
+
+	static GraphicsContext gc;
 	
     public Entity(int[] location, String imageName, String entityType) {
     	this.location = location;
@@ -17,10 +19,14 @@ public abstract class Entity {
     	entities.add(this);
     }
     
-    public void draw(GraphicsContext gc) {
-    	gc.drawImage(new Image(imageName), (location[0] * IMAGE_SIZE) , (location[1] * IMAGE_SIZE));
+    public void draw() {
+    	this.gc.drawImage(new Image(imageName), (location[0] * IMAGE_SIZE) , (location[1] * IMAGE_SIZE));
     }
-    
+
+    public static void setGC(GraphicsContext gc){
+    	Entity.gc = gc;
+	}
+
     public static ArrayList<Entity> getEntities() {
     	return entities;
     }

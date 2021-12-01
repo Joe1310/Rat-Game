@@ -1,15 +1,3 @@
-import java.util.Random;
-
-import javafx.geometry.Insets;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-
-import java.util.Random;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,10 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Sample application that demonstrates the use of JavaFX Canvas
@@ -111,7 +99,7 @@ private Pane buildGUI() {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		Entity nes = new NoEntrySign(location);
-		nes.draw(gc);
+		nes.draw();
 	}
 	
 	private void createBomb() {
@@ -127,12 +115,11 @@ private Pane buildGUI() {
 				GraphicsContext gc = canvas.getGraphicsContext2D();
 				
 				Entity bomb = new TestBomb(location);
-				bomb.draw(gc);
+				bomb.draw();
 	}
 	
 	private void tick() {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		ArrayList<Entity> ents = Entity.getEntities();
 		int maxEntities = ents.size();
 		
@@ -145,7 +132,7 @@ private Pane buildGUI() {
 		}
 		//for loop for drawing
 		for (Entity ent : Entity.getEntities()) {
-			ent.draw(gc);
+			ent.draw();
 		}
 	}
 }

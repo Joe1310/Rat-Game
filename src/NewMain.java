@@ -86,7 +86,7 @@ public class NewMain extends Application {
         });
         level2Button.setOnAction(event -> {
             levelMenuWindow.close();
-            //level2(primaryStage);
+            level2();
         });
         level3Button.setOnAction(event -> {
             levelMenuWindow.close();
@@ -118,17 +118,16 @@ public class NewMain extends Application {
 
         // Get the Graphic Context of the canvas. This is what we draw on.
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        Entity.setGC(gc);
 
         Level gameLevel = new Level(filename);
-
-        Map map = gameLevel.getMap();
-
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        // Set the background to gray.
+        // Set the background to beige.
         gc.setFill(Color.BEIGE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        Map map = gameLevel.getMap();
         map.tileOut(gc);
+        map.entityTick();
     }
 
     public void level1(){
@@ -139,6 +138,16 @@ public class NewMain extends Application {
         drawGame("level.txt");
         level1Stage.setScene(level1Scene);
         level1Stage.show();
+    }
+
+    public void level2(){
+        Stage level2Stage = new Stage();
+        level2Stage.setTitle("RAT GAME : LVL2");
+        Pane root = buildGUI();
+        Scene level1Scene = new Scene(root);
+        drawGame("level2.txt");
+        level2Stage.setScene(level1Scene);
+        level2Stage.show();
     }
 
     private Pane buildGUI() {

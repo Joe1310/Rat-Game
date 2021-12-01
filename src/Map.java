@@ -1,6 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,7 +26,6 @@ public class Map {
         this.column = y;
         this.tileLayout = tileLayout;
         this.maxRat = maxRat;
-        tick = entityTick();
     }
 
     public Tile[][] tileOut(GraphicsContext gc) {
@@ -41,9 +39,9 @@ public class Map {
                 if (Map.tileLayout[i][j].getTileType() == 'G') {
                     tileImage = grassImage;
                 } else if (Map.tileLayout[i][j].getTileType() == 'T') {
-                    tileImage = tunnelImage;
-                } else if (Map.tileLayout[i][j].getTileType() == 'P') {
                     tileImage = pathImage;
+                } else if (Map.tileLayout[i][j].getTileType() == 'P') {
+                    tileImage = tunnelImage;
                 }
                 gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
             }
@@ -51,21 +49,30 @@ public class Map {
         return Map.tileLayout;
     }
 
-
     /**
      *
      * @return Tick which increases by 1 every 0.5 seconds
      */
-    public static int entityTick() {
+    public int entityTick() {
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
         int tick = 0;
         exec.scheduleWithFixedDelay(new Runnable() {
-            private int tick = 0;
-
             public void run() {
-                tick++;
-                System.out.println(tick);
+                ArrayList<Entity> ents = Entity.getEntities();
+                int maxEntities = ents.size();
+
+                //for loop for drawing
+                for (Entity ent : Entity.getEntities()) {
+                    ent.draw();
+                }
+                //for loop for acting
+                for (int i = maxEntities-1; i > -1; i--) {
+                    if (maxEntities != i) {
+                        ents.get(i).act();
+                    }
+                }
             }
+            
         }, 0, 500, TimeUnit.MILLISECONDS);
         return tick;
     }
@@ -75,13 +82,13 @@ public class Map {
         if(tileLayout[x + 1][y].getTileType() == 'P' ||
                 tileLayout[x + 1][y].getTileType() == 'T'){
             movementOptions.add("E");
-        } else if(tileLayout[x - 1][y].getTileType() == 'P' ||
+        } if(tileLayout[x - 1][y].getTileType() == 'P' ||
                 tileLayout[x - 1][y].getTileType() == 'T'){
             movementOptions.add("W");
-        } else if(tileLayout[x][y - 1].getTileType() == 'P' ||
+        } if(tileLayout[x][y - 1].getTileType() == 'P' ||
                 tileLayout[x][y - 1].getTileType() == 'T'){
             movementOptions.add("N");
-        } else if(tileLayout[x][y + 1].getTileType() == 'P' ||
+        } if(tileLayout[x][y + 1].getTileType() == 'P' ||
                 tileLayout[x][y + 1].getTileType() == 'T'){
             movementOptions.add("S");
         }
