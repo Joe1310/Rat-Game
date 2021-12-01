@@ -7,7 +7,7 @@ public class Gas extends Entity {
 	private boolean hasSpread;
 	
 	public Gas(int[] location, boolean hasSpread) {
-		super(location, "Gas.png", "Gas");
+		super(location, "Gas2.png", "Gas");
 		this.spreadLimit = 5;
 		this.hasSpread = hasSpread;
 		this.direction = null;

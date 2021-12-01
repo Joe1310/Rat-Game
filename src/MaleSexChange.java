@@ -1,7 +1,7 @@
 public class MaleSexChange extends Entity {
 	
 	public MaleSexChange(int[] location) {
-		super(location, "MSexChange.png", "MSexChange");
+		super(location, "MaleSexChange.png", "MSexChange");
 	}
 	
 	public void act() {

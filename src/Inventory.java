@@ -1,113 +1,127 @@
 public class Inventory {
-    private int gasQuantity;
-    private int deathRatQuantity;
-    private int poisonQuantity;
-    private int sterilizationQuantity;
-    private int sexChangeQuantity;
-    private int noEntrySignQuantity;
-    private int bombQuantity;
+    static int gasQuantity;
+    static int deathRatQuantity;
+    static int poisonQuantity;
+    static int sterilizationQuantity;
+    static int femaleSexChangeQuantity;
+    static int maleSexChangeQuantity;
+    static int noEntrySignQuantity;
+    static int bombQuantity;
 
-    public Inventory(int gas, int deathRat, int poison, int sterilization, int sexChange, int noEntrySign, int bomb) {
-        this.gasQuantity = gas;
-        this.deathRatQuantity = deathRat;
-        this.poisonQuantity = poison;
-        this.sterilizationQuantity = sterilization;
-        this.sexChangeQuantity = sexChange;
-        this.noEntrySignQuantity = noEntrySign;
-        this.bombQuantity = bomb;
+    public Inventory(int gas, int deathRat, int poison, int sterilization, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+        gasQuantity = gas;
+        deathRatQuantity = deathRat;
+        poisonQuantity = poison;
+        sterilizationQuantity = sterilization;
+        femaleSexChangeQuantity = femaleSexChange;
+        maleSexChangeQuantity = maleSexChange;
+        noEntrySignQuantity = noEntrySign;
+        bombQuantity = bomb;
     }
 
     // functions get'ItemName' returns the amount of them in the inventory
     // functions add'ItemName' adds one to the amount of items, as long as its below 5 which is the item cap
     // functions remove'ItemName' takes one off the amount of them
-    public int getGas() {
+    public static int getGas() {
         return gasQuantity;
     }
-    public void addGas() {
-        if (this.gasQuantity < 5) {
-            this.gasQuantity += 1;
+    public static void addGas() {
+        if (gasQuantity < 5) {
+            gasQuantity += 1;
         }
     }
-    public void removeGas() {
-        this.gasQuantity -= 1;
+    public static void removeGas() {
+        gasQuantity -= 1;
     }
 
 
-    public int getDeathRat() {
+    public static int getDeathRat() {
         return deathRatQuantity;
     }
-    public void addDeathRat() {
-        if (this.deathRatQuantity < 5) {
-            this.deathRatQuantity += 1;
+    public static void addDeathRat() {
+        if (deathRatQuantity < 5) {
+            deathRatQuantity += 1;
         }
     }
-    public void removeDeathRat() {
-        this.deathRatQuantity -= 1;
+    public static void removeDeathRat() {
+        deathRatQuantity -= 1;
     }
 
 
-    public int getPoison() {
+    public static int getPoison() {
         return poisonQuantity;
     }
-    public void addPoison() {
-        if (this.poisonQuantity < 5) {
-            this.poisonQuantity += 1;
+    public static void addPoison() {
+        if (poisonQuantity < 5) {
+            poisonQuantity += 1;
         }
     }
-    public void removePoison() {
-        this.poisonQuantity -= 1;
+    public static void removePoison() {
+        poisonQuantity -= 1;
     }
 
 
-    public int getSterilization() {
+    public static int getSterilization() {
         return sterilizationQuantity;
     }
-    public void addSterilization() {
-        if (this.sterilizationQuantity < 5) {
-            this.sterilizationQuantity += 1;
+    public static void addSterilization() {
+        if (sterilizationQuantity < 5) {
+            sterilizationQuantity += 1;
         }
     }
-    public void removeSterilization() {
-        this.sterilizationQuantity -= 1;
+    public static void removeSterilization() {
+        sterilizationQuantity -= 1;
     }
 
 
-    public int getSexChange() {
-        return sexChangeQuantity;
+    public static int getFemaleSexChange() {
+        return femaleSexChangeQuantity;
     }
-    public void addSexChange() {
-        if (this.sexChangeQuantity < 5) {
-            this.sexChangeQuantity += 1;
+    public static void addFemaleSexChange() {
+        if (femaleSexChangeQuantity< 5) {
+            femaleSexChangeQuantity += 1;
         }
     }
-    public void removeSexChange() {
-        this.sexChangeQuantity -= 1;
+    public static void removeFemaleSexChange() {
+        femaleSexChangeQuantity -= 1;
+    }
+
+    public static int getMaleSexChange() {
+        return maleSexChangeQuantity;
+    }
+    public static void addMaleSexChange() {
+        if (maleSexChangeQuantity < 5) {
+            maleSexChangeQuantity += 1;
+        }
+    }
+    public static void removeMaleSexChange() {
+        maleSexChangeQuantity -= 1;
     }
 
 
-    public int getNoEntrySign() {
+    public static int getNoEntrySign() {
         return noEntrySignQuantity;
     }
-    public void addNoEntrySign() {
-        if (this.noEntrySignQuantity < 5) {
-            this.noEntrySignQuantity += 1;
+    public static void addNoEntrySign() {
+        if (noEntrySignQuantity < 5) {
+            noEntrySignQuantity += 1;
         }
     }
-    public void removeNoEntrySign() {
-        this.noEntrySignQuantity -= 1;
+    public static void removeNoEntrySign() {
+        noEntrySignQuantity -= 1;
     }
 
 
-    public int getBomb() {
+    public static int getBomb() {
         return bombQuantity;
     }
-    public void addBomb() {
-        if (this.bombQuantity < 5) {
-            this.bombQuantity += 1;
+    public static void addBomb() {
+        if (bombQuantity < 5) {
+            bombQuantity += 1;
         }
     }
-    public void removeBomb() {
-        this.bombQuantity -= 1;
+    public static void removeBomb() {
+        bombQuantity -= 1;
     }
 
 
