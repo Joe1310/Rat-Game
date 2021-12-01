@@ -3,16 +3,21 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class NewMain extends Application {
     // The dimensions of the canvas
-    private static final int CANVAS_WIDTH = 600;
+    private static final int CANVAS_WIDTH = 800;
     private static final int CANVAS_HEIGHT = 400;
 
     // Timeline which will cause tick method to be called periodically.
@@ -109,9 +114,50 @@ public class NewMain extends Application {
         levelMenuWindow.show();
     }
 
+    public void drawGame(String filename) {
+
+        // Get the Graphic Context of the canvas. This is what we draw on.
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        Level gameLevel = new Level(filename);
+
+        Map map = gameLevel.getMap();
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        // Set the background to gray.
+        gc.setFill(Color.BEIGE);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        map.tileOut(gc);
+    }
+
     public void level1(){
         Stage level1Stage = new Stage();
         level1Stage.setTitle("RAT GAME : LVL1");
+        Pane root = buildGUI();
+        Scene level1Scene = new Scene(root);
+        drawGame("level.txt");
+        level1Stage.setScene(level1Scene);
+        level1Stage.show();
+    }
+
+    private Pane buildGUI() {
+        // Create top-level panel that will hold all GUI nodes.
+        BorderPane root = new BorderPane();
+
+        // Create the canvas that we will draw on.
+        // We store this as a global variable so other methods can access it.
+        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        root.setCenter(canvas);
+
+        // Create a toolbar with some nice padding and spacing
+        HBox toolbar = new HBox();
+        toolbar.setSpacing(10);
+        toolbar.setPadding(new Insets(10, 10, 10, 10));
+        root.setTop(toolbar);
+
+        // Finally, return the border pane we built up.
+        return root;
     }
 
 

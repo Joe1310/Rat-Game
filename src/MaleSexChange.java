@@ -10,7 +10,7 @@ public class MaleSexChange extends Entity {
 				((AdultRat)rat).setSex("m");
 				removeEntity();
 			}
-		}		
+		}
 	}
 }
 

@@ -1,24 +1,20 @@
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-
-
 
 public class Map {
     int maxRat;
     static Tile[][] tileLayout;
     public int tick;
-    private Canvas canvas;
-    final int GRID_CELL_WIDTH = 50;
-    final int GRID_CELL_HEIGHT = 50;
+    final int GRID_SIZE = 50;
+    private int row;
+    private int column;
     Image grassImage;
-    Image dirtImage;
+    Image pathImage;
     Image tunnelImage;
 
     /**
@@ -26,38 +22,33 @@ public class Map {
      * @param tileLayout
      * @param maxRat
      */
-    public Map(Tile[][] tileLayout, int maxRat) {
-
+    public Map(Tile[][] tileLayout, int x, int y, int maxRat) {
+        this.row = x;
+        this.column = y;
         this.tileLayout = tileLayout;
         this.maxRat = maxRat;
         tick = entityTick();
     }
 
-    public Tile[][] tileOut(Tile[][] x) {
-        grassImage = new Image("GrassTile(1).png");
+    public Tile[][] tileOut(GraphicsContext gc) {
+        grassImage = new Image("Grass.png");
         tunnelImage = new Image("Tunnel.png");
-        dirtImage = new Image("Dirt.png");
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        pathImage = new Image("PathTile.png");
 
-        int tempY = 0;
-
-        for (int i = 0; i < (x.length); i++) {
-            for (int j = 0; j < x.length; j++) {
-                Image tileType = null;
-                if (x[i][j].getTileType() == 'G') {
-                    tileType = grassImage;
-                } else if (x[i][j].getTileType() == 'T') {
-                    tileType = tunnelImage;
-                } else if (x[i][j].getTileType() == 'D') {
-                    tileType = dirtImage;
+        for (int i = 0; i < (row); i++) {
+            for (int j = 0; j < column; j++) {
+                Image tileImage = null;
+                if (Map.tileLayout[i][j].getTileType() == 'G') {
+                    tileImage = grassImage;
+                } else if (Map.tileLayout[i][j].getTileType() == 'T') {
+                    tileImage = tunnelImage;
+                } else if (Map.tileLayout[i][j].getTileType() == 'P') {
+                    tileImage = pathImage;
                 }
-                gc.drawImage(tileType, i * GRID_CELL_WIDTH, tempY * GRID_CELL_HEIGHT);
-                tempY += 1;
+                gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
             }
         }
-        System.out.println(Arrays.toString(x));
-        return x;
+        return Map.tileLayout;
     }
 
 
@@ -81,18 +72,18 @@ public class Map {
 
     public static ArrayList<String> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
-        if(tileLayout[x + 1][y].getTileType() == 'p' ||
-                tileLayout[x + 1][y].getTileType() == 't'){
-            movementOptions.add("e");
-        } else if(tileLayout[x - 1][y].getTileType() == 'p' ||
-                tileLayout[x - 1][y].getTileType() == 't'){
-            movementOptions.add("w");
-        } else if(tileLayout[x][y - 1].getTileType() == 'p' ||
-                tileLayout[x][y - 1].getTileType() == 't'){
-            movementOptions.add("n");
-        } else if(tileLayout[x][y + 1].getTileType() == 'p' ||
-                tileLayout[x][y + 1].getTileType() == 't'){
-            movementOptions.add("s");
+        if(tileLayout[x + 1][y].getTileType() == 'P' ||
+                tileLayout[x + 1][y].getTileType() == 'T'){
+            movementOptions.add("E");
+        } else if(tileLayout[x - 1][y].getTileType() == 'P' ||
+                tileLayout[x - 1][y].getTileType() == 'T'){
+            movementOptions.add("W");
+        } else if(tileLayout[x][y - 1].getTileType() == 'P' ||
+                tileLayout[x][y - 1].getTileType() == 'T'){
+            movementOptions.add("N");
+        } else if(tileLayout[x][y + 1].getTileType() == 'P' ||
+                tileLayout[x][y + 1].getTileType() == 'T'){
+            movementOptions.add("S");
         }
         return movementOptions;
     }

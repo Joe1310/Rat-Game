@@ -11,7 +11,7 @@ public class DeathRat extends Rat {
         for(int i = 0; rats.size() >= i; i ++){
             if (this.location == rats.get(i).location && this != rats.get(i)){
                 rats.get(i).ratDeath();// not sure if correct
-                numOfKilled = numOfKilled ++;               
+                numOfKilled = numOfKilled ++;
             }
         }
         if (numOfKilled == 5){
