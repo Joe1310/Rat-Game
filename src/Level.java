@@ -150,7 +150,7 @@ public class Level {
 			int[] itemlocation = {5,3}; //remove
 			int i = Entity.getEntities().size();
 			if (i == 1) {
-				Entity gas = new Gas(itemlocation, false); //remove
+				Entity gas = new Poison(itemlocation); //remove
 			}
 			//REMOVE THIS
 		}

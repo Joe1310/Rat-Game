@@ -20,7 +20,7 @@ public class BabyRat extends Rat {
 
     public void act() {
         move();
-        //increaseAge();
+        increaseAge();
     }
 
     public void increaseAge() {
