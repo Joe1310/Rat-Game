@@ -115,7 +115,7 @@ public class Level {
 		sterile = scan.nextBoolean();
 		isPregnant = scan.nextBoolean();
 
-		Entity rat = new AdultRat(health, sterile, location, direction, sex, isPregnant);
+		Entity rat = new AdultRat(sex, health, sterile, location, direction, isPregnant);
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Baby Rat
@@ -145,6 +145,8 @@ public class Level {
 			direction = scan.next();
 
 			Entity rat = new BabyRat(sex, 100, false, location, direction);
+			int[] itemlocation = {5,3}; //remove
+			Entity gas = new NoEntrySign(itemlocation); //remove
 		}
 	}
 

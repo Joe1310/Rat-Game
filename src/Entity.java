@@ -39,6 +39,10 @@ public abstract class Entity {
     	return entityType;
     }
     
+    public static void clearEntities() {
+    	gc.clearRect(0, 0, 1850, 1000);
+    }
+    
     protected void setImageName(String imageName) {
     	this.imageName = imageName;
     }

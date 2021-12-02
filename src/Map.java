@@ -15,6 +15,7 @@ public class Map {
     Image grassImage;
     Image pathImage;
     Image tunnelImage;
+    static GraphicsContext gc; //TEST PROBABLY NOT A GOOD IDEA
 
     /**
      *
@@ -60,7 +61,7 @@ public class Map {
             public void run() {
                 ArrayList<Entity> ents = Entity.getEntities();
                 int maxEntities = ents.size();
-
+                tileOut(Map.gc); //Remove this too
                 //for loop for drawing
                 for (Entity ent : Entity.getEntities()) {
                     ent.draw();
@@ -73,6 +74,13 @@ public class Map {
             
         }, 0, 500, TimeUnit.MILLISECONDS);
         return tick;
+    }
+    
+    /*
+     * REMOVE THIS PROBABLY
+     */
+    public static void setGC(GraphicsContext grc) {
+    	gc = grc;
     }
 
     public static ArrayList<String> getMovementOptions(int x, int y){

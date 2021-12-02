@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.Arrays;
 
 public abstract class Rat extends Entity{
-    protected int health = 100;
+    protected int health;
     protected double speed;
     protected boolean sterile;
     protected String directionFacing;
@@ -31,8 +31,11 @@ public abstract class Rat extends Entity{
         this.speed = newSpeed;
     }
 
-    public void modifyHealth(int newHealth) {
-        this.health = newHealth;
+    public void damageRat(int damage) {
+        this.health =- damage;
+        if (this.health <= 0) {
+        	ratDeath();
+        }
     }
 
     public String getOpositeDirection() {
@@ -48,8 +51,8 @@ public abstract class Rat extends Entity{
     }
 
     public void move() {
-        checkNoEntry();
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
+        temp = checkNoEntry(temp);
         for (int i = temp.size()-1; i >= 0; i--) {
             if (temp.get(i).equals(getOpositeDirection()) && temp.size() > 1){
                 temp.remove(temp.get(i));
@@ -90,28 +93,34 @@ public abstract class Rat extends Entity{
         return rats;
     }
 
-    private void checkNoEntry() {
+    private ArrayList<String> checkNoEntry(ArrayList<String> directions) {
     	int[] tempLocation = new int[2];
-        if (directionFacing.equals("N")) {
-        	tempLocation[0] = this.location[0];
-        	tempLocation[1] = this.location[1] - 1;
-        } else if (directionFacing.equals("S")) {
-        	tempLocation[0] = this.location[0];
-        	tempLocation[1] = this.location[1] + 1;
-        } else if (directionFacing.equals("E")) {
-        	tempLocation[0] = this.location[0] + 1;
-        	tempLocation[1] = this.location[1];
-        } else {
-        	tempLocation[0] = this.location[0] - 1;
-        	tempLocation[1] = this.location[1];
-        }
-        
-		//for loop for acting
-		for (int i = getEntities().size()-1; i > -1; i--) {
-			if (Arrays.equals(getEntities().get(i).location, tempLocation) && getEntities().get(i).getType().equals("NES")) {
-				((NoEntrySign)getEntities().get(i)).degrade();
-	            this.directionFacing = getOpositeDirection();
+    	String tempDirection;
+	    for (int i = directions.size()-1; i >= 0; i--) {
+    		if (directions.get(i).equals("N")) {
+	        	tempLocation[0] = this.location[0];
+	        	tempLocation[1] = this.location[1] - 1;
+	        	tempDirection = "N";
+	        } else if (directions.get(i).equals("S")) {
+	        	tempLocation[0] = this.location[0];
+	        	tempLocation[1] = this.location[1] + 1;
+	        	tempDirection = "S";
+	        } else if (directions.get(i).equals("E")) {
+	        	tempLocation[0] = this.location[0] + 1;
+	        	tempLocation[1] = this.location[1];
+	        	tempDirection = "E";
+	        } else {
+	        	tempLocation[0] = this.location[0] - 1;
+	        	tempLocation[1] = this.location[1];
+	        	tempDirection = "W";
 	        }
-        }
+			for (int j = getEntities().size()-1; j > -1; j--) {
+				if (Arrays.equals(getEntities().get(j).location, tempLocation) && getEntities().get(j).getType().equals("NES")) {
+					((NoEntrySign)getEntities().get(j)).degrade();
+					directions.remove(tempDirection);
+		        }
+	        }
+	    }
+	    return directions;
     }
 }

@@ -31,7 +31,7 @@ public class BabyRat extends Rat {
     }
 
     public void becomeAdult(){
-        Entity newBabyRat = new AdultRat(this.health, this.sterile, this.location, this.directionFacing, this.sex, false);// check if correct
+        Entity newAdultRat = new AdultRat(this.sex, this.health, this.sterile, this.location, this.directionFacing, false);// check if correct
         removeEntity();
     }
 

@@ -4,14 +4,15 @@ public class AdultRat extends Rat {
     private String sex;
     private boolean isPregnant;
 
-    public AdultRat(int health, boolean sterile, int[] location, String directionFacing, String sex, boolean isPregnant){
-        super(health, 5, sterile, location, directionFacing, "AdultRat.png", "adult");
+    public AdultRat(String sex, int health, boolean sterile, int[] location, String directionFacing, boolean isPregnant){
+    	super(health, 5, sterile, location, directionFacing, sex + "Rat.png", "adult");
         this.sex = sex;
         this.isPregnant = isPregnant;
     }
 
     public void act() {
-        pregnancy();
+    	move();
+        //pregnancy();
     }
 
     public void procreate(){

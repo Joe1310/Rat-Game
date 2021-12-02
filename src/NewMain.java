@@ -123,6 +123,7 @@ public class NewMain extends Application {
         gc.setFill(Color.BEIGE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         Map map = gameLevel.getMap();
+        map.setGC(gc); //remove this later
         map.tileOut(gc);
         map.entityTick();
     }
