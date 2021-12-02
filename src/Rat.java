@@ -78,6 +78,7 @@ public abstract class Rat extends Entity{
                 this.directionFacing = "E";
                 break;
         }
+        updateRatImage();
     }
 
     protected void ratDeath() {
@@ -87,6 +88,10 @@ public abstract class Rat extends Entity{
 
     public String getRatType() {
         return ratType;
+    }
+    
+    public void updateRatImage() {
+    	setImageName(directionFacing + ratType + ".png");
     }
 
     protected static ArrayList<Rat> getRats() {

@@ -3,13 +3,13 @@ public class BabyRat extends Rat {
     private String sex;
 
     public BabyRat(int health, boolean sterile, int[] location, String directionFacing){
-        super(health, 2, sterile, location, directionFacing, "BabyRat.png", "baby");
+        super(health, 2, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
         this.age = 0;
         this.sex = randomSex();
     }
 
     public BabyRat(String sex, int health, boolean sterile, int[] location, String directionFacing){
-        super(health, 2, sterile, location, directionFacing, "BabyRat.png", "baby");
+        super(health, 2, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
         this.age = 0;
         if (sex == "BF") {
             this.sex = "F";

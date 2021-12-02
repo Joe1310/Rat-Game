@@ -12,7 +12,7 @@ public class DeathRatSpawner extends Entity {
 
     public void act() {
         if (countdown == 0) {
-            Entity deathRat = new DeathRat(1, true, this.location, "n");
+            Entity deathRat = new DeathRat(1, true, this.location, "N");
             removeEntity();
         }
         countdown -= 1;
