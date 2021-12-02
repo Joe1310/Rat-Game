@@ -147,10 +147,10 @@ public class Level {
 			Entity rat = new BabyRat(sex, 100, false, location, direction);
 			
 			//REMOVE THIS
-			int[] itemlocation = {5,3}; //remove
+			int[] itemlocation = {5,1}; //remove
 			int i = Entity.getEntities().size();
 			if (i == 1) {
-				Entity gas = new Poison(itemlocation); //remove
+				Entity gas = new NoEntrySign(itemlocation); //remove
 			}
 			//REMOVE THIS
 		}

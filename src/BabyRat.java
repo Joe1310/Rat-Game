@@ -11,7 +11,7 @@ public class BabyRat extends Rat {
     public BabyRat(String sex, int health, boolean sterile, int[] location, String directionFacing){
         super(health, 2, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
         this.age = 0;
-        if (sex == "BF") {
+        if (sex.equals("BF") || sex.equals("F")) {
             this.sex = "F";
         } else {
             this.sex = "M";
