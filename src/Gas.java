@@ -14,7 +14,7 @@ public class Gas extends Entity {
 	}
 	
 	public Gas(int[] location, int spreadLimit, String direction, boolean hasSpread) {
-		super(location, "Gas.png", "Gas");
+		super(location, "Gas2.png", "Gas");
 		this.spreadLimit = spreadLimit;
 		this.hasSpread = hasSpread;
 		this.direction = direction;
@@ -39,25 +39,29 @@ public class Gas extends Entity {
 		ArrayList<String> directions = Map.getMovementOptions(location[0], location[1]);
 		directions.remove(direction);
 		for (String d : directions) {
+			int[] tempLocation = new int[2];
 			switch(d) {
-				case "n":
-					int[] ntemp = {location[0], location[1] - 1};
-					Entity nGas = new Gas(ntemp, spreadLimit - 1, "s", false);
+				case "N":
+					tempLocation[0] = location[0];
+					tempLocation[1] = location[1] - 1;
+					Entity nGas = new Gas(tempLocation, spreadLimit - 1, "S", false);
 					break;
-				case "s":
-					int[] stemp = {location[0], location[1] - 1};
-					Entity sGas = new Gas(stemp, spreadLimit - 1, "n", false);
+				case "S":
+					tempLocation[0] = location[0];
+					tempLocation[1] = location[1] + 1;
+					Entity sGas = new Gas(tempLocation, spreadLimit - 1, "N", false);
 					break;
-				case "e":
-					int[] etemp = {location[0], location[1] - 1};
-					Entity eGas = new Gas(etemp, spreadLimit - 1, "w", false);
+				case "E":
+					tempLocation[0] = location[0] + 1;
+					tempLocation[1] = location[1];
+					Entity eGas = new Gas(tempLocation, spreadLimit - 1, "W", false);
 					break;
-				case "w":
-					int[] wtemp = {location[0], location[1] - 1};
-					Entity wGas = new Gas(wtemp, spreadLimit - 1, "e", false);
+				case "W":
+					tempLocation[0] = location[0] - 1;
+					tempLocation[1] = location[1];
+					Entity wGas = new Gas(tempLocation, spreadLimit - 1, "E", false);
 					break;
-			}
-				
+			}		
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class ItemPlaceTestMain extends Application{
 		
 	public void start(Stage primaryStage) {
 		// Build the GUI 
-		Pane root = buildGUI();		
+		Pane root = buildGUI();	
 		
 		Image image8 = new Image("Bomb.png");
 		ImageView img8 = new ImageView(image8);
@@ -64,7 +64,7 @@ public class ItemPlaceTestMain extends Application{
 		
 		// Display the scene on the stage
 		primaryStage.setScene(scene);
-		primaryStage.show();	
+		primaryStage.show();
 	}
 	
 	

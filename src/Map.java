@@ -67,9 +67,7 @@ public class Map {
                 }
                 //for loop for acting
                 for (int i = maxEntities-1; i >= 0; i--) {
-                    if (maxEntities != i) {
-                        ents.get(i).act();
-                    }
+                	ents.get(i).act();
                 }
             }
             

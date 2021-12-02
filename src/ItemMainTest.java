@@ -38,6 +38,8 @@ public class ItemMainTest extends Application {
 		// Create a scene from the GUI
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 		
+		Entity.setGC(canvas.getGraphicsContext2D());
+		
 		// Display the scene on the stage
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -111,9 +113,6 @@ private Pane buildGUI() {
 				int y = r.nextInt(8);
 				int[] location = {x,y};
 				
-				// Access the graphic context of the canvas
-				GraphicsContext gc = canvas.getGraphicsContext2D();
-				
 				Entity bomb = new TestBomb(location);
 				bomb.draw();
 	}
@@ -130,6 +129,7 @@ private Pane buildGUI() {
 				maxEntities = ents.size();
 			}
 		}
+		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		//for loop for drawing
 		for (Entity ent : Entity.getEntities()) {
 			ent.draw();
