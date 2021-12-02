@@ -32,7 +32,7 @@ public abstract class Rat extends Entity{
     }
 
     public void damageRat(int damage) {
-        this.health =- damage;
+        this.health = this.health - damage;
         if (this.health <= 0) {
         	ratDeath();
         }

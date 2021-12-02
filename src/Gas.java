@@ -8,32 +8,36 @@ public class Gas extends Entity {
 	private boolean hasSpread;
 	
 	public Gas(int[] location, boolean hasSpread) {
-		super(location, "Gas2.png", "Gas");
+		super(location, "Gas.png", "Gas");
 		this.spreadLimit = 5;
 		this.hasSpread = hasSpread;
 		this.direction = null;
 	}
 	
 	public Gas(int[] location, int spreadLimit, String direction, boolean hasSpread) {
-		super(location, "Gas2.png", "Gas");
+		super(location, "Gas.png", "Gas");
 		this.spreadLimit = spreadLimit;
 		this.hasSpread = hasSpread;
 		this.direction = direction;
 	}
 	
 	public void act() {
-		for (int i = Rat.getRats().size()-1; i > -1; i--) {
-			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
-					!(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
-				(Rat.getRats().get(i)).damageRat(10);
-	        }
-        }
+		damageRats();
 		if (!hasSpread && spreadLimit > 0) {
 			spread();
 			hasSpread = true;
 		}
 		diffuse();
 		
+	}
+	
+	private void damageRats() {
+		for (int i = Rat.getRats().size()-1; i > -1; i--) {
+			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
+					!(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
+				(Rat.getRats().get(i)).damageRat(20);
+	        }
+        }
 	}
 	
 	public void diffuse() {
