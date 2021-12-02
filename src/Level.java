@@ -145,8 +145,14 @@ public class Level {
 			direction = scan.next();
 
 			Entity rat = new BabyRat(sex, 100, false, location, direction);
+			
+			//REMOVE THIS
 			int[] itemlocation = {5,3}; //remove
-			Entity gas = new Poison(itemlocation); //remove
+			int i = Entity.getEntities().size();
+			if (i == 1) {
+				Entity gas = new Gas(itemlocation, false); //remove
+			}
+			//REMOVE THIS
 		}
 	}
 

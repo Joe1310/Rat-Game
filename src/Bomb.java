@@ -21,7 +21,9 @@ public class Bomb extends Entity{
 
     private void spawnExplosions() {
         Entity explosion = new Explosion(location);
-        int[] temp = location;
+        int[] temp = new int[2];
+        temp[0] = location[0];
+        temp[1] = location[1];
         int i = 0;
 
         while (Map.getMovementOptions(location[0], location[1]+i).contains("n")) {
@@ -29,21 +31,24 @@ public class Bomb extends Entity{
             explosion = new Explosion(temp);
             i++;
         }
-        temp = location;
+        temp[0] = location[0];
+        temp[1] = location[1];
         i = 0;
         while (Map.getMovementOptions(location[0], location[1]-i).contains("s")) {
             temp[1] -= i;
             explosion = new Explosion(temp);
             i++;
         }
-        temp = location;
+        temp[0] = location[0];
+        temp[1] = location[1];
         i = 0;
         while (Map.getMovementOptions(location[0]+i, location[1]).contains("e")) {
             temp[0] += i;
             explosion = new Explosion(temp);
             i++;
         }
-        temp = location;
+        temp[0] = location[0];
+        temp[1] = location[1];
         i = 0;
         while (Map.getMovementOptions(location[0]-i, location[1]).contains("w")) {
             temp[0] -= i;
