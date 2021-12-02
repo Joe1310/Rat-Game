@@ -36,31 +36,8 @@ public class ItemPlaceTestMain extends Application{
 		// Build the GUI 
 		Pane root = buildGUI();	
 		
-		Image image8 = new Image("Bomb.png");
-		ImageView img8 = new ImageView(image8);
-		img8.setX(100);
-		img8.setY(100);
-		
-		root.getChildren().addAll(img8);
-		
 		// Create a scene from the GUI
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-		
-		img8.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				img8.setX((int)event.getSceneX());
-				img8.setY((int)event.getSceneY());
-			}
-		});
-			
-		img8.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				img8.setX(100);
-				img8.setY(100);
-				Entity bomb = new Bomb(getMouseLocation(event));
-				bomb.draw();
-			}
-		});
 		
 		// Display the scene on the stage
 		primaryStage.setScene(scene);
@@ -79,119 +56,187 @@ public class ItemPlaceTestMain extends Application{
 				
 		// Create canvas
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		Entity.setGC(gc);
 		root.setCenter(canvas);
 		
-		// Create a sidebar with some nice padding and spacing
-		VBox sidebar = new VBox();
-		sidebar.setSpacing(10);
-		sidebar.setPadding(new Insets(0, 10, 0, 0)); 
-		root.setRight(sidebar);
+		
+		Image gasImg = new Image("Gas2.png");
+		ImageView gasButton = new ImageView(gasImg);
+		gasButton.setX(WINDOW_WIDTH - 50);
+		gasButton.setY(0);
+		
+		Image deathRatImg = new Image("DeathRatN.png");
+		ImageView deathRatButton = new ImageView(deathRatImg);
+		deathRatButton.setX(WINDOW_WIDTH - 50);
+		deathRatButton.setY(50);
+		
+		Image poisonImg = new Image("Poison.png");
+		ImageView poisonButton = new ImageView(poisonImg);
+		poisonButton.setX(WINDOW_WIDTH - 50);
+		poisonButton.setY(100);
+		
+		Image sterilizationImg = new Image("Sterilization.png");
+		ImageView sterilizationButton = new ImageView(sterilizationImg);
+		sterilizationButton.setX(WINDOW_WIDTH - 50);
+		sterilizationButton.setY(150);
+		
+		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
+		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
+		femaleSexChangeButton.setX(WINDOW_WIDTH - 50);
+		femaleSexChangeButton.setY(200);
+		
+		Image maleSexChangeImg = new Image("MaleSexChange.png");
+		ImageView maleSexChangeButton = new ImageView(maleSexChangeImg);
+		maleSexChangeButton.setX(WINDOW_WIDTH - 50);
+		maleSexChangeButton.setY(250);
+		
+		Image noEntrySignImg = new Image("NoEntrySign.png");
+		ImageView noEntrySignButton = new ImageView(noEntrySignImg);
+		noEntrySignButton.setX(WINDOW_WIDTH - 50);
+		noEntrySignButton.setY(300);
+		
+		Image bombImg = new Image("Bomb.png");
+		ImageView bombButton = new ImageView(bombImg);
+		bombButton.setX(WINDOW_WIDTH - 50);
+		bombButton.setY(350);
+		
+		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton, femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 		
 		
-		Image image = new Image("Gas2.png");
-		ImageView img = new ImageView(image);
-		
-		Image image1 = new Image("DeathRat.png");
-		ImageView img1 = new ImageView(image1);
-		
-		Image image2 = new Image("Poison.png");
-		ImageView img2 = new ImageView(image2);
-		
-		Image image3 = new Image("Sterilization.png");
-		ImageView img3 = new ImageView(image3);
-		
-		Image image4 = new Image("FemaleSexChange.png");
-		ImageView img4 = new ImageView(image4);
-		
-		Image image5 = new Image("MaleSexChange.png");
-		ImageView img5 = new ImageView(image5);
-		
-		Image image6 = new Image("NoEntrySign.png");
-		ImageView img6 = new ImageView(image6);
-		
-		Image image7 = new Image("Bomb.png");
-		ImageView img7 = new ImageView(image7);
-		
-		
-		Button gasButton = new Button("", img);
-		Button deathRatButton = new Button("", img1);
-		Button poisonButton = new Button("", img2);
-		Button sterilizationButton = new Button("", img3);
-		Button femaleSexChangeButton = new Button("", img4);
-		Button maleSexChangeButton = new Button("", img5);
-		Button noEntrySignButton = new Button("", img6);
-		Button bombButton = new Button("", img7);
-		
-		sidebar.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton, femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
-		
+		gasButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				gasButton.setX((int)event.getSceneX()-25);
+				gasButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		gasButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				gasButton.setX(WINDOW_WIDTH - 50);
+				gasButton.setY(0);
 				Entity gas = new Gas(getMouseLocation(event), false);
 				gas.draw();
 			}
 		});
-		
+
+		deathRatButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				deathRatButton.setX((int)event.getSceneX()-25);
+				deathRatButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		deathRatButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				deathRatButton.setX(WINDOW_WIDTH - 50);
+				deathRatButton.setY(50);
 				Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
 				deathRat.draw();
 			}
 		});
 		
+		poisonButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				poisonButton.setX((int)event.getSceneX()-25);
+				poisonButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		poisonButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				poisonButton.setX(WINDOW_WIDTH - 50);
+				poisonButton.setY(100);
 				Entity poison = new Poison(getMouseLocation(event));
 				poison.draw();
 			}
 		});
 		
+		sterilizationButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				sterilizationButton.setX((int)event.getSceneX()-25);
+				sterilizationButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		sterilizationButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
-				Entity sterilization = new Sterilization(getMouseLocation(event));
+				sterilizationButton.setX(WINDOW_WIDTH - 50);
+				sterilizationButton.setY(150);
+				Entity sterilization = new Sterilization(getMouseLocation(event), false);
 				sterilization.draw();
 			}
 		});
-
+		
+		femaleSexChangeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				femaleSexChangeButton.setX((int)event.getSceneX()-25);
+				femaleSexChangeButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		femaleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				femaleSexChangeButton.setX(WINDOW_WIDTH - 50);
+				femaleSexChangeButton.setY(200);
 				Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
 				femaleSexChange.draw();
 			}
 		});
 		
+		maleSexChangeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				maleSexChangeButton.setX((int)event.getSceneX()-25);
+				maleSexChangeButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		maleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				maleSexChangeButton.setX(WINDOW_WIDTH - 50);
+				maleSexChangeButton.setY(250);
 				Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
 				maleSexChange.draw();
 			}
 		});
 		
+		noEntrySignButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				noEntrySignButton.setX((int)event.getSceneX()-25);
+				noEntrySignButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		noEntrySignButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				noEntrySignButton.setX(WINDOW_WIDTH - 50);
+				noEntrySignButton.setY(300);
 				Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
 				noEntrySign.draw();
 			}
 		});
 		
+		bombButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				bombButton.setX((int)event.getSceneX()-25);
+				bombButton.setY((int)event.getSceneY()-25);
+			}
+		});	
 		bombButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
 			public void handle(MouseEvent event) {
+				bombButton.setX(WINDOW_WIDTH - 50);
+				bombButton.setY(350);
 				Entity bomb = new Bomb(getMouseLocation(event));
 				bomb.draw();
 			}
 		});
 		
-		
+
 		return root;
 	}
 
 	private int[] getMouseLocation(MouseEvent event) {
-		int x = (int)event.getSceneX();
+		int x = (int)event.getSceneX()-100;
 		int y = (int)event.getSceneY();
 		
 		x = ((x-(x%50))/50);
 		y = ((y-(y%50))/50);
 		
 		int[] location = {x,y};
+
 		return location;
 	}
 	
