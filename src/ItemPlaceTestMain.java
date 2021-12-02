@@ -29,14 +29,14 @@ public class ItemPlaceTestMain extends Application{
 		
 	public void start(Stage primaryStage) {
 		// Build the GUI 
-		Pane root = buildGUI();		
+		Pane root = buildGUI();	
 		
 		// Create a scene from the GUI
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 			
 		// Display the scene on the stage
 		primaryStage.setScene(scene);
-		primaryStage.show();	
+		primaryStage.show();
 	}
 	
 	

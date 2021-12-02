@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Arrays;
 
 public abstract class Rat extends Entity{
     protected int health = 100;
@@ -47,18 +48,18 @@ public abstract class Rat extends Entity{
     }
 
     public void move() {
-        //checkNoEntry();
+        checkNoEntry();
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]); // location[0] is the x coord and location[1] is the y coord
-        for (String direction : temp ){
-            if (direction.equals(getOpositeDirection()) && temp.size() > 1){
-                temp.remove(direction);
+        for (int i = temp.size()-1; i >= 0; i--) {
+            if (temp.get(i).equals(getOpositeDirection()) && temp.size() > 1){
+                temp.remove(temp.get(i));
             }
         }
         // Obtain a random direction available.
         int n = randomize(temp.size());
         switch (temp.get(n)){
-            case "N":       // at first the starting would be 0; for any direction like an array
-                location[1] = location[1] - 1; // 50 px is the size of the tile
+            case "N":
+                location[1] = location[1] - 1;
                 this.directionFacing = "N";
                 break;
             case "S":
@@ -90,28 +91,27 @@ public abstract class Rat extends Entity{
     }
 
     private void checkNoEntry() {
-        int[] tempLocation = this.location;
-        switch (directionFacing){
-            case "N":
-                tempLocation[1]--;
-                break;
-            case "S":
-                tempLocation[1]++;
-                break;
-            case "W":
-                tempLocation[0]--;
-                break;
-            case "E":
-                tempLocation[0]++;
-                break;
+    	int[] tempLocation = new int[2];
+        if (directionFacing.equals("N")) {
+        	tempLocation[0] = this.location[0];
+        	tempLocation[1] = this.location[1] - 1;
+        } else if (directionFacing.equals("S")) {
+        	tempLocation[0] = this.location[0];
+        	tempLocation[1] = this.location[1] + 1;
+        } else if (directionFacing.equals("E")) {
+        	tempLocation[0] = this.location[0] + 1;
+        	tempLocation[1] = this.location[1];
+        } else {
+        	tempLocation[0] = this.location[0] - 1;
+        	tempLocation[1] = this.location[1];
         }
-        for(Entity ent : Entity.getEntities()) {
-            if (ent.location == tempLocation && ent.getType() == "NES") {
-                ((NoEntrySign)ent).degrade();
-                this.directionFacing = getOpositeDirection();
-            }
+        
+		//for loop for acting
+		for (int i = getEntities().size()-1; i > -1; i--) {
+			if (Arrays.equals(getEntities().get(i).location, tempLocation) && getEntities().get(i).getType().equals("NES")) {
+				((NoEntrySign)getEntities().get(i)).degrade();
+	            this.directionFacing = getOpositeDirection();
+	        }
         }
     }
-
-
 }

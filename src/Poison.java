@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Poison extends Entity {
 	
 	public Poison(int[] location) {
@@ -5,11 +7,11 @@ public class Poison extends Entity {
 	}
 	
 	public void act() {
-	//	for (Rat rat : Rat.getRats()) {
-	//		if (rat.location == this.location && rat.getRatType() != "death") {
-	//			rat.ratDeath();
-	//			removeEntity();
-	//		}
-	//	}
+		for (int i = Rat.getRats().size()-1; i > -1; i--) {
+			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
+					(Rat.getRats().get(i).getRatType().equals("adult") || Rat.getRats().get(i).getRatType().equals("baby"))) {
+				(Rat.getRats().get(i)).ratDeath();
+	        }
+        }
 	}
 }
