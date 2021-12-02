@@ -146,7 +146,7 @@ public class Level {
 
 			Entity rat = new BabyRat(sex, 100, false, location, direction);
 			int[] itemlocation = {5,3}; //remove
-			Entity gas = new NoEntrySign(itemlocation); //remove
+			Entity gas = new Poison(itemlocation); //remove
 		}
 	}
 

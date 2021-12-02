@@ -91,7 +91,7 @@ public abstract class Rat extends Entity{
     }
     
     public void updateRatImage() {
-    	setImageName(directionFacing + ratType + ".png");
+    	setImageName(ratType + directionFacing + ".png");
     }
 
     protected static ArrayList<Rat> getRats() {

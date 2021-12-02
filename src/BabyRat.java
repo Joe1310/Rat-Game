@@ -44,6 +44,6 @@ public class BabyRat extends Rat {
     }
 
     public String toString(){
-        return "B" + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing + " " + sterile;
+        return "B" + sex + " "  + health  + " " + sterile + " " + this.location[0] + " " + this.location[1] + " " + directionFacing;
     }
 }
