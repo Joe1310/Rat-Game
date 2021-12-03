@@ -33,6 +33,7 @@ public class BabyRat extends Rat {
     public void becomeAdult(){
         Entity newAdultRat = new AdultRat(this.sex, this.health, this.sterile, this.location, this.directionFacing, false);// check if correct
         removeEntity();
+        rats.remove(this);
     }
 
     public String randomSex() {

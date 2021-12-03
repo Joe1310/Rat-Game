@@ -14,7 +14,15 @@ public class DeathRat extends Rat {
         this.killCount = killCount;
     }
     
+    public void act() {
+        killRat();
+        if (wait == 0) {
+        	move();
+        }
+    }
+    
     private void killRat() {
+    	System.out.println(rats.size());
     	for (int i = rats.size()-1; i > -1; i--) {
 			if (Arrays.equals(rats.get(i).location, this.location) && 
 					!rats.get(i).getRatType().equals("DeathRat")) {
@@ -24,13 +32,6 @@ public class DeathRat extends Rat {
         }
 		if (killCount > 5){
             removeEntity();
-        }
-    }
-    
-    public void act() {
-        killRat();
-        if (wait == 0) {
-        	move();
         }
     }
 

@@ -28,7 +28,6 @@ public class Gas extends Entity {
 			hasSpread = true;
 		}
 		diffuse();
-		
 	}
 	
 	private void damageRats() {

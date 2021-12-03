@@ -4,23 +4,50 @@ public class Bomb extends Entity{
     private int countdown;
 
     public Bomb(int[] location) {
-        super(location, "Bomb5.png", "Bomb");
+        super(location, "Bomb.png", "Bomb");
         this.countdown = 20;
     }
 
     public Bomb(int[] location, int countdown) {
         super(location, "Bomb.png", "Bomb");
         this.countdown = countdown;
-        setImageName(getBombImage());
+        switch(countdown) {
+			case 16:
+				setImageName("Bomb4.png");
+				break;
+			case 12:
+				setImageName("Bomb3.png");
+				break;
+			case 8:
+				setImageName("Bomb2.png");
+				break;
+			case 4:
+				setImageName("Bomb1.png");
+				break;
+        }
     }
 
     public void act() {
         if (countdown == 0) {
-            spawnExplosions();
+            //spawnExplosions();
             removeEntity();
         }
         countdown--;
-        setImageName(getBombImage());
+        
+        switch(countdown) {
+			case 16:
+				setImageName("Bomb4.png");
+				break;
+			case 12:
+				setImageName("Bomb3.png");
+				break;
+			case 8:
+				setImageName("Bomb2.png");
+				break;
+			case 4:
+				setImageName("Bomb1.png");
+				break;
+        }
     }
 
     /*
@@ -33,50 +60,39 @@ public class Bomb extends Entity{
         int[] temp = {location[0], location[1]};
         ArrayList<String> directions = Map.getMovementOptions(location[0], location[1]);
         for (String d : directions) {
+        	System.out.println(d);
 			int[] tempLocation = new int[2];
 			switch(d) {
 				case "N":
-					while(!(Map.getTileType(tempLocation[0], tempLocation[1]) == 'G')) {
+					System.out.println();
+					while((Map.getTileType(tempLocation[0], tempLocation[1]) != 'G')) {
 						tempLocation[0] = location[0];
 						tempLocation[1] = location[1] - 1;
+						System.out.println(tempLocation);
 					}
 					break;
 				case "S":
-					while(!(Map.getTileType(tempLocation[0], tempLocation[1]) == 'G')) {
+					while((Map.getTileType(tempLocation[0], tempLocation[1]) != 'G')) {
 						tempLocation[0] = location[0];
 						tempLocation[1] = location[1] - 1;
+						System.out.println(tempLocation);
 					}
 					break;
 				case "E":
-					while(!(Map.getTileType(tempLocation[0], tempLocation[1]) == 'G')) {
+					while((Map.getTileType(tempLocation[0], tempLocation[1]) != 'G')) {
 						tempLocation[0] = location[0];
 						tempLocation[1] = location[1] - 1;
+						System.out.println(tempLocation);
 					}
 					break;
 				case "W":
-					while(!(Map.getTileType(tempLocation[0], tempLocation[1]) == 'G')) {
+					while((Map.getTileType(tempLocation[0], tempLocation[1]) != 'G')) {
 						tempLocation[0] = location[0];
 						tempLocation[1] = location[1] - 1;
+						System.out.println(tempLocation);
 					}
 					break;
 			}		
 		}
-    }
-    
-    private String getBombImage() {
-    	switch(countdown) {
-    	case 20:
-    		return "Bomb5.png";
- 		case 16:
- 			return "Bomb4.png";
- 		case 12:
- 			return "Bomb3.png";
- 		case 8:
- 			return "Bomb2.png";
- 		case 4:
- 			return "Bomb1.png";
- 		default:
- 			return "Bomb.png";
-         }
     }
 }

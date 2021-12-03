@@ -84,7 +84,7 @@ public class Map {
                 tunnelOut(Map.gc);
                 //for loop for acting
                 for (int i = maxEntities-1; i >= 0; i--) {
-                	if (Entity.getEntities().size() != 0) {
+                	if (Entity.getEntities().size() > 0) {
                 		ents.get(i).act();
                 	}
                 }
@@ -93,6 +93,7 @@ public class Map {
                 } else {
                 	Rat.wait = 1;
                 }
+                System.out.println(Rat.rats.size());
             }
             
         }, 0, 250, TimeUnit.MILLISECONDS);
