@@ -39,8 +39,8 @@ public class Map {
                 Image tileImage = null;
                 if (Map.tileLayout[j][i].getTileType() == 'G') {
                     tileImage = grassImage;
-                //} else if (Map.tileLayout[j][i].getTileType() == 'T') {
-                //    tileImage = tunnelImage;
+                } else if (Map.tileLayout[j][i].getTileType() == 'T') {
+                    tileImage = tunnelImage;
                 } else if (Map.tileLayout[j][i].getTileType() == 'P') {
                     tileImage = pathImage;
                 }
@@ -87,15 +87,14 @@ public class Map {
                 		ents.get(i).act();
                 	}
                 }
-                tunnelOut(Map.gc);
-                if (AdultRat.wait == 1) {
-                	AdultRat.wait--;
+                if (Rat.wait == 1) {
+                	Rat.wait--;
                 } else {
-                	AdultRat.wait = 1;
+                	Rat.wait = 1;
                 }
             }
             
-        }, 0, 300, TimeUnit.MILLISECONDS);
+        }, 0, 250, TimeUnit.MILLISECONDS);
         return tick;
     }
     

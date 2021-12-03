@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class Gas extends Entity {
 	private int spreadLimit;
-	private int timer = 6;
+	private int timer = 10;
 	private String direction;
 	private boolean hasSpread;
 	

@@ -12,7 +12,6 @@ public class AdultRat extends Rat {
     private int timeMating;
     private int babyAmmount;
     private int timePregnant;
-    public static int wait;
     private int matingCooldown;
 
     public AdultRat(String sex, int health, boolean sterile, int[] location, String directionFacing, boolean isPregnant){
@@ -31,7 +30,10 @@ public class AdultRat extends Rat {
     	} else {
     		matingCooldown--;
     	}
-    	if (!isMating) {
+
+        if (isMating) {
+        	mating();
+        } else {
     		if(wait == 0) {
     			if(isPregnant) {
     				pregnancy();
@@ -39,9 +41,6 @@ public class AdultRat extends Rat {
     			move();
     		}
     	}
-        if (isMating) {
-        	mating();
-        }
     }
 
     /*
@@ -57,12 +56,17 @@ public class AdultRat extends Rat {
     					&& !((AdultRat)Rat.getRats().get(i)).isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
     			isMating = true;
     			matingCooldown = COOLDOWN;
+    			((AdultRat)Rat.getRats().get(i)).isMating = true;
+    			((AdultRat)Rat.getRats().get(i)).isPregnant = true;
+    			((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
     		} else if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
 					(Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F"))
 					&& this.sterile == false && !this.isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
     			isPregnant = true;
     			isMating = true;
     			matingCooldown = COOLDOWN;
+    			((AdultRat)Rat.getRats().get(i)).isMating = true;
+    			((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
     		}
         }
     }
@@ -73,7 +77,6 @@ public class AdultRat extends Rat {
 			timeMating = 0;
 		} else {
 			timeMating++;
-			//System.out.println("I am fucking" + matingCooldown);
 		}
     }
     

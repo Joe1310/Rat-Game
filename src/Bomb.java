@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Bomb extends Entity{
     private int countdown;
 
@@ -16,44 +18,37 @@ public class Bomb extends Entity{
             spawnExplosions();
             removeEntity();
         }
-        countdown -= 1;
+        countdown--;
     }
 
     private void spawnExplosions() {
-        Entity explosion = new Explosion(location);
-        int[] temp = new int[2];
-        temp[0] = location[0];
-        temp[1] = location[1];
-        int i = 0;
-
-        while (Map.getMovementOptions(location[0], location[1]+i).contains("n")) {
-            temp[1] += i;
-            explosion = new Explosion(temp);
-            i++;
-        }
-        temp[0] = location[0];
-        temp[1] = location[1];
-        i = 0;
-        while (Map.getMovementOptions(location[0], location[1]-i).contains("s")) {
-            temp[1] -= i;
-            explosion = new Explosion(temp);
-            i++;
-        }
-        temp[0] = location[0];
-        temp[1] = location[1];
-        i = 0;
-        while (Map.getMovementOptions(location[0]+i, location[1]).contains("e")) {
-            temp[0] += i;
-            explosion = new Explosion(temp);
-            i++;
-        }
-        temp[0] = location[0];
-        temp[1] = location[1];
-        i = 0;
-        while (Map.getMovementOptions(location[0]-i, location[1]).contains("w")) {
-            temp[0] -= i;
-            explosion = new Explosion(temp);
-            i++;
-        }
+    	Entity explosion = new Explosion(location);
+        int[] temp = {location[0], location[1]};
+        ArrayList<String> directions = Map.getMovementOptions(location[0], location[1]);
+        for (String d : directions) {
+			int[] tempLocation = new int[2];
+			switch(d) {
+				case "N":
+					tempLocation[0] = location[0];
+					tempLocation[1] = location[1] - 1;
+					Entity nGas = new Gas(tempLocation, 5, "S", false);
+					break;
+				case "S":
+					tempLocation[0] = location[0];
+					tempLocation[1] = location[1] + 1;
+					Entity sGas = new Gas(tempLocation, 5, "N", false);
+					break;
+				case "E":
+					tempLocation[0] = location[0] + 1;
+					tempLocation[1] = location[1];
+					Entity eGas = new Gas(tempLocation, 5, "W", false);
+					break;
+				case "W":
+					tempLocation[0] = location[0] - 1;
+					tempLocation[1] = location[1];
+					Entity wGas = new Gas(tempLocation, 5, "E", false);
+					break;
+			}		
+		}
     }
 }
