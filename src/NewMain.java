@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -35,6 +36,7 @@ public class NewMain extends Application {
         Button startButton = new Button("START");
         Button loadButton = new Button("LOAD");
         Button highScoresButton = new Button("HIGH SCORES");
+        Button howToPlayButton = new Button("HOW TO PLAY");
         Button quitButton = new Button("QUIT");
         startButton.setOnAction(event -> {
             menuWindow.close();
@@ -48,10 +50,14 @@ public class NewMain extends Application {
             menuWindow.close();
             highScores(primaryStage);
         });
+        howToPlayButton.setOnAction(event -> {
+            menuWindow.close();
+            howToPlay(primaryStage);
+        });
         quitButton.setOnAction(event -> {
             menuWindow.close();
         });
-        VBox container = new VBox(startButton, loadButton, highScoresButton, quitButton);
+        VBox container = new VBox(startButton, loadButton, highScoresButton, howToPlayButton, quitButton);
         //Style container
         container.setSpacing(15);
         container.setPadding(new Insets(25));
@@ -59,6 +65,33 @@ public class NewMain extends Application {
         menuWindow.setScene(new Scene(container));
         //Launch
         menuWindow.show();
+    }
+    public void howToPlay(Stage primaryStage){
+        Stage howToPlayWindow = new Stage();
+        howToPlayWindow.setTitle("HOW TO PLAY");
+        TextArea text = new TextArea("Drag and drop items onto the play area to stop the rats overproducing." +
+                "\nIf too many rats are created, then you lose.\nHowever if you kill enough of them, YOU WIN!");
+        text.setEditable(false);
+        Button menuButton = new Button("Return");
+
+        menuButton.setOnAction(event -> {
+            howToPlayWindow.close();
+            try {
+                start(primaryStage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        VBox container = new VBox(text, menuButton);
+
+        //Style container
+        container.setSpacing(15);
+        container.setPadding(new Insets(25));
+        //Set view in window
+        howToPlayWindow.setScene(new Scene(container));
+        //Launch
+        howToPlayWindow.show();
     }
 
     private void highScores(Stage primaryStage) {
@@ -69,7 +102,7 @@ public class NewMain extends Application {
 
     public void play(Stage primaryStage){
         Stage levelMenuWindow = new Stage();
-        levelMenuWindow.setTitle("Rat Game");
+        levelMenuWindow.setTitle("RAT GAME");
         //Create view in Java
         Label title = new Label("Select a level");
         Button level1Button = new Button("LEVEL 1");
@@ -112,7 +145,6 @@ public class NewMain extends Application {
     }
 
     public void drawGame(String filename) {
-
         // Get the Graphic Context of the canvas. This is what we draw on.
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Entity.setGC(gc);
@@ -136,6 +168,55 @@ public class NewMain extends Application {
         drawGame("level.txt");
         level1Stage.setScene(level1Scene);
         level1Stage.show();
+    }
+
+    public void win(){
+        Stage winScreen = new Stage();
+        winScreen.setTitle("YOU WIN");
+        Label title = new Label("You Won! Congrats");
+        Button menuButton = new Button("Main Menu");
+
+        menuButton.setOnAction(event -> {
+            winScreen.close();
+            try {
+                start(winScreen);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        VBox container = new VBox(title, menuButton);
+        //Style container
+        container.setSpacing(15);
+        container.setPadding(new Insets(25));
+        //Set view in window
+        winScreen.setScene(new Scene(container));
+        //Launch
+        winScreen.show();
+    }
+
+    public void lose(){
+        Stage loseScreen = new Stage();
+        loseScreen.setTitle("YOU LOST");
+        Label title = new Label("You Lost! Better Luck Next Time");
+        Button menuButton = new Button("Main Menu");
+
+        menuButton.setOnAction(event -> {
+            loseScreen.close();
+            try {
+                start(loseScreen);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        VBox container = new VBox(title, menuButton);
+        //Style container
+        container.setSpacing(15);
+        container.setPadding(new Insets(25));
+        //Set view in window
+        loseScreen.setScene(new Scene(container));
+        //Launch
+        loseScreen.show();
     }
 
     public void level2(){

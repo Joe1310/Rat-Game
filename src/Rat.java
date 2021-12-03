@@ -19,7 +19,7 @@ public abstract class Rat extends Entity{
     }
 
     public int randomize(int i){
-        Random rand = new Random();
+        Random rand = new Random();     
         return rand.nextInt(i);
     }
 
