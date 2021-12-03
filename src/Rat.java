@@ -3,6 +3,8 @@ import java.util.Random;
 import java.util.Arrays;
 
 public abstract class Rat extends Entity{
+
+    public static int wait;
     protected int health;
     protected boolean sterile;
     protected String directionFacing;

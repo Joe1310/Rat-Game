@@ -1,29 +1,40 @@
+import java.util.Arrays;
+
 public class DeathRat extends Rat {
 	
-    private int numOfKilled = 0;
+    private int killCount;
     
     public DeathRat(int health, boolean sterile, int[] location, String directionFacing) {
-        super(health, sterile, location, directionFacing, "DeathRat.png", "DeathRat");//add file for rat image
+        super(health, sterile, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+        killCount = 0;
     }
     
-    private void killRat(){
-        for(int i = 0; rats.size() >= i; i ++){
-            if (this.location == rats.get(i).location && this != rats.get(i)){
-                rats.get(i).ratDeath();// not sure if correct
-                numOfKilled = numOfKilled ++;
-            }
+    public DeathRat(int health, boolean sterile, int[] location, String directionFacing, int killCount) {
+        super(health, sterile, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+        this.killCount = killCount;
+    }
+    
+    private void killRat() {
+    	for (int i = rats.size()-1; i > -1; i--) {
+			if (Arrays.equals(rats.get(i).location, this.location) && 
+					!rats.get(i).getRatType().equals("DeathRat")) {
+				rats.get(i).ratDeath();
+				killCount++;
+	        }
         }
-        if (numOfKilled == 5){
+		if (killCount > 5){
             removeEntity();
         }
     }
     
     public void act() {
-        //killRat();
-        move();
+        killRat();
+        if (wait == 0) {
+        	move();
+        }
     }
 
-    public String toString(){
+    public String toString() {
         return "D" + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing;
     }
 }

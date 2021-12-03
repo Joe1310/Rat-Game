@@ -30,7 +30,7 @@ public class Level {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		
 		if(filename.contains("level")) {
 			readFreshLevel(scan);
 		} else {
@@ -147,10 +147,10 @@ public class Level {
 			Entity rat = new BabyRat(sex, 100, false, location, direction);
 			
 			//REMOVE THIS
-			int[] itemlocation = {5,1}; //remove
+			int[] itemlocation = {5,3}; //remove
 			int i = Entity.getEntities().size();
 			if (i == 1) {
-				Entity gas = new NoEntrySign(itemlocation); //remove
+				Entity gas = new Bomb(itemlocation); //remove
 			}
 			//REMOVE THIS
 		}

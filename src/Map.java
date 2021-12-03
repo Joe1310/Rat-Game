@@ -39,8 +39,8 @@ public class Map {
                 Image tileImage = null;
                 if (Map.tileLayout[j][i].getTileType() == 'G') {
                     tileImage = grassImage;
-                //} else if (Map.tileLayout[j][i].getTileType() == 'T') {
-                //    tileImage = tunnelImage;
+                } else if (Map.tileLayout[j][i].getTileType() == 'T') {
+                    tileImage = tunnelImage;
                 } else if (Map.tileLayout[j][i].getTileType() == 'P') {
                     tileImage = pathImage;
                 }
@@ -81,21 +81,21 @@ public class Map {
                 for (Entity ent : Entity.getEntities()) {
                     ent.draw();
                 }
+                tunnelOut(Map.gc);
                 //for loop for acting
                 for (int i = maxEntities-1; i >= 0; i--) {
                 	if (Entity.getEntities().size() != 0) {
                 		ents.get(i).act();
                 	}
                 }
-                tunnelOut(Map.gc);
-                if (AdultRat.wait == 1) {
-                	AdultRat.wait--;
+                if (Rat.wait == 1) {
+                	Rat.wait--;
                 } else {
-                	AdultRat.wait = 1;
+                	Rat.wait = 1;
                 }
             }
             
-        }, 0, 300, TimeUnit.MILLISECONDS);
+        }, 0, 250, TimeUnit.MILLISECONDS);
         return tick;
     }
     
@@ -104,6 +104,10 @@ public class Map {
      */
     public static void setGC(GraphicsContext grc) {
     	gc = grc;
+    }
+    
+    public static char getTileType(int x, int y) {
+    	return Map.tileLayout[x][y].getTileType();
     }
 
     public static ArrayList<String> getMovementOptions(int x, int y){
