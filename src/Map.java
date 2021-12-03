@@ -72,6 +72,7 @@ public class Map {
                 		ents.get(i).act();
                 	}
                 }
+                System.out.println(Rat.getRats().size());
             }
             
         }, 0, 500, TimeUnit.MILLISECONDS);

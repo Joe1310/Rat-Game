@@ -4,17 +4,15 @@ import java.util.Arrays;
 
 public abstract class Rat extends Entity{
     protected int health;
-    protected double speed;
     protected boolean sterile;
     protected String directionFacing;
     protected static ArrayList<Rat> rats = new ArrayList<Rat>();
     private String ratType;
 
-    public Rat(int health, double speed, boolean sterile, int[] location, String directionFacing, String image, String ratType){
+    public Rat(int health, boolean sterile, int[] location, String directionFacing, String image, String ratType){
         super(location, image, "Rat");
         this.ratType = ratType;
         this.health = health;
-        this.speed = speed;
         this.sterile = sterile;
         this.directionFacing = directionFacing;
         rats.add(this);
@@ -26,10 +24,6 @@ public abstract class Rat extends Entity{
     }
 
     public abstract void act();
-
-    public void modifySpeed(int newSpeed) {
-        this.speed = newSpeed;
-    }
 
     public void damageRat(int damage) {
         this.health = this.health - damage;

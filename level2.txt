@@ -3,9 +3,9 @@ M 1 1 E
 M 13 5 W
 M 3 3 E
 M 13 5 W
-F 1 5 N
-F 7 1 S
-F 9 9 N
+M 1 5 N
+M 7 1 S
+M 9 9 N
 F 14 4 S
 300
 10
