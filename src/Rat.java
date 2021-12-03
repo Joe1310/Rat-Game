@@ -82,6 +82,10 @@ public abstract class Rat extends Entity{
         removeEntity();
     }
 
+    protected void ratSterile() {
+       sterile = true;
+    }
+
     public String getRatType() {
         return ratType;
     }
