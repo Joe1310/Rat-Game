@@ -30,6 +30,7 @@ public class Level {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 		if(filename.contains("level")) {
 			readFreshLevel(scan);
 		} else {

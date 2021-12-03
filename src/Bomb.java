@@ -5,7 +5,7 @@ public class Bomb extends Entity{
 
     public Bomb(int[] location) {
         super(location, "Bomb.png", "Bomb");
-        this.countdown = 10;
+        this.countdown = 20;
     }
 
     public Bomb(int[] location, int countdown) {
@@ -19,8 +19,28 @@ public class Bomb extends Entity{
             removeEntity();
         }
         countdown--;
+        
+        switch(countdown) {
+		case 16:
+			setImageName("NoEntrySign2.png");
+			break;
+		case 3:
+			setImageName("NoEntrySign3.png");
+			break;
+		case 2:
+			setImageName("NoEntrySign4.png");
+			break;
+		case 1:
+			setImageName("NoEntrySign5.png");
+			break;
+	}
     }
 
+    /*
+     * Go every direction
+     * Spawn Explosions
+     * 
+     */
     private void spawnExplosions() {
     	Entity explosion = new Explosion(location);
         int[] temp = {location[0], location[1]};
@@ -29,24 +49,25 @@ public class Bomb extends Entity{
 			int[] tempLocation = new int[2];
 			switch(d) {
 				case "N":
-					tempLocation[0] = location[0];
-					tempLocation[1] = location[1] - 1;
-					Entity nGas = new Gas(tempLocation, 5, "S", false);
+					while(Map.getTileType(tempLocation[0], tempLocation[1])
+						tempLocation[0] = location[0];
+						tempLocation[1] = location[1] - 1;
+					
 					break;
 				case "S":
 					tempLocation[0] = location[0];
 					tempLocation[1] = location[1] + 1;
-					Entity sGas = new Gas(tempLocation, 5, "N", false);
+					
 					break;
 				case "E":
 					tempLocation[0] = location[0] + 1;
 					tempLocation[1] = location[1];
-					Entity eGas = new Gas(tempLocation, 5, "W", false);
+					
 					break;
 				case "W":
 					tempLocation[0] = location[0] - 1;
 					tempLocation[1] = location[1];
-					Entity wGas = new Gas(tempLocation, 5, "E", false);
+					
 					break;
 			}		
 		}

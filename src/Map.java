@@ -81,6 +81,7 @@ public class Map {
                 for (Entity ent : Entity.getEntities()) {
                     ent.draw();
                 }
+                tunnelOut(Map.gc);
                 //for loop for acting
                 for (int i = maxEntities-1; i >= 0; i--) {
                 	if (Entity.getEntities().size() != 0) {
@@ -103,6 +104,10 @@ public class Map {
      */
     public static void setGC(GraphicsContext grc) {
     	gc = grc;
+    }
+    
+    public static char getTileType(int x, int y) {
+    	return Map.tileLayout[x][y].getTileType();
     }
 
     public static ArrayList<String> getMovementOptions(int x, int y){
