@@ -1,14 +1,24 @@
+import java.util.ArrayList;
 
 public class PlayerData {
 
-	private String playerName;
-	private int playerScore;
-	private int maxLevelUnlocked;
-	private static int[][] first = new int[3][2];
-	private static int[][] second = new int[3][2];
-	private static int[][] third = new int[3][2];
+
+	private static int[][] first = new int[10][2];
+	private static int[][] second = new int[10][2];
+	private static int[][] third = new int[10][2];
 	
+	static ArrayList<Player> players = new ArrayList<Player>();
+	
+	//Remove this method in final copy
 	public static void main(String args[]) {
+		
+		Player player = new Player("Samarthya", 10, 1);
+		players.add(player);
+		Player player1 = new Player("Nick", 10, 2);
+		players.add(player1);
+		Player player2 = new Player("El", 10, 3);
+		players.add(player2);
+		
 		updateLevel(1,1,5);
 		updateLevel(1,2,2);
 		updateLevel(1,3,10);
@@ -21,32 +31,24 @@ public class PlayerData {
 		updateLevel(3,8,3);
 		updateLevel(3,9,5);
 		
-		
-		
 		updateLevel(1,7,11);
 		updateLevel(2,1,17);
 		updateLevel(3,6,7);
 		
-		System.out.println(printScoreBoard());
+		//System.out.println(printScoreBoard());
+		System.out.println(getPlayerData());
+			
 	}
 	
-
-	public void setPlayerName(String name) {
-		playerName =  name;
+	//Constructor for saving the PlayerData
+	public PlayerData(int[][] first, int[][] second, int[][] third, ArrayList<Player> players) {
+		PlayerData.first = first;
+		PlayerData.second = second;
+		PlayerData.third = third;
+		PlayerData.players = players;
 	}
 
-	public void setMaxLevelUnlocked(int level) {
-		maxLevelUnlocked =  level;
-	}
-
-	public String getplayerName() {
-		return playerName;
-	}
-
-	public int getMaxLevelUnlocked() {
-		return maxLevelUnlocked;
-	}
-
+	//Method updates the player's data in the given level
 	public static void updateLevel(int level, int playerID, int score) {
 
 		if(level == 1) {
@@ -58,6 +60,7 @@ public class PlayerData {
 		}
 	}
 
+	//Method checks for the ranking of the player on the basis of their scores and updates them
 	public static void LevelScoreboard(int[][] level, int playerID, int score) {
 
 		int loc = 0;
@@ -69,6 +72,34 @@ public class PlayerData {
 			if(level[0][0] > score) {
 				if(level[1][0] > score) {
 					if(level[2][0] > score) {
+						if(level[3][0] > score) {
+							if(level[4][0] > score) {
+								if(level[5][0] > score) {
+									if(level[6][0] > score) {
+										if(level[7][0] > score) {
+											if(level[8][0] > score) {
+												if(level[9][0] > score) {
+												} else {
+													loc = 9;
+												}
+											} else {
+												loc = 8;
+											}
+										} else {
+											loc = 7;
+										}
+									} else {
+										loc = 6;
+									}
+								} else {
+									loc = 5;
+								}
+							} else {
+								loc = 4;
+							}
+						} else {
+							loc = 3;
+						}
 					} else {
 						loc = 2;
 					} 
@@ -83,13 +114,14 @@ public class PlayerData {
 		updateScoreboard(level, loc, playerID, score);
 	}
 
+	///Method updates the Score board of the given level.
 	private static void updateScoreboard(int[][] level, int loc, int playerID, int score) {
 
 		if(loc == 2) {
 			level[2][0] = score;
 			level[2][1] = playerID;
 		} else {
-			for(int i = 2; i > loc ; i --){
+			for(int i = 9; i > loc ; i --){
 				level[i][0] = level[i - 1][0];
 				level[i][1] = level[i - 1][1];
 			}
@@ -98,25 +130,48 @@ public class PlayerData {
 		}
 	}
 
+	//Remove this method in final copy
 	public static String printScoreBoard() {
 		String line = "";
 		line += "Rank" +"\t" + "Score" +"\t"+ "PlayerID\n" + "\n   Level 1\n\n";
 		
-		for(int i = 0; i < 3; i ++) {
+		for(int i = 0; i < 10; i ++) {
 			line += i+1 +"\t"+ first[i][0] +"\t"+ first[i][1];
 			line += "\n";
 		}
 		line += "\n   Level 2\n\n";
-		for(int i = 0; i < 3; i ++) {
+		for(int i = 0; i < 10; i ++) {
 				line += i+1 +"\t"+ second[i][0] +"\t"+ second[i][1];
 			line += "\n";
 		}
 		line += "\n   Level 3\n\n";
-		for(int i = 0; i < 3; i ++) {
+		for(int i = 0; i < 10; i ++) {
 				line += i+1 +"\t"+ third[i][0] +"\t"+ third[i][1];
 				line += "\n";
 		}
 		line += "\n";
+		
+		return line;
+	}
+	
+	//Method for storing the PlayerData in text file
+	public static String getPlayerData() {
+		
+		String line = "";
+		
+		for(int i = 0; i < 10; i ++) {
+			line += first[i][0] + " " + first[i][1] + "\n";
+		}
+		for(int i = 0; i < 10; i ++) {
+			line += second[i][0] + " " + second[i][1] + "\n";
+		}
+		for(int i = 0; i < 10; i ++) {
+			line += third[i][0] + " " + third[i][1] + "\n";
+		}
+		
+		for(int i = 0; i < players.size(); i ++) {
+			line += players.get(i).toString() + "\n";
+		}
 		
 		return line;
 	}
