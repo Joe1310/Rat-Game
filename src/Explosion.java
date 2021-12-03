@@ -9,12 +9,10 @@ public class Explosion extends Entity {
 
     public void act() {
     	explodeRats();
-    	/*
     	wait--;
     	if (wait == 0) {
     		removeEntity();
     	}
-    	*/
     }
     
     private void explodeRats() {
