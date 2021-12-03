@@ -13,6 +13,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.image.*;
 
 import java.io.IOException;
 
@@ -230,24 +233,229 @@ public class NewMain extends Application {
     }
 
     private Pane buildGUI() {
-        // Create top-level panel that will hold all GUI nodes.
-        BorderPane root = new BorderPane();
+    	setupInventory();
+		// Create top-level panel that will hold all GUI
+		BorderPane root = new BorderPane();
+				
+		// Create canvas
+		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		Entity.setGC(gc);
+		root.setCenter(canvas);
+		
+		
+		Image gasImg = new Image("Gas2.png");
+		ImageView gasButton = new ImageView(gasImg);
+		gasButton.setX(CANVAS_WIDTH - 50);
+		gasButton.setY(0);
+		
+		Image deathRatImg = new Image("DeathRatN.png");
+		ImageView deathRatButton = new ImageView(deathRatImg);
+		deathRatButton.setX(CANVAS_WIDTH - 50);
+		deathRatButton.setY(50);
+		
+		Image poisonImg = new Image("Poison.png");
+		ImageView poisonButton = new ImageView(poisonImg);
+		poisonButton.setX(CANVAS_WIDTH - 50);
+		poisonButton.setY(100);
+		
+		Image sterilizationImg = new Image("Sterilization.png");
+		ImageView sterilizationButton = new ImageView(sterilizationImg);
+		sterilizationButton.setX(CANVAS_WIDTH - 50);
+		sterilizationButton.setY(150);
+		
+		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
+		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
+		femaleSexChangeButton.setX(CANVAS_WIDTH - 50);
+		femaleSexChangeButton.setY(200);
+		
+		Image maleSexChangeImg = new Image("MaleSexChange.png");
+		ImageView maleSexChangeButton = new ImageView(maleSexChangeImg);
+		maleSexChangeButton.setX(CANVAS_WIDTH - 50);
+		maleSexChangeButton.setY(250);
+		
+		Image noEntrySignImg = new Image("NoEntrySign.png");
+		ImageView noEntrySignButton = new ImageView(noEntrySignImg);
+		noEntrySignButton.setX(CANVAS_WIDTH - 50);
+		noEntrySignButton.setY(300);
+		
+		Image bombImg = new Image("Bomb.png");
+		ImageView bombButton = new ImageView(bombImg);
+		bombButton.setX(CANVAS_WIDTH - 50);
+		bombButton.setY(350);
+		
+		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton, femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
+		
+		
+		gasButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				gasButton.setX((int)event.getSceneX()-25);
+				gasButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		gasButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				gasButton.setX(CANVAS_WIDTH - 50);
+				gasButton.setY(0);
+				if (Inventory.getGas() > 0) {
+					Inventory.removeGas();
+					Entity gas = new Gas(getMouseLocation(event), false);
+					gas.draw();
+				}
+			}
+		});
 
-        // Create the canvas that we will draw on.
-        // We store this as a global variable so other methods can access it.
-        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-        root.setCenter(canvas);
+		deathRatButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				deathRatButton.setX((int)event.getSceneX()-25);
+				deathRatButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		deathRatButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				deathRatButton.setX(CANVAS_WIDTH - 50);
+				deathRatButton.setY(50);
+				if (Inventory.getDeathRat() > 0) {
+					Inventory.removeDeathRat();
+					Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
+					deathRat.draw();
+				}
+			}
+		});
+		
+		poisonButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				poisonButton.setX((int)event.getSceneX()-25);
+				poisonButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		poisonButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				poisonButton.setX(CANVAS_WIDTH - 50);
+				poisonButton.setY(100);
+				if (Inventory.getPoison() > 0) {
+					Inventory.removePoison();
+					Entity poison = new Poison(getMouseLocation(event));
+					poison.draw();
+				}
+			}
+		});
+		
+		sterilizationButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				sterilizationButton.setX((int)event.getSceneX()-25);
+				sterilizationButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		sterilizationButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				sterilizationButton.setX(CANVAS_WIDTH - 50);
+				sterilizationButton.setY(150);
+				//if (Inventory.getSterilization() > 0) {
+				//	Inventory.removeSterilization();
+				//	Entity sterilization = new Sterilization(getMouseLocation(event), false);
+				//	sterilization.draw();
+				//}
+			}
+		});
+		
+		femaleSexChangeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				femaleSexChangeButton.setX((int)event.getSceneX()-25);
+				femaleSexChangeButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		femaleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				femaleSexChangeButton.setX(CANVAS_WIDTH - 50);
+				femaleSexChangeButton.setY(200);
+				if (Inventory.getFemaleSexChange() > 0) {
+					Inventory.removeFemaleSexChange();
+					Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
+					femaleSexChange.draw();
+				}
+			}
+		});
+		
+		maleSexChangeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				maleSexChangeButton.setX((int)event.getSceneX()-25);
+				maleSexChangeButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		maleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				maleSexChangeButton.setX(CANVAS_WIDTH - 50);
+				maleSexChangeButton.setY(250);
+				if (Inventory.getMaleSexChange() > 0) {
+					Inventory.removeMaleSexChange();
+					Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
+					maleSexChange.draw();
+				}
+			}
+		});
+		
+		noEntrySignButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				noEntrySignButton.setX((int)event.getSceneX()-25);
+				noEntrySignButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		noEntrySignButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				noEntrySignButton.setX(CANVAS_WIDTH - 50);
+				noEntrySignButton.setY(300);
+				if (Inventory.getNoEntrySign() > 0) {
+					Inventory.removeNoEntrySign();
+					Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
+					noEntrySign.draw();
+				}
+			}
+		});
+		
+		bombButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {	
+				bombButton.setX((int)event.getSceneX()-25);
+				bombButton.setY((int)event.getSceneY()-25);
+			}
+		});	
+		bombButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
+			public void handle(MouseEvent event) {
+				bombButton.setX(CANVAS_WIDTH - 50);
+				bombButton.setY(350);
+				if (Inventory.getBomb() > 0) {
+					Inventory.removeBomb();
+					Entity bomb = new Bomb(getMouseLocation(event));
+					bomb.draw();
+				}
+			}
+		});
+		
+		return root;
+	}
 
-        // Create a toolbar with some nice padding and spacing
-        HBox toolbar = new HBox();
-        toolbar.setSpacing(10);
-        toolbar.setPadding(new Insets(10, 10, 10, 10));
-        root.setTop(toolbar);
-
-        // Finally, return the border pane we built up.
-        return root;
-    }
-
+    private int[] getMouseLocation(MouseEvent event) {
+		int x = (int)event.getSceneX();
+		int y = (int)event.getSceneY();
+		
+		x = ((x-(x%50))/50);
+		y = ((y-(y%50))/50);
+		
+		int[] location = {x,y};
+	
+		return location;
+	}
+    
+    private static void setupInventory() {
+		Inventory.gasQuantity = 5;
+		Inventory.deathRatQuantity = 5;
+		Inventory.poisonQuantity = 5;
+		Inventory.sterilizationQuantity = 5;
+		Inventory.femaleSexChangeQuantity = 5;
+		Inventory.maleSexChangeQuantity = 5;
+		Inventory.noEntrySignQuantity = 5;
+		Inventory.bombQuantity = 5;
+	}
 
     public static void main(String[] args) {
         launch(args);
