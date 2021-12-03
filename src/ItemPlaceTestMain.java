@@ -159,8 +159,8 @@ public class ItemPlaceTestMain extends Application{
 			public void handle(MouseEvent event) {
 				sterilizationButton.setX(WINDOW_WIDTH - 50);
 				sterilizationButton.setY(150);
-				Entity sterilization = new Sterilization(getMouseLocation(event), false);
-				sterilization.draw();
+				//Entity sterilization = new Sterilization(getMouseLocation(event), false);
+				//sterilization.draw();
 			}
 		});
 		

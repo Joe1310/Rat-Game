@@ -5,14 +5,14 @@ public class AdultRat extends Rat {
 
 	private final int MATING_TIME = 6;
 	private final int PREGNANCY_TIME = 4;
-	private final int COOLDOWN = 14;
+	private final int COOLDOWN = 60;
     private String sex;
     private boolean isPregnant;
     private boolean isMating;
     private int timeMating;
     private int babyAmmount;
     private int timePregnant;
-    private int wait;
+    public static int wait;
     private int matingCooldown;
 
     public AdultRat(String sex, int health, boolean sterile, int[] location, String directionFacing, boolean isPregnant){
@@ -22,25 +22,21 @@ public class AdultRat extends Rat {
         this.timeMating = 0;
         this.timePregnant = 0;
         this.babyAmmount = randomize(2) + 2;
-        this.wait = 1;
         this.matingCooldown = 0;
     }
 
     public void act() {
-    	if (matingCooldown == 0) {
+    	if (matingCooldown <= 0) {
     		procreateCheck();
     	} else {
     		matingCooldown--;
     	}
     	if (!isMating) {
     		if(wait == 0) {
-    			move();
     			if(isPregnant) {
     				pregnancy();
     			}
-    			wait = 1;
-    		} else {
-    			wait--;
+    			move();
     		}
     	}
         if (isMating) {
@@ -57,13 +53,13 @@ public class AdultRat extends Rat {
     public void procreateCheck(){
     	for (int i = Rat.getRats().size()-1; i > -1; i--) {
     	    if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
-    				(Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && !this.isMating
-    					&& !((AdultRat)Rat.getRats().get(i)).isPregnant) {
+    				(Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && this.sterile == false
+    					&& !((AdultRat)Rat.getRats().get(i)).isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
     			isMating = true;
     			matingCooldown = COOLDOWN;
     		} else if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
 					(Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F"))
-					&& this.sterile == false && !this.isPregnant) {
+					&& this.sterile == false && !this.isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
     			isPregnant = true;
     			isMating = true;
     			matingCooldown = COOLDOWN;
@@ -72,7 +68,6 @@ public class AdultRat extends Rat {
     }
     
     public void mating() {
-    	isMating = true;
 		if (timeMating == MATING_TIME) {
 			isMating = false;
 			timeMating = 0;

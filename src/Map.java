@@ -30,7 +30,7 @@ public class Map {
     }
 
     public Tile[][] tileOut(GraphicsContext gc) {
-        grassImage = new Image("Grass.png");
+        grassImage = new Image("Grass2.png");
         tunnelImage = new Image("Tunnel.png");
         pathImage = new Image("PathTile.png");
 
@@ -39,9 +39,24 @@ public class Map {
                 Image tileImage = null;
                 if (Map.tileLayout[j][i].getTileType() == 'G') {
                     tileImage = grassImage;
-                } else if (Map.tileLayout[j][i].getTileType() == 'T') {
-                    tileImage = pathImage;
+                //} else if (Map.tileLayout[j][i].getTileType() == 'T') {
+                //    tileImage = tunnelImage;
                 } else if (Map.tileLayout[j][i].getTileType() == 'P') {
+                    tileImage = pathImage;
+                }
+                gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
+            }
+        }
+        return Map.tileLayout;
+    }
+    
+    public Tile[][] tunnelOut(GraphicsContext gc) {
+        tunnelImage = new Image("Tunnel.png");
+
+        for (int i = 0; i < (row); i++) {
+            for (int j = 0; j < column; j++) {
+                Image tileImage = null;
+                if (Map.tileLayout[j][i].getTileType() == 'T') {
                     tileImage = tunnelImage;
                 }
                 gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
@@ -72,10 +87,15 @@ public class Map {
                 		ents.get(i).act();
                 	}
                 }
-                System.out.println(Rat.getRats().size());
+                tunnelOut(Map.gc);
+                if (AdultRat.wait == 1) {
+                	AdultRat.wait--;
+                } else {
+                	AdultRat.wait = 1;
+                }
             }
             
-        }, 0, 500, TimeUnit.MILLISECONDS);
+        }, 0, 300, TimeUnit.MILLISECONDS);
         return tick;
     }
     

@@ -36,10 +36,10 @@ public class BabyRat extends Rat {
     }
 
     public String randomSex() {
-        if (randomize(1) == 1) {
-            return "M";
-        } else {
+        if (randomize(2) == 1) {
             return "F";
+        } else {
+            return "M";
         }
     }
 
