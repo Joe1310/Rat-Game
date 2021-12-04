@@ -1,0 +1,16 @@
+4
+F 6 1 100 W false true true 0 6 54 3
+M 6 1 100 E false false true 0 6 55 3
+NES 8 5 4
+Poison 7 5
+300
+10
+5
+7 7
+GGGGGGG
+GGPPPPP
+GGPGGGG
+GGPGGGG
+GGPGGGG
+GGPPPPP
+GGGGGGG
