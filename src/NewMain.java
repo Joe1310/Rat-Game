@@ -192,7 +192,7 @@ public class NewMain extends Application {
         
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         // Set the background to beige.
-        gc.setFill(Color.BEIGE);
+        gc.setFill(Color.WHITESMOKE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         Map map = gameLevel.getMap();
         map.setGC(gc); //remove this later
@@ -357,10 +357,16 @@ public class NewMain extends Application {
 		ImageView bombButton = new ImageView(bombImg);
 		bombButton.setX(CANVAS_WIDTH - 50);
 		bombButton.setY(350);
+
+		Button saveButton = new Button("SAVE");
+		root.setBottom(saveButton);
 		
-		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton, femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
+		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton,
+				femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 		
-		
+		saveButton.setOnMouseClicked(event ->{
+			System.out.println("save");
+		});
 		gasButton.setOnMouseDragged(event -> {
 			gasButton.setX((int)event.getSceneX()-25);
 			gasButton.setY((int)event.getSceneY()-25);
