@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
@@ -8,13 +9,14 @@ import java.util.concurrent.TimeUnit;
 public class Map {
     int maxRat;
     static Tile[][] tileLayout;
-    public int tick;
     final int GRID_SIZE = 50;
     private int row;
     private int column;
     Image grassImage;
     Image pathImage;
     Image tunnelImage;
+    int timer;
+    static int count;
     static GraphicsContext gc; //TEST PROBABLY NOT A GOOD IDEA
 
     /**
@@ -94,12 +96,24 @@ public class Map {
                 if (Rat.wait == 1) {
                 	Rat.wait--;
                 } else {
-                	Rat.wait = 1;
+                    Rat.wait = 1;
+                }
+                timer++;
+
+                if (timer % 4 == 0){
+                    count++;
+                }
+                if (Rat.getRats().size() == 0) {
+                    exec.shutdown();
+                }else if (Rat.getRats().size() == Level.getMap().maxRat) {
+                    exec.shutdown();
                 }
             }
         }, 0, 250, TimeUnit.MILLISECONDS);
         return tick;
     }
+
+
     
     /*
      * REMOVE THIS PROBABLY
