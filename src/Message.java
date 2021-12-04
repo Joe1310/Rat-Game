@@ -14,7 +14,7 @@ public class Message {
 		
 		String message = GetHTTP("http://cswebcat.swansea.ac.uk/message?solution=" + passcode);
 		
-		message = message.substring(0, message.indexOf('.') + 1);
+		message = message.substring(0, message.indexOf('.') + 1) + " - MaRATma Ghandi";
 	
 		return message;
 	}
@@ -27,10 +27,8 @@ public class Message {
 		
 		InputStreamReader instream  = new InputStreamReader(con.getInputStream());
 		Scanner scan = new Scanner(instream);
-		
-		String code = scan.nextLine();
-		
-		return code;
+
+		return scan.nextLine();
 	}
 	
 	public static String decode(String code) {

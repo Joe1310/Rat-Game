@@ -1,4 +1,3 @@
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,12 +19,8 @@ import java.io.IOException;
 
 public class NewMain extends Application {
     // The dimensions of the canvas
-    private static final int TILE_SIZE = 50;
     private static int CANVAS_WIDTH = 1850;
     private static int CANVAS_HEIGHT = 1000;
-
-    // Timeline which will cause tick method to be called periodically.
-    private static Timeline tickTimeline;
 
     private Canvas canvas;
 
@@ -35,12 +29,33 @@ public class NewMain extends Application {
 
         Stage menuWindow = new Stage();
         menuWindow.setTitle("Rat Game");
-        //Create view in Java
+
+        Message message = new Message();
+        String messageOfTheDay = message.MessageOfTheDay();
+        TextArea MOTD = new TextArea(messageOfTheDay);
+        MOTD.setEditable(false);
+        MOTD.setStyle("-fx-font-size: 1.5em;");
+        MOTD.setPrefWidth(messageOfTheDay.length() * 10);
+        MOTD.setPrefHeight(30);
+
         Button startButton = new Button("START");
         Button loadButton = new Button("LOAD");
         Button highScoresButton = new Button("HIGH SCORES");
         Button howToPlayButton = new Button("HOW TO PLAY");
         Button quitButton = new Button("QUIT");
+
+		Image image = new Image("Logo.png");
+		ImageView logoView = new ImageView();
+		logoView.setImage(image);
+		logoView.setFitWidth(200);
+		logoView.setPreserveRatio(true);
+
+		Image maRat = new Image("MaRAT.png");
+		ImageView maRatView = new ImageView();
+		maRatView.setImage(maRat);
+		maRatView.setFitWidth(200);
+		maRatView.setPreserveRatio(true);
+
         startButton.setOnAction(event -> {
             menuWindow.close();
             play(primaryStage);
@@ -60,21 +75,44 @@ public class NewMain extends Application {
         quitButton.setOnAction(event -> {
             menuWindow.close();
         });
-        VBox container = new VBox(startButton, loadButton, highScoresButton, howToPlayButton, quitButton);
-        //Style container
+
+        VBox container = new VBox(logoView, MOTD, maRatView, startButton, loadButton, highScoresButton,
+				howToPlayButton, quitButton);
         container.setSpacing(15);
         container.setPadding(new Insets(25));
-        //Set view in window
+
         menuWindow.setScene(new Scene(container));
         //Launch
         menuWindow.show();
     }
     public void howToPlay(Stage primaryStage){
         Stage howToPlayWindow = new Stage();
+        howToPlayWindow.setResizable(false);
         howToPlayWindow.setTitle("HOW TO PLAY");
-        TextArea text = new TextArea("Drag and drop items onto the play area to stop the rats overproducing." +
-                "\nIf too many rats are created, then you lose.\nHowever if you kill enough of them, YOU WIN!");
+        TextArea text = new TextArea("Welcome exterminator. The city needs your help; the parks are being overrun" +
+                " with rats, and we need you to eliminate them before it’s too late.\n Aim:\n" +
+                "To eliminate all the Rats within the time frame, use the items you supplied. If rats of an opposite" +
+                " gender meet, they will procreate and reproduce.\n So, eliminate them quickly.\n Inventory:\n" +
+                "We have equipped you with an arsenal at your disposal, found in your inventory, that can be used by " +
+                "clicking on an item and dragging it onto the\n map where you would like. Once you have released " +
+                "the item, the item will activate.\n Items at your disposal:\n Gas:\n" +
+                "Gas, when placed, will immediately start spreading across the map, and any rat that passes through " +
+                "it will be damaged. After the gas has spread,\n it will begin to dissipate.\n Death rat:\n" +
+                "Is a robotic rat that, after 3 seconds of warming up, will move through the paths and kill any rat " +
+                "it comes across; however, after the death rat has\n killed five rats, it will self-destruct.\n" +
+                "Sterilisation:\n Is a rare radioactive isotope that will sterilise any rat within its radius " +
+                "so it can no longer procreate when placed.\n Female sex change:\n" +
+                "Will change the gender of a male rat to a female rat. These can be used to help stop the rats " +
+                "from reproducing.\n(If a female hit it, nothing will change).\n Male sex change:\n" +
+                "Will change the gender of a female rat to a male rat. These can be used to help stop the " +
+                "rats from reproducing.\n(If a male hit it, nothing will change).\n No entry signs:\n" +
+                "It can be used to black the paths of rats and trap them but be careful after 5 hits, the " +
+                "signs break.\n Bomb:\n Bombs can be placed onto a path. After 5 seconds, they will " +
+                "detonate, sending an explosion vertically and horizontally, killing any rat it hits.");
         text.setEditable(false);
+        text.setStyle("-fx-font-size: 1.5em;");
+        text.setPrefWidth(1200);
+        text.setPrefHeight(600);
         Button menuButton = new Button("Return");
 
         menuButton.setOnAction(event -> {
@@ -123,11 +161,11 @@ public class NewMain extends Application {
         });
         level3Button.setOnAction(event -> {
             levelMenuWindow.close();
-            //level3(primaryStage);
+            level3();
         });
         level4Button.setOnAction(event -> {
             levelMenuWindow.close();
-            //level4(primaryStage);
+            level4();
         });
         backButton.setOnAction(event -> {
             levelMenuWindow.close();
@@ -213,36 +251,63 @@ public class NewMain extends Application {
         loseScreen.show();
     }
 
-    public void level1(){
-    	// Hard coding the width/height of the screen because there isn't a real reason for a dynamic one, since levels will never change
-    	// Width is equal to 'number of tiles across, plus one, then multiply by 50'
-    	// Height is equal to 'number of tiles down, multiplied by 50'
-    	// Height needs to be a minimum of 400, as to fit all the side bar items on
-    	CANVAS_WIDTH = 600;
-    	CANVAS_HEIGHT = 400;
-        Stage level1Stage = new Stage();
-        level1Stage.setTitle("RAT GAME : LVL1");
-        Pane root = buildGUI();
-        Scene level1Scene = new Scene(root);
-        drawGame("level.txt");
-        level1Stage.setScene(level1Scene);
-        level1Stage.setResizable(false);
-        level1Stage.show();
-    }
-    
+	/**
+	 *
+	 */
+	public void level1(){
+		Stage level1Stage = new Stage();
+		level1Stage.setTitle("RAT GAME : LVL1");
+		Pane root = buildGUI();
+		Scene level1Scene = new Scene(root);
+		drawGame("level.txt");
+		level1Stage.setScene(level1Scene);
+		level1Stage.show();
+	}
+
+	/**
+	 *
+	 */
     public void level2(){
     	CANVAS_WIDTH = 1050;
     	CANVAS_HEIGHT = 800;
         Stage level2Stage = new Stage();
         level2Stage.setTitle("RAT GAME : LVL2");
         Pane root = buildGUI();
-        Scene level1Scene = new Scene(root);
+        Scene level2Scene = new Scene(root);
         drawGame("level2.txt");
-        level2Stage.setScene(level1Scene);
-        level2Stage.setResizable(false);
+        level2Stage.setScene(level2Scene);
         level2Stage.show();
     }
 
+	/**
+	 *
+	 */
+	public void level3(){
+		Stage level3Stage = new Stage();
+		level3Stage.setTitle("RAT GAME : LVL3");
+		Pane root = buildGUI();
+		Scene level3Scene = new Scene(root);
+		drawGame("level3.txt");
+		level3Stage.setScene(level3Scene);
+		level3Stage.show();
+	}
+
+	/**
+	 *
+	 */
+	public void level4(){
+		Stage level4Stage = new Stage();
+		level4Stage.setTitle("RAT GAME : LVL4");
+		Pane root = buildGUI();
+		Scene level4Scene = new Scene(root);
+		drawGame("level4.txt");
+		level4Stage.setScene(level4Scene);
+		level4Stage.show();
+	}
+
+	/**
+	 * @return
+	 */
     private Pane buildGUI() {
     	setupInventory();
 		// Create top-level panel that will hold all GUI

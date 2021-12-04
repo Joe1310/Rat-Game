@@ -8,3 +8,4 @@
 /httpRequests/
 # Ignore all class files
 *.class
+*.iml
