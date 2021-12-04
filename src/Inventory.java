@@ -2,17 +2,17 @@ public class Inventory {
     static int gasQuantity;
     static int deathRatQuantity;
     static int poisonQuantity;
-    static int sterilizationQuantity;
+    static int sterilisationQuantity;
     static int femaleSexChangeQuantity;
     static int maleSexChangeQuantity;
     static int noEntrySignQuantity;
     static int bombQuantity;
 
-    public Inventory(int gas, int deathRat, int poison, int sterilization, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public Inventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
         gasQuantity = gas;
         deathRatQuantity = deathRat;
         poisonQuantity = poison;
-        sterilizationQuantity = sterilization;
+        sterilisationQuantity = sterilisation;
         femaleSexChangeQuantity = femaleSexChange;
         maleSexChangeQuantity = maleSexChange;
         noEntrySignQuantity = noEntrySign;
@@ -62,15 +62,15 @@ public class Inventory {
 
 
     public static int getSterilization() {
-        return sterilizationQuantity;
+        return sterilisationQuantity;
     }
     public static void addSterilization() {
-        if (sterilizationQuantity < 5) {
-            sterilizationQuantity += 1;
+        if (sterilisationQuantity < 5) {
+            sterilisationQuantity += 1;
         }
     }
     public static void removeSterilization() {
-        sterilizationQuantity -= 1;
+        sterilisationQuantity -= 1;
     }
 
 

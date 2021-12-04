@@ -5,7 +5,7 @@ class Sterilisation extends Entity {
     private int spreadLimit;
     private String direction;
     private boolean hasSpread;
-    private int timer = 10;
+    private int timer = 15;
 
     public Sterilisation(int[] location, boolean hasSpread) {
         super(location, "Sterilisation.png", "Sterilisation");

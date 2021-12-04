@@ -362,11 +362,11 @@ public class NewMain extends Application {
 			public void handle(MouseEvent event) {
 				sterilizationButton.setX(CANVAS_WIDTH - 50);
 				sterilizationButton.setY(150);
-				//if (Inventory.getSterilization() > 0 && checkLegalTile(getMouseLocation(event))) {
-				//	Inventory.removeSterilization();
-				//	Entity sterilization = new Sterilization(getMouseLocation(event), false);
-				//	sterilization.draw();
-				//}
+				if (Inventory.getSterilization() > 0 && checkLegalTile(getMouseLocation(event))) {
+					Inventory.removeSterilization();
+					Entity sterilisation = new Sterilisation(getMouseLocation(event), false);
+					sterilisation.draw();
+				}
 			}
 		});
 		
@@ -473,7 +473,7 @@ public class NewMain extends Application {
 		Inventory.gasQuantity = 5;
 		Inventory.deathRatQuantity = 5;
 		Inventory.poisonQuantity = 5;
-		Inventory.sterilizationQuantity = 5;
+		Inventory.sterilisationQuantity = 5;
 		Inventory.femaleSexChangeQuantity = 5;
 		Inventory.maleSexChangeQuantity = 5;
 		Inventory.noEntrySignQuantity = 5;
