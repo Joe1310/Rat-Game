@@ -107,12 +107,20 @@ public class AdultRat extends Rat {
     	Entity baby = new BabyRat(100, false, babyLocation, newDirection);
     }
 
+    public void updateRatType() {
+    	setRatType(this.sex + "Rat");
+    }
+    
     public String getSex(){
         return this.sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+    
+    public void setPregnant(boolean pregnant) {
+    	this.isPregnant = pregnant;
     }
 
     public String toString(){

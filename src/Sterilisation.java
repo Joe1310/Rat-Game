@@ -8,14 +8,14 @@ class Sterilisation extends Entity {
     private int timer = 10;
 
     public Sterilisation(int[] location, boolean hasSpread) {
-        super(location, "Sterilization.png", "Sterilisation");
+        super(location, "Sterilisation.png", "Sterilisation");
         this.spreadLimit = 3;
         this.hasSpread = hasSpread;
         this.direction = null;
 
     }
     public Sterilisation(int[] location, int spreadLimit, String direction, boolean hasSpread) {
-        super(location, "Sterilization.png", "Sterilisation");
+        super(location, "Sterilisation.png", "Sterilisation");
         this.spreadLimit = spreadLimit;
         this.hasSpread = hasSpread;
         this.direction = direction;
