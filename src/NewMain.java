@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -162,14 +162,17 @@ public class NewMain extends Application {
 		level2Button.setOnAction(event -> {
 			levelMenuWindow.close();
 			level2();
+			mainTick();
 		});
 		level3Button.setOnAction(event -> {
 			levelMenuWindow.close();
 			level3();
+			mainTick();
 		});
 		level4Button.setOnAction(event -> {
 			levelMenuWindow.close();
 			level4();
+			mainTick();
 		});
 		backButton.setOnAction(event -> {
 			levelMenuWindow.close();
@@ -260,20 +263,26 @@ public class NewMain extends Application {
 		int num = 0;
 		test.scheduleWithFixedDelay(new Runnable() {
 			public void run() {
-				test();
+				if (Rat.getRats().size() == 0) {
+					System.out.println("Win");
+					Platform.runLater(() -> levelStage.close());
+					Entity.getEntities().clear();
+					Rat.getRats().clear();
+					Platform.runLater(() -> win());
+					test.shutdown();
+				}else if (Rat.getRats().size() == Level.getMap().maxRat) {
+					Platform.runLater(() -> levelStage.close());
+					Entity.getEntities().clear();
+					Rat.getRats().clear();
+					Platform.runLater(() -> lose());
+					test.shutdown();
+				}
 			}
 		}, 0, 250, TimeUnit.MILLISECONDS);
 		return num;
 	}
 
-	public void test() {
-		if (Rat.thing == true && Rat.getRats().size() == 0) {
-			System.out.println("Win");
-			System.out.println(Rat.getRats().size());
-			win();
-		}
 
-	}
 
 	/**
 	 *
@@ -288,7 +297,6 @@ public class NewMain extends Application {
 		levelStage.setScene(level1Scene);
 		levelStage.setResizable(false);
 		levelStage.show();
-		test();
 	}
 
 	/**
