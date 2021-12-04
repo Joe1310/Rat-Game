@@ -8,6 +8,7 @@ public class Explosion extends Entity {
     }
 
     public void act() {
+    	System.out.println("Explosion: " + location[0] + " " + location[1]);
     	explodeRats();
     	wait--;
     	if (wait == 0) {
@@ -15,6 +16,7 @@ public class Explosion extends Entity {
     	}
     }
     
+    //NEEDS TO EXPLODE ITEMS TOO
     private void explodeRats() {
 		for (int i = Rat.getRats().size()-1; i > -1; i--) {
 			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
@@ -23,7 +25,6 @@ public class Explosion extends Entity {
 	        }
         }
 	}
-    
     
     public String toString() {
     	return ("Explosion");
