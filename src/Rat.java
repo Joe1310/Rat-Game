@@ -55,24 +55,26 @@ public abstract class Rat extends Entity{
             }
         }
         // Obtain a random direction available.
-        int n = randomize(temp.size());
-        switch (temp.get(n)){
-            case "N":
-                location[1] = location[1] - 1;
-                this.directionFacing = "N";
-                break;
-            case "S":
-                location[1] = location[1] + 1;
-                this.directionFacing = "S";
-                break;
-            case "W":
-                location[0] = location[0] - 1;
-                this.directionFacing = "W";
-                break;
-            case "E":
-                location[0] = location[0] + 1;
-                this.directionFacing = "E";
-                break;
+        if(temp.size() != 0) {
+	        int n = randomize(temp.size());
+	        switch (temp.get(n)){
+	            case "N":
+	                location[1] = location[1] - 1;
+	                this.directionFacing = "N";
+	                break;
+	            case "S":
+	                location[1] = location[1] + 1;
+	                this.directionFacing = "S";
+	                break;
+	            case "W":
+	                location[0] = location[0] - 1;
+	                this.directionFacing = "W";
+	                break;
+	            case "E":
+	                location[0] = location[0] + 1;
+	                this.directionFacing = "E";
+	                break;
+	        }
         }
         updateRatImage();
     }
@@ -123,6 +125,7 @@ public abstract class Rat extends Entity{
 	        	tempLocation[1] = this.location[1];
 	        	tempDirection = "W";
 	        }
+    		
 			for (int j = getEntities().size()-1; j > -1; j--) {
 				if (Arrays.equals(getEntities().get(j).location, tempLocation) && getEntities().get(j).getType().equals("NES")) {
 					((NoEntrySign)getEntities().get(j)).degrade();
@@ -130,6 +133,7 @@ public abstract class Rat extends Entity{
 		        }
 	        }
 	    }
+	    
 	    return directions;
     }
 }

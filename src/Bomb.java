@@ -99,18 +99,18 @@ public class Bomb extends Entity{
     
     private void updateBombImage() {
     	switch(countdown) {
-		case 16:
-			setImageName("Bomb4.png");
-			break;
-		case 12:
-			setImageName("Bomb3.png");
-			break;
-		case 8:
-			setImageName("Bomb2.png");
-			break;
-		case 4:
-			setImageName("Bomb1.png");
-			break;
-    }
+			case 16:
+				setImageName("Bomb4.png");
+				break;
+			case 12:
+				setImageName("Bomb3.png");
+				break;
+			case 8:
+				setImageName("Bomb2.png");
+				break;
+			case 4:
+				setImageName("Bomb1.png");
+				break;
+    	}
     }
 }
