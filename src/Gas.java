@@ -34,7 +34,7 @@ public class Gas extends Entity {
 		for (int i = Rat.getRats().size()-1; i > -1; i--) {
 			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
 					!(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
-				(Rat.getRats().get(i)).damageRat(10);
+				(Rat.getRats().get(i)).damageRat(20);
 	        }
         }
 	}
