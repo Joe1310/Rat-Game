@@ -90,6 +90,10 @@ public abstract class Rat extends Entity{
         return ratType;
     }
     
+    protected void setRatType(String ratType) {
+    	this.ratType = ratType;
+    }
+    
     public void updateRatImage() {
     	setImageName(ratType + directionFacing + ".png");
     }
