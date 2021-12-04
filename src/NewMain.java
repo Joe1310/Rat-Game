@@ -21,6 +21,8 @@ public class NewMain extends Application {
     private static int CANVAS_WIDTH = 1850;
     private static int CANVAS_HEIGHT = 1000;
 
+    public Stage levelStage = new Stage();
+
     private Canvas canvas;
 
 	@Override
@@ -148,22 +150,21 @@ public class NewMain extends Application {
         Button level3Button = new Button("LEVEL 3");
         Button level4Button = new Button("LEVEL 4");
         Button backButton = new Button("BACK");
-        Stage levelStage = new Stage();
         level1Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level1(levelStage);
+            level1();
         });
         level2Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level2(levelStage);
+            level2();
         });
         level3Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level3(levelStage);
+            level3();
         });
         level4Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level4(levelStage);
+            level4();
         });
         backButton.setOnAction(event -> {
             levelMenuWindow.close();
@@ -252,7 +253,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level1(Stage levelStage){
+	public void level1(){
 		CANVAS_WIDTH = 600;
 		CANVAS_HEIGHT = 400;
 		levelStage.setTitle("RAT GAME : LVL1");
@@ -267,7 +268,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-    public void level2(Stage levelStage){
+    public void level2(){
     	CANVAS_WIDTH = 1050;
     	CANVAS_HEIGHT = 800;
         levelStage.setTitle("RAT GAME : LVL2");
@@ -282,7 +283,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level3(Stage levelStage){
+	public void level3(){
 		levelStage.setTitle("RAT GAME : LVL3");
 		Pane root = buildGUI();
 		Scene level3Scene = new Scene(root);
@@ -294,7 +295,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level4(Stage levelStage){
+	public void level4(){
 		levelStage.setTitle("RAT GAME : LVL4");
 		Pane root = buildGUI();
 		Scene level4Scene = new Scene(root);
