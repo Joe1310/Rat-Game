@@ -226,6 +226,7 @@ public class NewMain extends Application {
         Scene level1Scene = new Scene(root);
         drawGame("level.txt");
         level1Stage.setScene(level1Scene);
+        level1Stage.setResizable(false);
         level1Stage.show();
     }
     
@@ -238,6 +239,7 @@ public class NewMain extends Application {
         Scene level1Scene = new Scene(root);
         drawGame("level2.txt");
         level2Stage.setScene(level1Scene);
+        level2Stage.setResizable(false);
         level2Stage.show();
     }
 
