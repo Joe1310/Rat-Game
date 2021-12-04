@@ -9,9 +9,9 @@ public class Level {
 	//Variables
 	 static int parTime;
 	 int remainingTime = 0;
-	 int maxRats;
-	 int itemSpawnRate;
-	 Tile[][] tileLayout;
+	 static int maxRats;
+	 static int itemSpawnRate;
+	 static Tile[][] tileLayout;
 
 	 static Map map;
 	 Inventory inventory;
@@ -274,7 +274,7 @@ public class Level {
 
 
 	//Method saves the ongoing Game using playerID
-	public  void saveCurrent(int playerID) {
+	public static  void saveCurrent(int playerID) {
 
 		String saveFile = playerID + "savedGame.txt";
 		try {
@@ -292,7 +292,7 @@ public class Level {
 			saveGame.write(row + "\n");
 			for (int i = 0 ; i < row; i++){
 				for(int j = 0 ; j < column; j++){
-					saveGame.write(tileLayout[j][i].getTileType());
+					saveGame.write(tileLayout[i][j].getTileType());
 				}
 				saveGame.write("\n");
 			}

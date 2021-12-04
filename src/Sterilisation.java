@@ -46,5 +46,9 @@ class Sterilisation extends Entity {
         	return false;
         }
     }
+    
+    public String toString() {
+    	return (getType() + " " + location[0] + " " + location[1]);
+    }
 
 }

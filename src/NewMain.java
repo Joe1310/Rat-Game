@@ -403,12 +403,14 @@ public class NewMain extends Application {
 				femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 
 		saveButton.setOnMouseClicked(event ->{
-			
+			Level.saveCurrent(1);
 		});
+		
 		gasButton.setOnMouseDragged(event -> {
 			gasButton.setX((int)event.getSceneX()-25);
 			gasButton.setY((int)event.getSceneY()-25);
 		});
+		
 		gasButton.setOnMouseReleased(event -> {
 			gasButton.setX(CANVAS_WIDTH - 50);
 			gasButton.setY(0);
