@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.*;
 
@@ -24,7 +23,7 @@ public class NewMain extends Application {
 
     private Canvas canvas;
 
-    @Override
+	@Override
     public void start(Stage primaryStage) throws IOException {
 
         Stage menuWindow = new Stage();
@@ -72,9 +71,7 @@ public class NewMain extends Application {
             menuWindow.close();
             howToPlay(primaryStage);
         });
-        quitButton.setOnAction(event -> {
-            menuWindow.close();
-        });
+        quitButton.setOnAction(event -> menuWindow.close());
 
         VBox container = new VBox(logoView, MOTD, maRatView, startButton, loadButton, highScoresButton,
 				howToPlayButton, quitButton);
@@ -115,24 +112,24 @@ public class NewMain extends Application {
         text.setPrefHeight(600);
         Button menuButton = new Button("Return");
 
-        menuButton.setOnAction(event -> {
-            howToPlayWindow.close();
-            try {
-                start(primaryStage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+		menuButton.setOnAction(event -> {
+			howToPlayWindow.close();
+			try {
+				start(primaryStage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 
-        VBox container = new VBox(text, menuButton);
+		VBox container = new VBox(text, menuButton);
 
-        //Style container
-        container.setSpacing(15);
-        container.setPadding(new Insets(25));
-        //Set view in window
-        howToPlayWindow.setScene(new Scene(container));
-        //Launch
-        howToPlayWindow.show();
+		//Style container
+		container.setSpacing(15);
+		container.setPadding(new Insets(25));
+		//Set view in window
+		howToPlayWindow.setScene(new Scene(container));
+		//Launch
+		howToPlayWindow.show();
     }
 
     private void highScores(Stage primaryStage) {
@@ -151,21 +148,22 @@ public class NewMain extends Application {
         Button level3Button = new Button("LEVEL 3");
         Button level4Button = new Button("LEVEL 4");
         Button backButton = new Button("BACK");
+        Stage levelStage = new Stage();
         level1Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level1();
+            level1(levelStage);
         });
         level2Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level2();
+            level2(levelStage);
         });
         level3Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level3();
+            level3(levelStage);
         });
         level4Button.setOnAction(event -> {
             levelMenuWindow.close();
-            level4();
+            level4(levelStage);
         });
         backButton.setOnAction(event -> {
             levelMenuWindow.close();
@@ -254,63 +252,59 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level1(){
+	public void level1(Stage levelStage){
 		CANVAS_WIDTH = 600;
 		CANVAS_HEIGHT = 400;
-		Stage level1Stage = new Stage();
-		level1Stage.setTitle("RAT GAME : LVL1");
+		levelStage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI();
 		Scene level1Scene = new Scene(root);
 		drawGame("level.txt");
-		level1Stage.setScene(level1Scene);
-		level1Stage.setResizable(false);
-		level1Stage.show();
+		levelStage.setScene(level1Scene);
+		levelStage.setResizable(false);
+		levelStage.show();
 	}
 
 	/**
 	 *
 	 */
-    public void level2(){
+    public void level2(Stage levelStage){
     	CANVAS_WIDTH = 1050;
     	CANVAS_HEIGHT = 800;
-        Stage level2Stage = new Stage();
-        level2Stage.setTitle("RAT GAME : LVL2");
+        levelStage.setTitle("RAT GAME : LVL2");
         Pane root = buildGUI();
         Scene level2Scene = new Scene(root);
         drawGame("level2.txt");
-        level2Stage.setScene(level2Scene);
-		level2Stage.setResizable(false);
-        level2Stage.show();
+        levelStage.setScene(level2Scene);
+		levelStage.setResizable(false);
+        levelStage.show();
     }
 
 	/**
 	 *
 	 */
-	public void level3(){
-		Stage level3Stage = new Stage();
-		level3Stage.setTitle("RAT GAME : LVL3");
+	public void level3(Stage levelStage){
+		levelStage.setTitle("RAT GAME : LVL3");
 		Pane root = buildGUI();
 		Scene level3Scene = new Scene(root);
 		drawGame("level3.txt");
-		level3Stage.setScene(level3Scene);
-		level3Stage.show();
+		levelStage.setScene(level3Scene);
+		levelStage.show();
 	}
 
 	/**
 	 *
 	 */
-	public void level4(){
-		Stage level4Stage = new Stage();
-		level4Stage.setTitle("RAT GAME : LVL4");
+	public void level4(Stage levelStage){
+		levelStage.setTitle("RAT GAME : LVL4");
 		Pane root = buildGUI();
 		Scene level4Scene = new Scene(root);
 		drawGame("level4.txt");
-		level4Stage.setScene(level4Scene);
-		level4Stage.show();
+		levelStage.setScene(level4Scene);
+		levelStage.show();
 	}
 
 	/**
-	 * @return
+	 * @return return Pane for level stage.
 	 */
     private Pane buildGUI() {
     	setupInventory();
@@ -367,147 +361,115 @@ public class NewMain extends Application {
 		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton, femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 		
 		
-		gasButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				gasButton.setX((int)event.getSceneX()-25);
-				gasButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		gasButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				gasButton.setX(CANVAS_WIDTH - 50);
-				gasButton.setY(0);
-				if (Inventory.getGas() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeGas();
-					Entity gas = new Gas(getMouseLocation(event), false);
-					gas.draw();
-				}
+		gasButton.setOnMouseDragged(event -> {
+			gasButton.setX((int)event.getSceneX()-25);
+			gasButton.setY((int)event.getSceneY()-25);
+		});
+		gasButton.setOnMouseReleased(event -> {
+			gasButton.setX(CANVAS_WIDTH - 50);
+			gasButton.setY(0);
+			if (Inventory.getGas() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeGas();
+				Entity gas = new Gas(getMouseLocation(event), false);
+				gas.draw();
 			}
 		});
 
-		deathRatButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				deathRatButton.setX((int)event.getSceneX()-25);
-				deathRatButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		deathRatButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				deathRatButton.setX(CANVAS_WIDTH - 50);
-				deathRatButton.setY(50);
-				if (Inventory.getDeathRat() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeDeathRat();
-					Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
-					deathRat.draw();
-				}
+		deathRatButton.setOnMouseDragged(event -> {
+			deathRatButton.setX((int)event.getSceneX()-25);
+			deathRatButton.setY((int)event.getSceneY()-25);
+		});
+		deathRatButton.setOnMouseReleased(event -> {
+			deathRatButton.setX(CANVAS_WIDTH - 50);
+			deathRatButton.setY(50);
+			if (Inventory.getDeathRat() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeDeathRat();
+				Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
+				deathRat.draw();
 			}
 		});
 		
-		poisonButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				poisonButton.setX((int)event.getSceneX()-25);
-				poisonButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		poisonButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				poisonButton.setX(CANVAS_WIDTH - 50);
-				poisonButton.setY(100);
-				if (Inventory.getPoison() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removePoison();
-					Entity poison = new Poison(getMouseLocation(event));
-					poison.draw();
-				}
+		poisonButton.setOnMouseDragged(event -> {
+			poisonButton.setX((int)event.getSceneX()-25);
+			poisonButton.setY((int)event.getSceneY()-25);
+		});
+		poisonButton.setOnMouseReleased(event -> {
+			poisonButton.setX(CANVAS_WIDTH - 50);
+			poisonButton.setY(100);
+			if (Inventory.getPoison() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removePoison();
+				Entity poison = new Poison(getMouseLocation(event));
+				poison.draw();
 			}
 		});
 		
-		sterilizationButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				sterilizationButton.setX((int)event.getSceneX()-25);
-				sterilizationButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		sterilizationButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				sterilizationButton.setX(CANVAS_WIDTH - 50);
-				sterilizationButton.setY(150);
-				if (Inventory.getSterilization() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeSterilization();
-					Entity sterilisation = new Sterilisation(getMouseLocation(event));
-					sterilisation.draw();
-				}
+		sterilizationButton.setOnMouseDragged(event -> {
+			sterilizationButton.setX((int)event.getSceneX()-25);
+			sterilizationButton.setY((int)event.getSceneY()-25);
+		});
+		sterilizationButton.setOnMouseReleased(event -> {
+			sterilizationButton.setX(CANVAS_WIDTH - 50);
+			sterilizationButton.setY(150);
+			if (Inventory.getSterilization() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeSterilization();
+				Entity sterilisation = new Sterilisation(getMouseLocation(event));
+				sterilisation.draw();
 			}
 		});
 		
-		femaleSexChangeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				femaleSexChangeButton.setX((int)event.getSceneX()-25);
-				femaleSexChangeButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		femaleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				femaleSexChangeButton.setX(CANVAS_WIDTH - 50);
-				femaleSexChangeButton.setY(200);
-				if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeFemaleSexChange();
-					Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
-					femaleSexChange.draw();
-				}
+		femaleSexChangeButton.setOnMouseDragged(event -> {
+			femaleSexChangeButton.setX((int)event.getSceneX()-25);
+			femaleSexChangeButton.setY((int)event.getSceneY()-25);
+		});
+		femaleSexChangeButton.setOnMouseReleased(event -> {
+			femaleSexChangeButton.setX(CANVAS_WIDTH - 50);
+			femaleSexChangeButton.setY(200);
+			if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeFemaleSexChange();
+				Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
+				femaleSexChange.draw();
 			}
 		});
 		
-		maleSexChangeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				maleSexChangeButton.setX((int)event.getSceneX()-25);
-				maleSexChangeButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		maleSexChangeButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				maleSexChangeButton.setX(CANVAS_WIDTH - 50);
-				maleSexChangeButton.setY(250);
-				if (Inventory.getMaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeMaleSexChange();
-					Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
-					maleSexChange.draw();
-				}
+		maleSexChangeButton.setOnMouseDragged(event -> {
+			maleSexChangeButton.setX((int)event.getSceneX()-25);
+			maleSexChangeButton.setY((int)event.getSceneY()-25);
+		});
+		maleSexChangeButton.setOnMouseReleased(event -> {
+			maleSexChangeButton.setX(CANVAS_WIDTH - 50);
+			maleSexChangeButton.setY(250);
+			if (Inventory.getMaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeMaleSexChange();
+				Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
+				maleSexChange.draw();
 			}
 		});
 		
-		noEntrySignButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				noEntrySignButton.setX((int)event.getSceneX()-25);
-				noEntrySignButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		noEntrySignButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				noEntrySignButton.setX(CANVAS_WIDTH - 50);
-				noEntrySignButton.setY(300);
-				if (Inventory.getNoEntrySign() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeNoEntrySign();
-					Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
-					noEntrySign.draw();
-				}
+		noEntrySignButton.setOnMouseDragged(event -> {
+			noEntrySignButton.setX((int)event.getSceneX()-25);
+			noEntrySignButton.setY((int)event.getSceneY()-25);
+		});
+		noEntrySignButton.setOnMouseReleased(event -> {
+			noEntrySignButton.setX(CANVAS_WIDTH - 50);
+			noEntrySignButton.setY(300);
+			if (Inventory.getNoEntrySign() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeNoEntrySign();
+				Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
+				noEntrySign.draw();
 			}
 		});
 		
-		bombButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {	
-				bombButton.setX((int)event.getSceneX()-25);
-				bombButton.setY((int)event.getSceneY()-25);
-			}
-		});	
-		bombButton.setOnMouseReleased(new EventHandler<MouseEvent>() {		
-			public void handle(MouseEvent event) {
-				bombButton.setX(CANVAS_WIDTH - 50);
-				bombButton.setY(350);
-				if (Inventory.getBomb() > 0 && checkLegalTile(getMouseLocation(event))) {
-					Inventory.removeBomb();
-					Entity bomb = new Bomb(getMouseLocation(event));
-					bomb.draw();
-				}
+		bombButton.setOnMouseDragged(event -> {
+			bombButton.setX((int)event.getSceneX()-25);
+			bombButton.setY((int)event.getSceneY()-25);
+		});
+		bombButton.setOnMouseReleased(event -> {
+			bombButton.setX(CANVAS_WIDTH - 50);
+			bombButton.setY(350);
+			if (Inventory.getBomb() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeBomb();
+				Entity bomb = new Bomb(getMouseLocation(event));
+				bomb.draw();
 			}
 		});
 		
@@ -520,10 +482,8 @@ public class NewMain extends Application {
 		
 		x = ((x-(x%50))/50);
 		y = ((y-(y%50))/50);
-		
-		int[] location = {x,y};
-	
-		return location;
+
+		return new int[]{x,y};
 	}
     
     private boolean checkLegalTile(int[] location) {
