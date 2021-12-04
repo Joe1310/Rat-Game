@@ -2,31 +2,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class Sterilisation extends Entity {
-    private int spreadLimit;
-    private String direction;
-    private boolean hasSpread;
     private int timer = 15;
 
-    public Sterilisation(int[] location, boolean hasSpread) {
+    public Sterilisation(int[] location) {
         super(location, "Sterilisation.png", "Sterilisation");
-        this.spreadLimit = 3;
-        this.hasSpread = hasSpread;
-        this.direction = null;
-
     }
-    public Sterilisation(int[] location, int spreadLimit, String direction, boolean hasSpread) {
+    
+    public Sterilisation(int[] location, int timer) {
         super(location, "Sterilisation.png", "Sterilisation");
-        this.spreadLimit = spreadLimit;
-        this.hasSpread = hasSpread;
-        this.direction = direction;
+        this.timer = timer;
     }
 
     public void act() {
-        steriliseRat();
-        if (!hasSpread && spreadLimit > 0) {
-            spread();
-            hasSpread = true;
-        }
+        steriliseRats();
         disappear();
     }
 
@@ -37,42 +25,25 @@ class Sterilisation extends Entity {
         }
     }
 
-    private void steriliseRat() {
+    private void steriliseRats() {
+    	int[] corner = {this.location[0] - 1, this.location[1] - 1}; //Sets the radius to northwest of the steriliser
         for (int i = Rat.getRats().size()-1; i > -1; i--) {
-            if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
-                    !(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
-                (Rat.getRats().get(i)).ratSterile();
-            }
+        	for(int k = corner[1]; k <= (this.location[1] + 1); k++) {
+        		for(int j = corner[0]; j <= (this.location[0] + 1); j++) {
+        			int [] testLocation = {j, k};
+        			if (checkRat(testLocation, i)) {
+        				Rat.getRats().get(i).sterilise();
+        			}
+        		}
+        	}
         }
     }
-
-    public void spread() {
-        ArrayList<String> directions = Map.getMovementOptions(location[0], location[1]);
-        directions.remove(direction);
-        for (String d : directions) {
-            int[] tempLocation = new int[2];
-            switch(d) {
-                case "N":
-                    tempLocation[0] = location[0];
-                    tempLocation[1] = location[1] - 1;
-                    Entity nSterile = new Sterilisation(tempLocation, spreadLimit - 1, "S", false);
-                    break;
-                case "S":
-                    tempLocation[0] = location[0];
-                    tempLocation[1] = location[1] + 1;
-                    Entity sSterile = new Sterilisation(tempLocation, spreadLimit - 1, "N", false);
-                    break;
-                case "E":
-                    tempLocation[0] = location[0] + 1;
-                    tempLocation[1] = location[1];
-                    Entity eSterile = new Sterilisation(tempLocation, spreadLimit - 1, "W", false);
-                    break;
-                case "W":
-                    tempLocation[0] = location[0] - 1;
-                    tempLocation[1] = location[1];
-                    new Sterilisation(tempLocation, spreadLimit - 1, "E", false);
-                    break;
-            }
+    
+    private boolean checkRat(int[] tempLocation, int index) {
+    	if (Arrays.equals(Rat.getRats().get(index).location, tempLocation)) {
+			return true;
+        } else {
+        	return false;
         }
     }
 

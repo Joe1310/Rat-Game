@@ -82,7 +82,7 @@ public abstract class Rat extends Entity{
         removeEntity();
     }
 
-    protected void ratSterile() {
+    protected void sterilise() {
        sterile = true;
     }
 
