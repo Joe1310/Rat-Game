@@ -255,12 +255,15 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level1(){
+		CANVAS_WIDTH = 600;
+		CANVAS_HEIGHT = 400;
 		Stage level1Stage = new Stage();
 		level1Stage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI();
 		Scene level1Scene = new Scene(root);
 		drawGame("level.txt");
 		level1Stage.setScene(level1Scene);
+		level1Stage.setResizable(false);
 		level1Stage.show();
 	}
 
@@ -276,6 +279,7 @@ public class NewMain extends Application {
         Scene level2Scene = new Scene(root);
         drawGame("level2.txt");
         level2Stage.setScene(level2Scene);
+		level2Stage.setResizable(false);
         level2Stage.show();
     }
 
