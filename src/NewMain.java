@@ -289,7 +289,7 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level1(){
-		CANVAS_WIDTH = 600;
+		CANVAS_WIDTH = 650;
 		CANVAS_HEIGHT = 400;
 		levelStage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI();
@@ -304,7 +304,7 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level2(){
-		CANVAS_WIDTH = 1050;
+		CANVAS_WIDTH = 1100;
 		CANVAS_HEIGHT = 800;
 		levelStage.setTitle("RAT GAME : LVL2");
 		Pane root = buildGUI();
@@ -332,12 +332,13 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level4(){
+		CANVAS_WIDTH = 1200;
+		CANVAS_HEIGHT = 800;
 		levelStage.setTitle("RAT GAME : LVL4");
 		Pane root = buildGUI();
 		Scene level4Scene = new Scene(root);
 		drawGame("level4.txt");
 		levelStage.setScene(level4Scene);
-		levelStage.setResizable(false);
 		levelStage.show();
 	}
 
