@@ -14,14 +14,26 @@ public class AdultRat extends Rat {
     private int timePregnant;
     private int matingCooldown;
 
-    public AdultRat(String sex, int health, boolean sterile, int[] location, String directionFacing, boolean isPregnant){
+    public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile){
     	super(health, sterile, location, directionFacing, (sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
         this.sex = sex;
-        this.isPregnant = isPregnant;
+        this.isPregnant = false;
         this.timeMating = 0;
         this.timePregnant = 0;
         this.babyAmmount = randomize(2) + 2;
         this.matingCooldown = 0;
+    }
+    
+    public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile, boolean pregnant, 
+    			boolean mating, int timePregnant, int timeMating, int matingCooldown, int babyAmmount){
+    	super(health, sterile, location, directionFacing, (sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
+        this.sex = sex;
+        this.isPregnant = pregnant;
+        this.isMating = mating;
+        this.timePregnant = timePregnant;
+        this.timeMating = timeMating;
+        this.matingCooldown = matingCooldown;
+        this.babyAmmount = babyAmmount;
     }
 
     public void act() {
@@ -104,7 +116,7 @@ public class AdultRat extends Rat {
     	babyLocation[1] = this.location[1];
     	String[] directions = {"N","E","S","W"};
     	String newDirection = directions[(randomize(4))];
-    	Entity baby = new BabyRat(100, false, babyLocation, newDirection);
+    	Entity baby = new BabyRat(babyLocation, newDirection, this.sterile);
     }
 
     public void updateRatType() {
@@ -124,6 +136,8 @@ public class AdultRat extends Rat {
     }
 
     public String toString(){
-        return this.sex + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing + " " + sterile + " " + isPregnant;
+        return (this.sex + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing + " " 
+        			+ sterile + " " + isPregnant + " " + isMating + " " + timePregnant + " " + timeMating + " " 
+        				+ matingCooldown + " " + babyAmmount);
     }
 }

@@ -35,4 +35,8 @@ public class NoEntrySign extends Entity {
 				break;
 		}
 	}
+	
+	public String toString() {
+    	return (this.getType() + " " + location[0] + " " + location[1] + " " + health);
+    }
 }

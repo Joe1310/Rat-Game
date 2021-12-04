@@ -19,4 +19,8 @@ public class Poison extends Entity {
 	        }
         }
 	}
+	
+	public String toString() {
+    	return (this.getType() + " " + location[0] + " " + location[1]);
+    }
 }

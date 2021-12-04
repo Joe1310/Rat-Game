@@ -77,22 +77,42 @@ public class Level {
 	//Method reads Game data using Scanner and creates objects
 	public static void readGame(Scanner scan) {
 
-		int aliveRats = scan.nextInt();
+		int entities = scan.nextInt();
 
-		for (int i = 0; i < aliveRats; i ++) {
+		//being changed
+		for (int i = 0; i < entities; i ++) {
 			if(scan.hasNext("D")){
 				MakeDeadRat(scan);
 			} else if(scan.hasNext("B")) {
 				MakeBabyRat(scan);
-			} else {
+			} else if(scan.hasNext("M")) {
 				MakeAdultRat(scan);
+			} else if(scan.hasNext("F")) {
+				MakeAdultRat(scan);
+			} else if(scan.hasNext("DRS")) {
+				MakeDRS(scan);
+			} else if(scan.hasNext("Bomb")) {
+				MakeBomb(scan);
+			} else if(scan.hasNext("Explosion")) {
+				MakeExplosion(scan);
+			} else if(scan.hasNext("NES")) {
+				MakeNES(scan);
+			} else if(scan.hasNext("Gas")) {
+				MakeGas(scan);
+			} else if(scan.hasNext("Poison")) {
+				MakePoison(scan);
+			} else if(scan.hasNext("MSC")) {
+				MakeMSC(scan);
+			} else if(scan.hasNext("FSC")) {
+				MakeFSC(scan);
+			} else if(scan.hasNext("Sterliser")) {
+				MakeSteriliser(scan);
 			}
 		}
 
 
 
 		playerScore = scan.nextInt();
-
 		readLevel(scan);
 
 	}
@@ -100,82 +120,170 @@ public class Level {
 	//Reads Adult Rat and adds it to Entity
 	public static void MakeAdultRat(Scanner scan) {
 
-		String sex;
-		int x, y;
-		int health;
-		String direction;
-		boolean sterile, isPregnant;
-
-		sex = scan.next();
-		x = scan.nextInt();
-		y = scan.nextInt();
+		String sex = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
 		int[] location = {x,y};
-		health = scan.nextInt();
-		direction = scan.next();
-		sterile = scan.nextBoolean();
-		isPregnant = scan.nextBoolean();
-
-		Entity rat = new AdultRat(sex, health, sterile, location, direction, isPregnant);
+		String direction = scan.next();
+		int health = scan.nextInt();
+		boolean sterile = scan.nextBoolean();
+		boolean isPregnant = scan.nextBoolean();
+		boolean isMating = scan.nextBoolean();
+		int timePregnant = scan.nextInt();
+		int timeMating = scan.nextInt();
+		int matingCooldown = scan.nextInt();
+		int babyAmmount = scan.nextInt();
+		
+		Entity rat = new AdultRat(sex, location,  direction, health, sterile, 
+				isPregnant, isMating, timePregnant, timeMating, matingCooldown, babyAmmount);
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Baby Rat
 	public static void MakeBabyRat(Scanner scan) {
 
-		String sex;
-		int x, y;
-		int health;
-		String direction;
-		boolean sterile;
-
 		if(scan.hasNext("BM") || scan.hasNext("BF")) {
-			sex = scan.next();
-			x = scan.nextInt();
-			y = scan.nextInt();
+			String sex = scan.next();
+			int x = scan.nextInt();
+			int y = scan.nextInt();
 			int[] location = {x,y};
-			health = scan.nextInt();
-			direction = scan.next();
-			sterile = scan.nextBoolean();
+			int health = scan.nextInt();
+			String direction = scan.next();
+			boolean sterile = scan.nextBoolean();
 
-			Entity rat = new BabyRat(sex, health, sterile, location, direction);
+			Entity rat = new BabyRat(sex, location, direction, health, sterile);
 		} else {
-			sex = scan.next();
-			x = scan.nextInt();
-			y = scan.nextInt();
+			String sex = scan.next();
+			int x = scan.nextInt();
+			int y = scan.nextInt();
 			int[] location = {x,y};
-			direction = scan.next();
+			String direction = scan.next();
 
-			Entity rat = new BabyRat(sex, 100, false, location, direction);
+			Entity rat = new BabyRat(sex, location, direction, 100, false);
 		}
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Dead Rat
 	public static void MakeDeadRat(Scanner scan) {
 
-		String sex;
-		int x, y;
-		int health;
-		String direction;
-		boolean sterile;
-
-		sex = scan.next();
-		x = scan.nextInt();
-		y = scan.nextInt();
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
 		int[] location = {x,y};
-		health = scan.nextInt();
-		direction = scan.next();
-		sterile = scan.nextBoolean();
+		int health = scan.nextInt();
+		String direction = scan.next();
+		
 
-		Entity rat = new DeathRat(health, sterile, location, direction);
+		Entity rat = new DeathRat(location, direction);
 	}
+	
+	public static void MakeDRS(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		int timer = scan.nextInt();
+		
+		Entity drs = new DeathRatSpawner(location, timer);
+	}
+	
+	public static void MakeBomb(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		int timer = scan.nextInt();
+		
+		Entity bomb = new Bomb(location, timer);
+	}
+	
+	public static void MakeExplosion(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		
+		Entity drs = new Explosion(location);
+	}
+	
+	public static void MakeNES(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		int health = scan.nextInt();
+		
+		Entity drs = new DeathRatSpawner(location, health);
+	}
+	
+	public static void MakeGas(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		int spreadLimit = scan.nextInt();
+		boolean hasSpread = scan.nextBoolean();
+		String direction = scan.next();
+		
+		Entity gas = new Gas(location, spreadLimit, direction, hasSpread);
+	}
+	
+	public static void MakePoison(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		
+		Entity poison = new Poison(location);
+	}
+	
+	public static void MakeMSC(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		
+		Entity msc = new MaleSexChange(location);
+	}
+	
+	public static void MakeFSC(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		
+		Entity fsc = new FemaleSexChange(location);
+	}
+	
+	public static void MakeSteriliser(Scanner scan) {
+
+		String type = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		int timer = scan.nextInt();
+		
+		Entity steriliser = new Sterilisation(location, timer);
+	}
+
 
 	//Method saves the ongoing Game using playerID
 	public static void saveCurrent(String playerID) {
 
 		String saveFile = playerID + "savedGame.txt";
 		try {
-
 			FileWriter saveGame = new FileWriter(saveFile);
-			saveGame.write("Saved Game Data Here.");
+			saveGame.write(Entity.getEntities().size() +"\n");
+			for (Entity ent : Entity.getEntities()) {
+				System.out.println(ent + "\n");
+			}
 			saveGame.close();
 
 		} catch (IOException e) {

@@ -4,13 +4,13 @@ public class DeathRat extends Rat {
 	
     private int killCount;
     
-    public DeathRat(int health, boolean sterile, int[] location, String directionFacing) {
-        super(health, sterile, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+    public DeathRat(int[] location, String directionFacing) {
+        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
         killCount = 0;
     }
     
-    public DeathRat(int health, boolean sterile, int[] location, String directionFacing, int killCount) {
-        super(health, sterile, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+    public DeathRat(int[] location, String directionFacing, int health, int killCount) {
+        super(health, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
         this.killCount = killCount;
     }
     
@@ -35,6 +35,6 @@ public class DeathRat extends Rat {
     }
 
     public String toString() {
-        return "D" + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing;
+        return "D" + " " + this.location[0] + " " + this.location[1] + " " + directionFacing + " " + killCount;
     }
 }

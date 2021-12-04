@@ -96,7 +96,6 @@ public class Bomb extends Entity{
     	}
     }
     
-    
     private void updateBombImage() {
     	switch(countdown) {
 			case 16:
@@ -112,5 +111,9 @@ public class Bomb extends Entity{
 				setImageName("Bomb1.png");
 				break;
     	}
+    }
+    
+    public String toString() {
+    	return (this.getType() + " " + location[0] + " " + location[1] + " " + countdown);
     }
 }
