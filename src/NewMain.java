@@ -158,6 +158,7 @@ public class NewMain extends Application {
 			levelMenuWindow.close();
 			level1();
 			mainTick();
+
 		});
 		level2Button.setOnAction(event -> {
 			levelMenuWindow.close();
@@ -213,6 +214,7 @@ public class NewMain extends Application {
 		Stage winScreen = new Stage();
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
+		Label scoreTitle = new Label("Score: " + Level.getLevelScore());
 		Button menuButton = new Button("Main Menu");
 
 		menuButton.setOnAction(event -> {
@@ -223,7 +225,7 @@ public class NewMain extends Application {
 				e.printStackTrace();
 			}
 		});
-		VBox container = new VBox(title, menuButton);
+		VBox container = new VBox(title, scoreTitle, menuButton);
 		//Style container
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
@@ -258,6 +260,7 @@ public class NewMain extends Application {
 		loseScreen.show();
 	}
 
+
 	public int mainTick() {
 		ScheduledExecutorService test = Executors.newScheduledThreadPool(1);
 		int num = 0;
@@ -281,8 +284,6 @@ public class NewMain extends Application {
 		}, 0, 250, TimeUnit.MILLISECONDS);
 		return num;
 	}
-
-
 
 	/**
 	 *
@@ -318,8 +319,6 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level3(){
-		CANVAS_WIDTH = 900;
-		CANVAS_HEIGHT = 500;
 		levelStage.setTitle("RAT GAME : LVL3");
 		Pane root = buildGUI();
 		Scene level3Scene = new Scene(root);
@@ -332,8 +331,6 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level4(){
-		CANVAS_WIDTH = 1550;
-		CANVAS_HEIGHT = 800;
 		levelStage.setTitle("RAT GAME : LVL4");
 		Pane root = buildGUI();
 		Scene level4Scene = new Scene(root);
@@ -404,7 +401,7 @@ public class NewMain extends Application {
 				femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 
 		saveButton.setOnMouseClicked(event ->{
-			Level.saveCurrent(1);
+			
 		});
 		gasButton.setOnMouseDragged(event -> {
 			gasButton.setX((int)event.getSceneX()-25);

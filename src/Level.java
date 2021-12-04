@@ -7,21 +7,21 @@ import java.util.Scanner;
 public class Level {
 
 	//Variables
-	static int parTime;
-	static int remainingTime = 0;
-	static int maxRats;
-	static int itemSpawnRate;
-	static Tile[][] tileLayout;
+	 static int parTime;
+	 int remainingTime = 0;
+	 int maxRats;
+	 int itemSpawnRate;
+	 Tile[][] tileLayout;
 
-	static Map map;
-	static Inventory inventory;
-	static String items;
-	static int playerScore = 0;
-	static int levelScore = 0;
+	 static Map map;
+	 Inventory inventory;
+	 String items;
+	 int playerScore = 0;
+	 static int levelScore = 0;
 
 	//Constructor
 	public Level(String filename) {
-
+		levelScore = 0;
 		File file = new File(filename);
 		Scanner scan = null;
 		try {
@@ -39,7 +39,7 @@ public class Level {
 	}
 
 	//Reads fresh level data
-	public static void readFreshLevel(Scanner scan) {
+	public  void readFreshLevel(Scanner scan) {
 
 		int bots = scan.nextInt();
 		for(int k = 0; k < bots; k ++) {
@@ -50,7 +50,7 @@ public class Level {
 	}
 
 	//Method reads Level data and creates MAP
-	public static void readLevel(Scanner scan) {
+	public  void readLevel(Scanner scan) {
 
 		int row, column;
 		String line;
@@ -74,7 +74,7 @@ public class Level {
 	}
 
 	//Method reads Game data using Scanner and creates objects
-	public static void readGame(Scanner scan) {
+	public  void readGame(Scanner scan) {
 
 		int entities = scan.nextInt();
 
@@ -117,7 +117,7 @@ public class Level {
 	}
 
 	//Reads Adult Rat and adds it to Entity
-	public static void MakeAdultRat(Scanner scan) {
+	public  void MakeAdultRat(Scanner scan) {
 
 		String sex = scan.next();
 		int x = scan.nextInt();
@@ -138,7 +138,7 @@ public class Level {
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Baby Rat
-	public static void MakeBabyRat(Scanner scan) {
+	public  void MakeBabyRat(Scanner scan) {
 
 		if(scan.hasNext("BM") || scan.hasNext("BF")) {
 			String sex = scan.next();
@@ -162,7 +162,7 @@ public class Level {
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Dead Rat
-	public static void MakeDeadRat(Scanner scan) {
+	public  void MakeDeadRat(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -175,7 +175,7 @@ public class Level {
 		Entity rat = new DeathRat(location, direction);
 	}
 	
-	public static void MakeDRS(Scanner scan) {
+	public  void MakeDRS(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -186,7 +186,7 @@ public class Level {
 		Entity drs = new DeathRatSpawner(location, timer);
 	}
 	
-	public static void MakeBomb(Scanner scan) {
+	public  void MakeBomb(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -197,7 +197,7 @@ public class Level {
 		Entity bomb = new Bomb(location, timer);
 	}
 	
-	public static void MakeExplosion(Scanner scan) {
+	public  void MakeExplosion(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -207,7 +207,7 @@ public class Level {
 		Entity drs = new Explosion(location);
 	}
 	
-	public static void MakeNES(Scanner scan) {
+	public  void MakeNES(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -218,7 +218,7 @@ public class Level {
 		Entity drs = new DeathRatSpawner(location, health);
 	}
 	
-	public static void MakeGas(Scanner scan) {
+	public  void MakeGas(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -231,7 +231,7 @@ public class Level {
 		Entity gas = new Gas(location, spreadLimit, direction, hasSpread);
 	}
 	
-	public static void MakePoison(Scanner scan) {
+	public  void MakePoison(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -241,7 +241,7 @@ public class Level {
 		Entity poison = new Poison(location);
 	}
 	
-	public static void MakeMSC(Scanner scan) {
+	public  void MakeMSC(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -251,7 +251,7 @@ public class Level {
 		Entity msc = new MaleSexChange(location);
 	}
 	
-	public static void MakeFSC(Scanner scan) {
+	public  void MakeFSC(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -261,7 +261,7 @@ public class Level {
 		Entity fsc = new FemaleSexChange(location);
 	}
 	
-	public static void MakeSteriliser(Scanner scan) {
+	public  void MakeSteriliser(Scanner scan) {
 
 		String type = scan.next();
 		int x = scan.nextInt();
@@ -274,7 +274,7 @@ public class Level {
 
 
 	//Method saves the ongoing Game using playerID
-	public static void saveCurrent(int playerID) {
+	public  void saveCurrent(int playerID) {
 
 		String saveFile = playerID + "savedGame.txt";
 		try {
@@ -305,19 +305,34 @@ public class Level {
 	}
 
 	//Get methods
-	static Map getMap() {
+	 static Map getMap() {
 		return map;
 	}
 
-	static int getItemSpawnRate() {
+	 int getItemSpawnRate() {
 		return itemSpawnRate;
 	}
 
-	static int getLevelScore() {
+	public static void addScore() {
+		levelScore = levelScore + 10;
+	}
+
+	public static void score() {
+		int bonus = Level.parTime - Map.count;
+		if(bonus < 0) {
+			bonus = 0;
+		}
+
+		levelScore = levelScore + bonus;
+
+	}
+
+	 static int getLevelScore() {
+		score();
 		return levelScore;
 	}
 
-	static int getPlayerScore() {
+	 int getPlayerScore() {
 		return playerScore;
 	}
 }

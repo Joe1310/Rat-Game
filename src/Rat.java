@@ -10,7 +10,6 @@ public abstract class Rat extends Entity{
     protected String directionFacing;
     protected static ArrayList<Rat> rats = new ArrayList<Rat>();
     private String ratType;
-    public static boolean thing = true;
 
     public Rat(int health, boolean sterile, int[] location, String directionFacing, String image, String ratType){
         super(location, image, "Rat");
@@ -84,7 +83,7 @@ public abstract class Rat extends Entity{
     protected void ratDeath() {
         rats.remove(this);
         removeEntity();
-        thing = true;
+        Level.addScore();
     }
 
 
