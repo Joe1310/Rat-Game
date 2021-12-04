@@ -42,7 +42,6 @@ class Sterilisation extends Entity {
             if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
                     !(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
                 (Rat.getRats().get(i)).ratSterile();
-                removeEntity();
             }
         }
     }
