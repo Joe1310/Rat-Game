@@ -320,7 +320,7 @@ public class NewMain extends Application {
 		root.setCenter(canvas);
 		
 		
-		Image gasImg = new Image("Gas2.png");
+		Image gasImg = new Image("Gas.png");
 		ImageView gasButton = new ImageView(gasImg);
 		gasButton.setX(CANVAS_WIDTH - 50);
 		gasButton.setY(0);
@@ -335,7 +335,7 @@ public class NewMain extends Application {
 		poisonButton.setX(CANVAS_WIDTH - 50);
 		poisonButton.setY(100);
 		
-		Image sterilizationImg = new Image("Sterilization.png");
+		Image sterilizationImg = new Image("Sterilisation.png");
 		ImageView sterilizationButton = new ImageView(sterilizationImg);
 		sterilizationButton.setX(CANVAS_WIDTH - 50);
 		sterilizationButton.setY(150);
