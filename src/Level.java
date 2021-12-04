@@ -287,7 +287,7 @@ public class Level {
 			saveGame.write(maxRats + "\n");
 			saveGame.write(itemSpawnRate + "\n");
 			int column = tileLayout[0].length;
-			int row = tileLayout[0].length;
+			int row = tileLayout[1].length;
 			saveGame.write(column + " ");
 			saveGame.write(row + "\n");
 			for (int i = 0 ; i < row; i++){
