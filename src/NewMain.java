@@ -368,10 +368,10 @@ public class NewMain extends Application {
 		poisonButton.setX(CANVAS_WIDTH - 50);
 		poisonButton.setY(100);
 
-		Image sterilizationImg = new Image("Sterilisation.png");
-		ImageView sterilizationButton = new ImageView(sterilizationImg);
-		sterilizationButton.setX(CANVAS_WIDTH - 50);
-		sterilizationButton.setY(150);
+		Image sterilisationImg = new Image("Sterilisation.png");
+		ImageView sterilisationButton = new ImageView(sterilisationImg);
+		sterilisationButton.setX(CANVAS_WIDTH - 50);
+		sterilisationButton.setY(150);
 
 		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
 		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
@@ -396,11 +396,11 @@ public class NewMain extends Application {
 		Button saveButton = new Button("SAVE");
 		root.setBottom(saveButton);
 
-		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilizationButton,
+		root.getChildren().addAll(gasButton, deathRatButton, poisonButton, sterilisationButton,
 				femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 
 		saveButton.setOnMouseClicked(event ->{
-			System.out.println("save");
+			Level.saveCurrent(1);
 		});
 		gasButton.setOnMouseDragged(event -> {
 			gasButton.setX((int)event.getSceneX()-25);
@@ -444,13 +444,13 @@ public class NewMain extends Application {
 			}
 		});
 
-		sterilizationButton.setOnMouseDragged(event -> {
-			sterilizationButton.setX((int)event.getSceneX()-25);
-			sterilizationButton.setY((int)event.getSceneY()-25);
+		sterilisationButton.setOnMouseDragged(event -> {
+			sterilisationButton.setX((int)event.getSceneX()-25);
+			sterilisationButton.setY((int)event.getSceneY()-25);
 		});
-		sterilizationButton.setOnMouseReleased(event -> {
-			sterilizationButton.setX(CANVAS_WIDTH - 50);
-			sterilizationButton.setY(150);
+		sterilisationButton.setOnMouseReleased(event -> {
+			sterilisationButton.setX(CANVAS_WIDTH - 50);
+			sterilisationButton.setY(150);
 			if (Inventory.getSterilisation() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeSterilisation();
 				Entity sterilisation = new Sterilisation(getMouseLocation(event));

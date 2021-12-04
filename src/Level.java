@@ -12,7 +12,6 @@ public class Level {
 	static int maxRats;
 	static int itemSpawnRate;
 	static Tile[][] tileLayout;
-	static int[] arrayOfLocation = null;
 
 	static Map map;
 	static Inventory inventory;
@@ -275,14 +274,27 @@ public class Level {
 
 
 	//Method saves the ongoing Game using playerID
-	public static void saveCurrent(String playerID) {
+	public static void saveCurrent(int playerID) {
 
 		String saveFile = playerID + "savedGame.txt";
 		try {
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(Entity.getEntities().size() +"\n");
 			for (Entity ent : Entity.getEntities()) {
-				System.out.println(ent + "\n");
+				saveGame.write(ent + "\n");
+			}
+			saveGame.write(parTime + "\n");
+			saveGame.write(maxRats + "\n");
+			saveGame.write(itemSpawnRate + "\n");
+			int column = tileLayout[0].length;
+			int row = tileLayout[1].length;
+			saveGame.write(column + " ");
+			saveGame.write(row + "\n");
+			for (int i = 0 ; i < row; i++){
+				for(int j = 0 ; j < column; j++){
+					saveGame.write(tileLayout[j][i].getTileType());
+				}
+				saveGame.write("\n");
 			}
 			saveGame.close();
 
