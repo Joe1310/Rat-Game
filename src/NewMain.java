@@ -451,8 +451,8 @@ public class NewMain extends Application {
 		sterilizationButton.setOnMouseReleased(event -> {
 			sterilizationButton.setX(CANVAS_WIDTH - 50);
 			sterilizationButton.setY(150);
-			if (Inventory.getSterilization() > 0 && checkLegalTile(getMouseLocation(event))) {
-				Inventory.removeSterilization();
+			if (Inventory.getSterilisation() > 0 && checkLegalTile(getMouseLocation(event))) {
+				Inventory.removeSterilisation();
 				Entity sterilisation = new Sterilisation(getMouseLocation(event));
 				sterilisation.draw();
 			}
