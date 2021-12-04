@@ -75,4 +75,9 @@ public class Gas extends Entity {
 			}		
 		}
 	}
+	
+	public String toString() {
+    	return (this.getType() + " " + location[0] + " " + location[1] + " " + spreadLimit 
+    			+ " " + hasSpread + " " + direction);
+    }
 }

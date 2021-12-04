@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class MaleSexChange extends Entity {
 	
 	public MaleSexChange(int[] location) {
-		super(location, "MaleSexChange.png", "MSexChange");
+		super(location, "MaleSexChange.png", "MSC");
 	}
 	
 	public void act() {
@@ -17,5 +17,9 @@ public class MaleSexChange extends Entity {
 	        }
         }
 	}
+	
+	public String toString() {
+    	return (this.getType() + " " + location[0] + " " + location[1]);
+    }
 }
 

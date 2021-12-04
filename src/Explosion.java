@@ -35,6 +35,6 @@ public class Explosion extends Entity {
     }
     
     public String toString() {
-    	return ("Explosion");
+    	return (this.getType() + " " + location[0] + " " + location[1]);
     }
 }

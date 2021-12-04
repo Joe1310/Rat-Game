@@ -5,11 +5,11 @@ class Sterilisation extends Entity {
     private int timer = 15;
 
     public Sterilisation(int[] location) {
-        super(location, "Sterilisation.png", "Sterilisation");
+        super(location, "Sterilisation.png", "Steriliser");
     }
     
     public Sterilisation(int[] location, int timer) {
-        super(location, "Sterilisation.png", "Sterilisation");
+        super(location, "Sterilisation.png", "Steriliser");
         this.timer = timer;
     }
 
