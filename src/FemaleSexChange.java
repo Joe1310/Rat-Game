@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class FemaleSexChange extends Entity {
 	
 	public FemaleSexChange(int[] location) {
@@ -5,11 +7,13 @@ public class FemaleSexChange extends Entity {
 	}
 	
 	public void act() {
-		//for (Rat rat : Rat.getRats()) {
-		//	if (rat.location == this.location && rat.getRatType() == "adult") {
-		//		((AdultRat)rat).setSex("f");
-		//		removeEntity();
-		//	}
-		//}
+		for (int i = Rat.getRats().size()-1; i > -1; i--) {
+			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
+					((Rat.getRats().get(i).getRatType().equals("FRat")) || (Rat.getRats().get(i).getRatType().equals("MRat")))) {
+				((AdultRat)Rat.getRats().get(i)).setSex("F");
+				((AdultRat)Rat.getRats().get(i)).updateRatType();
+				removeEntity();
+	        }
+        }
 	}
 }
