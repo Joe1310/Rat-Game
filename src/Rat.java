@@ -3,18 +3,12 @@ import java.util.Random;
 import java.util.Arrays;
 
 /**
- * <p> 1. File name: Rat.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Rat behavior extension of Entity</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
+ * Class to model a Rat entity.
+ *
  * @author Nick, Elliot
  * @version 2.0
  */
-
 public abstract class Rat extends Entity{
-
     public static int wait;
     protected static ArrayList<Rat> rats = new ArrayList<Rat>();
     protected int health;
@@ -23,13 +17,12 @@ public abstract class Rat extends Entity{
     private String ratType;
 
     /**
-     * AdultRat constructor with some inputs and initializing variables
-     * and adds the rat to the array list of all rats and passes location,
-     * image and rat type to the super class entity.
-     * @param location location of the rat
-     * @param directionFacing direction the rat is currently facing
-     * @param health current health of the rat
-     * @param sterile if rat is sterile or not
+     * Constructor to create a Rat entity.
+     *
+     * @param location Location of the rat
+     * @param directionFacing Direction the rat is currently facing
+     * @param health Current health of the rat
+     * @param sterile If rat is sterile or not
      */
     public Rat(int health, boolean sterile, int[] location, String directionFacing, String image, String ratType){
         super(location, image, "Rat");
@@ -38,13 +31,13 @@ public abstract class Rat extends Entity{
         this.sterile = sterile;
         this.directionFacing = directionFacing;
         rats.add(this);
-
     }
 
     /**
-     * returns a randome number between 0 and the passed int.
-     * @param i is the range for the random number from 0 to i
-     * @return Int random value
+     * Method to return a random number between 0 and the passed int.
+     *
+     * @param i The range for the random number from 0 to i
+     * @return Returns a random Int value
      */
     public int randomize(int i){
         //random function that takes in the range
@@ -53,15 +46,14 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * abstract method called every tick
+     * Abstract method to complete an action every tick
      */
     public abstract void act();
 
     /**
-     * When called removes the parameter damage from health and if the health is less than
-     * or equal to 0 it calls ratDeath() to kill the rat.
-     * @param damage hte damage that needs to be removed from health
-     * <p>has side-effect</p>
+     * Method to damage the rat for a given amount of damage.
+     *
+     * @param damage amount of health the rat is to be damaged for.
      */
     public void damageRat(int damage) {
         //removes the damage from the health
@@ -72,8 +64,13 @@ public abstract class Rat extends Entity{
         }
     }
 
-    public String getOpositeDirection() {
-        //removes the oposite direction so that the rat doesn't go back on itself
+    /**
+     * Method to get the opposite of the direction the rat is facing.
+     *
+     * @return opposite direction to what the rat is already facing.
+     */
+    public String getOppositeDirection() {
+        //removes the opposite direction so that the rat doesn't go back on itself
         //unless the rat is at a dead end
         if (directionFacing.equals("E")){
             return ("W");
@@ -87,19 +84,16 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * move() gets the moment options from map fot the tile that the rat is on and picks a random one of those to
-     * change location to, it also removes the opposite direction to the one its facing unless its at a dead end
-     * it also removes any possible directions with a no entry sign on them.
-     * after picking a random direction the method then changes the direction facing to the correct
-     * direction based of the way it just moved
-     * <p>has side-effect</p>
+     * Method to get the possible movement options for the rat and pick a random one for the rat to move to,
+     * only choosing the way it came from if it is the only option the rat has.
+     * Then makes sure the rat has the correct image based on the direction it just moved.
      */
     public void move() {
         // location[0] is the x coord and location[1] is the y coord
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]);
         temp = checkNoEntry(temp);
         for (int i = temp.size()-1; i >= 0; i--) {
-            if (temp.get(i).equals(getOpositeDirection()) && temp.size() > 1){
+            if (temp.get(i).equals(getOppositeDirection()) && temp.size() > 1){
                 temp.remove(temp.get(i));
             }
         }
@@ -129,9 +123,7 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * ratDeath() when called removes that rat from the array list of rats and then removes the entity from the game
-     * and then adds to the score unless the rat was a death rat
-     * <p>has side-effect</p>
+     * Method to remove rat entity.
      */
     protected void ratDeath() {
         //removes a rat if its been killed and adds to the score
@@ -144,34 +136,30 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * sterilise() sets sterile to true.
-     * <p>has side-effect</p>
+     * Method to set the rat to sterile.
      */
     protected void sterilise() {
        sterile = true;
     }
 
     /**
-     * gets the rat type
-     * @return String ratType
+     * Method to get the rat type.
+     *
+     * @return Returns rat type.
      */
     public String getRatType() {
         return ratType;
     }
 
     /**
-     * sets the type of the rat
-     * @param ratType String of the rat type i.e "DeathRat"
-     * <p>has side-effect</p>
+     * Method to set the type of rat.
      */
     protected void setRatType(String ratType) {
     	this.ratType = ratType;
     }
 
     /**
-     * updateRatImage() calls the setImageName() in entity by using the Direction facing and the rat type to construct
-     * the uniform image naming system.
-     * <p>has side-effects</p>
+     * Method to update the rat image dependant on the way the rat is facing.
      */
     public void updateRatImage() {
         //creates the rat image name
@@ -179,20 +167,19 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * gets the array list of rats
-     * @return rats: arrayList of all rat objects in the game
+     * Method to get the array list of rats.
+     *
+     * @return Returns arrayList of all rat objects in the game.
      */
     protected static ArrayList<Rat> getRats() {
         return rats;
     }
 
     /**
-     * checkNoEntry() gets called every time the rat moves, it check's every direction
-     * passed to it to see if theirs a no entry sign on it, if the there is it removes the
-     * direction from the array list and degrades the no entry sign.
-     * @param directions an array list of all possible moment option from that location
-     * @return amended list of directions
-     * <p>has side-effect</p>
+     * Method to check if one of the movement options the rat has contains a NoEntrySign and gets rid of these options.
+     *
+     * @param directions an array list of all possible moment option from that location.
+     * @return Return amended list of directions.
      */
     private ArrayList<String> checkNoEntry(ArrayList<String> directions) {
     	int[] tempLocation = new int[2];
