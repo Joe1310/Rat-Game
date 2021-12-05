@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Class to get the message of the day from the given website URL by decoding the result of a GET request to the website
  * and returning the result.
  *
- * @author Patel, Joe
+ * @author Patel
  * @version 1.0
  */
 public class Message {
