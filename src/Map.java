@@ -39,7 +39,7 @@ public class Map {
     /**
      * Constructor to create a Map object
      *
-     * @param tileLayout Layout of tiles in the map.
+     * @param tileLayout Layout of Tile objects in the map.
      * @param x Number of rows.
      * @param y Number of columns.
      * @param maxRat Maximum number of rats before the game is lost.
