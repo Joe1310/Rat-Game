@@ -43,17 +43,19 @@ public class Level {
 			e.printStackTrace();
 		}
 		
-		if(filename.contains("level")) {
-			if(filename.contains("2")) {
+		if (filename.contains("SavedGame")) {
+			readGame(scan);
+		} else {
+			if(filename.contains("1")) {
+				levelNumber = 1;
+			} else if(filename.contains("2")) {
 				levelNumber = 2;
 			} else if(filename.contains("3")) {
 				levelNumber = 3;
-			} else if(filename.contains("4")) {
+			} else {
 				levelNumber = 4;
 			}
 			readFreshLevel(scan);
-		} else {
-			readGame(scan);
 		}
 	}
 
@@ -101,7 +103,7 @@ public class Level {
 		for (int i = 0; i < entities; i ++) {
 			if(scan.hasNext("D")){
 				MakeDeadRat(scan);
-			} else if(scan.hasNext("B")) {
+			} else if(scan.hasNext("BF") || scan.hasNext("BM")) {
 				MakeBabyRat(scan);
 			} else if(scan.hasNext("M")) {
 				MakeAdultRat(scan);
@@ -123,15 +125,13 @@ public class Level {
 				MakeMSC(scan);
 			} else if(scan.hasNext("FSC")) {
 				MakeFSC(scan);
-			} else if(scan.hasNext("Sterliser")) {
+			} else if(scan.hasNext("Steriliser")) {
 				MakeSteriliser(scan);
 			}
 		}
-		
 		levelNumber = scan.nextInt();
 		levelScore = scan.nextInt();
 		readLevel(scan);
-
 	}
 
 	//Reads Adult Rat and adds it to Entity
@@ -156,10 +156,7 @@ public class Level {
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Baby Rat
-	public  void MakeBabyRat(Scanner scan) {
-		if (scan.hasNext("B")) {
-			scan.next();
-		}
+	public void MakeBabyRat(Scanner scan) {
 		String sex = scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
@@ -285,7 +282,7 @@ public class Level {
 	//Method saves the ongoing Game using playerID
 	public static void saveCurrent() {
 
-		String saveFile = NewMain.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
+		String saveFile = "src/saves/" + NewMain.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
 		try {
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(Entity.getEntities().size() +"\n");

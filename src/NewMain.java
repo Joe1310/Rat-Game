@@ -339,7 +339,7 @@ public class NewMain extends Application {
 				level4();
 				mainTick();
 			});
-		} if (new File(currentPlayer.getPlayerName() + "SavedGame.txt").exists()) {
+		} if (new File("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt").exists()) {
 			Button loadSavedButton = new Button("LOAD LAST SAVE");
 			container.getChildren().add(loadSavedButton);
 			loadSavedButton.setOnAction(event -> {
@@ -478,7 +478,7 @@ public class NewMain extends Application {
 		levelStage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI();
 		Scene level1Scene = new Scene(root);
-		drawGame("level.txt");
+		drawGame("src/levels/level.txt");
 		levelStage.setScene(level1Scene);
 		levelStage.setResizable(false);
 		levelStage.show();
@@ -494,7 +494,7 @@ public class NewMain extends Application {
 		levelStage.setTitle("RAT GAME : LVL2");
 		Pane root = buildGUI();
 		Scene level2Scene = new Scene(root);
-		drawGame("level2.txt");
+		drawGame("src/levels/level2.txt");
 		levelStage.setScene(level2Scene);
 		levelStage.setResizable(false);
 		levelStage.show();
@@ -510,7 +510,7 @@ public class NewMain extends Application {
 		levelStage.setTitle("RAT GAME : LVL3");
 		Pane root = buildGUI();
 		Scene level3Scene = new Scene(root);
-		drawGame("level3.txt");
+		drawGame("src/levels/level3.txt");
 		levelStage.setScene(level3Scene);
 		levelStage.setResizable(false);
 		levelStage.show();
@@ -525,7 +525,7 @@ public class NewMain extends Application {
 		levelStage.setTitle("RAT GAME : LVL4");
 		Pane root = buildGUI();
 		Scene level4Scene = new Scene(root);
-		drawGame("level4.txt");
+		drawGame("src/levels/level4.txt");
 		levelStage.setScene(level4Scene);
 		levelStage.show();
 	}
@@ -536,7 +536,7 @@ public class NewMain extends Application {
 		levelStage.setTitle("RAT GAME : SAVED LEVEL");
 		Pane root = buildGUI();
 		Scene savedlevelScene = new Scene(root);
-		drawGame(currentPlayer.getPlayerName() + "savedGame.txt");
+		drawGame("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
 		levelStage.setScene(savedlevelScene);
 		levelStage.show();
 	}

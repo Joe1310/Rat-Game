@@ -1,9 +1,9 @@
 3
-M 6 1 E 100 false false false 0 0 0 2
-D 6 1 W 0
-NES 8 5 5
-1
-10
+BM 8 3 S 100 false
+BF 2 3 N 100 false
+Steriliser 8 4 12
+4
+0
 300
 10
 5
