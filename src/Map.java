@@ -9,7 +9,6 @@
  * @version 2.0
  */
 
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
@@ -106,8 +105,8 @@ public class Map {
         int tick = 0;
         exec.scheduleWithFixedDelay(new Runnable() {
             public void run() {
-            	drawCounter();
-            	RenderBar.drawProgressBar(gc, column * 50, row * 50);
+                drawCounter();
+                RenderBar.drawProgressBar(gc, column * 50, row * 50);
                 ArrayList<Entity> ents = Entity.getEntities();
                 int maxEntities = ents.size();
                 tileOut(Map.gc); //Remove this too
@@ -118,15 +117,15 @@ public class Map {
                 tunnelOut(Map.gc);
                 //for loop for acting
                 for (int i = maxEntities-1; i >= 0; i--) {
-                	if (ents.size() > 0) {
-                		ents.get(i).act();
-                	}
-                	if (i > Entity.getEntities().size()) {
-                		i = Entity.getEntities().size();
-                	}
+                    if (ents.size() > 0) {
+                        ents.get(i).act();
+                    }
+                    if (i > Entity.getEntities().size()) {
+                        i = Entity.getEntities().size();
+                    }
                 }
                 if (Rat.wait == 1) {
-                	Rat.wait--;
+                    Rat.wait--;
                 } else {
                     Rat.wait = 1;
                 }
@@ -152,15 +151,15 @@ public class Map {
      * Method to draw the item counters to the screen.
      */
     public void drawCounter() {
-    	gc.clearRect(((column + 1) * 50), 0, 50, 400);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getGas())+".png"),((column + 1) * 50), 0);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getDeathRat())+".png"),((column + 1) * 50), 50);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getPoison())+".png"),((column + 1) * 50), 100);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getSterilisation())+".png"),((column + 1) * 50), 150);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getFemaleSexChange())+".png"),((column + 1) * 50), 200);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getMaleSexChange())+".png"),((column + 1) * 50), 250);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getNoEntrySign())+".png"),((column + 1) * 50), 300);
-    	gc.drawImage(new Image(Integer.toString(Inventory.getBomb())+".png"),((column + 1) * 50), 350);
+        gc.clearRect(((column + 1) * 50), 0, 50, 400);
+        gc.drawImage(new Image(Integer.toString(Inventory.getGas())+".png"),((column + 1) * 50), 0);
+        gc.drawImage(new Image(Integer.toString(Inventory.getDeathRat())+".png"),((column + 1) * 50), 50);
+        gc.drawImage(new Image(Integer.toString(Inventory.getPoison())+".png"),((column + 1) * 50), 100);
+        gc.drawImage(new Image(Integer.toString(Inventory.getSterilisation())+".png"),((column + 1) * 50), 150);
+        gc.drawImage(new Image(Integer.toString(Inventory.getFemaleSexChange())+".png"),((column + 1) * 50), 200);
+        gc.drawImage(new Image(Integer.toString(Inventory.getMaleSexChange())+".png"),((column + 1) * 50), 250);
+        gc.drawImage(new Image(Integer.toString(Inventory.getNoEntrySign())+".png"),((column + 1) * 50), 300);
+        gc.drawImage(new Image(Integer.toString(Inventory.getBomb())+".png"),((column + 1) * 50), 350);
     }
 
     /**
@@ -169,18 +168,18 @@ public class Map {
      * @param grc Graphics Context for the map.
      */
     public static void setGC(GraphicsContext grc) {
-    	gc = grc;
+        gc = grc;
     }
 
     /**
-     * Method to get the tile type of a specific tile.
+     * Method to get the tile type of specific tile.
      *
      * @param x The x coordinate of the tile.
      * @param y The y coordinate of the tile.
      * @return Returns the tile type of the tile.
      */
     public static char getTileType(int x, int y) {
-    	return Map.tileLayout[x][y].getTileType();
+        return Map.tileLayout[x][y].getTileType();
     }
 
     /**
@@ -195,15 +194,15 @@ public class Map {
         if(tileLayout[x + 1][y].getTileType() == 'P' ||
                 tileLayout[x + 1][y].getTileType() == 'T'){
             movementOptions.add("E");
-        } 
+        }
         if(tileLayout[x - 1][y].getTileType() == 'P' ||
                 tileLayout[x - 1][y].getTileType() == 'T'){
             movementOptions.add("W");
-        } 
+        }
         if(tileLayout[x][y - 1].getTileType() == 'P' ||
                 tileLayout[x][y - 1].getTileType() == 'T'){
             movementOptions.add("N");
-        } 
+        }
         if(tileLayout[x][y + 1].getTileType() == 'P' ||
                 tileLayout[x][y + 1].getTileType() == 'T'){
             movementOptions.add("S");
