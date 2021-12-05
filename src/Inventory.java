@@ -217,15 +217,15 @@ public class Inventory {
     }
 
     /**
-     * This setups everything 
-     * @param gas
-     * @param deathRat
-     * @param poison
-     * @param sterilisation
-     * @param femaleSexChange
-     * @param maleSexChange
-     * @param noEntrySign
-     * @param bomb
+     * This sets up the inventory when you play a new level from the beginning 
+     * @param gas The spawn rate of the gas item
+     * @param deathRat The spawn rate of the death rat item
+     * @param poison The spawn rate of the poison item
+     * @param sterilisation The spawn rate of the sterilisation item
+     * @param femaleSexChange The spawn rate of the female sex change item
+     * @param maleSexChange The spawn rate of the male sex change item
+     * @param noEntrySign The spawn rate of the no entry sign item
+     * @param bomb The spawn rate of the bomb item
      */
     public static void setupNewInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
@@ -256,6 +256,17 @@ public class Inventory {
     	bombQuantity = 0;
     }
     
+    /**
+     * This sets up the quantities of items when starting a saved level
+     * @param gas The quantity of the gas item
+     * @param deathRat The quantity of the death rat item
+     * @param poison The quantity of the poison item
+     * @param sterilisation The quantity of the sterilisation item
+     * @param femaleSexChange The quantity of the female sex change item
+     * @param maleSexChange The quantity of the male sex change item
+     * @param noEntrySign The quantity of the no entry sign item
+     * @param bomb The quantity of the bomb item
+     */
     public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasQuantity = gas;
     	deathRatQuantity = deathRat;
@@ -264,7 +275,7 @@ public class Inventory {
     	femaleSexChangeQuantity = femaleSexChange;
     	maleSexChangeQuantity = maleSexChange;
     	noEntrySignQuantity = noEntrySign;
-    	bombQuantity = 0;
+    	bombQuantity = bomb;
     }
     
     public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
