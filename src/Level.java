@@ -348,4 +348,8 @@ public class Level {
 		score();
 		return levelScore;
 	}
+	
+	public static void resetLevelScore() {
+		levelScore = 0;
+	}
 }

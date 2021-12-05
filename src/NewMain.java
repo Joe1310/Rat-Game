@@ -61,7 +61,6 @@ public class NewMain extends Application {
 
 		Stage menuWindow = new Stage();
 		menuWindow.setTitle("Rat Game");
-		new Leaderboard();
 
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
@@ -209,7 +208,9 @@ public class NewMain extends Application {
 			highScoresWindow.close();
 			levelScores(primaryStage, 4);
 		});
-		
+
+		container.setSpacing(15);
+		container.setPadding(new Insets(25));
 		container.getChildren().addAll(level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
 		highScoresWindow.setScene(new Scene(container));
 		highScoresWindow.show();
@@ -221,11 +222,12 @@ public class NewMain extends Application {
 		VBox container = new VBox();
 		levelScoresWindow.setResizable(false);
 		levelScoresWindow.setTitle("HIGH SCORES: LEVEL " + levelNo);
-		TextArea text = new TextArea(Leaderboard.formatLeaderboardData(levelNo));
+		String scores = Leaderboard.formatLeaderboardData(levelNo);
+		TextArea text = new TextArea(scores);
 		text.setEditable(false);
 		text.setStyle("-fx-font-size: 1.5em;");
-		text.setPrefWidth(400);
-		text.setPrefHeight(800);
+		text.setPrefWidth(200);
+		text.setPrefHeight(400);
 		Button backButton = new Button("Back");
 
 		backButton.setOnAction(event -> {
@@ -454,7 +456,9 @@ public class NewMain extends Application {
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
 		Label scoreTitle = new Label("Score: " + Level.getLevelScore());
+		new Leaderboard();
 		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), Level.getLevelScore());
+		Level.resetLevelScore();
 		Leaderboard.writeLeaderboards();
 		Button menuButton = new Button("Main Menu");
 		currentPlayer.updateMaxLevel(Level.getLevelNumber());
