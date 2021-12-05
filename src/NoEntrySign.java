@@ -10,7 +10,7 @@ public class NoEntrySign extends Entity {
 	/**
 	 * Constructor to create a NoEntrySign entity.
 	 *
-	 * @param location The coordinates the NoEntrySign is being placed.
+	 * @param location The coordinates x, y of the entity.
 	 */
 	public NoEntrySign(int[] location) {
 		super(location, "NoEntrySign.png", "NES");
