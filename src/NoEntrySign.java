@@ -8,7 +8,7 @@ public class NoEntrySign extends Entity {
 	private int health;
 
 	/**
-	 * Constructor for a NoEntrySign.
+	 * Constructor to create a NoEntrySign entity.
 	 *
 	 * @param location The coordinates the NoEntrySign is being placed.
 	 */
@@ -60,9 +60,9 @@ public class NoEntrySign extends Entity {
 	}
 
 	/**
-	 * Method to return the values of attributes which need to be saved for the item.
+	 * Method to return the attribute values of the NoEntrySign entity (Item Type, x coordinate, y coordinate, health).
 	 *
-	 * @return the values of attributes: item type, x, y, health
+	 * @return Returns attribute values as single String
 	 */
 	public String toString() {
     	return (this.getType() + " " + location[0] + " " + location[1] + " " + health);

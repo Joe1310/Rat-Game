@@ -10,7 +10,7 @@ public class Bomb extends Entity{
     private int countdown;
 
 	/**
-	 * Constructor to create a bomb entity.
+	 * Constructor to create a Bomb entity.
 	 *
 	 * @param location The x, y coordinates of the bomb on the map.
 	 */
@@ -140,7 +140,7 @@ public class Bomb extends Entity{
 	 * Method to update the bombs image dependent on the time remaining before the bomb explodes.
 	 */
 	private void updateBombImage() {
-    	switch(countdown) {
+    	switch(countdown){
 			case 16:
 				setImageName("Bomb4.png");
 				break;
@@ -159,7 +159,7 @@ public class Bomb extends Entity{
 	/**
 	 * Method to return the attribute values of the bomb entity (Item Type, x coordinate, y coordinate, countdown).
 	 *
-	 * @return Attribute values as single String
+	 * @return Returns attribute values as single String
 	 */
 	public String toString() {
     	return (this.getType() + " " + location[0] + " " + location[1] + " " + countdown);
