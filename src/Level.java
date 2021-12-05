@@ -16,6 +16,7 @@ public class Level {
 	 static int maxRats;
 	 static int[] itemSpawnRates;
 	 static int[] inventoryQuantities;
+	 static int[] inventoryTimers;
 	 
 	 static Tile[][] tileLayout;
 	 static int levelNumber = 1;
