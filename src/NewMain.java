@@ -61,6 +61,7 @@ public class NewMain extends Application {
 
 		Stage menuWindow = new Stage();
 		menuWindow.setTitle("Rat Game");
+		new Leaderboard();
 
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
@@ -96,6 +97,7 @@ public class NewMain extends Application {
 			menuWindow.close();
 			highScores(primaryStage);
 		});
+		
 		howToPlayButton.setOnAction(event -> {
 			menuWindow.close();
 			howToPlay(primaryStage);
@@ -177,6 +179,63 @@ public class NewMain extends Application {
 	}
 
 	private void highScores(Stage primaryStage) {
+		Stage highScoresWindow = new Stage();
+		highScoresWindow.setTitle("RAT GAME: HIGH SCORES");
+		VBox container = new VBox();
+		//Create view in Java
+		Label title = new Label("Select a level:");
+		
+		Button level1ScoresButton = new Button("LEVEL 1");
+		level1ScoresButton.setOnAction(event -> {
+			highScoresWindow.close();
+			levelScores(primaryStage, 1);
+		});
+		
+		Button level2ScoresButton = new Button("LEVEL 2");
+		level1ScoresButton.setOnAction(event -> {
+			highScoresWindow.close();
+			levelScores(primaryStage, 2);
+		});
+		
+		Button level3ScoresButton = new Button("LEVEL 3");
+		level1ScoresButton.setOnAction(event -> {
+			highScoresWindow.close();
+			levelScores(primaryStage, 3);
+		});
+		
+
+		Button level4ScoresButton = new Button("LEVEL 4");
+		level1ScoresButton.setOnAction(event -> {
+			highScoresWindow.close();
+			levelScores(primaryStage, 4);
+		});
+		
+		container.getChildren().addAll(level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
+		highScoresWindow.setScene(new Scene(container));
+		highScoresWindow.show();
+	}
+	
+	private void levelScores(Stage primaryStage, int levelNo) {
+
+		Stage levelScoresWindow = new Stage();
+		VBox container = new VBox();
+		levelScoresWindow.setResizable(false);
+		levelScoresWindow.setTitle("HIGH SCORES: LEVEL " + levelNo);
+		TextArea text = new TextArea(Leaderboard.formatLeaderboardData(levelNo));
+		text.setEditable(false);
+		text.setStyle("-fx-font-size: 1.5em;");
+		text.setPrefWidth(400);
+		text.setPrefHeight(800);
+		Button backButton = new Button("Back");
+
+		backButton.setOnAction(event -> {
+			levelScoresWindow.close();
+			highScores(primaryStage);
+		});
+		
+		container.getChildren().addAll(text, backButton);
+		levelScoresWindow.setScene(new Scene(container));
+		levelScoresWindow.show();
 	}
 	
 	public void profileSelect(Stage primaryStage){
@@ -254,7 +313,6 @@ public class NewMain extends Application {
 		GridPane grid = new GridPane();
 		profileCreateWindow.setTitle("RAT GAME: CREATE PROFILE");
 		//Create view in Java
-		Label title = new Label("Enter your Name: ");
 		TextField name = new TextField();
 		name.setPromptText("Enter your name :)");
 		name.setPrefColumnCount(15);
@@ -396,6 +454,8 @@ public class NewMain extends Application {
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
 		Label scoreTitle = new Label("Score: " + Level.getLevelScore());
+		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), Level.getLevelScore());
+		Leaderboard.writeLeaderboards();
 		Button menuButton = new Button("Main Menu");
 		currentPlayer.updateMaxLevel(Level.getLevelNumber());
 		currentPlayer.updatePlayerFile();
