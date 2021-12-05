@@ -1,31 +1,41 @@
-/**
- * <p> 1. File name: Bomb.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Bomb's behavior and characteristics</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
- * @version 2.0
- */
-
-
 import java.util.ArrayList;
 
+/**
+ * Class to model a Bomb item
+ *
+ * @author Elliot, Ollie
+ * @version 1.0
+ */
 public class Bomb extends Entity{
     private int countdown;
 
+	/**
+	 * Constructor to create a bomb entity.
+	 *
+	 * @param location The x, y coordinates of the bomb on the map.
+	 */
     public Bomb(int[] location) {
         super(location, "Bomb5.png", "Bomb");
         this.countdown = 20;
     }
 
+	/**
+	 * Constructor used for bombs created from a saved game file (contains custom countdown
+	 * so the timer is kept from the time it was saved.
+	 *
+	 * @param location The x, y coordinates of the bomb on the map.
+	 * @param countdown The time remaining before the bomb blows up in quarter seconds.
+	 */
     public Bomb(int[] location, int countdown) {
         super(location, "Bomb.png", "Bomb");
         this.countdown = countdown;
         updateBombImage();
     }
 
+	/**
+	 * Method to blow up the bomb if the countdown has finished and reduce the time remaining on the countdown
+	 * if the bomb hasnt already hit 0. Also changes the image of the bomb to match the time remaining.
+	 */
     public void act() {
         if (countdown == 0) {
             spawnExplosions();
@@ -49,12 +59,10 @@ public class Bomb extends Entity{
         }
     }
 
-    /*
-     * Go every direction
-     * Spawn Explosions
-     * 
-     */
-    private void spawnExplosions() {
+	/**
+	 * Method to spawn the explosion images.
+	 */
+	private void spawnExplosions() {
     	Entity explosion = new Explosion(this.location);
     	int[] tempLocation = {this.location[0], this.location[1]};
         ArrayList<String> directions = Map.getMovementOptions(tempLocation[0], tempLocation[1]);
@@ -75,40 +83,63 @@ public class Bomb extends Entity{
 			}		
 		}
     }
-    
-    private void explodeNorthLine(int[] exLocation) {
+
+	/**
+	 * Method to spawn the explosions to the north of the bomb.
+	 *
+	 * @param exLocation The x, y coordinate of the explosion entity
+	 */
+	private void explodeNorthLine(int[] exLocation) {
     	Entity explosion = new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0], exLocation[1] - 1) != 'G')) {
 	   		int[] newLocation = {exLocation[0], exLocation[1] - 1};
 	   		explodeNorthLine(newLocation);
 	   	}
     }
-    
-    private void explodeSouthLine(int[] exLocation) {
+
+	/**
+	 * Method to spawn the explosions to the south of the bomb.
+	 *
+	 * @param exLocation The x, y coordinates of the explosion entity.
+	 */
+	private void explodeSouthLine(int[] exLocation) {
     	Entity explosion = new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0], exLocation[1] + 1) != 'G')) {
     		int[] newLocation = {exLocation[0], exLocation[1] + 1};
     		explodeSouthLine(newLocation);
     	}
     }
-    
-    private void explodeEastLine(int[] exLocation) {
+
+	/**
+	 * Method to spawn the explosions to the east of the bomb.
+	 *
+	 * @param exLocation The x, y coordinates of the explosion entity.
+	 */
+	private void explodeEastLine(int[] exLocation) {
     	Entity explosion = new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0] + 1, exLocation[1]) != 'G')) {
     		int[] newLocation = {exLocation[0] + 1, exLocation[1]};
     		explodeEastLine(newLocation);
     	}
     }
-    
-    private void explodeWestLine(int[] exLocation) {
+
+	/**
+	 * Method to spawn the explosions to the west of the bomb.
+	 *
+	 * @param exLocation The x, y coordinates of the explosion entity.
+	 */
+	private void explodeWestLine(int[] exLocation) {
     	Entity explosion = new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0] - 1, exLocation[1]) != 'G')) {
     		int[] newLocation = {exLocation[0] - 1, exLocation[1]};
     		explodeWestLine(newLocation);
     	}
     }
-    
-    private void updateBombImage() {
+
+	/**
+	 * Method to update the bombs image dependent on the time remaining before the bomb explodes.
+	 */
+	private void updateBombImage() {
     	switch(countdown) {
 			case 16:
 				setImageName("Bomb4.png");
@@ -124,8 +155,13 @@ public class Bomb extends Entity{
 				break;
     	}
     }
-    
-    public String toString() {
+
+	/**
+	 * Method to return the attribute values of the bomb entity (Item Type, x coordinate, y coordinate, countdown).
+	 *
+	 * @return Attribute values as single String
+	 */
+	public String toString() {
     	return (this.getType() + " " + location[0] + " " + location[1] + " " + countdown);
     }
 }
