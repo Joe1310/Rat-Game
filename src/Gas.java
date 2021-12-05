@@ -9,7 +9,6 @@
  * @version 2.0
  */
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,21 +17,35 @@ public class Gas extends Entity {
 	private int timer = 10;
 	private String direction;
 	private boolean hasSpread;
-	
+
+	/**
+	 * Gas constructor
+	 * <p> no side-effect </p>
+	 * <p> not referentially transparent </p>
+	 * @param location
+	 * @param hasSpread
+	 */
 	public Gas(int[] location, boolean hasSpread) {
 		super(location, "Gas.png", "Gas");
 		this.spreadLimit = 4;
 		this.hasSpread = hasSpread;
 		this.direction = null;
 	}
-	
+
+	/**
+	 * Gas constructor
+	 * @param location
+	 * @param spreadLimit
+	 * @param direction
+	 * @param hasSpread
+	 */
 	public Gas(int[] location, int spreadLimit, String direction, boolean hasSpread) {
 		super(location, "Gas.png", "Gas");
 		this.spreadLimit = spreadLimit;
 		this.hasSpread = hasSpread;
 		this.direction = direction;
 	}
-	
+
 	public void act() {
 		damageRats();
 		if (!hasSpread && spreadLimit > 0) {
