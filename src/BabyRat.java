@@ -1,27 +1,37 @@
 /**
- * <p> 1. File name: BabyRat.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Baby rat behavior</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
+ * Class to model a BabyRat entity
+ *
+ * @author Nick, Elliot
  * @version 2.0
  */
 
-
-
-
 public class BabyRat extends Rat {
+
     private int age;
     private String sex;
 
+    /**
+     * Constructor to create a BabyRat object.
+     *
+     * @param location Location of the rat.
+     * @param directionFacing Direction the rat is currently facing.
+     * @param sterile If rat is sterile or not.
+     */
     public BabyRat(int[] location, String directionFacing, boolean sterile){
         super(100, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
         this.age = 0;
+        //assigns random sex
         this.sex = randomSex();
     }
 
+    /**
+     * Constructor to create a BabyRat object with pulled from a saved game file.
+     *
+     * @param sex Gender of the rat
+     * @param location Location of the rat
+     * @param directionFacing Direction the rat is currently facing
+     * @param sterile If rat is sterile or not
+     */
     public BabyRat(String sex, int[] location, String directionFacing, int health, boolean sterile){
         super(health, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
         this.age = 0;
@@ -32,25 +42,46 @@ public class BabyRat extends Rat {
         }
     }
 
+    /**
+     * Method to complete actions every tick.
+     */
     public void act() {
         move();
         increaseAge();
     }
 
+    /**
+     * Method to increase the age of the baby rat every tick and once it reaches 14 ticks of age it turns into an
+     * adult rat.
+     */
     public void increaseAge() {
         age++;
+        //checks if age is equal to 14 and if so makes an adult rat in its place
         if (this.age == 14) {
             becomeAdult();
         }
     }
 
+    /**
+     * Method to make the BabyRat turn into an AdultRat using its current attributes.
+     */
     public void becomeAdult(){
-        Entity newAdultRat = new AdultRat(this.sex, this.location, this.directionFacing, this.health, this.sterile);// check if correct
+        //removes the baby rat and spawns an adult rat in its place with all the same attributes
+        Entity newAdultRat = new AdultRat(this.sex, this.location, this.directionFacing,
+                this.health, this.sterile);
+        //removes the baby rat
         removeEntity();
+        //removes baby rat from the array list
         rats.remove(this);
     }
 
+    /**
+     * Method to pick a random sex for the BabyRat.
+     *
+     * @return Returns the sex of the rat.
+     */
     public String randomSex() {
+        //assigns random gender
         if (randomize(2) == 1) {
             return "F";
         } else {
@@ -58,7 +89,13 @@ public class BabyRat extends Rat {
         }
     }
 
+    /**
+     * Method to return the attributes of the BabyRat entity.
+     *
+     * @return Returns a String of the attributes of the BabyRat.
+     */
     public String toString(){
-        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " + directionFacing + " "  + health  + " " + sterile;
+        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " +
+                directionFacing + " "  + health  + " " + sterile;
     }
 }
