@@ -77,6 +77,7 @@ public class Map {
         exec.scheduleWithFixedDelay(new Runnable() {
             public void run() {
             	drawCounter();
+            	RenderBar.drawProgressBar(gc, column * 50, row * 50);
                 ArrayList<Entity> ents = Entity.getEntities();
                 int maxEntities = ents.size();
                 tileOut(Map.gc); //Remove this too
@@ -106,7 +107,7 @@ public class Map {
                 }
                 if (Rat.getRats().size() == 0) {
                     exec.shutdown();
-                }else if (Rat.getRats().size() == Level.getMap().maxRat) {
+                }else if (Rat.getRats().size() >= Level.getMap().maxRat) {
                     exec.shutdown();
                 }
                 if (Rat.getRats().size() == 0){
