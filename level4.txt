@@ -1,13 +1,13 @@
 9
-F 3 3 E
-M 12 5 W
-M 1 5 N
-M 7 1 S
-M 9 9 N
-F 3 14 S
-M 28 1 S
-M 28 7 N
-F 24 3 S
+F 3 3 E 100 false
+M 12 5 W 100 false
+M 1 5 N 100 false
+M 7 1 S 100 false
+M 9 9 N 100 false
+F 3 14 S 100 false
+M 28 1 S 100 false
+M 28 7 N 100 false
+F 24 3 S 100 false
 300
 30
 5
