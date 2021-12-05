@@ -5,7 +5,7 @@
  * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
  * <p> 7. Purpose of the program: Monitoring the inventory</p>
  * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
+ * @author Oliver
  * @version 2.0
  */
 
@@ -40,9 +40,7 @@ public class Inventory {
     static int noEntrySignTimer;
     static int bombTimer;
 
-    // functions get'ItemName' returns the amount of them in the inventory
-    // functions add'ItemName' adds one to the amount of items, as long as its below 5 which is the item cap
-    // functions remove'ItemName' takes one off the amount of them
+    
     public static int getGas() {
         return gasQuantity;
     }
@@ -145,7 +143,7 @@ public class Inventory {
         bombQuantity -= 1;
     }
 
-    public static void setupInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupNewInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
     	deathRatSpawnRate = deathRat;
     	poisonSpawnRate = poison;
@@ -172,6 +170,39 @@ public class Inventory {
     	maleSexChangeQuantity = 0;
     	noEntrySignQuantity = 0;
     	bombQuantity = 0;
+    }
+    
+    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    	gasQuantity = gas;
+    	deathRatQuantity = deathRat;
+    	poisonQuantity = poison;
+    	sterilisationQuantity = sterilisation;
+    	femaleSexChangeQuantity = femaleSexChange;
+    	maleSexChangeQuantity = maleSexChange;
+    	noEntrySignQuantity = noEntrySign;
+    	bombQuantity = 0;
+    }
+    
+    public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    	gasSpawnRate = gas;
+    	deathRatSpawnRate = deathRat;
+    	poisonSpawnRate = poison;
+    	sterilisationSpawnRate = sterilisation;
+    	femaleSexChangeSpawnRate = femaleSexChange;
+    	maleSexChangeSpawnRate = maleSexChange;
+    	noEntrySignSpawnRate = noEntrySign;
+    	bombSpawnRate = bomb;
+    }
+    
+    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    	gasTimer = gas;
+    	deathratTimer = deathRat;
+    	poisonTimer = poison;
+    	sterilisationTimer = sterilisation;
+    	femaleSexChangeTimer = femaleSexChange;
+    	maleSexChangeTimer = maleSexChange;
+    	noEntrySignTimer = noEntrySign;
+    	bombTimer = bomb;
     }
     
     public static void act() {
@@ -218,4 +249,11 @@ public class Inventory {
     	}
     }
 
+    public String toString() {
+    	String output = (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " " + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity + "\n ");
+    	output += (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " + femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " + bombSpawnRate + "\n ");
+    	output += (gasTimer + " " + deathratTimer + " " + poisonTimer + " " + sterilisationTimer + " " + femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
+    	
+    	return output;
+    }
 }
