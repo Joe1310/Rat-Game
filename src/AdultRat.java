@@ -117,7 +117,6 @@ public class AdultRat extends Rat {
     			move();
     		}
     	}
-        
     }
 
 	/**
