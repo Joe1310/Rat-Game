@@ -50,7 +50,7 @@ class Sterilisation extends Entity {
     }
 
     /**
-     *
+     * Method to sterilise a rat that goes through the Sterilisation entity.
      */
     private void steriliseRats() {
     	int[] corner = {this.location[0] - 1, this.location[1] - 1}; //Sets the radius to northwest of the steriliser
@@ -67,11 +67,11 @@ class Sterilisation extends Entity {
     }
 
     /**
-     * Method to
+     * Method to check if a rat is on the Sterilisation entity.
      *
-     * @param tempLocation
-     * @param index
-     * @return
+     * @param tempLocation Sterilisation entity location.
+     * @param index Rat index.
+     * @return Boolean of whether the given rat is on the same tile as the Sterilisation Entity.
      */
     private boolean checkRat(int[] tempLocation, int index) {
     	if (Arrays.equals(Rat.getRats().get(index).location, tempLocation)) {
@@ -80,9 +80,13 @@ class Sterilisation extends Entity {
         	return false;
         }
     }
-    
+
+    /**
+     * Method to return the attribute values of the Sterilisation entity.
+     *
+     * @return Returns attribute values as single String.
+     */
     public String toString() {
     	return (getType() + " " + location[0] + " " + location[1] + " " + timer);
     }
-
 }

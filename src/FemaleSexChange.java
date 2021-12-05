@@ -32,7 +32,7 @@ public class FemaleSexChange extends Entity {
 	}
 
 	/**
-	 * Method to return the attribute values of the FemaleSexChange entity (Item Type, x coordinate, y coordinate).
+	 * Method to return the attribute values of the FemaleSexChange entity.
 	 *
 	 * @return Returns attribute values as single String
 	 */

@@ -60,7 +60,7 @@ public class NoEntrySign extends Entity {
 	}
 
 	/**
-	 * Method to return the attribute values of the NoEntrySign entity (Item Type, x coordinate, y coordinate, health).
+	 * Method to return the attribute values of the NoEntrySign entity.
 	 *
 	 * @return Returns attribute values as single String
 	 */
