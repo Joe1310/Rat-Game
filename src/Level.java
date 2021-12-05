@@ -14,7 +14,7 @@ public class Level {
 	 static int parTime;
 	 int remainingTime = 0;
 	 static int maxRats;
-	 static int itemSpawnRates;
+	 static int[] itemSpawnRates;
 	 static Tile[][] tileLayout;
 	 static int levelNumber = 1;
 
@@ -280,7 +280,7 @@ public class Level {
 			saveGame.write(levelScore + "\n");
 			saveGame.write(parTime + "\n");
 			saveGame.write(maxRats + "\n");
-			saveGame.write(itemSpawnRate + "\n");
+			saveGame.write(itemSpawnRates + "\n");
 			//inventory writing
 			int row = tileLayout[0].length;
 			int column = tileLayout.length;
