@@ -18,7 +18,7 @@ public class NoEntrySign extends Entity {
 	}
 
 	/**
-	 * Constructor for a NoEntrySign from a saved game (health is pulled from save).
+	 * Constructor to create a NoEntrySign from a saved game file (health is pulled from save).
 	 *
 	 * @param location The coordinates the sign is to be placed at.
 	 * @param health The remaining number of rats that can hit the sign before it breaks.
@@ -60,7 +60,7 @@ public class NoEntrySign extends Entity {
 	}
 
 	/**
-	 * Method to return the attribute values of the NoEntrySign entity (Item Type, x coordinate, y coordinate, health).
+	 * Method to return the attribute values of the NoEntrySign entity.
 	 *
 	 * @return Returns attribute values as single String
 	 */
