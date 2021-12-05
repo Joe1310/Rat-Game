@@ -1,17 +1,8 @@
 /**
- * <p> 1. File name: Inventory.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Monitoring the inventory</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
+ * This class hold the inventory that the player has, and controls it
  * @author Oliver
  * @version 2.0
  */
-
-
-
-
 public class Inventory {
     static int gasQuantity;
     static int deathRatQuantity;
@@ -40,111 +31,203 @@ public class Inventory {
     static int noEntrySignTimer;
     static int bombTimer;
 
-    
+    /**
+     * Returns the number of gas items the player has
+     * @return The number of gas items
+     */
     public static int getGas() {
         return gasQuantity;
     }
+    /**
+     * Adds 1 to the number of gas items the player has, with a maximum cap of 4 of that item
+     */
     public static void addGas() {
         if (gasQuantity < 4) {
             gasQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of gas items
+     */
     public static void removeGas() {
         gasQuantity -= 1;
     }
 
-
+    
+    /**
+     * Returns the number of death rat items the player has
+     * @return The number of death rat items
+     */
     public static int getDeathRat() {
         return deathRatQuantity;
     }
+    /**
+     * Adds 1 to the number of death rat items the player has, with a maximum cap of 4 of that item
+     */
     public static void addDeathRat() {
         if (deathRatQuantity < 4) {
             deathRatQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of death rat items
+     */
     public static void removeDeathRat() {
         deathRatQuantity -= 1;
     }
 
 
+    /**
+     * Returns the number of poison items the player has
+     * @return The number of poison items
+     */
     public static int getPoison() {
         return poisonQuantity;
     }
+    /**
+     * Adds 1 to the number of poison items the player has, with a maximum cap of 4 of that item
+     */
     public static void addPoison() {
         if (poisonQuantity < 4) {
             poisonQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of poison items
+     */
     public static void removePoison() {
         poisonQuantity -= 1;
     }
 
 
+    /**
+     * Returns the number of sterilisation items the player has
+     * @return The number of sterilisation items
+     */
     public static int getSterilisation() {
         return sterilisationQuantity;
     }
+    /**
+     * Adds 1 to the number of sterilisation items the player has, with a maximum cap of 4 of that item
+     */
     public static void addSterilisation() {
         if (sterilisationQuantity < 4) {
             sterilisationQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of sterilisation items
+     */
     public static void removeSterilisation() {
         sterilisationQuantity -= 1;
     }
 
 
+    /**
+     * Returns the number of female sex change items the player has
+     * @return The number of female sex change items
+     */
     public static int getFemaleSexChange() {
         return femaleSexChangeQuantity;
     }
+    /**
+     * Adds 1 to the number of female sex change items the player has, with a maximum cap of 4 of that item
+     */
     public static void addFemaleSexChange() {
         if (femaleSexChangeQuantity< 4) {
             femaleSexChangeQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of female sex change items
+     */
     public static void removeFemaleSexChange() {
         femaleSexChangeQuantity -= 1;
     }
 
+    
+    /**
+     * Returns the number of male sex change items the player has
+     * @return The number of male sex change items
+     */
     public static int getMaleSexChange() {
         return maleSexChangeQuantity;
     }
+    /**
+     * Adds 1 to the number of male sex change items the player has, with a maximum cap of 4 of that item
+     */
     public static void addMaleSexChange() {
         if (maleSexChangeQuantity < 4) {
             maleSexChangeQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of male sex change items
+     */
     public static void removeMaleSexChange() {
         maleSexChangeQuantity -= 1;
     }
 
 
+    /**
+     * Returns the number of no entry sign items the player has
+     * @return The number of no entry sign items
+     */
     public static int getNoEntrySign() {
         return noEntrySignQuantity;
     }
+    /**
+     * Adds 1 to the number of no entry sign items the player has, with a maximum cap of 4 of that item
+     */
     public static void addNoEntrySign() {
         if (noEntrySignQuantity < 4) {
             noEntrySignQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of no entry sign items
+     */
+    
+    
     public static void removeNoEntrySign() {
         noEntrySignQuantity -= 1;
     }
 
 
+    /**
+     * Returns the number of bomb items the player has
+     * @return The number of bomb items
+     */
     public static int getBomb() {
         return bombQuantity;
     }
+    /**
+     * Adds 1 to the number of bomb items the player has, with a maximum cap of 4 of that item
+     */
     public static void addBomb() {
         if (bombQuantity < 4) {
             bombQuantity += 1;
         }
     }
+    /**
+     * Removes 1 from the number of bomb items
+     */
     public static void removeBomb() {
         bombQuantity -= 1;
     }
 
-    public static void setupNewInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
-                                         int maleSexChange, int noEntrySign, int bomb) {
+    /**
+     * This setups everything 
+     * @param gas
+     * @param deathRat
+     * @param poison
+     * @param sterilisation
+     * @param femaleSexChange
+     * @param maleSexChange
+     * @param noEntrySign
+     * @param bomb
+     */
+    public static void setupNewInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
     	deathRatSpawnRate = deathRat;
     	poisonSpawnRate = poison;
@@ -173,8 +256,7 @@ public class Inventory {
     	bombQuantity = 0;
     }
     
-    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
-                                     int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasQuantity = gas;
     	deathRatQuantity = deathRat;
     	poisonQuantity = poison;
@@ -185,8 +267,7 @@ public class Inventory {
     	bombQuantity = 0;
     }
     
-    public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
-                                       int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
     	deathRatSpawnRate = deathRat;
     	poisonSpawnRate = poison;
@@ -197,8 +278,7 @@ public class Inventory {
     	bombSpawnRate = bomb;
     }
     
-    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
-                                   int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasTimer = gas;
     	deathratTimer = deathRat;
     	poisonTimer = poison;
@@ -253,16 +333,14 @@ public class Inventory {
     	}
     }
 
-    public String toString() {
-    	String output = (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " "
-                + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity
-                + "\n ");
-    	output += (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " +
-                femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " +
-                bombSpawnRate + "\n ");
-    	output += (gasTimer + " " + deathratTimer + " " + poisonTimer + " " + sterilisationTimer + " " +
-                femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
-    	
-    	return output;
+    public static String returnQuantity() {
+    	return (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " " + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity);
     }
+    public static String returnSpawnRates() {
+    	return (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " + femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " + bombSpawnRate);
+    }
+    public static String returnTimers() {
+    	return (gasTimer + " " + deathratTimer + " " + poisonTimer + " " + sterilisationTimer + " " + femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
+    }
+    
 }
