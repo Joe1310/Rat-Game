@@ -1,20 +1,43 @@
+/**
+ * Class to model a NoEntrySign item.
+ *
+ * @author Elliot, Ollie
+ * @version 1.0
+ */
 public class NoEntrySign extends Entity {
 	private int health;
-	
+
+	/**
+	 * Constructor for a NoEntrySign.
+	 *
+	 * @param location The coordinates the NoEntrySign is being placed.
+	 */
 	public NoEntrySign(int[] location) {
 		super(location, "NoEntrySign.png", "NES");
 		health = 5;
 	}
-	
+
+	/**
+	 * Constructor for a NoEntrySign from a saved game (health is pulled from save).
+	 *
+	 * @param location The coordinates the sign is to be placed at.
+	 * @param health The remaining number of rats that can hit the sign before it breaks.
+	 */
 	public NoEntrySign(int[] location, int health) {
 		super(location, "NoEntrySign.png", "NES");
 		this.health = health;
 	}
-	
+
+	/**
+	 * Needed so it can be extended from entity.
+	 */
 	public void act() {
-		
+
 	}
-	
+
+	/**
+	 * Method to decrease the health of a NoEntrySign and update the image that is used by it.
+	 */
 	public void degrade() {
 		health--;
 		if (health == 0) {
@@ -35,7 +58,12 @@ public class NoEntrySign extends Entity {
 				break;
 		}
 	}
-	
+
+	/**
+	 * Method to return the values of attributes which need to be saved for the item.
+	 *
+	 * @return the values of attributes: item type, x, y, health
+	 */
 	public String toString() {
     	return (this.getType() + " " + location[0] + " " + location[1] + " " + health);
     }
