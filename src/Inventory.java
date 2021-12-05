@@ -143,7 +143,8 @@ public class Inventory {
         bombQuantity -= 1;
     }
 
-    public static void setupNewInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupNewInventory(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
+                                         int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
     	deathRatSpawnRate = deathRat;
     	poisonSpawnRate = poison;
@@ -172,7 +173,8 @@ public class Inventory {
     	bombQuantity = 0;
     }
     
-    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
+                                     int maleSexChange, int noEntrySign, int bomb) {
     	gasQuantity = gas;
     	deathRatQuantity = deathRat;
     	poisonQuantity = poison;
@@ -183,7 +185,8 @@ public class Inventory {
     	bombQuantity = 0;
     }
     
-    public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
+                                       int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
     	deathRatSpawnRate = deathRat;
     	poisonSpawnRate = poison;
@@ -194,7 +197,8 @@ public class Inventory {
     	bombSpawnRate = bomb;
     }
     
-    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
+                                   int maleSexChange, int noEntrySign, int bomb) {
     	gasTimer = gas;
     	deathratTimer = deathRat;
     	poisonTimer = poison;
@@ -250,9 +254,14 @@ public class Inventory {
     }
 
     public String toString() {
-    	String output = (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " " + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity + "\n ");
-    	output += (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " + femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " + bombSpawnRate + "\n ");
-    	output += (gasTimer + " " + deathratTimer + " " + poisonTimer + " " + sterilisationTimer + " " + femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
+    	String output = (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " "
+                + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity
+                + "\n ");
+    	output += (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " +
+                femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " +
+                bombSpawnRate + "\n ");
+    	output += (gasTimer + " " + deathratTimer + " " + poisonTimer + " " + sterilisationTimer + " " +
+                femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
     	
     	return output;
     }
