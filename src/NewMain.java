@@ -34,6 +34,7 @@ public class NewMain extends Application {
 
 	public Stage levelStage = new Stage();
 	private Canvas canvas;
+	private static PlayerData currentPlayer;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -159,6 +160,8 @@ public class NewMain extends Application {
 		Button submit = new Button("SUBMIT");
 		submit.setOnAction(event -> {
 			String name = profileSelect.getValue();
+			File profile = new File("src/profiles/" + name + ".txt");
+			currentPlayer = new PlayerData(profile);
 		});
 		
 		Button create = new Button("CREATE");
@@ -170,12 +173,12 @@ public class NewMain extends Application {
 		Button delete = new Button("DELETE");
 		delete.setOnAction(event -> {
 			String name = profileSelect.getValue();
-			File data = new File(name + ".txt");
+			File data = new File("src/profiles/" + name + ".txt");
 			data.delete();
 			profileSelect.getItems().remove(name);
 		});
 		
-		Button backButton = new Button("BACK");
+		Button backButton = new Button(" BACK ");
 		backButton.setOnAction(event -> {
 			profileSelectWindow.close();
 			try {
@@ -189,7 +192,7 @@ public class NewMain extends Application {
 		container.getChildren().addAll(profileSelect, submit, delete, create, backButton);
 		container.setConstraints(submit, 1, 0);
 		container.setConstraints(delete, 2, 0);
-		container.setConstraints(backButton, 3, 0);
+		container.setConstraints(backButton, 2, 1);
 		container.setConstraints(create, 1, 1);
 		
 		
@@ -197,6 +200,8 @@ public class NewMain extends Application {
 		container.setPadding(new Insets(25));
 		//Set view in window
 		profileSelectWindow.setScene(new Scene(container));
+		
+		profileSelectWindow.setResizable(false);
 		//Launch
 		profileSelectWindow.show();
 	}
@@ -216,15 +221,11 @@ public class NewMain extends Application {
 		Button backButton = new Button("BACK");
 		backButton.setOnAction(event -> {
 			profileCreateWindow.close();
-			try {
-				start(primaryStage);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			profileSelect(primaryStage);
 		});
 		submit.setOnAction(event -> {
 			String playerName = name.getText();
-			File file = new File(playerName + ".txt");
+			File file = new File("src/profiles/" + playerName + ".txt");
 			Scanner scan = null;
 			try {
 				scan = new Scanner(file);
@@ -232,24 +233,24 @@ public class NewMain extends Application {
 				try {
 					if (file.createNewFile()) {
 						file.createNewFile();
-					} else {
-						
+						profileCreateWindow.close();
+						profileSelect(primaryStage);
 					}
-					file.createNewFile();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
-			profileCreateWindow.close();
-			profileSelect(primaryStage);
 		});
 		
 		grid.setConstraints(submit, 1, 0);
-		grid.getChildren().addAll(name, submit);
+		grid.setConstraints(backButton, 2, 0);
+		grid.getChildren().addAll(name, submit, backButton);
 		//Style container
 		grid.setPadding(new Insets(25));
 		//Set view in window
+		profileCreateWindow.setResizable(false);
+		
 		profileCreateWindow.setScene(new Scene(grid));
 		//Launch
 		profileCreateWindow.show();
@@ -532,7 +533,7 @@ public class NewMain extends Application {
 				femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 
 		saveButton.setOnMouseClicked(event ->{
-			Level.saveCurrent(1);
+			Level.saveCurrent(currentPlayer.getPlayerName());
 		});
 		
 		gasButton.setOnMouseDragged(event -> {
@@ -649,6 +650,10 @@ public class NewMain extends Application {
 		});
 
 		return root;
+	}
+	
+	public static PlayerData getCurrentPlayer() {
+		return currentPlayer;
 	}
 
 	private int[] getMouseLocation(MouseEvent event) {

@@ -1,36 +1,59 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PlayerData {
 
 	private String playerName;
-	private int playerScore;
-	private int maxLevelUnlocked;
+	private int maxLevel;
 	
 	//Constructor for Player object
-	public PlayerData(Scanner playerFile) {
-		readPlayerData(playerFile);
+	public PlayerData(File playerFile) {
+		if (playerFile.length() != 0) {
+			Scanner prof = null;
+			try {
+				prof = new Scanner(playerFile);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			readPlayerData(prof);
+		} else {
+			initialiseData(playerFile);
+		}
 	}
 	
-	public void readPlayerData(Scanner scan) {
-		
+	private void readPlayerData(Scanner scan) {
+		playerName = scan.next();
+		maxLevel = scan.nextInt();
+		scan.close();
 	}
 	
-	//Set method for player's name
-	public void setPlayerName(String name) {
-		playerName =  name;
+	private void initialiseData(File playerFile) {
+		String playerName = playerFile.getName();
+		this.playerName = playerName.substring(0, playerName.length()-4);
+		this.maxLevel = 1;
+		updatePlayerFile();
 	}
 	
-	//Set method for player's score
-	public void setPlayerScore(int score) {
-		playerScore =  score;
-	}
+	public void updatePlayerFile() {
+		File player = new File("src/profiles/" + getPlayerName() + ".txt");
+		try {
+			FileWriter playerFile = new FileWriter(player);
+			playerFile.write(playerName + "\n" + maxLevel);
+			playerFile.close();
 
+		} catch (IOException e) {
+			System.out.println("\nAn error occurred while saving the current game.");
+			e.printStackTrace();
+		}
+	}
+	
 	//Updates max level of the player if the previous level is smaller than the new one
-	public void updateMaxLevelUnlocked(int level) {
-		if(maxLevelUnlocked < level) {
-			maxLevelUnlocked =  level;
+	public void updateMaxLevel(int level) {
+		if(maxLevel < level) {
+			maxLevel = level;
 		}
 	
 	}
@@ -39,19 +62,9 @@ public class PlayerData {
 	public String getPlayerName() {
 		return playerName;
 	}
-	
-	//Get method for player's score
-	public int getPlayerScore() {
-		return playerScore;
-	}
 
 	//Get method for player's max level unlocked
-	public int getMaxLevelUnlocked() {
-		return maxLevelUnlocked;
-	}
-	
-	//toString method
-	public String toString() {
-		return getPlayerName() + " " + getPlayerScore() + " " + getMaxLevelUnlocked();
+	public int getMaxLevel() {
+		return maxLevel;
 	}
 }

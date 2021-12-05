@@ -163,7 +163,7 @@ public class Level {
 	//Reads Rat's properties using scanner and makes an object for Dead Rat
 	public  void MakeDeadRat(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -176,7 +176,7 @@ public class Level {
 	
 	public  void MakeDRS(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -187,7 +187,7 @@ public class Level {
 	
 	public  void MakeBomb(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -198,7 +198,7 @@ public class Level {
 	
 	public  void MakeExplosion(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -208,7 +208,7 @@ public class Level {
 	
 	public  void MakeNES(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -219,7 +219,7 @@ public class Level {
 	
 	public  void MakeGas(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -232,7 +232,7 @@ public class Level {
 	
 	public  void MakePoison(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -242,7 +242,7 @@ public class Level {
 	
 	public  void MakeMSC(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -252,7 +252,7 @@ public class Level {
 	
 	public  void MakeFSC(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -262,7 +262,7 @@ public class Level {
 	
 	public  void MakeSteriliser(Scanner scan) {
 
-		String type = scan.next();
+		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
@@ -273,9 +273,9 @@ public class Level {
 
 
 	//Method saves the ongoing Game using playerID
-	public static  void saveCurrent(int playerID) {
+	public static  void saveCurrent(String playerID) {
 
-		String saveFile = playerID + "savedGame.txt";
+		String saveFile = NewMain.getCurrentPlayer().getPlayerName() + "savedGame.txt";
 		try {
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(Entity.getEntities().size() +"\n");
