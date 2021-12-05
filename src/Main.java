@@ -35,7 +35,7 @@ import java.util.Scanner;
  *
  * Do not build the whole application in one file. This file should probably remain very small.
  *
- * @author Liam O'Reilly
+ * @author Liam O'Reilly loser
  */
 public class Main extends Application {
     // The dimensions of the window

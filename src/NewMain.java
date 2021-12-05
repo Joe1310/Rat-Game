@@ -5,9 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,18 +18,21 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class NewMain extends Application {
+	
 	// The dimensions of the canvas
 	private static int CANVAS_WIDTH = 1850;
 	private static int CANVAS_HEIGHT = 1000;
 
 	public Stage levelStage = new Stage();
-
 	private Canvas canvas;
 
 	@Override
@@ -44,7 +50,6 @@ public class NewMain extends Application {
 		MOTD.setPrefHeight(30);
 
 		Button startButton = new Button("START");
-		Button loadButton = new Button("LOAD");
 		Button highScoresButton = new Button("HIGH SCORES");
 		Button howToPlayButton = new Button("HOW TO PLAY");
 		Button quitButton = new Button("QUIT");
@@ -55,7 +60,7 @@ public class NewMain extends Application {
 		logoView.setFitWidth(200);
 		logoView.setPreserveRatio(true);
 
-		Image maRat = new Image("MaRAT.png");
+		Image maRat = new Image("MaRAT.png"); //Praise be
 		ImageView maRatView = new ImageView();
 		maRatView.setImage(maRat);
 		maRatView.setFitWidth(200);
@@ -63,11 +68,7 @@ public class NewMain extends Application {
 
 		startButton.setOnAction(event -> {
 			menuWindow.close();
-			play(primaryStage);
-		});
-		loadButton.setOnAction(event -> {
-			menuWindow.close();
-			load(primaryStage);
+			profileSelect(primaryStage);
 		});
 		highScoresButton.setOnAction(event -> {
 			menuWindow.close();
@@ -79,7 +80,7 @@ public class NewMain extends Application {
 		});
 		quitButton.setOnAction(event -> menuWindow.close());
 
-		VBox container = new VBox(logoView, MOTD, maRatView, startButton, loadButton, highScoresButton,
+		VBox container = new VBox(logoView, MOTD, maRatView, startButton, highScoresButton,
 				howToPlayButton, quitButton);
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
@@ -140,19 +141,130 @@ public class NewMain extends Application {
 
 	private void highScores(Stage primaryStage) {
 	}
-
-	private void load(Stage primaryStage) {
+	
+	public void profileSelect(Stage primaryStage){
+		Stage profileSelectWindow = new Stage();
+		profileSelectWindow.setTitle("RAT GAME: PROFILE SELECT");
+		ComboBox<String> profileSelect = new ComboBox<String>();
+		File profileFolder = new File("src/profiles");
+		File[] profiles = profileFolder.listFiles();
+		for(File profile : profiles) {
+			if(profile.getName().endsWith(".txt")) {
+				String profileName = profile.getName();
+				profileName = profileName.substring(0, profileName.length()-4);
+				profileSelect.getItems().add(profileName);
+			}
+		}
+		
+		Button submit = new Button("SUBMIT");
+		submit.setOnAction(event -> {
+			String name = profileSelect.getValue();
+		});
+		
+		Button create = new Button("CREATE");
+		create.setOnAction(event -> {
+			profileSelectWindow.close();
+			profileCreator(primaryStage);
+			});
+		
+		Button delete = new Button("DELETE");
+		delete.setOnAction(event -> {
+			String name = profileSelect.getValue();
+			File data = new File(name + ".txt");
+			data.delete();
+			profileSelect.getItems().remove(name);
+		});
+		
+		Button backButton = new Button("BACK");
+		backButton.setOnAction(event -> {
+			profileSelectWindow.close();
+			try {
+				start(primaryStage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		GridPane container = new GridPane();
+		container.getChildren().addAll(profileSelect, submit, delete, create, backButton);
+		container.setConstraints(submit, 1, 0);
+		container.setConstraints(delete, 2, 0);
+		container.setConstraints(backButton, 3, 0);
+		container.setConstraints(create, 1, 1);
+		
+		
+		//Style container
+		container.setPadding(new Insets(25));
+		//Set view in window
+		profileSelectWindow.setScene(new Scene(container));
+		//Launch
+		profileSelectWindow.show();
+	}
+	
+	
+	public void profileCreator(Stage primaryStage) {
+		Stage profileCreateWindow = new Stage();
+		GridPane grid = new GridPane();
+		profileCreateWindow.setTitle("RAT GAME: CREATE PROFILE");
+		//Create view in Java
+		Label title = new Label("Enter your Name: ");
+		TextField name = new TextField();
+		name.setPromptText("Enter your name :)");
+		name.setPrefColumnCount(15);
+		Button submit = new Button("Submit");
+		
+		Button backButton = new Button("BACK");
+		backButton.setOnAction(event -> {
+			profileCreateWindow.close();
+			try {
+				start(primaryStage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		submit.setOnAction(event -> {
+			String playerName = name.getText();
+			File file = new File(playerName + ".txt");
+			Scanner scan = null;
+			try {
+				scan = new Scanner(file);
+			} catch (FileNotFoundException e) {
+				try {
+					if (file.createNewFile()) {
+						file.createNewFile();
+					} else {
+						
+					}
+					file.createNewFile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			profileCreateWindow.close();
+			profileSelect(primaryStage);
+		});
+		
+		grid.setConstraints(submit, 1, 0);
+		grid.getChildren().addAll(name, submit);
+		//Style container
+		grid.setPadding(new Insets(25));
+		//Set view in window
+		profileCreateWindow.setScene(new Scene(grid));
+		//Launch
+		profileCreateWindow.show();
 	}
 
 	public void play(Stage primaryStage){
 		Stage levelMenuWindow = new Stage();
-		levelMenuWindow.setTitle("RAT GAME");
+		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
 		//Create view in Java
 		Label title = new Label("Select a level");
 		Button level1Button = new Button("LEVEL 1");
 		Button level2Button = new Button("LEVEL 2");
 		Button level3Button = new Button("LEVEL 3");
 		Button level4Button = new Button("LEVEL 4");
+		Button loadSavedButton = new Button("LOAD LAST SAVE");
 		Button backButton = new Button("BACK");
 		level1Button.setOnAction(event -> {
 			levelMenuWindow.close();
@@ -173,6 +285,11 @@ public class NewMain extends Application {
 		level4Button.setOnAction(event -> {
 			levelMenuWindow.close();
 			level4();
+			mainTick();
+		});
+		loadSavedButton.setOnAction(event -> {
+			levelMenuWindow.close();
+			savedLevel();
 			mainTick();
 		});
 		backButton.setOnAction(event -> {
@@ -339,6 +456,17 @@ public class NewMain extends Application {
 		Scene level4Scene = new Scene(root);
 		drawGame("level4.txt");
 		levelStage.setScene(level4Scene);
+		levelStage.show();
+	}
+	
+	public void savedLevel(){
+		CANVAS_WIDTH = 1200;
+		CANVAS_HEIGHT = 800;
+		levelStage.setTitle("RAT GAME : LVL???");
+		Pane root = buildGUI();
+		Scene savedlevelScene = new Scene(root);
+		//drawGame(playerID + "savedGame.txt");
+		levelStage.setScene(savedlevelScene);
 		levelStage.show();
 	}
 

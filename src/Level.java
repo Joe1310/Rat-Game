@@ -35,7 +35,6 @@ public class Level {
 		} else {
 			readGame(scan);
 		}
-
 	}
 
 	//Reads fresh level data
