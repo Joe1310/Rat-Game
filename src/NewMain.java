@@ -375,7 +375,15 @@ public class NewMain extends Application {
 
 		Level gameLevel = new Level(filename);
 		int[] spawn = gameLevel.getItemSpawnRates();
-		Inventory.setupNewInventory(spawn[0], spawn[1], spawn[2], spawn[3], spawn[4], spawn[5], spawn[6], spawn[7], spawn[8], spawn[9]);
+		if (!filename.contains("SavedGame")) {
+				Inventory.setupNewInventory(spawn[0], spawn[1], spawn[2], spawn[3], spawn[4], spawn[5], spawn[6], spawn[7]);
+		} else {
+			int[] quan = gameLevel.getInventoryQuantities();
+			int[] timer = gameLevel.getInventoryTimers();
+			Inventory.setupSpawnRates(spawn[0], spawn[1], spawn[2], spawn[3], spawn[4], spawn[5], spawn[6], spawn[7]);
+			Inventory.setupQuantity(quan[0], quan[1], quan[2], quan[3], quan[4], quan[5], quan[6], quan[7]);
+			Inventory.setupTimers(timer[0], timer[1], timer[2], timer[3], timer[4], timer[5], timer[6], timer[7]);
+		}
 
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		// Set the background to beige.
@@ -476,7 +484,6 @@ public class NewMain extends Application {
 	public void level1(){
 		CANVAS_WIDTH = 650;
 		CANVAS_HEIGHT = 400;
-		Inventory.setupInventory(5, 5, 5, 5, 5, 5, 5, 5);
 		levelStage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI();
 		Scene level1Scene = new Scene(root);
@@ -492,7 +499,6 @@ public class NewMain extends Application {
 	public void level2(){
 		CANVAS_WIDTH = 1100;
 		CANVAS_HEIGHT = 850;
-		Inventory.setupInventory(5, 5, 5, 5, 5, 5, 5, 5);
 		levelStage.setTitle("RAT GAME : LVL2");
 		Pane root = buildGUI();
 		Scene level2Scene = new Scene(root);
@@ -508,7 +514,6 @@ public class NewMain extends Application {
 	public void level3(){
 		CANVAS_WIDTH = 950;
 		CANVAS_HEIGHT = 550;
-		Inventory.setupInventory(5, 5, 5, 5, 5, 5, 5, 5);
 		levelStage.setTitle("RAT GAME : LVL3");
 		Pane root = buildGUI();
 		Scene level3Scene = new Scene(root);

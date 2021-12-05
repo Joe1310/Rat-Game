@@ -15,6 +15,8 @@ public class Level {
 	 int remainingTime = 0;
 	 static int maxRats;
 	 static int[] itemSpawnRates;
+	 static int[] inventoryQuantities;
+	 
 	 static Tile[][] tileLayout;
 	 static int levelNumber = 1;
 
@@ -42,7 +44,7 @@ public class Level {
 				levelNumber = 2;
 			} else if(filename.contains("3")) {
 				levelNumber = 3;
-			} else {
+			} else if (filename.contains("4")){
 				levelNumber = 4;
 			}
 			readFreshLevel(scan);
@@ -278,10 +280,11 @@ public class Level {
 			}
 			saveGame.write(levelNumber + "\n");
 			saveGame.write(levelScore + "\n");
+			saveGame.write(Inventory.get());
 			saveGame.write(parTime + "\n");
 			saveGame.write(maxRats + "\n");
-			saveGame.write(itemSpawnRates + "\n");
-			//inventory writing
+			saveGame.write(Inventory.get());
+			saveGame.write(Inventory.get());
 			int row = tileLayout[0].length;
 			int column = tileLayout.length;
 			saveGame.write(column + " ");
@@ -305,6 +308,14 @@ public class Level {
 
 	public int[] getItemSpawnRates() {
 		return itemSpawnRates;
+	}
+	
+	public int[] getInventoryQuantities() {
+		return inventoryQuantities;
+	}
+	
+	public int[] getInventoryTimers() {
+		return inventoryTimers;
 	}
 	
 	public static int getLevelNumber() {
