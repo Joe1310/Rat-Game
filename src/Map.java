@@ -30,7 +30,7 @@ public class Map {
      * @param tileLayout Layout of Tile objects in the map.
      * @param x Number of rows.
      * @param y Number of columns.
-     * @param maxRat Maximum number of rats before the game is lost.
+     * @param maxRat Maximum number of rats in the map.
      */
     public Map(Tile[][] tileLayout, int x, int y, int maxRat) {
         this.row = x;
@@ -176,7 +176,7 @@ public class Map {
      *
      * @param x The x coordinate of the tile.
      * @param y the y coordinate of the tile.
-     * @return Returns the options to move (N - North, E - East, S - South, W - West) from the given tile location.
+     * @return Returns the options to move from the given tile location.
      */
     public static ArrayList<String> getMovementOptions(int x, int y){
         ArrayList<String> movementOptions = new ArrayList<String>();
