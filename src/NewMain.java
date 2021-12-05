@@ -6,6 +6,7 @@
  * <p> 7. Purpose of the program: Handling multiple behavior of classes</p>
  * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
  * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
+ * @version 2.0
  */
 
 

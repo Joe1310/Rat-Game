@@ -6,6 +6,7 @@
  * <p> 7. Purpose of the program: damage rat's health with poison behavior & characteristics</p>
  * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
  * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
+ * @version 2.0
  */
 
 import java.util.Arrays;
