@@ -107,6 +107,7 @@ public class Gas extends Entity {
 			}		
 		}
 	}
+
 	/**
 	 * Method to return the attribute values of the Gas entity.
 	 *
