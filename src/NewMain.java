@@ -158,28 +158,32 @@ public class NewMain extends Application {
 				profileSelect.getItems().add(profileName);
 			}
 		}
-		
+
 		Button submit = new Button("SUBMIT");
 		submit.setOnAction(event -> {
 			String name = profileSelect.getValue();
-			File profile = new File("src/profiles/" + name + ".txt");
-			currentPlayer = new PlayerData(profile);
-			profileSelectWindow.close();
-			levelSelect(primaryStage);
+			if(name != null) {
+				File profile = new File("src/profiles/" + name + ".txt");
+				currentPlayer = new PlayerData(profile);
+				profileSelectWindow.close();
+				levelSelect(primaryStage);
+			}
 		});
-		
+
+		Button delete = new Button("DELETE");
+		delete.setOnAction(event -> {
+			String name = profileSelect.getValue();
+			if(name != null) {
+				File data = new File("src/profiles/" + name + ".txt");
+				data.delete();
+				profileSelect.getItems().remove(name);
+			}
+		});
+
 		Button create = new Button("CREATE");
 		create.setOnAction(event -> {
 			profileSelectWindow.close();
 			profileCreator(primaryStage);
-		});
-		
-		Button delete = new Button("DELETE");
-		delete.setOnAction(event -> {
-			String name = profileSelect.getValue();
-			File data = new File("src/profiles/" + name + ".txt");
-			data.delete();
-			profileSelect.getItems().remove(name);
 		});
 		
 		Button backButton = new Button(" BACK ");
@@ -191,7 +195,7 @@ public class NewMain extends Application {
 				e.printStackTrace();
 			}
 		});
-		
+
 		GridPane container = new GridPane();
 		container.getChildren().addAll(profileSelect, submit, delete, create, backButton);
 		container.setConstraints(submit, 1, 0);
