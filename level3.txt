@@ -1,8 +1,8 @@
 4
-M 1 1 N
-F 15 1 S
-M 2 8 N
-F 15 7 S
+M 1 1 N 100 false
+F 15 1 S 100 false
+M 2 8 N 100 false
+F 15 7 S 100 false
 500
 20
 5
