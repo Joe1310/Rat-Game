@@ -264,7 +264,7 @@ public class Inventory {
     	femaleSexChangeQuantity = femaleSexChange;
     	maleSexChangeQuantity = maleSexChange;
     	noEntrySignQuantity = noEntrySign;
-    	bombQuantity = 0;
+    	bombQuantity = bomb;
     }
     
     public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
@@ -275,7 +275,7 @@ public class Inventory {
     	femaleSexChangeSpawnRate = femaleSexChange;
     	maleSexChangeSpawnRate = maleSexChange;
     	noEntrySignSpawnRate = noEntrySign;
-    	bombSpawnRate = bomb;
+    	bombSpawnRate = 0;
     }
     
     public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
