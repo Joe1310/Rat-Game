@@ -5,6 +5,7 @@
  * FileName : Leaderboard.java
  * 
  * @author Patel and Elliot.
+ * @version 2.0
  */
 
 import java.io.File;
