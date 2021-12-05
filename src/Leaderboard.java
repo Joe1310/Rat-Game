@@ -281,4 +281,36 @@ public class Leaderboard {
 
 		return line;
 	}
+	
+	/***
+	 * Get method for storing Leader board data in a specific format, in the text
+	 * file.
+	 * 
+	 * @param levelNo Number of the Level
+	 * @return line Output line for text file
+	 */
+	public static String formatLeaderboardData(int levelNo) {
+
+		String line = "";
+
+		if (levelNo == ONE) {
+			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
+				line += (i + 1) + ".\t" + firstNames[i] + " " + firstScores[i] + "\n";
+			}
+		} else if (levelNo == TWO) {
+			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
+				line += (i + 1) + ".\t" + secondNames[i] + "" + secondScores[i] + "\n";
+			}
+		} else if (levelNo == THREE) {
+			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
+				line += (i + 1) + ".\t" + thirdNames[i] + " " + thirdScores[i] + "\n";
+			}
+		} else {
+			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
+				line += (i + 1) + ".\t" + fourthNames[i] + " " + fourthScores[i] + "\n";
+			}
+		}
+
+		return line;
+	}
 }

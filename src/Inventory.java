@@ -217,7 +217,7 @@ public class Inventory {
     }
 
     /**
-     * This sets up the inventory when you play a new level from the beginning 
+     * This sets up the whole inventory when given the integers representing the spawn rates of each item
      * @param gas The spawn rate of the gas item
      * @param deathRat The spawn rate of the death rat item
      * @param poison The spawn rate of the poison item
@@ -257,7 +257,7 @@ public class Inventory {
     }
     
     /**
-     * This sets up the quantities of items when starting a saved level
+     * This set the quantities of items using the given integers
      * @param gas The quantity of the gas item
      * @param deathRat The quantity of the death rat item
      * @param poison The quantity of the poison item
@@ -278,6 +278,17 @@ public class Inventory {
     	bombQuantity = bomb;
     }
     
+    /**
+     * This sets the spawn rates of the items using the given integers
+     * @param gas The spawn rate of the gas item
+     * @param deathRat The spawn rate of the death rat item
+     * @param poison The spawn rate of the poison item
+     * @param sterilisation The spawn rate of the sterilisation item
+     * @param femaleSexChange The spawn rate of the female sex change item
+     * @param maleSexChange The spawn rate of the male sex change item
+     * @param noEntrySign The spawn rate of the no entry sign item
+     * @param bomb The spawn rate of the bomb item
+     */
     public static void setupSpawnRates(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasSpawnRate = gas;
     	deathRatSpawnRate = deathRat;
@@ -289,6 +300,17 @@ public class Inventory {
     	bombSpawnRate = 0;
     }
     
+    /**
+     * This sets the timers of the items using the given integers
+     * @param gas The value for the gas timer
+     * @param deathRat The value for the death rat timer
+     * @param poison The value for the poison timer
+     * @param sterilisation The value for the sterilisation timer
+     * @param femaleSexChange The value for the female sex change timer
+     * @param maleSexChange The value for the male sex change timer
+     * @param noEntrySign The value for the no entry sign timer
+     * @param bomb The value for the bomb timer
+     */
     public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
     	gasTimer = gas;
     	deathratTimer = deathRat;
@@ -300,6 +322,9 @@ public class Inventory {
     	bombTimer = bomb;
     }
     
+    /**
+     * This is ran once per game tick, and counts all the item timers down. Once they reach 0, the add for that item is called and the timer is reset
+     */
     public static void act() {
     	gasTimer -= 1;
     	deathratTimer -= 1;
@@ -344,12 +369,26 @@ public class Inventory {
     	}
     }
 
+    /**
+     * Returns all the quantities of each item
+     * @return A string containing every item quantity
+     */
     public static String returnQuantity() {
     	return (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " " + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity);
     }
+    
+    /**
+     * Returns all the spawn rates of each item
+     * @return A string containing all the spawn rates of each item
+     */
     public static String returnSpawnRates() {
     	return (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " + femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " + bombSpawnRate);
     }
+    
+    /**
+     * Returns all the current counts on each item's timer
+     * @return A string containing all the current counts on each item's timer
+     */
     public static String returnTimers() {
     	return (gasTimer + " " + deathratTimer + " " + poisonTimer + " " + sterilisationTimer + " " + femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
     }
