@@ -32,7 +32,7 @@ class Sterilisation extends Entity {
     }
 
     /**
-     * Method to cause the sterilisation object to sterilise a rat and then delete itself.
+     * Method to run the actions of the entity every tick.
      */
     public void act() {
         steriliseRats();
