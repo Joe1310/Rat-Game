@@ -57,7 +57,7 @@ public class Leaderboard {
 	 * Method passes the leaderboards of each levels from the mentioned text files,
 	 * using scanner to readLeaderboard method.
 	 * 
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException If the method fails to locate the required file 
 	 */
 	public void readLeaderboards() throws FileNotFoundException {
 		
@@ -90,8 +90,8 @@ public class Leaderboard {
 	 * Method Reads all the data of the leaderboard and stores them in the
 	 * appropriate level array
 	 * 
-	 * @param board
-	 * @param levelNo
+	 * @param board Leader board 
+	 * @param levelNo Number of the Level 
 	 */
 	public void readLeaderboard(Scanner board, int levelNo) {
 		
@@ -172,9 +172,9 @@ public class Leaderboard {
 	 * Method calls updatePosition method while checking particular conditions and
 	 * passes the parameter to it.
 	 * 
-	 * @param level
-	 * @param playerName
-	 * @param score
+	 * @param level Number of the Level
+	 * @param playerName Name of the Player
+	 * @param score Score of the Player
 	 */
 	public static void inputPlayerScore(int level, String playerName, int score) {
 		if (level == ONE) {
@@ -192,11 +192,11 @@ public class Leaderboard {
 	 * Method checks for the ranking of the player on the basis of their scores and
 	 * updates by passing them to updateLeaderboard method.
 	 * 
-	 * @param levelScores
-	 * @param levelNames
-	 * @param playerID
-	 * @param score
-	 * @param levelNo
+	 * @param levelScores Array of player's scores on the leader board
+	 * @param levelNames Array of player's names on the leader board
+	 * @param playerID Player's name
+	 * @param score Player's score
+	 * @param levelNo Number of the Level
 	 */
 	public static void updatePosition(int[] levelScores, String[] levelNames, String playerID, int score, int levelNo) {
 
@@ -217,12 +217,12 @@ public class Leaderboard {
 	 * Method updates the Leader board of the given level using the passed
 	 * parameters.
 	 * 
-	 * @param scores
-	 * @param names
-	 * @param loc
-	 * @param playerID
-	 * @param score
-	 * @param levelNo
+	 * @param scores Array of player's scores on the leader board
+	 * @param names Array of player's names on the leader board
+	 * @param loc Location where the Recent winner's player is going to be added
+	 * @param playerID Player's name
+	 * @param score Player's score
+	 * @param levelNo Number of the Level
 	 */
 	private static void updateLeaderboard(int[] scores, String[] names, int loc, String playerID, int score,
 			int levelNo) {
@@ -254,8 +254,8 @@ public class Leaderboard {
 	 * Get method for storing Leader board data in a specific format, in the text
 	 * file.
 	 * 
-	 * @param levelNo
-	 * @return line
+	 * @param levelNo Number of the Level
+	 * @return line Output line for text file
 	 */
 	public static String getLeaderboardData(int levelNo) {
 
