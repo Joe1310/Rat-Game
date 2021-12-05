@@ -54,7 +54,7 @@ public class Explosion extends Entity {
     }
 
 	/**
-	 * Method to return the attribute values of the Gas entity.
+	 * Method to return the attribute values of the Explosion entity.
 	 *
 	 * @return Returns attribute values as single String.
 	 */
