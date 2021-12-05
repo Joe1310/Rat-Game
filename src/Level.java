@@ -14,9 +14,9 @@ public class Level {
 	 static int parTime;
 	 int remainingTime = 0;
 	 static int maxRats;
-	 static int[] itemSpawnRates;
-	 static int[] inventoryQuantities;
-	 static int[] inventoryTimers;
+	 static int[] itemSpawnRates = new int[8];
+	 static int[] inventoryQuantities = new int[8];
+	 static int[] inventoryTimers = new int[8];
 	 
 	 static Tile[][] tileLayout;
 	 static int levelNumber = 1;
@@ -71,6 +71,9 @@ public class Level {
 
 		parTime = scan.nextInt();
 		maxRats = scan.nextInt();
+		for(int i = 0; i < 8; i++) {
+			itemSpawnRates[i] = scan.nextInt();
+		}
 		column = scan.nextInt();
 		row = scan.nextInt();
 		tileLayout = new Tile[column][row];
@@ -121,6 +124,12 @@ public class Level {
 		}
 		levelNumber = scan.nextInt();
 		levelScore = scan.nextInt();
+		for (int i = 0; i < 8; i++) {
+			inventoryQuantities[i] = scan.nextInt();
+		}
+		for (int i = 0; i < 8; i++) {
+			inventoryTimers[i] = scan.nextInt();
+		}
 		readLevel(scan);
 	}
 
@@ -281,11 +290,11 @@ public class Level {
 			}
 			saveGame.write(levelNumber + "\n");
 			saveGame.write(levelScore + "\n");
-			saveGame.write(Inventory.get());
+			saveGame.write(Inventory.returnQuantity() + "\n");
+			saveGame.write(Inventory.returnTimers() + "\n");
 			saveGame.write(parTime + "\n");
 			saveGame.write(maxRats + "\n");
-			saveGame.write(Inventory.get());
-			saveGame.write(Inventory.get());
+			saveGame.write(Inventory.returnSpawnRates() + "\n");
 			int row = tileLayout[0].length;
 			int column = tileLayout.length;
 			saveGame.write(column + " ");
