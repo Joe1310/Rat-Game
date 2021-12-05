@@ -1,24 +1,25 @@
-/**
- * <p> 1. File name: MaleSexChange.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Changing the sex of the male rat</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
- */
-
-
-
-
 import java.util.Arrays;
 
+/**
+ * Class to model a MaleSexChange entity.
+ *
+ * @author Elliot, Ollie
+ * @version 1.0
+ */
 public class MaleSexChange extends Entity {
-	
+
+	/**
+	 * Constructor to create a MaleSexChange object.
+	 *
+	 * @param location The x, y coordinates of the MaleSexChange object.
+	 */
 	public MaleSexChange(int[] location) {
 		super(location, "MaleSexChange.png", "MSC");
 	}
-	
+
+	/**
+	 * Method to change the gender of any female rats that go through the tile it is placed on.
+	 */
 	public void act() {
 		for (int i = Rat.getRats().size()-1; i > -1; i--) {
 			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
@@ -30,7 +31,12 @@ public class MaleSexChange extends Entity {
 	        }
         }
 	}
-	
+
+	/**
+	 * Method to return the attribute values of the MaleSexChange entity (Item Type, x coordinate, y coordinate).
+	 *
+	 * @return Returns attribute values as single String
+	 */
 	public String toString() {
     	return (this.getType() + " " + location[0] + " " + location[1]);
     }
