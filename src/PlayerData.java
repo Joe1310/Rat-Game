@@ -58,7 +58,7 @@ public class PlayerData {
 			playerFile.close();
 
 		} catch (IOException e) {
-			System.out.println("\nAn error occurred while saving the current game.");
+			System.out.println("\nAn error occurred while updating player profile.");
 			e.printStackTrace();
 		}
 	}

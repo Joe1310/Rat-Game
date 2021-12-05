@@ -16,11 +16,6 @@ public class Leaderboard {
 	private static int[] fourthScores = new int[10];
 	private static String[] fourthNames = new String[10];
 	
-	public static void main(String[] args) {
-		Leaderboard l1 = new Leaderboard();
-		System.out.println(l1.getLeaderboardData(1));
-	}
-	
 	//Constructor for saving the PlayerData
 	public Leaderboard() {
 		try {

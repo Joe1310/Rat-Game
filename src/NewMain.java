@@ -12,13 +12,18 @@
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +49,11 @@ public class NewMain extends Application {
 	private static int CANVAS_WIDTH = 1850;
 	private static int CANVAS_HEIGHT = 1000;
 	
+	/*
+	 * We need to create final variables for each levels canvas size
+	 * so that saved game can use it
+	 */
+	
 	public boolean saved = false;
 
 	public Stage levelStage = new Stage();
@@ -59,10 +69,11 @@ public class NewMain extends Application {
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
 		TextArea MOTD = new TextArea(messageOfTheDay);
+		MOTD.setMaxWidth(500);
+		MOTD.setWrapText(true);
 		MOTD.setEditable(false);
-		MOTD.setStyle("-fx-font-size: 1.5em;");
-		MOTD.setPrefWidth(messageOfTheDay.length() * 10);
-		MOTD.setPrefHeight(30);
+		MOTD.setStyle("-fx-font-size: 1.5em; -fx-border-color: #FFFFFF; -fx-focus-color: #FFFFFF; -fx-faint-focus-color: #FFFFFF;");
+		MOTD.setPrefHeight(messageOfTheDay.length() + messageOfTheDay.length()/8);
 
 		Button startButton = new Button("START");
 		Button highScoresButton = new Button("HIGH SCORES");
@@ -94,13 +105,28 @@ public class NewMain extends Application {
 			howToPlay(primaryStage);
 		});
 		quitButton.setOnAction(event -> menuWindow.close());
-
-		VBox container = new VBox(logoView, MOTD, maRatView, startButton, highScoresButton,
+		
+		GridPane container = new GridPane();
+		container.setConstraints(MOTD, 0, 1, 3, 1);
+		container.setConstraints(maRatView, 1, 2, 2, 5);
+		container.setConstraints(startButton, 0, 2);
+		container.setConstraints(highScoresButton, 0, 3);
+		container.setConstraints(howToPlayButton, 0, 4);
+		container.setConstraints(quitButton, 0, 5);
+		container.setPadding(new Insets(40));
+		container.getChildren().addAll(MOTD, maRatView, startButton, highScoresButton,
 				howToPlayButton, quitButton);
-		container.setSpacing(15);
-		container.setPadding(new Insets(25));
+		
+		
+		BorderPane border = new BorderPane();
+		border.setMaxWidth(400);
+		border.setPrefWidth(400);
+		border.setTop(logoView);
+		border.setAlignment(logoView, Pos.TOP_CENTER);
+		border.setCenter(container);
+		border.setStyle("-fx-background-color: #FFFFFF;");
 
-		menuWindow.setScene(new Scene(container));
+		menuWindow.setScene(new Scene(border));
 		//Launch
 		menuWindow.show();
 	}
@@ -507,7 +533,7 @@ public class NewMain extends Application {
 	public void savedLevel(){
 		CANVAS_WIDTH = 1200;
 		CANVAS_HEIGHT = 800;
-		levelStage.setTitle("RAT GAME : LVL???");
+		levelStage.setTitle("RAT GAME : SAVED LEVEL");
 		Pane root = buildGUI();
 		Scene savedlevelScene = new Scene(root);
 		drawGame(currentPlayer.getPlayerName() + "savedGame.txt");
@@ -523,7 +549,7 @@ public class NewMain extends Application {
 		BorderPane root = new BorderPane();
 
 		// Create canvas
-		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT + 50);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		Entity.setGC(gc);
 		root.setCenter(canvas);
@@ -716,6 +742,7 @@ public class NewMain extends Application {
 		return new int[]{x,y};
 	}
 
+	//Add something here to try/catch or throw idex out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
 	private boolean checkLegalTile(int[] location) {
 		boolean result = false;
 		System.out.println(location[0]);
