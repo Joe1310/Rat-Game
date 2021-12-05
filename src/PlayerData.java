@@ -9,8 +9,6 @@
  * @version 2.0
  */
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

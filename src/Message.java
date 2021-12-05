@@ -4,8 +4,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * Class to get the message of the day from the given website URL by decoding the result of a GET request to the website
+ * and returning the result.
+ *
+ * @author Patel
+ * @version 1.0
+ */
 public class Message {
 
+	/**
+	 * Method to get the message of the day.
+	 *
+	 * @return The message of the day.
+	 * @throws IOException Throws an IOException if the HTTP request fails.
+	 */
 	public String MessageOfTheDay() throws IOException {
 		
 		String code = GetHTTP("http://cswebcat.swansea.ac.uk/puzzle");
@@ -18,7 +31,14 @@ public class Message {
 	
 		return message;
 	}
-	
+
+	/**
+	 * Method to issue a GET request to a given url.
+	 *
+	 * @param link Website URL
+	 * @return returns the result of the GET request
+	 * @throws IOException Throws an IOException if the HTTP request fails.
+	 */
 	public String GetHTTP(String link) throws IOException {
 		
 		URL url = new URL(link);
@@ -30,7 +50,13 @@ public class Message {
 
 		return scan.nextLine();
 	}
-	
+
+	/**
+	 * Method to decode a given String with a shift value of 1.
+	 *
+	 * @param code Cipher text to be decoded.
+	 * @return returns the result of decoding the string.
+	 */
 	public static String decode(String code) {
 		
 		String passcode = "";
@@ -44,7 +70,14 @@ public class Message {
 		
 		return passcode;
 	}
-	
+
+	/**
+	 * Method to decipher a given character by shifting it by a given value.
+	 *
+	 * @param c Character to be shifted.
+	 * @param shift Amount to shift the character by.
+	 * @return Deciphered character.
+	 */
 	public static char cipher(char c, int shift) {
 		
 		if(shift % 2 != 0) {

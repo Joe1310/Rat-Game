@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Leaderboard {
 
-
 	private static int[] firstScores = new int[10];
 	private static String[] firstNames = new String[10];
 	private static int[] secondScores = new int[10];

@@ -9,10 +9,6 @@
  * @version 2.0
  */
 
-
-
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,6 +25,14 @@ public class AdultRat extends Rat {
     private int timePregnant;
     private int matingCooldown;
 
+	/**
+	 * AdultRat constructor with some inputs
+	 * @param sex
+	 * @param location
+	 * @param directionFacing
+	 * @param health
+	 * @param sterile
+	 */
     public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile){
     	super(health, sterile, location, directionFacing, (sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
         this.sex = sex;
@@ -38,7 +42,21 @@ public class AdultRat extends Rat {
         this.babyAmmount = randomize(2) + 2;
         this.matingCooldown = 0;
     }
-    
+
+	/**
+	 * AdultRat constructor with more inputs
+	 * @param sex
+	 * @param location
+	 * @param directionFacing
+	 * @param health
+	 * @param sterile
+	 * @param pregnant
+	 * @param mating
+	 * @param timePregnant
+	 * @param timeMating
+	 * @param matingCooldown
+	 * @param babyAmmount
+	 */
     public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile, boolean pregnant, 
     			boolean mating, int timePregnant, int timeMating, int matingCooldown, int babyAmmount){
     	super(health, sterile, location, directionFacing, (sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
@@ -50,9 +68,22 @@ public class AdultRat extends Rat {
         this.matingCooldown = matingCooldown;
         this.babyAmmount = babyAmmount;
     }
+
+	/**
+	 * Check if the Rat is pregnant
+	 * <p> no side-effect</p>
+	 * <p> not referentially transparent </p>
+	 * @return 'true' is the rat is pregnant
+	 */
     public boolean getIsPregnant(){
     	return this.isPregnant;
 	}
+
+	/**
+	 * ratDeath - whenever called, the rat dies
+	 * and score added; if the rat is pregnant then soore added twice
+	 * <p> has side effect</p>
+	 */
 	@Override
 	protected void ratDeath() {
 		rats.remove(this);
@@ -65,6 +96,10 @@ public class AdultRat extends Rat {
 		Level.addScore();
 	}
 
+	/**
+	 * This method checks if the rat is mating and set the behavior accordingly
+	 * <p> no side-effect</p>
+	 */
     public void act() {
     	if (matingCooldown <= 0) {
     		procreateCheck();
@@ -82,15 +117,13 @@ public class AdultRat extends Rat {
     			move();
     		}
     	}
-        
     }
 
-    /*
-     * Mating
-     * Checks if a male and female rat are on top of each other
-     * Stop Movement
-     * Make female rat pregnant
-     */
+	/**
+	 * Mating, Checks if a male and female rat are on top of each other,
+	 * Stop Movement, Make female rat pregnant
+	 * <p> has side-effect</p>
+	 */
     public void procreateCheck(){
     	for (int i = Rat.getRats().size()-1; i > -1; i--) {
     	    if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
@@ -112,8 +145,13 @@ public class AdultRat extends Rat {
     		}
         }
     }
-    
-    public void mating() {
+
+	/**
+	 * Checks if the rat's meting time is same as the max mating time and stop mating
+	 * if MATING_TIME is equal to it's time.
+	 * <p> has side effect</p>
+	 */
+	public void mating() {
 		if (timeMating == MATING_TIME) {
 			isMating = false;
 			timeMating = 0;
@@ -122,8 +160,9 @@ public class AdultRat extends Rat {
 		}
     }
     
-    /*
+    /**
      * Makes pregnant female rat pump out a few babies
+	 * <p> has side-effect</p>
      */
     public void pregnancy() {
         if(timePregnant != PREGNANCY_TIME) {
@@ -138,8 +177,12 @@ public class AdultRat extends Rat {
         	}	
         }
     }
-    
-    public void makeBabyRat() {
+
+	/**
+	 * Creates baby rats
+	 * <p> has side-effect</p>
+	 */
+	public void makeBabyRat() {
     	int[] babyLocation = new int[2];
     	babyLocation[0] = this.location[0];
     	babyLocation[1] = this.location[1];
@@ -148,19 +191,38 @@ public class AdultRat extends Rat {
     	Entity baby = new BabyRat(babyLocation, newDirection, this.sterile);
     }
 
+	/**
+	 * updates rat's type
+	 * <p> has side-effect</p>
+	 */
     public void updateRatType() {
     	setRatType(this.sex + "Rat");
     }
-    
-    public String getSex(){
+
+	/**
+	 * get the sex of the rat
+	 * <p> not referentially transparent</p>
+	 * @return the sex of the rat
+	 */
+	public String getSex(){
         return this.sex;
     }
 
+	/**
+	 * set sex of the rat
+	 * <p> has side-effect</p>
+	 * @param sex
+	 */
     public void setSex(String sex) {
         this.sex = sex;
     }
-    
-    public void setPregnant(boolean pregnant) {
+
+	/**
+	 * set the pregnancy of the rat
+	 * <p> has side effect</p>
+	 * @param pregnant
+	 */
+	public void setPregnant(boolean pregnant) {
     	this.isPregnant = pregnant;
     }
 

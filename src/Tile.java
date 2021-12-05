@@ -1,7 +1,8 @@
-import java.util.ArrayList;
-
 /**
+ * Class to model a tile for the map.
  *
+ * @author Joe, Jay
+ * @version 1.0
  */
 public class Tile {
     private final char tileType;
@@ -9,6 +10,8 @@ public class Tile {
     private final int y;
 
     /**
+     * Constructor to create a tile entity.
+     *
      * @param tileType The type of tile (Grass, Tunnel, Path).
      * @param x x coordinate of the tile.
      * @param y y coordinate of the tile.
@@ -20,12 +23,10 @@ public class Tile {
     }
 
     /**
-     * @return return a list of movement options from that tile.
+     * Method to get the tile type associated with the tile.
+     *
+     * @return Tile type associated with the tile.
      */
-    public ArrayList<String> getMovementOptions() {
-        return Map.getMovementOptions(x, y);
-    }
-
     public char getTileType(){
         return this.tileType;
     }

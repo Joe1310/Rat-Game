@@ -25,7 +25,7 @@ public class BabyRat extends Rat {
     public BabyRat(String sex, int[] location, String directionFacing, int health, boolean sterile){
         super(health, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
         this.age = 0;
-        if (sex.equals("BF") || sex.equals("F")) {
+        if (sex.equals("F") || (sex.equals("BF"))) {
             this.sex = "F";
         } else {
             this.sex = "M";
@@ -59,6 +59,6 @@ public class BabyRat extends Rat {
     }
 
     public String toString(){
-        return "B" + " " + sex  + " " + this.location[0] + " " + this.location[1] + " " + directionFacing + " "  + health  + " " + sterile;
+        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " + directionFacing + " "  + health  + " " + sterile;
     }
 }
