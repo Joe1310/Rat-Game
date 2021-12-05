@@ -51,7 +51,7 @@ public class Map {
     }
 
     /**
-     * Method draw the tiles and return the layout.`
+     * Method draws the tiles and return the layout.`
      *
      * @param gc Graphics context used to draw tiles.
      */
@@ -109,7 +109,7 @@ public class Map {
                 RenderBar.drawProgressBar(gc, column * 50, row * 50);
                 ArrayList<Entity> ents = Entity.getEntities();
                 int maxEntities = ents.size();
-                tileOut(Map.gc); //Remove this too
+                tileOut(Map.gc);
                 //for loop for drawing
                 for (Entity ent : Entity.getEntities()) {
                     ent.draw();
