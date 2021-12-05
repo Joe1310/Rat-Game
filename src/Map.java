@@ -108,6 +108,9 @@ public class Map {
                 }else if (Rat.getRats().size() == Level.getMap().maxRat) {
                     exec.shutdown();
                 }
+                if (Rat.getRats().size() == 0){
+                    exec.shutdown();
+                }
             }
         }, 0, 250, TimeUnit.MILLISECONDS);
         return tick;

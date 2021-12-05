@@ -263,40 +263,50 @@ public class NewMain extends Application {
 	public void levelSelect(Stage primaryStage){
 		Stage levelMenuWindow = new Stage();
 		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
+		VBox container = new VBox();
 		//Create view in Java
 		Label title = new Label("Select a level");
 		Button level1Button = new Button("LEVEL 1");
-		Button level2Button = new Button("LEVEL 2");
-		Button level3Button = new Button("LEVEL 3");
-		Button level4Button = new Button("LEVEL 4");
-		Button loadSavedButton = new Button("LOAD LAST SAVE");
-		Button backButton = new Button("BACK");
 		level1Button.setOnAction(event -> {
 			levelMenuWindow.close();
 			level1();
 			mainTick();
-
 		});
-		level2Button.setOnAction(event -> {
-			levelMenuWindow.close();
-			level2();
-			mainTick();
-		});
-		level3Button.setOnAction(event -> {
-			levelMenuWindow.close();
-			level3();
-			mainTick();
-		});
-		level4Button.setOnAction(event -> {
-			levelMenuWindow.close();
-			level4();
-			mainTick();
-		});
-		loadSavedButton.setOnAction(event -> {
-			levelMenuWindow.close();
-			savedLevel();
-			mainTick();
-		});
+		container.getChildren().addAll(title, level1Button);
+		if (currentPlayer.getMaxLevel() >= 2) {
+			Button level2Button = new Button("LEVEL 2");
+			container.getChildren().add(level2Button);
+			level2Button.setOnAction(event -> {
+				levelMenuWindow.close();
+				level2();
+				mainTick();
+			});
+		} if (currentPlayer.getMaxLevel() >= 3) {
+			Button level3Button = new Button("LEVEL 3");
+			container.getChildren().add(level3Button);
+			level3Button.setOnAction(event -> {
+				levelMenuWindow.close();
+				level3();
+				mainTick();
+			});
+		} if (currentPlayer.getMaxLevel() >= 4){
+			Button level4Button = new Button("LEVEL 4");
+			container.getChildren().add(level4Button);
+			level4Button.setOnAction(event -> {
+				levelMenuWindow.close();
+				level4();
+				mainTick();
+			});
+		} if (new File(currentPlayer.getPlayerName() + "SavedGame.txt").exists()) {
+			Button loadSavedButton = new Button("LOAD LAST SAVE");
+			container.getChildren().add(loadSavedButton);
+			loadSavedButton.setOnAction(event -> {
+				levelMenuWindow.close();
+				savedLevel();
+				mainTick();
+			});
+		}
+		Button backButton = new Button("BACK");
 		backButton.setOnAction(event -> {
 			levelMenuWindow.close();
 			try {
@@ -305,7 +315,8 @@ public class NewMain extends Application {
 				e.printStackTrace();
 			}
 		});
-		VBox container = new VBox(title,level1Button,level2Button,level3Button,level4Button, loadSavedButton, backButton);
+
+		container.getChildren().add(backButton);
 		//Style container
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
@@ -495,7 +506,6 @@ public class NewMain extends Application {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		Entity.setGC(gc);
 		root.setCenter(canvas);
-
 
 		Image gasImg = new Image("Gas.png");
 		ImageView gasButton = new ImageView(gasImg);
