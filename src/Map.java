@@ -17,7 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Class to model a Map of Tile objects
+ * Class to model a Map of Tile objects.
  *
  * @author Joe, Jay
  * @version 1.0
@@ -36,7 +36,7 @@ public class Map {
     private static GraphicsContext gc;
 
     /**
-     * Constructor to create a Map object
+     * Constructor to create a Map object.
      *
      * @param tileLayout Layout of Tile objects in the map.
      * @param x Number of rows.
@@ -51,7 +51,7 @@ public class Map {
     }
 
     /**
-     * Method draws the tiles and return the layout.`
+     * Method draws the tiles and return the layout.
      *
      * @param gc Graphics context used to draw tiles.
      */
@@ -98,7 +98,7 @@ public class Map {
      * Method to continuously call the movement method on the rats, redraw the tiles and keep track of how
      * long the level has been played for.
      *
-     * @return Tick which increases by 1 every 0.5 seconds
+     * @return Tick which increases by 1 every 0.25 seconds.
      */
     public int entityTick() {
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
