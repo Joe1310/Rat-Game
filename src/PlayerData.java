@@ -52,12 +52,27 @@ public class PlayerData {
 	
 	//Updates max level of the player if the previous level is smaller than the new one
 	public void updateMaxLevel(int level) {
-		if(maxLevel < level) {
-			maxLevel = level;
+		switch (level) {
+			case 1:
+				if (maxLevel < 2) {
+					maxLevel = 2;
+				}
+				break;
+			case 2:
+				if (maxLevel < 3) {
+					maxLevel = 3;
+				}
+				break;
+			case 3:
+				if (maxLevel < 4) {
+					maxLevel = 4;
+				}
+				break;
 		}
 	
 	}
 
+	
 	//Get method for player's name
 	public String getPlayerName() {
 		return playerName;

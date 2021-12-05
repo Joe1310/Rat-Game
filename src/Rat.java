@@ -83,7 +83,9 @@ public abstract class Rat extends Entity{
     protected void ratDeath() {
         rats.remove(this);
         removeEntity();
-        Level.addScore();
+        if(ratType != "DeathRat") {
+        	Level.addScore();
+        }
     }
 
 

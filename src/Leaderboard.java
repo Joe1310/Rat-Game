@@ -6,6 +6,7 @@ public class Leaderboard {
 	private static int[][] first = new int[10][2];
 	private static int[][] second = new int[10][2];
 	private static int[][] third = new int[10][2];
+	private static int[][] fourth = new int[10][2];
 	
 	static ArrayList<PlayerData> players = new ArrayList<PlayerData>();
 	

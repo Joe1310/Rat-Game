@@ -12,11 +12,11 @@ public class Level {
 	 static int maxRats;
 	 static int itemSpawnRate;
 	 static Tile[][] tileLayout;
+	 static int levelNumber = 1;
 
 	 static Map map;
 	 Inventory inventory;
 	 String items;
-	 int playerScore = 0;
 	 static int levelScore = 0;
 
 	//Constructor
@@ -31,6 +31,13 @@ public class Level {
 		}
 		
 		if(filename.contains("level")) {
+			if(filename.contains("2")) {
+				levelNumber = 2;
+			} else if(filename.contains("3")) {
+				levelNumber = 3;
+			} else if(filename.contains("4")) {
+				levelNumber = 4;
+			}
 			readFreshLevel(scan);
 		} else {
 			readGame(scan);
@@ -107,10 +114,9 @@ public class Level {
 				MakeSteriliser(scan);
 			}
 		}
-
-
-
-		playerScore = scan.nextInt();
+		
+		levelNumber = scan.nextInt();
+		levelScore = scan.nextInt();
 		readLevel(scan);
 
 	}
@@ -130,34 +136,26 @@ public class Level {
 		int timePregnant = scan.nextInt();
 		int timeMating = scan.nextInt();
 		int matingCooldown = scan.nextInt();
-		int babyAmmount = scan.nextInt();
+		int babyAmount = scan.nextInt();
 		
 		Entity rat = new AdultRat(sex, location,  direction, health, sterile, 
-				isPregnant, isMating, timePregnant, timeMating, matingCooldown, babyAmmount);
+				isPregnant, isMating, timePregnant, timeMating, matingCooldown, babyAmount);
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Baby Rat
 	public  void MakeBabyRat(Scanner scan) {
-
-		if(scan.hasNext("BM") || scan.hasNext("BF")) {
-			String sex = scan.next();
-			int x = scan.nextInt();
-			int y = scan.nextInt();
-			int[] location = {x,y};
-			int health = scan.nextInt();
-			String direction = scan.next();
-			boolean sterile = scan.nextBoolean();
-
-			Entity rat = new BabyRat(sex, location, direction, health, sterile);
-		} else {
-			String sex = scan.next();
-			int x = scan.nextInt();
-			int y = scan.nextInt();
-			int[] location = {x,y};
-			String direction = scan.next();
-
-			Entity rat = new BabyRat(sex, location, direction, 100, false);
+		if (scan.hasNext("B")) {
+			scan.next();
 		}
+		String sex = scan.next();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int[] location = {x,y};
+		String direction = scan.next();
+		int health = scan.nextInt();
+		boolean sterile = scan.nextBoolean();
+
+		Entity rat = new BabyRat(sex, location, direction, health, sterile);
 	}
 
 	//Reads Rat's properties using scanner and makes an object for Dead Rat
@@ -167,11 +165,10 @@ public class Level {
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
-		int health = scan.nextInt();
 		String direction = scan.next();
+		int killCount = scan.nextInt();
 		
-
-		Entity rat = new DeathRat(location, direction);
+		Entity rat = new DeathRat(location, direction, killCount);
 	}
 	
 	public  void MakeDRS(Scanner scan) {
@@ -214,7 +211,7 @@ public class Level {
 		int[] location = {x,y};
 		int health = scan.nextInt();
 		
-		Entity drs = new DeathRatSpawner(location, health);
+		Entity nes = new NoEntrySign(location, health);
 	}
 	
 	public  void MakeGas(Scanner scan) {
@@ -224,8 +221,8 @@ public class Level {
 		int y = scan.nextInt();
 		int[] location = {x,y};
 		int spreadLimit = scan.nextInt();
-		boolean hasSpread = scan.nextBoolean();
 		String direction = scan.next();
+		boolean hasSpread = scan.nextBoolean();
 		
 		Entity gas = new Gas(location, spreadLimit, direction, hasSpread);
 	}
@@ -273,25 +270,27 @@ public class Level {
 
 
 	//Method saves the ongoing Game using playerID
-	public static  void saveCurrent(String playerID) {
+	public static void saveCurrent() {
 
-		String saveFile = NewMain.getCurrentPlayer().getPlayerName() + "savedGame.txt";
+		String saveFile = NewMain.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
 		try {
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(Entity.getEntities().size() +"\n");
 			for (Entity ent : Entity.getEntities()) {
 				saveGame.write(ent + "\n");
 			}
+			saveGame.write(levelNumber + "\n");
+			saveGame.write(levelScore + "\n");
 			saveGame.write(parTime + "\n");
 			saveGame.write(maxRats + "\n");
 			saveGame.write(itemSpawnRate + "\n");
-			int column = tileLayout[0].length;
-			int row = tileLayout[1].length;
+			int row = tileLayout[0].length;
+			int column = tileLayout.length;
 			saveGame.write(column + " ");
 			saveGame.write(row + "\n");
 			for (int i = 0 ; i < row; i++){
 				for(int j = 0 ; j < column; j++){
-					saveGame.write(tileLayout[i][j].getTileType());
+					saveGame.write(tileLayout[j][i].getTileType());
 				}
 				saveGame.write("\n");
 			}
@@ -299,17 +298,20 @@ public class Level {
 
 		} catch (IOException e) {
 			System.out.println("\nAn error occurred while saving the current game.");
-			e.printStackTrace();
 		}
 	}
 
 	//Get methods
-	 static Map getMap() {
+	public static Map getMap() {
 		return map;
 	}
 
-	 int getItemSpawnRate() {
+	public int getItemSpawnRate() {
 		return itemSpawnRate;
+	}
+	
+	public static int getLevelNumber() {
+		return levelNumber;
 	}
 
 	public static void addScore() {
@@ -321,17 +323,11 @@ public class Level {
 		if(bonus < 0) {
 			bonus = 0;
 		}
-
 		levelScore = levelScore + bonus;
-
 	}
-
-	 static int getLevelScore() {
+	
+	public static int getLevelScore() {
 		score();
 		return levelScore;
-	}
-
-	 int getPlayerScore() {
-		return playerScore;
 	}
 }

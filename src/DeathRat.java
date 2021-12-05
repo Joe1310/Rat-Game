@@ -9,8 +9,8 @@ public class DeathRat extends Rat {
         killCount = 0;
     }
     
-    public DeathRat(int[] location, String directionFacing, int health, int killCount) {
-        super(health, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+    public DeathRat(int[] location, String directionFacing, int killCount) {
+        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
         this.killCount = killCount;
     }
     
@@ -30,7 +30,7 @@ public class DeathRat extends Rat {
 	        }
         }
 		if (killCount >= 5){
-            removeEntity();
+            ratDeath();
         }
     }
 

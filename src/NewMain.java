@@ -31,6 +31,8 @@ public class NewMain extends Application {
 	// The dimensions of the canvas
 	private static int CANVAS_WIDTH = 1850;
 	private static int CANVAS_HEIGHT = 1000;
+	
+	public boolean saved = false;
 
 	public Stage levelStage = new Stage();
 	private Canvas canvas;
@@ -162,13 +164,15 @@ public class NewMain extends Application {
 			String name = profileSelect.getValue();
 			File profile = new File("src/profiles/" + name + ".txt");
 			currentPlayer = new PlayerData(profile);
+			profileSelectWindow.close();
+			levelSelect(primaryStage);
 		});
 		
 		Button create = new Button("CREATE");
 		create.setOnAction(event -> {
 			profileSelectWindow.close();
 			profileCreator(primaryStage);
-			});
+		});
 		
 		Button delete = new Button("DELETE");
 		delete.setOnAction(event -> {
@@ -256,7 +260,7 @@ public class NewMain extends Application {
 		profileCreateWindow.show();
 	}
 
-	public void play(Stage primaryStage){
+	public void levelSelect(Stage primaryStage){
 		Stage levelMenuWindow = new Stage();
 		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
 		//Create view in Java
@@ -301,7 +305,7 @@ public class NewMain extends Application {
 				e.printStackTrace();
 			}
 		});
-		VBox container = new VBox(title,level1Button,level2Button,level3Button,level4Button,backButton);
+		VBox container = new VBox(title,level1Button,level2Button,level3Button,level4Button, loadSavedButton, backButton);
 		//Style container
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
@@ -334,6 +338,8 @@ public class NewMain extends Application {
 		Label title = new Label("You Won! Congrats");
 		Label scoreTitle = new Label("Score: " + Level.getLevelScore());
 		Button menuButton = new Button("Main Menu");
+		currentPlayer.updateMaxLevel(Level.getLevelNumber());
+		currentPlayer.updatePlayerFile();
 
 		menuButton.setOnAction(event -> {
 			winScreen.close();
@@ -396,6 +402,11 @@ public class NewMain extends Application {
 					Entity.getEntities().clear();
 					Rat.getRats().clear();
 					Platform.runLater(() -> lose());
+					test.shutdown();
+				} else if (saved) {
+					Entity.getEntities().clear();
+					Rat.getRats().clear();
+					saved = false;
 					test.shutdown();
 				}
 			}
@@ -466,7 +477,7 @@ public class NewMain extends Application {
 		levelStage.setTitle("RAT GAME : LVL???");
 		Pane root = buildGUI();
 		Scene savedlevelScene = new Scene(root);
-		//drawGame(playerID + "savedGame.txt");
+		drawGame(currentPlayer.getPlayerName() + "savedGame.txt");
 		levelStage.setScene(savedlevelScene);
 		levelStage.show();
 	}
@@ -533,7 +544,15 @@ public class NewMain extends Application {
 				femaleSexChangeButton, maleSexChangeButton, noEntrySignButton, bombButton);
 
 		saveButton.setOnMouseClicked(event ->{
-			Level.saveCurrent(currentPlayer.getPlayerName());
+			Level.saveCurrent();
+			levelStage.close();
+			try {
+				start(levelStage);
+				saved = true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 		
 		gasButton.setOnMouseDragged(event -> {

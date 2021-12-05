@@ -18,8 +18,7 @@ public class Explosion extends Entity {
     
     private void explodeRats() {
 		for (int i = Rat.getRats().size()-1; i > -1; i--) {
-			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
-					!(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
+			if (Arrays.equals(Rat.getRats().get(i).location, this.location)) {
 				Rat.getRats().get(i).ratDeath();
 	        }
         }

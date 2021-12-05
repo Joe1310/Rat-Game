@@ -150,7 +150,7 @@ public class AdultRat extends Rat {
     }
 
     public String toString(){
-        return (this.sex + " " + this.location[0] + " " + this.location[1] + " " + health + " " + directionFacing + " " 
+        return (this.sex + " " + this.location[0] + " " + this.location[1] + " " + directionFacing + " " + health + " " 
         			+ sterile + " " + isPregnant + " " + isMating + " " + timePregnant + " " + timeMating + " " 
         				+ matingCooldown + " " + babyAmmount);
     }
