@@ -1,10 +1,11 @@
-2
-BM 8 4 S 100 false
-BF 2 2 N 100 false
+3
+Poison 6 5
+F 8 1 E 100 false false false 0 0 0 2
+M 2 5 W 100 false false false 0 0 0 3
 1
 0
+4 4 3 4 4 4 4 4
 2 2 2 2 2 2 2 2
-4 4 4 4 4 4 4 4
 300
 10
 5 5 5 5 5 5 5 5
