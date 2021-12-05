@@ -33,7 +33,7 @@ public class Inventory {
         return gasQuantity;
     }
     public static void addGas() {
-        if (gasQuantity < 5) {
+        if (gasQuantity < 4) {
             gasQuantity += 1;
         }
     }
@@ -46,7 +46,7 @@ public class Inventory {
         return deathRatQuantity;
     }
     public static void addDeathRat() {
-        if (deathRatQuantity < 5) {
+        if (deathRatQuantity < 4) {
             deathRatQuantity += 1;
         }
     }
@@ -59,7 +59,7 @@ public class Inventory {
         return poisonQuantity;
     }
     public static void addPoison() {
-        if (poisonQuantity < 5) {
+        if (poisonQuantity < 4) {
             poisonQuantity += 1;
         }
     }
@@ -72,7 +72,7 @@ public class Inventory {
         return sterilisationQuantity;
     }
     public static void addSterilisation() {
-        if (sterilisationQuantity < 5) {
+        if (sterilisationQuantity < 4) {
             sterilisationQuantity += 1;
         }
     }
@@ -85,7 +85,7 @@ public class Inventory {
         return femaleSexChangeQuantity;
     }
     public static void addFemaleSexChange() {
-        if (femaleSexChangeQuantity< 5) {
+        if (femaleSexChangeQuantity< 4) {
             femaleSexChangeQuantity += 1;
         }
     }
@@ -97,7 +97,7 @@ public class Inventory {
         return maleSexChangeQuantity;
     }
     public static void addMaleSexChange() {
-        if (maleSexChangeQuantity < 5) {
+        if (maleSexChangeQuantity < 4) {
             maleSexChangeQuantity += 1;
         }
     }
@@ -110,7 +110,7 @@ public class Inventory {
         return noEntrySignQuantity;
     }
     public static void addNoEntrySign() {
-        if (noEntrySignQuantity < 5) {
+        if (noEntrySignQuantity < 4) {
             noEntrySignQuantity += 1;
         }
     }
@@ -123,7 +123,7 @@ public class Inventory {
         return bombQuantity;
     }
     public static void addBomb() {
-        if (bombQuantity < 5) {
+        if (bombQuantity < 4) {
             bombQuantity += 1;
         }
     }

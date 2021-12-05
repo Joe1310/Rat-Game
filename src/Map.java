@@ -76,6 +76,7 @@ public class Map {
         int tick = 0;
         exec.scheduleWithFixedDelay(new Runnable() {
             public void run() {
+            	drawCounter();
                 ArrayList<Entity> ents = Entity.getEntities();
                 int maxEntities = ents.size();
                 tileOut(Map.gc); //Remove this too
@@ -116,7 +117,17 @@ public class Map {
         return tick;
     }
 
-
+    public void drawCounter() {
+    	gc.clearRect(((column + 1) * 50), 0, 50, 400);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getGas())+".png"),((column + 1) * 50), 0);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getDeathRat())+".png"),((column + 1) * 50), 50);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getPoison())+".png"),((column + 1) * 50), 100);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getSterilisation())+".png"),((column + 1) * 50), 150);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getFemaleSexChange())+".png"),((column + 1) * 50), 200);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getMaleSexChange())+".png"),((column + 1) * 50), 250);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getNoEntrySign())+".png"),((column + 1) * 50), 300);
+    	gc.drawImage(new Image(Integer.toString(Inventory.getBomb())+".png"),((column + 1) * 50), 350);
+    }
     
     /*
      * REMOVE THIS PROBABLY

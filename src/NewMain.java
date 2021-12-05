@@ -401,6 +401,7 @@ public class NewMain extends Application {
 		int num = 0;
 		test.scheduleWithFixedDelay(new Runnable() {
 			public void run() {
+				Inventory.act();
 				if (Rat.getRats().size() == 0) {
 					System.out.println("Win");
 					Platform.runLater(() -> levelStage.close());
@@ -431,6 +432,7 @@ public class NewMain extends Application {
 	public void level1(){
 		CANVAS_WIDTH = 650;
 		CANVAS_HEIGHT = 400;
+		Inventory.setupInventory(5, 5, 5, 5, 5, 5, 5, 5);
 		levelStage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI();
 		Scene level1Scene = new Scene(root);
@@ -446,6 +448,7 @@ public class NewMain extends Application {
 	public void level2(){
 		CANVAS_WIDTH = 1100;
 		CANVAS_HEIGHT = 800;
+		Inventory.setupInventory(5, 5, 5, 5, 5, 5, 5, 5);
 		levelStage.setTitle("RAT GAME : LVL2");
 		Pane root = buildGUI();
 		Scene level2Scene = new Scene(root);
@@ -497,7 +500,6 @@ public class NewMain extends Application {
 	 * @return return Pane for level stage.
 	 */
 	private Pane buildGUI() {
-		setupInventory();
 		// Create top-level panel that will hold all GUI
 		BorderPane root = new BorderPane();
 
@@ -509,42 +511,42 @@ public class NewMain extends Application {
 
 		Image gasImg = new Image("Gas.png");
 		ImageView gasButton = new ImageView(gasImg);
-		gasButton.setX(CANVAS_WIDTH - 50);
+		gasButton.setX(CANVAS_WIDTH - 100);
 		gasButton.setY(0);
 
 		Image deathRatImg = new Image("DeathRatN.png");
 		ImageView deathRatButton = new ImageView(deathRatImg);
-		deathRatButton.setX(CANVAS_WIDTH - 50);
+		deathRatButton.setX(CANVAS_WIDTH - 100);
 		deathRatButton.setY(50);
 
 		Image poisonImg = new Image("Poison.png");
 		ImageView poisonButton = new ImageView(poisonImg);
-		poisonButton.setX(CANVAS_WIDTH - 50);
+		poisonButton.setX(CANVAS_WIDTH - 100);
 		poisonButton.setY(100);
 
 		Image sterilisationImg = new Image("Sterilisation.png");
 		ImageView sterilisationButton = new ImageView(sterilisationImg);
-		sterilisationButton.setX(CANVAS_WIDTH - 50);
+		sterilisationButton.setX(CANVAS_WIDTH - 100);
 		sterilisationButton.setY(150);
 
 		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
 		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
-		femaleSexChangeButton.setX(CANVAS_WIDTH - 50);
+		femaleSexChangeButton.setX(CANVAS_WIDTH - 100);
 		femaleSexChangeButton.setY(200);
 
 		Image maleSexChangeImg = new Image("MaleSexChange.png");
 		ImageView maleSexChangeButton = new ImageView(maleSexChangeImg);
-		maleSexChangeButton.setX(CANVAS_WIDTH - 50);
+		maleSexChangeButton.setX(CANVAS_WIDTH - 100);
 		maleSexChangeButton.setY(250);
 
 		Image noEntrySignImg = new Image("NoEntrySign.png");
 		ImageView noEntrySignButton = new ImageView(noEntrySignImg);
-		noEntrySignButton.setX(CANVAS_WIDTH - 50);
+		noEntrySignButton.setX(CANVAS_WIDTH - 100);
 		noEntrySignButton.setY(300);
 
 		Image bombImg = new Image("Bomb.png");
 		ImageView bombButton = new ImageView(bombImg);
-		bombButton.setX(CANVAS_WIDTH - 50);
+		bombButton.setX(CANVAS_WIDTH - 100);
 		bombButton.setY(350);
 
 		Button saveButton = new Button("SAVE");
@@ -571,7 +573,7 @@ public class NewMain extends Application {
 		});
 		
 		gasButton.setOnMouseReleased(event -> {
-			gasButton.setX(CANVAS_WIDTH - 50);
+			gasButton.setX(CANVAS_WIDTH - 100);
 			gasButton.setY(0);
 			if (Inventory.getGas() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeGas();
@@ -585,7 +587,7 @@ public class NewMain extends Application {
 			deathRatButton.setY((int)event.getSceneY()-25);
 		});
 		deathRatButton.setOnMouseReleased(event -> {
-			deathRatButton.setX(CANVAS_WIDTH - 50);
+			deathRatButton.setX(CANVAS_WIDTH - 100);
 			deathRatButton.setY(50);
 			if (Inventory.getDeathRat() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeDeathRat();
@@ -599,7 +601,7 @@ public class NewMain extends Application {
 			poisonButton.setY((int)event.getSceneY()-25);
 		});
 		poisonButton.setOnMouseReleased(event -> {
-			poisonButton.setX(CANVAS_WIDTH - 50);
+			poisonButton.setX(CANVAS_WIDTH - 100);
 			poisonButton.setY(100);
 			if (Inventory.getPoison() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removePoison();
@@ -613,7 +615,7 @@ public class NewMain extends Application {
 			sterilisationButton.setY((int)event.getSceneY()-25);
 		});
 		sterilisationButton.setOnMouseReleased(event -> {
-			sterilisationButton.setX(CANVAS_WIDTH - 50);
+			sterilisationButton.setX(CANVAS_WIDTH - 100);
 			sterilisationButton.setY(150);
 			if (Inventory.getSterilisation() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeSterilisation();
@@ -627,7 +629,7 @@ public class NewMain extends Application {
 			femaleSexChangeButton.setY((int)event.getSceneY()-25);
 		});
 		femaleSexChangeButton.setOnMouseReleased(event -> {
-			femaleSexChangeButton.setX(CANVAS_WIDTH - 50);
+			femaleSexChangeButton.setX(CANVAS_WIDTH - 100);
 			femaleSexChangeButton.setY(200);
 			if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeFemaleSexChange();
@@ -641,7 +643,7 @@ public class NewMain extends Application {
 			maleSexChangeButton.setY((int)event.getSceneY()-25);
 		});
 		maleSexChangeButton.setOnMouseReleased(event -> {
-			maleSexChangeButton.setX(CANVAS_WIDTH - 50);
+			maleSexChangeButton.setX(CANVAS_WIDTH - 100);
 			maleSexChangeButton.setY(250);
 			if (Inventory.getMaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeMaleSexChange();
@@ -655,7 +657,7 @@ public class NewMain extends Application {
 			noEntrySignButton.setY((int)event.getSceneY()-25);
 		});
 		noEntrySignButton.setOnMouseReleased(event -> {
-			noEntrySignButton.setX(CANVAS_WIDTH - 50);
+			noEntrySignButton.setX(CANVAS_WIDTH - 100);
 			noEntrySignButton.setY(300);
 			if (Inventory.getNoEntrySign() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeNoEntrySign();
@@ -669,7 +671,7 @@ public class NewMain extends Application {
 			bombButton.setY((int)event.getSceneY()-25);
 		});
 		bombButton.setOnMouseReleased(event -> {
-			bombButton.setX(CANVAS_WIDTH - 50);
+			bombButton.setX(CANVAS_WIDTH - 100);
 			bombButton.setY(350);
 			if (Inventory.getBomb() > 0 && checkLegalTile(getMouseLocation(event))) {
 				Inventory.removeBomb();
@@ -705,17 +707,6 @@ public class NewMain extends Application {
 			}
 		}
 		return result;
-	}
-
-	private static void setupInventory() {
-		Inventory.gasQuantity = 5;
-		Inventory.deathRatQuantity = 5;
-		Inventory.poisonQuantity = 5;
-		Inventory.sterilisationQuantity = 5;
-		Inventory.femaleSexChangeQuantity = 5;
-		Inventory.maleSexChangeQuantity = 5;
-		Inventory.noEntrySignQuantity = 5;
-		Inventory.bombQuantity = 5;
 	}
 
 	public static void main(String[] args) {
