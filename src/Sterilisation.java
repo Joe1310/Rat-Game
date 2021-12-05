@@ -20,7 +20,7 @@ class Sterilisation extends Entity {
     }
 
     /**
-     * Constructor for sterilisation objects pulled from saved game files (sets time remaining to what
+     * Constructor to create a  sterilisation object pulled from a saved game file (sets time remaining to what
      * it was when the game was saved).
      *
      * @param location The x, y coordinates that the sterilisation object is to be placed at.

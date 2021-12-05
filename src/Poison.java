@@ -11,7 +11,7 @@ public class Poison extends Entity {
 	/**
 	 * Constructor to create a poison object.
 	 *
-	 * @param location The x, y coordinates of the posion object.
+	 * @param location The x, y coordinates of the poison object.
 	 */
 	public Poison(int[] location) {
 		super(location, "Poison.png", "Poison");
