@@ -1,28 +1,39 @@
-/**
- * <p> 1. File name: PlayerData.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: String, reading & reflecting player data</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
- * @version 2.0
- */
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * This class is responsible for dealing with Player's data, creating and
+ * loading text files and updating the necessary player data.
+ * 
+ * File name: PlayerData.java
+ * 
+ * @author Patel and Elliot
+ * @version 2.0
+ */
+
 public class PlayerData {
 
+	private static final int ZERO = 0;
+	private static final int ONE = 1;
+	private static final int TWO = 2;
+	private static final int THREE = 3;
+	private static final int FOUR = 4;
+
+	// Attributes for the Name of the Player and max Level unlocked by them
 	private String playerName;
 	private int maxLevel;
-	
-	//Constructor for Player object
+
+	/***
+	 * Constructor either reads Player data or initialises it by calling appropriate
+	 * method
+	 * 
+	 * @param playerFile Text file which has Player's saved game data
+	 */
 	public PlayerData(File playerFile) {
-		if (playerFile.length() != 0) {
+		if (playerFile.length() != ZERO) {
 			Scanner prof = null;
 			try {
 				prof = new Scanner(playerFile);
@@ -34,25 +45,39 @@ public class PlayerData {
 			initialiseData(playerFile);
 		}
 	}
-	
+
+	/***
+	 * Method reads the player's data using Scanner
+	 * 
+	 * @param scan Scanner
+	 */
 	private void readPlayerData(Scanner scan) {
 		playerName = scan.next();
 		maxLevel = scan.nextInt();
 		scan.close();
 	}
-	
+
+	/***
+	 * Method initialises the data using file
+	 * 
+	 * @param playerFile File containing Player's data
+	 */
 	private void initialiseData(File playerFile) {
 		String playerName = playerFile.getName();
-		this.playerName = playerName.substring(0, playerName.length()-4);
-		this.maxLevel = 1;
+		this.playerName = playerName.substring(ZERO, playerName.length() - FOUR);
+		this.maxLevel = ONE;
 		updatePlayerFile();
 	}
-	
+
+	/***
+	 * Method creates a text file and writes data in it.
+	 * 
+	 */
 	public void updatePlayerFile() {
 		File player = new File("src/profiles/" + getPlayerName() + ".txt");
 		try {
 			FileWriter playerFile = new FileWriter(player);
-			playerFile.write(playerName + "\n" + maxLevel);
+			playerFile.write(getPlayerName() + "\n" + getMaxLevel());
 			playerFile.close();
 
 		} catch (IOException e) {
@@ -60,36 +85,47 @@ public class PlayerData {
 			e.printStackTrace();
 		}
 	}
-	
-	//Updates max level of the player if the previous level is smaller than the new one
+
+	/***
+	 * Method updates max level of the player if the previous level is smaller than
+	 * the new one
+	 * 
+	 * @param level Number of the Level
+	 */
 	public void updateMaxLevel(int level) {
 		switch (level) {
-			case 1:
-				if (maxLevel < 2) {
-					maxLevel = 2;
-				}
-				break;
-			case 2:
-				if (maxLevel < 3) {
-					maxLevel = 3;
-				}
-				break;
-			case 3:
-				if (maxLevel < 4) {
-					maxLevel = 4;
-				}
-				break;
+		case ONE:
+			if (maxLevel < TWO) {
+				maxLevel = TWO;
+			}
+			break;
+		case TWO:
+			if (maxLevel < THREE) {
+				maxLevel = THREE;
+			}
+			break;
+		case THREE:
+			if (maxLevel < FOUR) {
+				maxLevel = FOUR;
+			}
+			break;
 		}
-	
 	}
 
-	
-	//Get method for player's name
+	/***
+	 * Get method for getting player's name
+	 * 
+	 * @return playerName
+	 */
 	public String getPlayerName() {
 		return playerName;
 	}
 
-	//Get method for player's max level unlocked
+	/***
+	 * Get method for getting player's max level unlocked
+	 * 
+	 * @return maxLevel
+	 */
 	public int getMaxLevel() {
 		return maxLevel;
 	}

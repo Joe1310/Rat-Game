@@ -1,53 +1,78 @@
-/**
- * <p> 1. File name: DeathRat.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Death rat behavior</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
- * @version 2.0
- */
-
-
-
 import java.util.Arrays;
 
+/**
+ * Class to model a DeathRat entity.
+ *
+ * @author Nick, Elliot
+ * @version 2.0
+ */
 public class DeathRat extends Rat {
 	
     private int killCount;
-    
+
+    /**
+     * Constructor to create a DeathRat entity.
+     *
+     * @param location Location of the rat.
+     * @param directionFacing Direction the rat is currently facing.
+     */
     public DeathRat(int[] location, String directionFacing) {
-        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"),
+                "DeathRat");
         killCount = 0;
     }
-    
+
+    /**
+     * Constructor to create a DeathRat entity with attributes pulled from a saved game file.
+     *
+     * @param location Location of the rat.
+     * @param directionFacing Direction the rat is currently facing.
+     * @param killCount The number of rats this death rat has killed.
+     */
     public DeathRat(int[] location, String directionFacing, int killCount) {
-        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"), "DeathRat");//add file for rat image
+        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"),
+                "DeathRat");//add file for rat image
         this.killCount = killCount;
     }
-    
+
+    /**
+     * Method to continuously call the DeathRats actions.
+     */
     public void act() {
+        //checks if their is another rat on its tile and kills any that are.
         killRat();
         if (wait == 1) {
         	move();
         }
     }
-    
+
+    /**
+     * Method to kill any Rats that come into contact with the DeathRat excluding other DeathRats.
+     * If the DeathRat meets its max kills then it also kills itself.
+     */
     private void killRat() {
+        //searches through the list of rats and sees if any are on the same tile
     	for (int i = rats.size()-1; i > -1; i--) {
 			if (Arrays.equals(rats.get(i).location, this.location) && 
 					!rats.get(i).getRatType().equals("DeathRat")) {
+			    //if they are it removes the other rat and adds one to the kill count
 				rats.get(i).ratDeath();
 				killCount++;
 	        }
         }
+    	//checks if the kill count is greater or equal to 5 and if so then removes the death rat
 		if (killCount >= 5){
             ratDeath();
         }
     }
 
+    /**
+     * Method to return the attributes of the DeathRat entity.
+     *
+     * @return Returns a String of the attributes of the DeathRat.
+     */
     public String toString() {
-        return "D" + " " + this.location[0] + " " + this.location[1] + " " + directionFacing + " " + killCount;
+        return "D" + " " + this.location[0] + " " + this.location[1] + " " + directionFacing +
+                " " + killCount;
     }
 }
