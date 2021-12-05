@@ -1,179 +1,228 @@
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Leaderboard {
 
 
-	private static int[][] first = new int[10][2];
-	private static int[][] second = new int[10][2];
-	private static int[][] third = new int[10][2];
-	private static int[][] fourth = new int[10][2];
+	private static int[] firstScores = new int[10];
+	private static String[] firstNames = new String[10];
+	private static int[] secondScores = new int[10];
+	private static String[] secondNames = new String[10];
+	private static int[] thirdScores = new int[10];
+	private static String[] thirdNames = new String[10];
+	private static int[] fourthScores = new int[10];
+	private static String[] fourthNames = new String[10];
 	
-	static ArrayList<PlayerData> players = new ArrayList<PlayerData>();
-	
-	/*
-	//Remove this method in final copy
-	public static void main(String args[]) {
-		
-		PlayerData player = new PlayerData();
-		players.add(player);
-		PlayerData player1 = new PlayerData("Nick", 10, 2);
-		players.add(player1);
-		PlayerData player2 = new PlayerData("El", 10, 3);
-		players.add(player2);
-		
-		updateLevel(1,1,5);
-		updateLevel(1,2,2);
-		updateLevel(1,3,10);
-		
-		updateLevel(2,4,5);
-		updateLevel(2,5,6);
-		updateLevel(2,6,1);
-		
-		updateLevel(3,7,10);
-		updateLevel(3,8,3);
-		updateLevel(3,9,5);
-		
-		updateLevel(1,7,11);
-		updateLevel(2,1,17);
-		updateLevel(3,6,7);
-		
-		//System.out.println(printScoreBoard());
-		System.out.println(getPlayerData());
-			
+	public static void main(String[] args) {
+		Leaderboard l1 = new Leaderboard();
+		System.out.println(l1.getLeaderboardData(1));
 	}
-	*/
 	
 	//Constructor for saving the PlayerData
-	public Leaderboard(int[][] first, int[][] second, int[][] third, ArrayList<PlayerData> players) {
-		Leaderboard.first = first;
-		Leaderboard.second = second;
-		Leaderboard.third = third;
-		Leaderboard.players = players;
+	public Leaderboard() {
+		try {
+			readLeaderboards();
+		} catch (FileNotFoundException e) {
+			System.out.println("Leaderboards not found");
+		}
+	}
+	
+	public void readLeaderboards() throws FileNotFoundException {
+		File first = new File("src/leaderboards/Leaderboard1.txt");
+		Scanner level1 = null;
+		level1 = new Scanner(first);
+		readLeaderboard(level1, 1);
+		
+		File second = new File("src/leaderboards/Leaderboard2.txt");
+		Scanner level2 = null;
+		level2 = new Scanner(second);
+		readLeaderboard(level2, 2);
+		
+		File third = new File("src/leaderboards/Leaderboard3.txt");
+		Scanner level3 = null;
+		level3 = new Scanner(third);
+		readLeaderboard(level3, 3);
+		
+		File fourth = new File("src/leaderboards/Leaderboard4.txt");
+		Scanner level4 = null;
+		level4 = new Scanner(fourth);
+		readLeaderboard(level4, 4);
+	}
+	
+	public void readLeaderboard(Scanner board, int levelNo) {
+		String[] tempNames = new String[10];
+		int[] tempScores = new int[10];
+		for (int i = 0; i < 10; i++) {
+			tempNames[i] = board.next();
+			tempScores[i] = board.nextInt();
+		}
+		
+		if(levelNo == 1) {
+			firstNames = tempNames;
+			firstScores = tempScores;
+		} else if(levelNo == 2) {
+			secondNames = tempNames;
+			secondScores = tempScores;
+		} else if(levelNo == 3){
+			thirdNames = tempNames;
+			thirdScores = tempScores;
+		} else {
+			fourthNames = tempNames;
+			fourthScores = tempScores;
+		}
+		
+	}
+	
+	public static void writeLeaderboards() {
+		File leaderboard1 = new File("src/leaderboards/Leaderboard1.txt");
+		try {
+			FileWriter lvl1 = new FileWriter(leaderboard1);
+			lvl1.write(getLeaderboardData(1));
+			lvl1.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		File leaderboard2 = new File("src/leaderboards/Leaderboard2.txt");
+		try {
+			FileWriter lvl2 = new FileWriter(leaderboard2);
+			lvl2.write(getLeaderboardData(2));
+			lvl2.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		File leaderboard3 = new File("src/leaderboards/Leaderboard3.txt");
+		try {
+			FileWriter lvl3 = new FileWriter(leaderboard3);
+			lvl3.write(getLeaderboardData(3));
+			lvl3.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		File leaderboard4 = new File("src/leaderboards/Leaderboard4.txt");
+		try {
+			FileWriter lvl4 = new FileWriter(leaderboard4);
+			lvl4.write(getLeaderboardData(4));
+			lvl4.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	//Method updates the player's data in the given level
-	public static void updateLevel(int level, int playerID, int score) {
-
+	public static void inputPlayerScore(int level, String playerName, int score) {
 		if(level == 1) {
-			LevelScoreboard(first, playerID, score);
+			updatePosition(firstScores, firstNames, playerName, score, 1);
 		} else if(level == 2) {
-			LevelScoreboard(second, playerID, score);
+			updatePosition(secondScores, secondNames, playerName, score, 2);
+		} else if(level == 3){
+			updatePosition(thirdScores, thirdNames, playerName, score, 3);
 		} else {
-			LevelScoreboard(third, playerID, score);
+			updatePosition(fourthScores, fourthNames, playerName, score, 4);
 		}
 	}
 
 	//Method checks for the ranking of the player on the basis of their scores and updates them
-	public static void LevelScoreboard(int[][] level, int playerID, int score) {
+	public static void updatePosition(int[]levelScores, String[]levelNames, String playerID, int score, int levelNo) {
 
 		int loc = 0;
 
-		if(level.equals(null)) {
-			level[0][0] = score;
-			level[0][1] = playerID;
-		} else {
-			if(level[0][0] > score) {
-				if(level[1][0] > score) {
-					if(level[2][0] > score) {
-						if(level[3][0] > score) {
-							if(level[4][0] > score) {
-								if(level[5][0] > score) {
-									if(level[6][0] > score) {
-										if(level[7][0] > score) {
-											if(level[8][0] > score) {
-												if(level[9][0] > score) {
-												} else {
-													loc = 9;
-												}
+		if(levelScores[0] > score) {
+			if(levelScores[1] > score) {
+				if(levelScores[2] > score) {
+					if(levelScores[3] > score) {
+						if(levelScores[4] > score) {
+							if(levelScores[5] > score) {
+								if(levelScores[6] > score) {
+									if(levelScores[7] > score) {
+										if(levelScores[8] > score) {
+											if(levelScores[9] > score) {
+												loc = 10;
 											} else {
-												loc = 8;
+												loc = 9;
 											}
 										} else {
-											loc = 7;
+											loc = 8;
 										}
 									} else {
-										loc = 6;
+										loc = 7;
 									}
 								} else {
-									loc = 5;
+									loc = 6;
 								}
 							} else {
-								loc = 4;
+								loc = 5;
 							}
 						} else {
-							loc = 3;
+							loc = 4;
 						}
 					} else {
-						loc = 2;
-					} 
+						loc = 3;
+					}
 				} else {
-					loc = 1;
-				}
+					loc = 2;
+				} 
 			} else {
-				loc = 0;
+				loc = 1;
 			}
+		} else {
+			loc = 0;
 		}
 
-		updateScoreboard(level, loc, playerID, score);
+		updateScoreboard(levelScores, levelNames, loc, playerID, score, levelNo);
 	}
 
 	///Method updates the Score board of the given level.
-	private static void updateScoreboard(int[][] level, int loc, int playerID, int score) {
-
-		if(loc == 2) {
-			level[2][0] = score;
-			level[2][1] = playerID;
-		} else {
-			for(int i = 9; i > loc ; i --){
-				level[i][0] = level[i - 1][0];
-				level[i][1] = level[i - 1][1];
+	private static void updateScoreboard(int[] scores, String[] names, int loc, String playerID, int score, int levelNo) {
+		
+		if (loc != 10) {
+			for (int i = 9; i > loc; i--) {
+					scores[i] = scores[i - 1];
+					names[i] = names[i - 1];
 			}
-			level[loc][0] = score;
-			level[loc][1] = playerID;
+			scores[loc] = score;
+			names[loc] = playerID;
+			
+			if (levelNo == 1) {
+				firstScores = scores;
+				firstNames = names;
+			} else if (levelNo == 2) {
+				secondScores = scores;
+				secondNames = names;
+			} else if (levelNo == 3) {
+				thirdScores = scores;
+				thirdNames = names;
+			} else {
+				fourthScores = scores;
+				fourthNames = names;
+			}
 		}
-	}
-
-	//Remove this method in final copy
-	public static String printScoreBoard() {
-		String line = "";
-		line += "Rank" +"\t" + "Score" +"\t"+ "PlayerID\n" + "\n   Level 1\n\n";
-		
-		for(int i = 0; i < 10; i ++) {
-			line += i+1 +"\t"+ first[i][0] +"\t"+ first[i][1];
-			line += "\n";
-		}
-		line += "\n   Level 2\n\n";
-		for(int i = 0; i < 10; i ++) {
-				line += i+1 +"\t"+ second[i][0] +"\t"+ second[i][1];
-			line += "\n";
-		}
-		line += "\n   Level 3\n\n";
-		for(int i = 0; i < 10; i ++) {
-				line += i+1 +"\t"+ third[i][0] +"\t"+ third[i][1];
-				line += "\n";
-		}
-		line += "\n";
-		
-		return line;
 	}
 	
 	//Method for storing the PlayerData in text file
-	public static String getPlayerData() {
+	public static String getLeaderboardData(int levelNo) {
 		
 		String line = "";
 		
-		for(int i = 0; i < 10; i ++) {
-			line += first[i][0] + " " + first[i][1] + "\n";
-		}
-		for(int i = 0; i < 10; i ++) {
-			line += second[i][0] + " " + second[i][1] + "\n";
-		}
-		for(int i = 0; i < 10; i ++) {
-			line += third[i][0] + " " + third[i][1] + "\n";
-		}
-		
-		for(int i = 0; i < players.size(); i ++) {
-			line += players.get(i).toString() + "\n";
+		if (levelNo == 1) {
+			for(int i = 0; i < 10; i ++) {
+				line += firstNames[i] + " " + firstScores[i] + "\n";
+			}
+		} else if (levelNo == 2) {
+			for(int i = 0; i < 10; i ++) {
+				line += secondNames[i] + " " + secondScores[i] + "\n";
+			}
+		} else if (levelNo == 3) {
+			for(int i = 0; i < 10; i ++) {
+				line += thirdNames[i] + " " + thirdScores[i] + "\n";
+			}
+		} else {
+			for(int i = 0; i < 10; i ++) {
+				line += fourthNames[i] + " " + fourthScores[i] + "\n";
+			}
 		}
 		
 		return line;
