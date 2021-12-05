@@ -1,15 +1,6 @@
 /**
- * <p> 1. File name: Level.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: setting the level of the game</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
- * @version 2.0
+ * 
  */
-
-
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,12 +14,11 @@ public class Level {
 	 static int parTime;
 	 int remainingTime = 0;
 	 static int maxRats;
-	 static int itemSpawnRate;
+	 static int itemSpawnRates;
 	 static Tile[][] tileLayout;
 	 static int levelNumber = 1;
 
 	 static Map map;
-	 Inventory inventory;
 	 String items;
 	 static int levelScore = 0;
 
@@ -78,8 +68,6 @@ public class Level {
 
 		parTime = scan.nextInt();
 		maxRats = scan.nextInt();
-		itemSpawnRate = scan.nextInt();
-
 		column = scan.nextInt();
 		row = scan.nextInt();
 		tileLayout = new Tile[column][row];
@@ -90,7 +78,6 @@ public class Level {
 				tileLayout[j][i] = tile;
 			}
 		}
-
 		map = new Map(tileLayout, row, column, maxRats);
 	}
 
@@ -294,6 +281,7 @@ public class Level {
 			saveGame.write(parTime + "\n");
 			saveGame.write(maxRats + "\n");
 			saveGame.write(itemSpawnRate + "\n");
+			//inventory writing
 			int row = tileLayout[0].length;
 			int column = tileLayout.length;
 			saveGame.write(column + " ");
@@ -305,7 +293,6 @@ public class Level {
 				saveGame.write("\n");
 			}
 			saveGame.close();
-
 		} catch (IOException e) {
 			System.out.println("\nAn error occurred while saving the current game.");
 		}
@@ -316,8 +303,8 @@ public class Level {
 		return map;
 	}
 
-	public int getItemSpawnRate() {
-		return itemSpawnRate;
+	public int[] getItemSpawnRates() {
+		return itemSpawnRates;
 	}
 	
 	public static int getLevelNumber() {

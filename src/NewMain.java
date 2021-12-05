@@ -374,6 +374,8 @@ public class NewMain extends Application {
 		Entity.setGC(gc);
 
 		Level gameLevel = new Level(filename);
+		int[] spawn = gameLevel.getItemSpawnRates();
+		Inventory.setupNewInventory(spawn[0], spawn[1], spawn[2], spawn[3], spawn[4], spawn[5], spawn[6], spawn[7], spawn[8], spawn[9]);
 
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		// Set the background to beige.
