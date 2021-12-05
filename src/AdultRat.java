@@ -35,6 +35,20 @@ public class AdultRat extends Rat {
         this.matingCooldown = matingCooldown;
         this.babyAmmount = babyAmmount;
     }
+    public boolean getIsPregnant(){
+    	return this.isPregnant;
+	}
+	@Override
+	protected void ratDeath() {
+		rats.remove(this);
+		removeEntity();
+		if(this.isPregnant){
+			for (int i = 0; i < babyAmmount; i++){
+				Level.addScore();
+			}
+		}
+		Level.addScore();
+	}
 
     public void act() {
     	if (matingCooldown <= 0) {
