@@ -1,3 +1,15 @@
+/**
+ * <p> 1. File name: Entity.java</p>
+ * <p> 3. Creation date: 08.11.2021</p>
+ * <p> 4. Last modification date: 05.12.2021</p>
+ * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
+ * <p> 7. Purpose of the program: control and making connection between classes</p>
+ * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
+ * @author Raj, Nick, Elliot, Oliver, Joe, Jay, Shivraj & Patel
+ */
+
+
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
