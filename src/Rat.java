@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author Nick, Elliot
  * @version 2.0
  */
-public abstract class Rat extends Entity{
+public abstract class Rat extends Entity {
     public static int wait;
     protected static ArrayList<Rat> rats = new ArrayList<Rat>();
     protected int health;
@@ -19,12 +19,12 @@ public abstract class Rat extends Entity{
     /**
      * Constructor to create a Rat entity.
      *
-     * @param location Location of the rat
+     * @param location        Location of the rat
      * @param directionFacing Direction the rat is currently facing
-     * @param health Current health of the rat
-     * @param sterile If rat is sterile or not
+     * @param health          Current health of the rat
+     * @param sterile         If rat is sterile or not
      */
-    public Rat(int health, boolean sterile, int[] location, String directionFacing, String image, String ratType){
+    public Rat(int health, boolean sterile, int[] location, String directionFacing, String image, String ratType) {
         super(location, image, "Rat");
         this.ratType = ratType;
         this.health = health;
@@ -48,10 +48,9 @@ public abstract class Rat extends Entity{
         this.health = this.health - damage;
         //if the health is 0 kills the rat
         if (this.health <= 0) {
-        	ratDeath();
+            ratDeath();
         }
     }
-
 
 
     /**
@@ -72,15 +71,15 @@ public abstract class Rat extends Entity{
         // location[0] is the x coord and location[1] is the y coord
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]);
         checkNoEntry(temp);
-        for (int i = temp.size()-1; i >= 0; i--) {
-            if (temp.get(i).equals(getOppositeDirection()) && temp.size() > 1){
+        for (int i = temp.size() - 1; i >= 0; i--) {
+            if (temp.get(i).equals(getOppositeDirection()) && temp.size() > 1) {
                 temp.remove(temp.get(i));
             }
         }
         // Obtain a random direction available.
-        if(temp.size() != 0) {
+        if (temp.size() != 0) {
             int n = randomize(temp.size());
-            switch (temp.get(n)){
+            switch (temp.get(n)) {
                 case "N":
                     location[1] = location[1] - 1;
                     this.directionFacing = "N";
@@ -103,14 +102,13 @@ public abstract class Rat extends Entity{
     }
 
 
-
     /**
      * Method to return a random number between 0 and the passed int.
      *
      * @param i The range for the random number from 0 to i
      * @return Returns a random Int value
      */
-    protected int randomize(int i){
+    protected int randomize(int i) {
         //random function that takes in the range
         Random rand = new Random();
         return rand.nextInt(i);
@@ -131,8 +129,8 @@ public abstract class Rat extends Entity{
         rats.remove(this);
         removeEntity();
         //unless its a death rat
-        if(!ratType.equals("DeathRat")) {
-        	Level.addScore();
+        if (!ratType.equals("DeathRat")) {
+            Level.addScore();
         }
     }
 
@@ -140,7 +138,7 @@ public abstract class Rat extends Entity{
      * Method to set the type of rat.
      */
     protected void setRatType(String ratType) {
-    	this.ratType = ratType;
+        this.ratType = ratType;
     }
 
     /**
@@ -166,10 +164,10 @@ public abstract class Rat extends Entity{
      * @param directions an array list of all possible moment option from that location.
      */
     private void checkNoEntry(ArrayList<String> directions) {
-    	int[] tempLocation = new int[2];
-    	String tempDirection;
-    	//checks if theirs a no entry sign in that direction
-	    for (int i = directions.size()-1; i >= 0; i--) {
+        int[] tempLocation = new int[2];
+        String tempDirection;
+        //checks if theirs a no entry sign in that direction
+        for (int i = directions.size() - 1; i >= 0; i--) {
             switch (directions.get(i)) {
                 case "N":
                     tempLocation[0] = this.location[0];
@@ -192,16 +190,16 @@ public abstract class Rat extends Entity{
                     tempDirection = "W";
                     break;
             }
-    		//
-			for (int j = getEntities().size()-1; j > -1; j--) {
-				if (Arrays.equals(getEntities().get(j).location, tempLocation) && getEntities().get(j).getType().equals("NES")) {
-				    //degrades the no entry sign
-					((NoEntrySign)getEntities().get(j)).degrade();
-					//removes that direction from the list of directions
-					directions.remove(tempDirection);
-		        }
-	        }
-	    }
+            //
+            for (int j = getEntities().size() - 1; j > -1; j--) {
+                if (Arrays.equals(getEntities().get(j).location, tempLocation) && getEntities().get(j).getType().equals("NES")) {
+                    //degrades the no entry sign
+                    ((NoEntrySign) getEntities().get(j)).degrade();
+                    //removes that direction from the list of directions
+                    directions.remove(tempDirection);
+                }
+            }
+        }
 
     }
 

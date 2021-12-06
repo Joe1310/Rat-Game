@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,9 +28,9 @@ public class Map {
      * Constructor to create a Map object.
      *
      * @param tileLayout Layout of Tile objects in the map.
-     * @param x Number of rows.
-     * @param y Number of columns.
-     * @param maxRat Maximum number of rats in the map.
+     * @param x          Number of rows.
+     * @param y          Number of columns.
+     * @param maxRat     Maximum number of rats in the map.
      */
     public Map(Tile[][] tileLayout, int x, int y, int maxRat) {
         this.row = x;
@@ -67,7 +68,6 @@ public class Map {
     /**
      * Method to continuously call the movement method on the rats, redraw the tiles and keep track of how
      * long the level has been played for.
-     *
      */
     public void entityTick() {
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
@@ -84,7 +84,7 @@ public class Map {
             }
             tunnelOut(Map.gc);
             //for loop for acting
-            for (int i = maxEntities-1; i >= 0; i--) {
+            for (int i = maxEntities - 1; i >= 0; i--) {
                 if (ents.size() > 0) {
                     ents.get(i).act();
                 }
@@ -99,15 +99,15 @@ public class Map {
             }
             timer++;
 
-            if (timer % SECOND == 0){
+            if (timer % SECOND == 0) {
                 count++;
             }
             if (Rat.getRats().size() == 0) {
                 exec.shutdown();
-            }else if (Rat.getRats().size() >= Level.getMap().maxRat) {
+            } else if (Rat.getRats().size() >= Level.getMap().maxRat) {
                 exec.shutdown();
             }
-            if (Rat.getRats().size() == 0){
+            if (Rat.getRats().size() == 0) {
                 exec.shutdown();
             }
         }, 0, DELAY, TimeUnit.MILLISECONDS);
@@ -140,22 +140,22 @@ public class Map {
      * @param y the y coordinate of the tile.
      * @return Returns the options to move from the given tile location.
      */
-    public static ArrayList<String> getMovementOptions(int x, int y){
+    public static ArrayList<String> getMovementOptions(int x, int y) {
         ArrayList<String> movementOptions = new ArrayList<String>();
-        if(tileLayout[x + 1][y].getTileType() == 'P' ||
-                tileLayout[x + 1][y].getTileType() == 'T'){
+        if (tileLayout[x + 1][y].getTileType() == 'P' ||
+                tileLayout[x + 1][y].getTileType() == 'T') {
             movementOptions.add("E");
         }
-        if(tileLayout[x - 1][y].getTileType() == 'P' ||
-                tileLayout[x - 1][y].getTileType() == 'T'){
+        if (tileLayout[x - 1][y].getTileType() == 'P' ||
+                tileLayout[x - 1][y].getTileType() == 'T') {
             movementOptions.add("W");
         }
-        if(tileLayout[x][y - 1].getTileType() == 'P' ||
-                tileLayout[x][y - 1].getTileType() == 'T'){
+        if (tileLayout[x][y - 1].getTileType() == 'P' ||
+                tileLayout[x][y - 1].getTileType() == 'T') {
             movementOptions.add("N");
         }
-        if(tileLayout[x][y + 1].getTileType() == 'P' ||
-                tileLayout[x][y + 1].getTileType() == 'T'){
+        if (tileLayout[x][y + 1].getTileType() == 'P' ||
+                tileLayout[x][y + 1].getTileType() == 'T') {
             movementOptions.add("S");
         }
         return movementOptions;
@@ -167,14 +167,14 @@ public class Map {
     private void drawCounter() {
         int SIZE = 400;
         gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
-        gc.drawImage(new Image("sprites/" + Inventory.getGas() +".png"),((column + 1) * 50), 0);
-        gc.drawImage(new Image("sprites/" + Inventory.getDeathRat() +".png"),((column + 1) * 50), 50);
-        gc.drawImage(new Image("sprites/" + Inventory.getPoison() +".png"),((column + 1) * 50), 100);
-        gc.drawImage(new Image("sprites/" + Inventory.getSterilisation() +".png"),((column + 1) * 50), 150);
-        gc.drawImage(new Image("sprites/" + Inventory.getFemaleSexChange() +".png"),((column + 1) * 50), 200);
-        gc.drawImage(new Image("sprites/" + Inventory.getMaleSexChange() +".png"),((column + 1) * 50), 250);
-        gc.drawImage(new Image("sprites/" + Inventory.getNoEntrySign() +".png"),((column + 1) * 50), 300);
-        gc.drawImage(new Image("sprites/" + Inventory.getBomb() +".png"),((column + 1) * 50), 350);
+        gc.drawImage(new Image("sprites/" + Inventory.getGas() + ".png"), ((column + 1) * 50), 0);
+        gc.drawImage(new Image("sprites/" + Inventory.getDeathRat() + ".png"), ((column + 1) * 50), 50);
+        gc.drawImage(new Image("sprites/" + Inventory.getPoison() + ".png"), ((column + 1) * 50), 100);
+        gc.drawImage(new Image("sprites/" + Inventory.getSterilisation() + ".png"), ((column + 1) * 50), 150);
+        gc.drawImage(new Image("sprites/" + Inventory.getFemaleSexChange() + ".png"), ((column + 1) * 50), 200);
+        gc.drawImage(new Image("sprites/" + Inventory.getMaleSexChange() + ".png"), ((column + 1) * 50), 250);
+        gc.drawImage(new Image("sprites/" + Inventory.getNoEntrySign() + ".png"), ((column + 1) * 50), 300);
+        gc.drawImage(new Image("sprites/" + Inventory.getBomb() + ".png"), ((column + 1) * 50), 350);
     }
 
     /**
