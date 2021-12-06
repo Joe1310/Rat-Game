@@ -257,7 +257,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Method to display a gui where users can select which profile they want to play as.
+	 * Method to display a gui where users can select which profile they want to play/delete/create
+	 * (If a player deletes a profile it deletes any saves associated with that profile).
 	 */
 	private void profileSelect(){
 		Stage profileSelectWindow = new Stage();
