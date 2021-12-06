@@ -14,14 +14,14 @@ public class Level {
 
 	public int remainingTime = 0;
 	public static int maxRats;
-	 private static int parTime;
-	 private static int[] itemSpawnRates = new int[8];
-	 private static int[] inventoryQuantities = new int[8];
-	 private static int[] inventoryTimers = new int[8];
-	 private static Tile[][] tileLayout;
-	 private static int levelNumber = 1;
-	 private static Map map;
-	 private static int levelScore = 0;
+	private static int parTime;
+	private static final int[] ITEM_SPAWN_RATES = new int[8];
+	private static final int[] INVENTORY_QUANTITIES = new int[8];
+	private static final int[] INVENTORY_TIMERS = new int[8];
+	private static Tile[][] tileLayout;
+	private static int levelNumber = 1;
+	private static Map map;
+	private static int levelScore = 0;
 
 	/**
 	 * Constructor to create a Level object.
@@ -39,6 +39,7 @@ public class Level {
 		}
 
 		if (filename.contains("SavedGame")) {
+			assert scan != null;
 			readGame(scan);
 		} else {
 			if(filename.contains("1")) {
@@ -50,6 +51,7 @@ public class Level {
 			} else if (filename.contains("4")){
 				levelNumber = 4;
 			}
+			assert scan != null;
 			readFreshLevel(scan);
 		}
 	}
@@ -78,8 +80,8 @@ public class Level {
 			saveGame.write(column + " ");
 			saveGame.write(row + "\n");
 			for (int i = 0 ; i < row; i++){
-				for(int j = 0 ; j < column; j++){
-					saveGame.write(tileLayout[j][i].getTileType());
+				for (Tile[] tiles : tileLayout) {
+					saveGame.write(tiles[i].getTileType());
 				}
 				saveGame.write("\n");
 			}
@@ -104,7 +106,7 @@ public class Level {
 	 * @return Returns the spawn rates of items.
 	 */
 	public int[] getItemSpawnRates() {
-		return itemSpawnRates;
+		return ITEM_SPAWN_RATES;
 	}
 
 	/**
@@ -113,7 +115,7 @@ public class Level {
 	 * @return Returns item counts.
 	 */
 	public int[] getInventoryQuantities() {
-		return inventoryQuantities;
+		return INVENTORY_QUANTITIES;
 	}
 
 	/**
@@ -122,7 +124,7 @@ public class Level {
 	 * @return Return timers before the items spawn
 	 */
 	public int[] getInventoryTimers() {
-		return inventoryTimers;
+		return INVENTORY_TIMERS;
 	}
 
 	/**
@@ -186,7 +188,7 @@ public class Level {
 		parTime = scan.nextInt();
 		maxRats = scan.nextInt();
 		for(int i = 0; i < 8; i++) {
-			itemSpawnRates[i] = scan.nextInt();
+			ITEM_SPAWN_RATES[i] = scan.nextInt();
 		}
 		column = scan.nextInt();
 		row = scan.nextInt();
@@ -243,10 +245,10 @@ public class Level {
 		levelNumber = scan.nextInt();
 		levelScore = scan.nextInt();
 		for (int i = 0; i < 8; i++) {
-			inventoryQuantities[i] = scan.nextInt();
+			INVENTORY_QUANTITIES[i] = scan.nextInt();
 		}
 		for (int i = 0; i < 8; i++) {
-			inventoryTimers[i] = scan.nextInt();
+			INVENTORY_TIMERS[i] = scan.nextInt();
 		}
 		readLevel(scan);
 	}
