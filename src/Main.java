@@ -47,7 +47,7 @@ public class Main extends Application {
 	private static final int STAGE2_CANVAS_HEIGHT = 800;
 	private static final int STAGE3_CANVAS_WIDTH = 950;
 	private static final int STAGE3_CANVAS_HEIGHT = 500;
-	private static final int STAGE4_CANVAS_WIDTH = 1550;
+	private static final int STAGE4_CANVAS_WIDTH = 1400;
 	private static final int STAGE4_CANVAS_HEIGHT = 700;
 
 	private static PlayerData currentPlayer;
@@ -292,6 +292,14 @@ public class Main extends Application {
 				File data = new File("src/profiles/" + name + ".txt");
 				data.delete();
 				profileSelect.getItems().remove(name);
+				File saveFolder = new File("src/saves");
+				File[] saves = saveFolder.listFiles();
+				assert saves != null;
+				for(File save : saves) {
+					if(save.getPath().equals("src/saves/" + name + "SavedGame.txt")) {
+						save.delete();
+					}
+				}
 			}
 		});
 
