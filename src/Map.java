@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class Map {
     public int maxRat;
     private static Tile[][] tileLayout;
-    private final int GRID_SIZE = 50;
-    private final int SECOND = 4;
+    private final int gridSize = 50;
+    private final int second = 4;
     private final int row;
     private final int column;
     private Image tunnelImage;
@@ -60,7 +60,7 @@ public class Map {
                 } else if (Map.tileLayout[j][i].getTileType() == 'P') {
                     tileImage = pathImage;
                 }
-                gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
+                gc.drawImage(tileImage, j * gridSize, i * gridSize);
             }
         }
     }
@@ -71,10 +71,10 @@ public class Map {
      */
     public void entityTick() {
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-        int DELAY = 250;
+        int delay = 250;
         exec.scheduleWithFixedDelay(() -> {
             drawCounter();
-            RenderBar.drawProgressBar(gc, column * GRID_SIZE, row * GRID_SIZE);
+            RenderBar.drawProgressBar(gc, column * gridSize, row * gridSize);
             ArrayList<Entity> ents = Entity.getEntities();
             int maxEntities = ents.size();
             tileOut(Map.gc);
@@ -99,7 +99,7 @@ public class Map {
             }
             timer++;
 
-            if (timer % SECOND == 0) {
+            if (timer % second == 0) {
                 count++;
             }
             if (Rat.getRats().size() == 0) {
@@ -110,7 +110,7 @@ public class Map {
             if (Rat.getRats().size() == 0) {
                 exec.shutdown();
             }
-        }, 0, DELAY, TimeUnit.MILLISECONDS);
+        }, 0, delay, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -142,20 +142,20 @@ public class Map {
      */
     public static ArrayList<String> getMovementOptions(int x, int y) {
         ArrayList<String> movementOptions = new ArrayList<String>();
-        if (tileLayout[x + 1][y].getTileType() == 'P' ||
-                tileLayout[x + 1][y].getTileType() == 'T') {
+        if (tileLayout[x + 1][y].getTileType() == 'P' 
+                || tileLayout[x + 1][y].getTileType() == 'T') {
             movementOptions.add("E");
         }
-        if (tileLayout[x - 1][y].getTileType() == 'P' ||
-                tileLayout[x - 1][y].getTileType() == 'T') {
+        if (tileLayout[x - 1][y].getTileType() == 'P' 
+                || tileLayout[x - 1][y].getTileType() == 'T') {
             movementOptions.add("W");
         }
-        if (tileLayout[x][y - 1].getTileType() == 'P' ||
-                tileLayout[x][y - 1].getTileType() == 'T') {
+        if (tileLayout[x][y - 1].getTileType() == 'P' 
+                || tileLayout[x][y - 1].getTileType() == 'T') {
             movementOptions.add("N");
         }
-        if (tileLayout[x][y + 1].getTileType() == 'P' ||
-                tileLayout[x][y + 1].getTileType() == 'T') {
+        if (tileLayout[x][y + 1].getTileType() == 'P' 
+                || tileLayout[x][y + 1].getTileType() == 'T') {
             movementOptions.add("S");
         }
         return movementOptions;
@@ -165,8 +165,8 @@ public class Map {
      * Method to draw the item counters to the screen.
      */
     private void drawCounter() {
-        int SIZE = 400;
-        gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
+        int size = 400;
+        gc.clearRect(((column + 1) * gridSize), 0, gridSize, size);
         gc.drawImage(new Image("sprites/" + Inventory.getGas() + ".png"), ((column + 1) * 50), 0);
         gc.drawImage(new Image("sprites/" + Inventory.getDeathRat() + ".png"), ((column + 1) * 50), 50);
         gc.drawImage(new Image("sprites/" + Inventory.getPoison() + ".png"), ((column + 1) * 50), 100);
@@ -191,7 +191,7 @@ public class Map {
                 if (Map.tileLayout[j][i].getTileType() == 'T') {
                     tileImage = tunnelImage;
                 }
-                gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
+                gc.drawImage(tileImage, j * gridSize, i * gridSize);
             }
         }
     }

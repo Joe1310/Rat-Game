@@ -41,6 +41,8 @@ public class RenderBar {
                 case "DeathRat":
                     deathRatCounter += 1;
                     break;
+                default:
+                    break;
             }
         }
 

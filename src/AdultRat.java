@@ -26,7 +26,8 @@ public class AdultRat extends Rat {
      * @param sterile         If rat is sterile or not
      */
     public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile) {
-        super(health, sterile, location, directionFacing, ("sprites/" + sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
+        super(health, sterile, location, directionFacing, ("sprites/" + sex + "Rat"
+                + directionFacing + ".png"), (sex + "Rat"));
         this.sex = sex;
         this.isPregnant = false;
         this.timeMating = 0;
@@ -52,7 +53,8 @@ public class AdultRat extends Rat {
      */
     public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile, boolean pregnant,
                     boolean mating, int timePregnant, int timeMating, int matingCooldown, int babyAmount) {
-        super(health, sterile, location, directionFacing, ("sprites/" + sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
+        super(health, sterile, location, directionFacing, ("sprites/" + sex + "Rat"
+                + directionFacing + ".png"), (sex + "Rat"));
         this.sex = sex;
         this.isPregnant = pregnant;
         this.isMating = mating;
@@ -154,23 +156,27 @@ public class AdultRat extends Rat {
     private void procreateCheck() {
 
         for (int i = Rat.getRats().size() - 1; i > -1; i--) {
-            int cooldown = 60;
-            if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
-                    (Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && !this.sterile && !Rat.getRats().get(i).sterile
-                    && !((AdultRat) Rat.getRats().get(i)).isPregnant && ((AdultRat) Rat.getRats().get(i)).matingCooldown == 0) {
+            int matingCooldown = 60;
+            if (Arrays.equals(Rat.getRats().get(i).location, this.location)
+                    && (Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M"))
+                    && !this.sterile && !Rat.getRats().get(i).sterile
+                    && !((AdultRat) Rat.getRats().get(i)).isPregnant
+                    && ((AdultRat) Rat.getRats().get(i)).matingCooldown == 0) {
                 isMating = true;
-                matingCooldown = cooldown;
+                matingCooldown = matingCooldown;
                 ((AdultRat) Rat.getRats().get(i)).isMating = true;
                 ((AdultRat) Rat.getRats().get(i)).isPregnant = true;
-                ((AdultRat) Rat.getRats().get(i)).matingCooldown = cooldown;
-            } else if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
-                    (Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F")) && !Rat.getRats().get(i).sterile
-                    && !this.sterile && !this.isPregnant && ((AdultRat) Rat.getRats().get(i)).matingCooldown == 0) {
+                ((AdultRat) Rat.getRats().get(i)).matingCooldown = matingCooldown;
+            } else if (Arrays.equals(Rat.getRats().get(i).location, this.location)
+                    && (Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F"))
+                    && !Rat.getRats().get(i).sterile
+                    && !this.sterile && !this.isPregnant
+                    && ((AdultRat) Rat.getRats().get(i)).matingCooldown == 0) {
                 isPregnant = true;
                 isMating = true;
-                matingCooldown = cooldown;
+                matingCooldown = matingCooldown;
                 ((AdultRat) Rat.getRats().get(i)).isMating = true;
-                ((AdultRat) Rat.getRats().get(i)).matingCooldown = cooldown;
+                ((AdultRat) Rat.getRats().get(i)).matingCooldown = matingCooldown;
             }
         }
     }

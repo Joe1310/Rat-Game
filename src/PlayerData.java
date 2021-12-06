@@ -110,6 +110,8 @@ public class PlayerData {
                     maxLevel = FOUR;
                 }
                 break;
+            default:
+                break;
         }
     }
 

@@ -31,7 +31,7 @@ public class DeathRat extends Rat {
      */
     public DeathRat(int[] location, String directionFacing, int killCount) {
         super(1000, true, location, directionFacing, ("sprites/DeathRat" + directionFacing + ".png"),
-                "DeathRat");//add file for rat image
+                "DeathRat"); //add file for rat image
         this.killCount = killCount;
     }
 
@@ -52,8 +52,8 @@ public class DeathRat extends Rat {
      * @return Returns a String of the attributes of the DeathRat.
      */
     public String toString() {
-        return "D" + " " + this.location[0] + " " + this.location[1] + " " + directionFacing +
-                " " + killCount;
+        return "D" + " " + this.location[0] + " " + this.location[1] + " " + directionFacing
+                + " " + killCount;
     }
 
     /**
@@ -63,8 +63,8 @@ public class DeathRat extends Rat {
     private void killRat() {
         //searches through the list of rats and sees if any are on the same tile
         for (int i = rats.size() - 1; i > -1; i--) {
-            if (Arrays.equals(rats.get(i).location, this.location) &&
-                    !rats.get(i).getRatType().equals("DeathRat")) {
+            if (Arrays.equals(rats.get(i).location, this.location)
+                    && !rats.get(i).getRatType().equals("DeathRat")) {
                 //if they are it removes the other rat and adds one to the kill count
                 rats.get(i).ratDeath();
                 killCount++;

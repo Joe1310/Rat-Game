@@ -168,7 +168,7 @@ public class Level {
 
         int bots = scan.nextInt();
         for (int k = 0; k < bots; k++) {
-            MakeBabyRat(scan);
+            makeBabyRat(scan);
         }
         readLevel(scan);
 
@@ -181,7 +181,8 @@ public class Level {
      */
     private void readLevel(Scanner scan) {
 
-        int row, column;
+        int row;
+        int column;
         String line;
 
         parTime = scan.nextInt();
@@ -214,31 +215,31 @@ public class Level {
         //being changed
         for (int i = 0; i < entities; i++) {
             if (scan.hasNext("D")) {
-                MakeDeadRat(scan);
+                makeDeadRat(scan);
             } else if (scan.hasNext("BF") || scan.hasNext("BM")) {
-                MakeBabyRat(scan);
+                makeBabyRat(scan);
             } else if (scan.hasNext("M")) {
-                MakeAdultRat(scan);
+                makeAdultRat(scan);
             } else if (scan.hasNext("F")) {
-                MakeAdultRat(scan);
+                makeAdultRat(scan);
             } else if (scan.hasNext("DRS")) {
-                MakeDRS(scan);
+                makeDRS(scan);
             } else if (scan.hasNext("Bomb")) {
-                MakeBomb(scan);
+                makeBomb(scan);
             } else if (scan.hasNext("Explosion")) {
-                MakeExplosion(scan);
+                makeExplosion(scan);
             } else if (scan.hasNext("NES")) {
-                MakeNES(scan);
+                makeNES(scan);
             } else if (scan.hasNext("Gas")) {
-                MakeGas(scan);
+                makeGas(scan);
             } else if (scan.hasNext("Poison")) {
-                MakePoison(scan);
+                makePoison(scan);
             } else if (scan.hasNext("MSC")) {
-                MakeMSC(scan);
+                makeMSC(scan);
             } else if (scan.hasNext("FSC")) {
-                MakeFSC(scan);
+                makeFSC(scan);
             } else if (scan.hasNext("Steriliser")) {
-                MakeSteriliser(scan);
+                makeSteriliser(scan);
             }
         }
         levelNumber = scan.nextInt();
@@ -257,7 +258,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeAdultRat(Scanner scan) {
+    private void makeAdultRat(Scanner scan) {
         String sex = scan.next();
         int x = scan.nextInt();
         int y = scan.nextInt();
@@ -283,7 +284,7 @@ public class Level {
      * @param scan Scanner accessing the file of the level.
      */
     //Reads Rat's properties using scanner and makes an object for Baby Rat
-    private void MakeBabyRat(Scanner scan) {
+    private void makeBabyRat(Scanner scan) {
         String sex = scan.next();
         int x = scan.nextInt();
         int y = scan.nextInt();
@@ -300,7 +301,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeDeadRat(Scanner scan) {
+    private void makeDeadRat(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -317,7 +318,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeDRS(Scanner scan) {
+    private void makeDRS(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -333,7 +334,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeBomb(Scanner scan) {
+    private void makeBomb(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -349,7 +350,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeExplosion(Scanner scan) {
+    private void makeExplosion(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -364,7 +365,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeNES(Scanner scan) {
+    private void makeNES(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -380,7 +381,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeGas(Scanner scan) {
+    private void makeGas(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -398,7 +399,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakePoison(Scanner scan) {
+    private void makePoison(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -413,7 +414,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeMSC(Scanner scan) {
+    private void makeMSC(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -428,7 +429,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeFSC(Scanner scan) {
+    private void makeFSC(Scanner scan) {
 
         scan.next();
         int x = scan.nextInt();
@@ -443,7 +444,7 @@ public class Level {
      *
      * @param scan Scanner accessing the file of the level.
      */
-    private void MakeSteriliser(Scanner scan) {
+    private void makeSteriliser(Scanner scan) {
         scan.next();
         int x = scan.nextInt();
         int y = scan.nextInt();

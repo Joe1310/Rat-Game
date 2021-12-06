@@ -96,6 +96,8 @@ public abstract class Rat extends Entity {
                     location[0] = location[0] + 1;
                     this.directionFacing = "E";
                     break;
+                default:
+                    break;
             }
         }
         updateRatImage();
@@ -192,7 +194,8 @@ public abstract class Rat extends Entity {
             }
             //
             for (int j = getEntities().size() - 1; j > -1; j--) {
-                if (Arrays.equals(getEntities().get(j).location, tempLocation) && getEntities().get(j).getType().equals("NES")) {
+                if (Arrays.equals(getEntities().get(j).location, tempLocation)
+                        && getEntities().get(j).getType().equals("NES")) {
                     //degrades the no entry sign
                     ((NoEntrySign) getEntities().get(j)).degrade();
                     //removes that direction from the list of directions

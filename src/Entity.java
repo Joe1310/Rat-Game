@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public abstract class Entity {
 
-    private static final ArrayList<Entity> entities = new ArrayList<Entity>();
+    private static final ArrayList<Entity> ENTITIES = new ArrayList<Entity>();
     private String imageName;
     private final String entityType;
     protected int[] location;
@@ -29,15 +29,15 @@ public abstract class Entity {
         this.location = location;
         this.imageName = imageName;
         this.entityType = entityType;
-        entities.add(this);
+        ENTITIES.add(this);
     }
 
     /**
      * Method to draw the entity to the Graphics context.
      */
     public void draw() {
-        int IMAGE_SIZE = 50;
-        gc.drawImage(new Image(imageName), (location[0] * IMAGE_SIZE), (location[1] * IMAGE_SIZE));
+        int imageSize = 50;
+        gc.drawImage(new Image(imageName), (location[0] * imageSize), (location[1] * imageSize));
     }
 
     /**
@@ -55,14 +55,14 @@ public abstract class Entity {
      * @return Returns an ArrayList of all entities.
      */
     public static ArrayList<Entity> getEntities() {
-        return entities;
+        return ENTITIES;
     }
 
     /**
      * Method to remove the entity from the list of all entities.
      */
     public void removeEntity() {
-        entities.remove(this);
+        ENTITIES.remove(this);
     }
 
     /**

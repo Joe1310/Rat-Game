@@ -56,6 +56,8 @@ public class NoEntrySign extends Entity {
             case 1:
                 setImageName("sprites/NoEntrySign5.png");
                 break;
+            default:
+                break;
         }
     }
 

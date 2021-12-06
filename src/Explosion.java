@@ -46,8 +46,8 @@ public class Explosion extends Entity {
      */
     private void explodeItems() {
         for (int i = Entity.getEntities().size() - 1; i > -1; i--) {
-            if (Arrays.equals(Entity.getEntities().get(i).location, this.location) &&
-                    (Entity.getEntities().get(i) != this)) {
+            if (Arrays.equals(Entity.getEntities().get(i).location, this.location)
+                    && (Entity.getEntities().get(i) != this)) {
                 Entity.getEntities().get(i).removeEntity();
             }
         }

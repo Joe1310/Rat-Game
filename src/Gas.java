@@ -64,8 +64,8 @@ public class Gas extends Entity {
      */
     private void damageRats() {
         for (int i = Rat.getRats().size() - 1; i > -1; i--) {
-            if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
-                    !(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
+            if (Arrays.equals(Rat.getRats().get(i).location, this.location)
+                    && !(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
                 (Rat.getRats().get(i)).damageRat(20);
             }
         }
@@ -109,6 +109,8 @@ public class Gas extends Entity {
                     tempLocation[0] = location[0] - 1;
                     tempLocation[1] = location[1];
                     new Gas(tempLocation, spreadLimit - 1, "E", false);
+                    break;
+                default:
                     break;
             }
         }

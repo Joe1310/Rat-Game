@@ -19,13 +19,13 @@ public class Message {
      * @return The message of the day.
      * @throws IOException Throws an IOException if the HTTP request fails.
      */
-    public String MessageOfTheDay() throws IOException {
+    public String messageOfTheDay() throws IOException {
 
-        String code = GetHTTP("http://cswebcat.swansea.ac.uk/puzzle");
+        String code = getHTTP("http://cswebcat.swansea.ac.uk/puzzle");
 
         String passcode = decode(code);
 
-        String message = GetHTTP("http://cswebcat.swansea.ac.uk/message?solution=" + passcode);
+        String message = getHTTP("http://cswebcat.swansea.ac.uk/message?solution=" + passcode);
 
         message += "\n- MaRATma Ghandi";
 
@@ -39,7 +39,7 @@ public class Message {
      * @return returns the result of the GET request
      * @throws IOException Throws an IOException if the HTTP request fails.
      */
-    private String GetHTTP(String link) throws IOException {
+    private String getHTTP(String link) throws IOException {
 
         URL url = new URL(link);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();

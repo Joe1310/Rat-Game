@@ -293,7 +293,8 @@ public class Inventory {
      * @param noEntrySign     The quantity of the no entry sign item.
      * @param bomb            The quantity of the bomb item.
      */
-    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupQuantity(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
+                                     int maleSexChange, int noEntrySign, int bomb) {
         gasQuantity = gas;
         deathRatQuantity = deathRat;
         poisonQuantity = poison;
@@ -340,7 +341,8 @@ public class Inventory {
      * @param noEntrySign     The value for the no entry sign timer.
      * @param bomb            The value for the bomb timer.
      */
-    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange, int maleSexChange, int noEntrySign, int bomb) {
+    public static void setupTimers(int gas, int deathRat, int poison, int sterilisation, int femaleSexChange,
+                                   int maleSexChange, int noEntrySign, int bomb) {
         gasTimer = gas;
         deathRatTimer = deathRat;
         poisonTimer = poison;
@@ -405,8 +407,9 @@ public class Inventory {
      * @return A string containing every item quantity.
      */
     public static String returnQuantity() {
-        return (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " " +
-                femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " " + bombQuantity);
+        return (gasQuantity + " " + deathRatQuantity + " " + poisonQuantity + " " + sterilisationQuantity + " "
+                + femaleSexChangeQuantity + " " + maleSexChangeQuantity + " " + noEntrySignQuantity + " "
+                + bombQuantity);
     }
 
     /**
@@ -415,9 +418,9 @@ public class Inventory {
      * @return A string containing all the spawn rates of each item.
      */
     public static String returnSpawnRates() {
-        return (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " " +
-                femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " " +
-                bombSpawnRate);
+        return (gasSpawnRate + " " + deathRatSpawnRate + " " + poisonSpawnRate + " " + sterilisationSpawnRate + " "
+                + femaleSexChangeSpawnRate + " " + maleSexChangeSpawnRate + " " + noEntrySignSpawnRate + " "
+                + bombSpawnRate);
     }
 
     /**
@@ -426,8 +429,8 @@ public class Inventory {
      * @return A string containing all the current counts on each item's timer.
      */
     public static String returnTimers() {
-        return (gasTimer + " " + deathRatTimer + " " + poisonTimer + " " + sterilisationTimer + " " +
-                femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
+        return (gasTimer + " " + deathRatTimer + " " + poisonTimer + " " + sterilisationTimer + " "
+                + femaleSexChangeTimer + " " + maleSexChangeTimer + " " + noEntrySignTimer + " " + bombTimer);
     }
 
 }

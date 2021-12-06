@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Bomb extends Entity {
 
-    private final int COUNTDOWN_START = 16;
+    private final int countdownStart = 16;
 
     private int countdown;
 
@@ -19,7 +19,7 @@ public class Bomb extends Entity {
      */
     public Bomb(int[] location) {
         super(location, "sprites/Bomb4.png", "Bomb");
-        this.countdown = COUNTDOWN_START;
+        this.countdown = countdownStart;
     }
 
     /**
@@ -59,6 +59,8 @@ public class Bomb extends Entity {
             case 4:
                 setImageName("sprites/Bomb1.png");
                 break;
+            default:
+                break;
         }
     }
 
@@ -82,6 +84,8 @@ public class Bomb extends Entity {
                     break;
                 case "W":
                     explodeWestLine(tempLocation);
+                    break;
+                default:
                     break;
             }
         }
@@ -155,6 +159,8 @@ public class Bomb extends Entity {
                 break;
             case 4:
                 setImageName("sprites/Bomb1.png");
+                break;
+            default:
                 break;
         }
     }

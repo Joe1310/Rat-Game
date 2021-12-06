@@ -56,8 +56,8 @@ public class BabyRat extends Rat {
      * @return Returns a String of the attributes of the BabyRat.
      */
     public String toString(){
-        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " +
-                directionFacing + " "  + health  + " " + sterile;
+        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " 
+                + directionFacing + " "  + health  + " " + sterile;
     }
 
     /**
@@ -67,8 +67,8 @@ public class BabyRat extends Rat {
     private void increaseAge() {
         age++;
         //checks if age is equal to 14 and if so makes an adult rat in its place
-        int MAX_AGE = 14;
-        if (this.age == MAX_AGE) {
+        int maxAge = 14;
+        if (this.age == maxAge) {
             becomeAdult();
         }
     }
