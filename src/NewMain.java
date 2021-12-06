@@ -85,7 +85,7 @@ public class NewMain extends Application {
 		MOTD.setMaxWidth(500);
 		MOTD.setWrapText(true);
 		MOTD.setEditable(false);
-		MOTD.setStyle("-fx-font-size: 1.5em; -fx-border-color: #FFFFFF; -fx-focus-color: #FFFFFF; -fx-faint-focus-color: #FFFFFF;");
+		MOTD.setStyle("-fx-font-size: 1.5em; -fx-border-color: #ffffff; -fx-focus-color: #FFFFFF; -fx-faint-focus-color: #FFFFFF;");
 		MOTD.setPrefHeight(messageOfTheDay.length() + messageOfTheDay.length()/8);
 
 		Button startButton = new Button("START");
@@ -130,8 +130,6 @@ public class NewMain extends Application {
 		container.setPadding(new Insets(40));
 		container.getChildren().addAll(MOTD, maRatView, startButton, highScoresButton,
 				howToPlayButton, quitButton);
-		
-		
 		BorderPane border = new BorderPane();
 		border.setMaxWidth(400);
 		border.setPrefWidth(400);

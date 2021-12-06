@@ -206,53 +206,51 @@ public class Leaderboard {
 	 */
 	public static void updatePosition(int[] levelScores, String[] levelNames, String playerID, int score, int levelNo) {
 
-		int loc = ZERO;
+		int loc = TEN;
 
 		// Checks for the location where player stands on.
-		if(levelScores[0] == 0) {
-			levelScores[0] = score;
-		}else {
-			if (levelScores[ZERO] > score) {
-				if (levelScores[ONE] > score) {
-					if (levelScores[TWO] > score) {
-						if (levelScores[THREE] > score) {
-							if (levelScores[FOUR] > score) {
-								if (levelScores[FIVE] > score) {
-									if (levelScores[SIX] > score) {
-										if (levelScores[SEVEN] > score) {
-											if (levelScores[EIGHT] > score) {
-												if (levelScores[NINE] > score) {
-													loc = TEN;
-												} else {
-													loc = NINE;
-												}
+
+		if (levelScores[ZERO] > score) {
+			if (levelScores[ONE] > score) {
+				if (levelScores[TWO] > score) {
+					if (levelScores[THREE] > score) {
+						if (levelScores[FOUR] > score) {
+							if (levelScores[FIVE] > score) {
+								if (levelScores[SIX] > score) {
+									if (levelScores[SEVEN] > score) {
+										if (levelScores[EIGHT] > score) {
+											if (levelScores[NINE] > score) {
+												loc = TEN;
 											} else {
-												loc = EIGHT;
+												loc = NINE;
 											}
 										} else {
-											loc = SEVEN;
+											loc = EIGHT;
 										}
 									} else {
-										loc = SIX;
+										loc = SEVEN;
 									}
 								} else {
-									loc = FIVE;
+									loc = SIX;
 								}
 							} else {
-								loc = FOUR;
+								loc = FIVE;
 							}
 						} else {
-							loc = THREE;
+							loc = FOUR;
 						}
 					} else {
-						loc = TWO;
+						loc = THREE;
 					}
 				} else {
-					loc = ONE;
+					loc = TWO;
 				}
+			} else {
+				loc = ONE;
 			}
+		} else{
+			loc = ZERO;
 		}
-
 		updateLeaderboard(levelScores, levelNames, loc, playerID, score, levelNo);
 	}
 
@@ -270,26 +268,27 @@ public class Leaderboard {
 	 */
 	private static void updateLeaderboard(int[] scores, String[] names, int loc, String playerID, int score,
 			int levelNo) {
+		if(loc < TEN) {
+			for (int i = LEVEL_DATA_SIZE - ONE; i > loc; i--) {
+				scores[i] = scores[i - ONE];
+				names[i] = names[i - ONE];
+			}
+			scores[loc] = score;
+			names[loc] = playerID;
 
-		for (int i = LEVEL_DATA_SIZE - ONE; i > loc; i--) {
-			scores[i] = scores[i - ONE];
-			names[i] = names[i - ONE];
-		}
-		scores[loc] = score;
-		names[loc] = playerID;
-
-		if (levelNo == ONE) {
-			firstScores = scores;
-			firstNames = names;
-		} else if (levelNo == TWO) {
-			secondScores = scores;
-			secondNames = names;
-		} else if (levelNo == THREE) {
-			thirdScores = scores;
-			thirdNames = names;
-		} else {
-			fourthScores = scores;
-			fourthNames = names;
+			if (levelNo == ONE) {
+				firstScores = scores;
+				firstNames = names;
+			} else if (levelNo == TWO) {
+				secondScores = scores;
+				secondNames = names;
+			} else if (levelNo == THREE) {
+				thirdScores = scores;
+				thirdNames = names;
+			} else {
+				fourthScores = scores;
+				fourthNames = names;
+			}
 		}
 	}
 
