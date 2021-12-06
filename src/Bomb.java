@@ -8,6 +8,8 @@ import java.util.ArrayList;
  */
 public class Bomb extends Entity{
 
+	private final int COUNTDOWN_START = 16;
+	
 	private int countdown;
 
 	/**
@@ -17,7 +19,7 @@ public class Bomb extends Entity{
 	 */
     public Bomb(int[] location) {
         super(location, "sprites/Bomb4.png", "Bomb");
-		this.countdown = 16;
+		this.countdown = COUNTDOWN_START;
     }
 
 	/**
