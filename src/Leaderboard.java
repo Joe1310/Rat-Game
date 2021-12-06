@@ -16,17 +16,19 @@ public class Leaderboard {
 	// Array size of the different levels
 	private static final int LEVEL_DATA_SIZE = 10;
 
-	private static final int ZERO = 0;
-	private static final int ONE = 1;
-	private static final int TWO = 2;
-	private static final int THREE = 3;
-	private static final int FOUR = 4;
-	private static final int FIVE = 5;
-	private static final int SIX = 6;
-	private static final int SEVEN = 7;
-	private static final int EIGHT = 8;
-	private static final int NINE = 9;
-	private static final int TEN = 10;
+	private static final int LEVEL_1_NUM = 1;
+	private static final int LEVEL_2_NUM = 2;
+	private static final int LEVEL_3_NUM = 3;
+	private static final int LEVEL_4_NUM = 4;
+
+	private static final int INDEX_TWO = 2;
+	private static final int INDEX_THREE = 3;
+	private static final int INDEX_FOUR = 4;
+	private static final int INDEX_FIVE = 5;
+	private static final int INDEX_SIX = 6;
+	private static final int INDEX_SEVEN = 7;
+	private static final int INDEX_EIGHT = 8;
+	private static final int INDEX_NINE = 9;
 
 	// Arrays for storing scores and player's names for Level 1
 	private static int[] firstScores = new int[LEVEL_DATA_SIZE];
@@ -67,22 +69,22 @@ public class Leaderboard {
 		File first = new File("src/leaderboards/Leaderboard1.txt");
 		Scanner level1;
 		level1 = new Scanner(first);
-		readLeaderboard(level1, ONE);
+		readLeaderboard(level1, LEVEL_1_NUM);
 
 		File second = new File("src/leaderboards/Leaderboard2.txt");
 		Scanner level2;
 		level2 = new Scanner(second);
-		readLeaderboard(level2, TWO);
+		readLeaderboard(level2, LEVEL_2_NUM);
 
 		File third = new File("src/leaderboards/Leaderboard3.txt");
 		Scanner level3;
 		level3 = new Scanner(third);
-		readLeaderboard(level3, THREE);
+		readLeaderboard(level3, LEVEL_3_NUM);
 
 		File fourth = new File("src/leaderboards/Leaderboard4.txt");
 		Scanner level4;
 		level4 = new Scanner(fourth);
-		readLeaderboard(level4, FOUR);
+		readLeaderboard(level4, LEVEL_4_NUM);
 	}
 
 	/***
@@ -97,18 +99,18 @@ public class Leaderboard {
 		String[] tempNames = new String[LEVEL_DATA_SIZE];
 		int[] tempScores = new int[LEVEL_DATA_SIZE];
 
-		for (int i = ZERO; i < LEVEL_DATA_SIZE; i++) {
+		for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 			tempNames[i] = board.next();
 			tempScores[i] = board.nextInt();
 		}
 
-		if (levelNo == ONE) {
+		if (levelNo == LEVEL_1_NUM) {
 			firstNames = tempNames;
 			firstScores = tempScores;
-		} else if (levelNo == TWO) {
+		} else if (levelNo == LEVEL_2_NUM) {
 			secondNames = tempNames;
 			secondScores = tempScores;
-		} else if (levelNo == THREE) {
+		} else if (levelNo == LEVEL_3_NUM) {
 			thirdNames = tempNames;
 			thirdScores = tempScores;
 		} else {
@@ -128,7 +130,7 @@ public class Leaderboard {
 		File leaderboard1 = new File("src/leaderboards/Leaderboard1.txt");
 		try {
 			FileWriter lvl1 = new FileWriter(leaderboard1);
-			lvl1.write(getLeaderboardData(ONE));
+			lvl1.write(getLeaderboardData(LEVEL_1_NUM));
 			lvl1.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -137,7 +139,7 @@ public class Leaderboard {
 		File leaderboard2 = new File("src/leaderboards/Leaderboard2.txt");
 		try {
 			FileWriter lvl2 = new FileWriter(leaderboard2);
-			lvl2.write(getLeaderboardData(TWO));
+			lvl2.write(getLeaderboardData(LEVEL_2_NUM));
 			lvl2.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -146,7 +148,7 @@ public class Leaderboard {
 		File leaderboard3 = new File("src/leaderboards/Leaderboard3.txt");
 		try {
 			FileWriter lvl3 = new FileWriter(leaderboard3);
-			lvl3.write(getLeaderboardData(THREE));
+			lvl3.write(getLeaderboardData(LEVEL_3_NUM));
 			lvl3.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -155,7 +157,7 @@ public class Leaderboard {
 		File leaderboard4 = new File("src/leaderboards/Leaderboard4.txt");
 		try {
 			FileWriter lvl4 = new FileWriter(leaderboard4);
-			lvl4.write(getLeaderboardData(FOUR));
+			lvl4.write(getLeaderboardData(LEVEL_4_NUM));
 			lvl4.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -171,14 +173,14 @@ public class Leaderboard {
 	 * @param score      Score of the Player
 	 */
 	public static void inputPlayerScore(int level, String playerName, int score) {
-		if (level == ONE) {
-			updatePosition(firstScores, firstNames, playerName, score, ONE);
-		} else if (level == TWO) {
-			updatePosition(secondScores, secondNames, playerName, score, TWO);
-		} else if (level == THREE) {
-			updatePosition(thirdScores, thirdNames, playerName, score, THREE);
+		if (level == LEVEL_1_NUM) {
+			updatePosition(firstScores, firstNames, playerName, score, LEVEL_1_NUM);
+		} else if (level == LEVEL_2_NUM) {
+			updatePosition(secondScores, secondNames, playerName, score, LEVEL_2_NUM);
+		} else if (level == LEVEL_3_NUM) {
+			updatePosition(thirdScores, thirdNames, playerName, score, LEVEL_3_NUM);
 		} else {
-			updatePosition(fourthScores, fourthNames, playerName, score, FOUR);
+			updatePosition(fourthScores, fourthNames, playerName, score, LEVEL_4_NUM);
 		}
 	}
 
@@ -194,50 +196,49 @@ public class Leaderboard {
 	 */
 	public static void updatePosition(int[] levelScores, String[] levelNames, String playerID, int score, int levelNo) {
 
-		int loc = TEN;
-
+		int loc;
 		// Checks where in the leaderboard the player should be placed.
 
-		if (levelScores[ZERO] > score) {
-			if (levelScores[ONE] > score) {
-				if (levelScores[TWO] > score) {
-					if (levelScores[THREE] > score) {
-						if (levelScores[FOUR] > score) {
-							if (levelScores[FIVE] > score) {
-								if (levelScores[SIX] > score) {
-									if (levelScores[SEVEN] > score) {
-										if (levelScores[EIGHT] > score) {
-											if (levelScores[NINE] > score) {
-												loc = TEN;
+		if (levelScores[0] > score) {
+			if (levelScores[1] > score) {
+				if (levelScores[INDEX_TWO] > score) {
+					if (levelScores[INDEX_THREE] > score) {
+						if (levelScores[INDEX_FOUR] > score) {
+							if (levelScores[INDEX_FIVE] > score) {
+								if (levelScores[INDEX_SIX] > score) {
+									if (levelScores[INDEX_SEVEN] > score) {
+										if (levelScores[INDEX_EIGHT] > score) {
+											if (levelScores[INDEX_NINE] > score) {
+												loc = 10;
 											} else {
-												loc = NINE;
+												loc = 9;
 											}
 										} else {
-											loc = EIGHT;
+											loc = 8;
 										}
 									} else {
-										loc = SEVEN;
+										loc = 7;
 									}
 								} else {
-									loc = SIX;
+									loc = 6;
 								}
 							} else {
-								loc = FIVE;
+								loc = 5;
 							}
 						} else {
-							loc = FOUR;
+							loc = 4;
 						}
 					} else {
-						loc = THREE;
+						loc = 3;
 					}
 				} else {
-					loc = TWO;
+					loc = 2;
 				}
 			} else {
-				loc = ONE;
+				loc = 1;
 			}
 		} else{
-			loc = ZERO;
+			loc = 0;
 		}
 		updateLeaderboard(levelScores, levelNames, loc, playerID, score, levelNo);
 	}
@@ -256,21 +257,21 @@ public class Leaderboard {
 	 */
 	private static void updateLeaderboard(int[] scores, String[] names, int loc, String playerID, int score,
 			int levelNo) {
-		if(loc < TEN) {
-			for (int i = LEVEL_DATA_SIZE - ONE; i > loc; i--) {
-				scores[i] = scores[i - ONE];
-				names[i] = names[i - ONE];
+		if(loc < 10) {
+			for (int i = LEVEL_DATA_SIZE - 1; i > loc; i--) {
+				scores[i] = scores[i - 1];
+				names[i] = names[i - 1];
 			}
 			scores[loc] = score;
 			names[loc] = playerID;
 
-			if (levelNo == ONE) {
+			if (levelNo == LEVEL_1_NUM) {
 				firstScores = scores;
 				firstNames = names;
-			} else if (levelNo == TWO) {
+			} else if (levelNo == LEVEL_2_NUM) {
 				secondScores = scores;
 				secondNames = names;
-			} else if (levelNo == THREE) {
+			} else if (levelNo == LEVEL_3_NUM) {
 				thirdScores = scores;
 				thirdNames = names;
 			} else {
@@ -291,15 +292,15 @@ public class Leaderboard {
 
 		String line = "";
 
-		if (levelNo == ONE) {
+		if (levelNo == LEVEL_1_NUM) {
 			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 				line += firstNames[i] + " " + firstScores[i] + "\n";
 			}
-		} else if (levelNo == TWO) {
+		} else if (levelNo == LEVEL_2_NUM) {
 			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 				line += secondNames[i] + " " + secondScores[i] + "\n";
 			}
-		} else if (levelNo == THREE) {
+		} else if (levelNo == LEVEL_3_NUM) {
 			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 				line += thirdNames[i] + " " + thirdScores[i] + "\n";
 			}
@@ -323,15 +324,15 @@ public class Leaderboard {
 
 		String line = "";
 
-		if (levelNo == ONE) {
+		if (levelNo == LEVEL_1_NUM) {
 			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 				line += (i + 1) + ".\t" + firstNames[i] + " " + firstScores[i] + "\n";
 			}
-		} else if (levelNo == TWO) {
+		} else if (levelNo == LEVEL_2_NUM) {
 			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 				line += (i + 1) + ".\t" + secondNames[i] + " " + secondScores[i] + "\n";
 			}
-		} else if (levelNo == THREE) {
+		} else if (levelNo == LEVEL_3_NUM) {
 			for (int i = 0; i < LEVEL_DATA_SIZE; i++) {
 				line += (i + 1) + ".\t" + thirdNames[i] + " " + thirdScores[i] + "\n";
 			}
