@@ -103,79 +103,6 @@ public class AdultRat extends Rat {
     }
 
 	/**
-	 * Method to check if any rats of the opposite gender are on the same tile as it, if so makes
-	 * the female rat pregnant
-	 */
-    public void procreateCheck(){
-
-    	for (int i = Rat.getRats().size()-1; i > -1; i--) {
-    	    if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
-    				(Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && !this.sterile && !Rat.getRats().get(i).sterile
-    					&& !((AdultRat)Rat.getRats().get(i)).isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
-    			isMating = true;
-    			matingCooldown = COOLDOWN;
-    			((AdultRat)Rat.getRats().get(i)).isMating = true;
-    			((AdultRat)Rat.getRats().get(i)).isPregnant = true;
-    			((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
-    		} else if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
-					(Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F")) && !Rat.getRats().get(i).sterile
-					&& !this.sterile && !this.isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
-    			isPregnant = true;
-    			isMating = true;
-    			matingCooldown = COOLDOWN;
-    			((AdultRat)Rat.getRats().get(i)).isMating = true;
-    			((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
-    		}
-        }
-    }
-
-	/**
-	 * Method to check if the rats have been mating for long enough.
-	 */
-	public void mating() {
-		if (timeMating == MATING_TIME) {
-			isMating = false;
-			timeMating = 0;
-		} else {
-			timeMating++;
-		}
-    }
-    
-    /**
-	 * Method to check if the mother has been pregnant for long enough to give birth.
-     */
-    public void pregnancy() {
-    	// checks if the mother has been pregnant for long enough
-        if(timePregnant != PREGNANCY_TIME) {
-        	timePregnant++;
-        } else {
-        	//starts spawning baby rats
-        	if (babyAmount != 0){
-        		makeBabyRat();
-        		babyAmount--;
-        	} else {
-        		// resets everything after the mother has given birth
-        		isPregnant = false;
-        		this.babyAmount = randomize(2) + 2;
-        	}	
-        }
-    }
-
-	/**
-	 * Method to create a new NabyRat entity.
-	 */
-	public void makeBabyRat() {
-		// creates the random number of baby's
-    	int[] babyLocation = new int[2];
-    	babyLocation[0] = this.location[0];
-    	babyLocation[1] = this.location[1];
-    	String[] directions = {"N","E","S","W"};
-    	//assigns a random direction to spread the rats across the map more evenly
-    	String newDirection = directions[(randomize(4))];
-    	Entity baby = new BabyRat(babyLocation, newDirection, this.sterile);
-    }
-
-	/**
 	 * Method to set the Rats type.
 	 */
     public void updateRatType() {
@@ -232,5 +159,78 @@ public class AdultRat extends Rat {
 			}
 		}
 		Level.addScore();
+	}
+
+	/**
+	 * Method to check if any rats of the opposite gender are on the same tile as it, if so makes
+	 * the female rat pregnant
+	 */
+	private void procreateCheck(){
+
+		for (int i = Rat.getRats().size()-1; i > -1; i--) {
+			if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
+					(Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && !this.sterile && !Rat.getRats().get(i).sterile
+					&& !((AdultRat)Rat.getRats().get(i)).isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
+				isMating = true;
+				matingCooldown = COOLDOWN;
+				((AdultRat)Rat.getRats().get(i)).isMating = true;
+				((AdultRat)Rat.getRats().get(i)).isPregnant = true;
+				((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
+			} else if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
+					(Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F")) && !Rat.getRats().get(i).sterile
+					&& !this.sterile && !this.isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
+				isPregnant = true;
+				isMating = true;
+				matingCooldown = COOLDOWN;
+				((AdultRat)Rat.getRats().get(i)).isMating = true;
+				((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
+			}
+		}
+	}
+
+	/**
+	 * Method to check if the rats have been mating for long enough.
+	 */
+	private void mating() {
+		if (timeMating == MATING_TIME) {
+			isMating = false;
+			timeMating = 0;
+		} else {
+			timeMating++;
+		}
+	}
+
+	/**
+	 * Method to check if the mother has been pregnant for long enough to give birth.
+	 */
+	private void pregnancy() {
+		// checks if the mother has been pregnant for long enough
+		if(timePregnant != PREGNANCY_TIME) {
+			timePregnant++;
+		} else {
+			//starts spawning baby rats
+			if (babyAmount != 0){
+				makeBabyRat();
+				babyAmount--;
+			} else {
+				// resets everything after the mother has given birth
+				isPregnant = false;
+				this.babyAmount = randomize(2) + 2;
+			}
+		}
+	}
+
+	/**
+	 * Method to create a new BabyRat entity.
+	 */
+	private void makeBabyRat() {
+		// creates the random number of baby's
+		int[] babyLocation = new int[2];
+		babyLocation[0] = this.location[0];
+		babyLocation[1] = this.location[1];
+		String[] directions = {"N","E","S","W"};
+		//assigns a random direction to spread the rats across the map more evenly
+		String newDirection = directions[(randomize(4))];
+		Entity baby = new BabyRat(babyLocation, newDirection, this.sterile);
 	}
 }

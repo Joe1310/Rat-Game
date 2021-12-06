@@ -51,10 +51,20 @@ public class BabyRat extends Rat {
     }
 
     /**
+     * Method to return the attributes of the BabyRat entity.
+     *
+     * @return Returns a String of the attributes of the BabyRat.
+     */
+    public String toString(){
+        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " +
+                directionFacing + " "  + health  + " " + sterile;
+    }
+
+    /**
      * Method to increase the age of the baby rat every tick and once it reaches 14 ticks of age it turns into an
      * adult rat.
      */
-    public void increaseAge() {
+    private void increaseAge() {
         age++;
         //checks if age is equal to 14 and if so makes an adult rat in its place
         if (this.age == 14) {
@@ -65,7 +75,7 @@ public class BabyRat extends Rat {
     /**
      * Method to make the BabyRat turn into an AdultRat using its current attributes.
      */
-    public void becomeAdult(){
+    private void becomeAdult(){
         //removes the baby rat and spawns an adult rat in its place with all the same attributes
         Entity newAdultRat = new AdultRat(this.sex, this.location, this.directionFacing,
                 this.health, this.sterile);
@@ -80,22 +90,12 @@ public class BabyRat extends Rat {
      *
      * @return Returns the sex of the rat.
      */
-    public String randomSex() {
+    private String randomSex() {
         //assigns random gender
         if (randomize(2) == 1) {
             return "F";
         } else {
             return "M";
         }
-    }
-
-    /**
-     * Method to return the attributes of the BabyRat entity.
-     *
-     * @return Returns a String of the attributes of the BabyRat.
-     */
-    public String toString(){
-        return "B" + sex + " " + this.location[0] + " " + this.location[1] + " " +
-                directionFacing + " "  + health  + " " + sterile;
     }
 }

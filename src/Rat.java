@@ -34,18 +34,6 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * Method to return a random number between 0 and the passed int.
-     *
-     * @param i The range for the random number from 0 to i
-     * @return Returns a random Int value
-     */
-    public int randomize(int i){
-        //random function that takes in the range
-        Random rand = new Random();     
-        return rand.nextInt(i);
-    }
-
-    /**
      * Abstract method to complete an action every tick
      */
     public abstract void act();
@@ -64,63 +52,7 @@ public abstract class Rat extends Entity{
         }
     }
 
-    /**
-     * Method to get the opposite of the direction the rat is facing.
-     *
-     * @return opposite direction to what the rat is already facing.
-     */
-    public String getOppositeDirection() {
-        //removes the opposite direction so that the rat doesn't go back on itself
-        //unless the rat is at a dead end
-        if (directionFacing.equals("E")){
-            return ("W");
-        }else if (directionFacing.equals("W")){
-            return ("E");
-        }else if (directionFacing.equals("N")){
-            return ("S");
-        }else {
-            return ("N");
-        }
-    }
 
-    /**
-     * Method to get the possible movement options for the rat and pick a random one for the rat to move to,
-     * only choosing the way it came from if it is the only option the rat has.
-     * Then makes sure the rat has the correct image based on the direction it just moved.
-     */
-    public void move() {
-        // location[0] is the x coord and location[1] is the y coord
-        ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]);
-        temp = checkNoEntry(temp);
-        for (int i = temp.size()-1; i >= 0; i--) {
-            if (temp.get(i).equals(getOppositeDirection()) && temp.size() > 1){
-                temp.remove(temp.get(i));
-            }
-        }
-        // Obtain a random direction available.
-        if(temp.size() != 0) {
-	        int n = randomize(temp.size());
-	        switch (temp.get(n)){
-	            case "N":
-	                location[1] = location[1] - 1;
-	                this.directionFacing = "N";
-	                break;
-	            case "S":
-	                location[1] = location[1] + 1;
-	                this.directionFacing = "S";
-	                break;
-	            case "W":
-	                location[0] = location[0] - 1;
-	                this.directionFacing = "W";
-	                break;
-	            case "E":
-	                location[0] = location[0] + 1;
-	                this.directionFacing = "E";
-	                break;
-	        }
-        }
-        updateRatImage();
-    }
 
     /**
      * Method to get the rat type.
@@ -132,12 +64,58 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * Method to update the rat image dependant on the way the rat is facing.
+     * Method to get the possible movement options for the rat and pick a random one for the rat to move to,
+     * only choosing the way it came from if it is the only option the rat has.
+     * Then makes sure the rat has the correct image based on the direction it just moved.
      */
-    public void updateRatImage() {
-        //creates the rat image name
-        setImageName(ratType + directionFacing + ".png");
+    protected void move() {
+        // location[0] is the x coord and location[1] is the y coord
+        ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]);
+        temp = checkNoEntry(temp);
+        for (int i = temp.size()-1; i >= 0; i--) {
+            if (temp.get(i).equals(getOppositeDirection()) && temp.size() > 1){
+                temp.remove(temp.get(i));
+            }
+        }
+        // Obtain a random direction available.
+        if(temp.size() != 0) {
+            int n = randomize(temp.size());
+            switch (temp.get(n)){
+                case "N":
+                    location[1] = location[1] - 1;
+                    this.directionFacing = "N";
+                    break;
+                case "S":
+                    location[1] = location[1] + 1;
+                    this.directionFacing = "S";
+                    break;
+                case "W":
+                    location[0] = location[0] - 1;
+                    this.directionFacing = "W";
+                    break;
+                case "E":
+                    location[0] = location[0] + 1;
+                    this.directionFacing = "E";
+                    break;
+            }
+        }
+        updateRatImage();
     }
+
+
+
+    /**
+     * Method to return a random number between 0 and the passed int.
+     *
+     * @param i The range for the random number from 0 to i
+     * @return Returns a random Int value
+     */
+    protected int randomize(int i){
+        //random function that takes in the range
+        Random rand = new Random();
+        return rand.nextInt(i);
+    }
+
     /**
      * Method to set the rat to sterile.
      */
@@ -172,6 +150,14 @@ public abstract class Rat extends Entity{
      */
     protected static ArrayList<Rat> getRats() {
         return rats;
+    }
+
+    /**
+     * Method to update the rat image dependant on the way the rat is facing.
+     */
+    private void updateRatImage() {
+        //creates the rat image name
+        setImageName(ratType + directionFacing + ".png");
     }
 
     /**
@@ -214,5 +200,24 @@ public abstract class Rat extends Entity{
 	    }
 	    
 	    return directions;
+    }
+
+    /**
+     * Method to get the opposite of the direction the rat is facing.
+     *
+     * @return opposite direction to what the rat is already facing.
+     */
+    private String getOppositeDirection() {
+        //removes the opposite direction so that the rat doesn't go back on itself
+        //unless the rat is at a dead end
+        if (directionFacing.equals("E")){
+            return ("W");
+        }else if (directionFacing.equals("W")){
+            return ("E");
+        }else if (directionFacing.equals("N")){
+            return ("S");
+        }else {
+            return ("N");
+        }
     }
 }
