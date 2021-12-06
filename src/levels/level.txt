@@ -1,6 +1,6 @@
 2
 M 2 3 N 100 false
-F 8 3 S 100 false
+F 8 3 N 100 false
 300
 10
 5 5 5 5 5 5 5 5
