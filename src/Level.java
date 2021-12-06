@@ -60,7 +60,7 @@ public class Level {
 	 */
 	public static void saveCurrent() {
 
-		String saveFile = "src/saves/" + NewMain.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
+		String saveFile = "src/saves/" + Main.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
 		try {
 			FileWriter saveGame = new FileWriter(saveFile);
 			saveGame.write(Entity.getEntities().size() +"\n");

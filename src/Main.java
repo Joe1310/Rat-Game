@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  * @author Joe, Oliver, Elliot, Nick, Jay, Shivraj, Patel
  * @version 2.0
  */
-public class NewMain extends Application {
+public class Main extends Application {
 
 	public boolean saved = false;
 	public Stage levelStage = new Stage();
