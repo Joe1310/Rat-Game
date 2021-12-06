@@ -150,30 +150,11 @@ public class Main extends Application {
 		Stage howToPlayWindow = new Stage();
 		howToPlayWindow.setResizable(false);
 		howToPlayWindow.setTitle("HOW TO PLAY");
-		TextArea text = new TextArea("Welcome exterminator. The city needs your help; the parks are being overrun" +
-				" with rats, and we need you to eliminate them before it's too late.\n Aim:\n" +
-				"To eliminate all the Rats within the time frame, use the items you supplied. If rats of an opposite" +
-				" gender meet, they will procreate and reproduce.\n So, eliminate them quickly.\n Inventory:\n" +
-				"We have equipped you with an arsenal at your disposal, found in your inventory, that can be used by " +
-				"clicking on an item and dragging it onto the\n map where you would like. Once you have released " +
-				"the item, the item will activate.\n Items at your disposal:\n Gas:\n" +
-				"Gas, when placed, will immediately start spreading across the map, and any rat that passes through " +
-				"it will be damaged. After the gas has spread,\n it will begin to dissipate.\n Death rat:\n" +
-				"Is a robotic rat that, after 3 seconds of warming up, will move through the paths and kill any rat " +
-				"it comes across; however, after the death rat has\n killed five rats, it will self-destruct.\n" +
-				"Sterilisation:\n Is a rare radioactive isotope that will sterilise any rat within its radius " +
-				"so it can no longer procreate when placed.\n Female sex change:\n" +
-				"Will change the gender of a male rat to a female rat. These can be used to help stop the rats " +
-				"from reproducing.\n(If a female hit it, nothing will change).\n Male sex change:\n" +
-				"Will change the gender of a female rat to a male rat. These can be used to help stop the " +
-				"rats from reproducing.\n(If a male hit it, nothing will change).\n No entry signs:\n" +
-				"It can be used to black the paths of rats and trap them but be careful after 5 hits, the " +
-				"signs break.\n Bomb:\n Bombs can be placed onto a path. After 5 seconds, they will " +
-				"detonate, sending an explosion vertically and horizontally, killing any rat it hits.");
-		text.setEditable(false);
-		text.setStyle("-fx-font-size: 1.5em;");
-		text.setPrefWidth(1200);
-		text.setPrefHeight(600);
+		Image htp = new Image("images/HowToPlay.png");
+		ImageView howToPlay = new ImageView();
+		howToPlay.setImage(htp);
+		howToPlay.setFitWidth(750);
+		howToPlay.setPreserveRatio(true);
 		Button menuButton = new Button("Return");
 
 		menuButton.setOnAction(event -> {
@@ -185,11 +166,9 @@ public class Main extends Application {
 			}
 		});
 
-		VBox container = new VBox(text, menuButton);
-
+		VBox container = new VBox();
+		container.getChildren().addAll(howToPlay, menuButton);
 		//Style container
-		container.setSpacing(15);
-		container.setPadding(new Insets(25));
 		//Set view in window
 		howToPlayWindow.setScene(new Scene(container));
 		//Launch
