@@ -61,6 +61,7 @@ public class NewMain extends Application {
 
 		Stage menuWindow = new Stage();
 		menuWindow.setTitle("Rat Game");
+		Leaderboard leaderboard = new Leaderboard();
 
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
@@ -211,7 +212,7 @@ public class NewMain extends Application {
 
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
-		container.getChildren().addAll(level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
+		container.getChildren().addAll(title, level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
 		highScoresWindow.setScene(new Scene(container));
 		highScoresWindow.show();
 	}
@@ -455,9 +456,9 @@ public class NewMain extends Application {
 		Stage winScreen = new Stage();
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
-		Label scoreTitle = new Label("Score: " + Level.getLevelScore());
-		new Leaderboard();
-		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), Level.getLevelScore());
+		int score = Level.getLevelScore();
+		Label scoreTitle = new Label("Score: " + score);
+		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), score);
 		Level.resetLevelScore();
 		Leaderboard.writeLeaderboards();
 		Button menuButton = new Button("Main Menu");

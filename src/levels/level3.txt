@@ -4,7 +4,7 @@ F 15 1 S 100 false
 M 2 8 N 100 false
 F 15 7 S 100 false
 500
-20
+16
 5 5 5 5 5 5 5 5
 17 10
 GGGGGGGGGGGGGGGGG
