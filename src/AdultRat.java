@@ -8,11 +8,7 @@ import java.util.Arrays;
  */
 public class AdultRat extends Rat {
 
-	private final int MATING_TIME = 6;
-	private final int PREGNANCY_TIME = 4;
-	private final int COOLDOWN = 60;
-
-    private String sex;
+	private String sex;
     private boolean isPregnant;
     private boolean isMating;
     private int timeMating;
@@ -65,17 +61,6 @@ public class AdultRat extends Rat {
         this.matingCooldown = matingCooldown;
         this.babyAmount = babyAmount;
     }
-
-	/**
-	 * Method to get the attribute isPregnant.
-	 *
-	 * @return Return if is the rat is pregnant.
-	 */
-    public boolean getIsPregnant(){
-    	return this.isPregnant;
-	}
-
-
 
 	/**
 	 * Method to complete actions every tick to do mating, procreating and moving.
@@ -168,6 +153,7 @@ public class AdultRat extends Rat {
 	private void procreateCheck(){
 
 		for (int i = Rat.getRats().size()-1; i > -1; i--) {
+			int COOLDOWN = 60;
 			if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
 					(Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && !this.sterile && !Rat.getRats().get(i).sterile
 					&& !((AdultRat)Rat.getRats().get(i)).isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
@@ -192,6 +178,7 @@ public class AdultRat extends Rat {
 	 * Method to check if the rats have been mating for long enough.
 	 */
 	private void mating() {
+		int MATING_TIME = 6;
 		if (timeMating == MATING_TIME) {
 			isMating = false;
 			timeMating = 0;
@@ -205,6 +192,7 @@ public class AdultRat extends Rat {
 	 */
 	private void pregnancy() {
 		// checks if the mother has been pregnant for long enough
+		int PREGNANCY_TIME = 4;
 		if(timePregnant != PREGNANCY_TIME) {
 			timePregnant++;
 		} else {
@@ -231,6 +219,6 @@ public class AdultRat extends Rat {
 		String[] directions = {"N","E","S","W"};
 		//assigns a random direction to spread the rats across the map more evenly
 		String newDirection = directions[(randomize(4))];
-		Entity baby = new BabyRat(babyLocation, newDirection, this.sterile);
+		new BabyRat(babyLocation, newDirection, this.sterile);
 	}
 }

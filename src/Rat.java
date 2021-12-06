@@ -71,7 +71,7 @@ public abstract class Rat extends Entity{
     protected void move() {
         // location[0] is the x coord and location[1] is the y coord
         ArrayList<String> temp = Map.getMovementOptions(location[0], location[1]);
-        temp = checkNoEntry(temp);
+        checkNoEntry(temp);
         for (int i = temp.size()-1; i >= 0; i--) {
             if (temp.get(i).equals(getOppositeDirection()) && temp.size() > 1){
                 temp.remove(temp.get(i));
@@ -164,30 +164,34 @@ public abstract class Rat extends Entity{
      * Method to check if one of the movement options the rat has contains a NoEntrySign and gets rid of these options.
      *
      * @param directions an array list of all possible moment option from that location.
-     * @return Return amended list of directions.
      */
-    private ArrayList<String> checkNoEntry(ArrayList<String> directions) {
+    private void checkNoEntry(ArrayList<String> directions) {
     	int[] tempLocation = new int[2];
     	String tempDirection;
     	//checks if theirs a no entry sign in that direction
 	    for (int i = directions.size()-1; i >= 0; i--) {
-    		if (directions.get(i).equals("N")) {
-	        	tempLocation[0] = this.location[0];
-	        	tempLocation[1] = this.location[1] - 1;
-	        	tempDirection = "N";
-	        } else if (directions.get(i).equals("S")) {
-	        	tempLocation[0] = this.location[0];
-	        	tempLocation[1] = this.location[1] + 1;
-	        	tempDirection = "S";
-	        } else if (directions.get(i).equals("E")) {
-	        	tempLocation[0] = this.location[0] + 1;
-	        	tempLocation[1] = this.location[1];
-	        	tempDirection = "E";
-	        } else {
-	        	tempLocation[0] = this.location[0] - 1;
-	        	tempLocation[1] = this.location[1];
-	        	tempDirection = "W";
-	        }
+            switch (directions.get(i)) {
+                case "N":
+                    tempLocation[0] = this.location[0];
+                    tempLocation[1] = this.location[1] - 1;
+                    tempDirection = "N";
+                    break;
+                case "S":
+                    tempLocation[0] = this.location[0];
+                    tempLocation[1] = this.location[1] + 1;
+                    tempDirection = "S";
+                    break;
+                case "E":
+                    tempLocation[0] = this.location[0] + 1;
+                    tempLocation[1] = this.location[1];
+                    tempDirection = "E";
+                    break;
+                default:
+                    tempLocation[0] = this.location[0] - 1;
+                    tempLocation[1] = this.location[1];
+                    tempDirection = "W";
+                    break;
+            }
     		//
 			for (int j = getEntities().size()-1; j > -1; j--) {
 				if (Arrays.equals(getEntities().get(j).location, tempLocation) && getEntities().get(j).getType().equals("NES")) {
@@ -198,8 +202,7 @@ public abstract class Rat extends Entity{
 		        }
 	        }
 	    }
-	    
-	    return directions;
+
     }
 
     /**
@@ -210,14 +213,15 @@ public abstract class Rat extends Entity{
     private String getOppositeDirection() {
         //removes the opposite direction so that the rat doesn't go back on itself
         //unless the rat is at a dead end
-        if (directionFacing.equals("E")){
-            return ("W");
-        }else if (directionFacing.equals("W")){
-            return ("E");
-        }else if (directionFacing.equals("N")){
-            return ("S");
-        }else {
-            return ("N");
+        switch (directionFacing) {
+            case "E":
+                return ("W");
+            case "W":
+                return ("E");
+            case "N":
+                return ("S");
+            default:
+                return ("N");
         }
     }
 }

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -74,11 +73,7 @@ class Sterilisation extends Entity {
      * @return Boolean of whether the given rat is on the same tile as the Sterilisation Entity.
      */
     private boolean checkRat(int[] tempLocation, int index) {
-    	if (Arrays.equals(Rat.getRats().get(index).location, tempLocation)) {
-			return true;
-        } else {
-        	return false;
-        }
+        return Arrays.equals(Rat.getRats().get(index).location, tempLocation);
     }
 
     /**

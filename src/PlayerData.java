@@ -40,6 +40,7 @@ public class PlayerData {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			assert prof != null;
 			readPlayerData(prof);
 		} else {
 			initialiseData(playerFile);
