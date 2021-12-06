@@ -47,26 +47,6 @@ public class DeathRat extends Rat {
     }
 
     /**
-     * Method to kill any Rats that come into contact with the DeathRat excluding other DeathRats.
-     * If the DeathRat meets its max kills then it also kills itself.
-     */
-    private void killRat() {
-        //searches through the list of rats and sees if any are on the same tile
-    	for (int i = rats.size()-1; i > -1; i--) {
-			if (Arrays.equals(rats.get(i).location, this.location) && 
-					!rats.get(i).getRatType().equals("DeathRat")) {
-			    //if they are it removes the other rat and adds one to the kill count
-				rats.get(i).ratDeath();
-				killCount++;
-	        }
-        }
-    	//checks if the kill count is greater or equal to 5 and if so then removes the death rat
-		if (killCount >= 5){
-            ratDeath();
-        }
-    }
-
-    /**
      * Method to return the attributes of the DeathRat entity.
      *
      * @return Returns a String of the attributes of the DeathRat.
@@ -74,5 +54,25 @@ public class DeathRat extends Rat {
     public String toString() {
         return "D" + " " + this.location[0] + " " + this.location[1] + " " + directionFacing +
                 " " + killCount;
+    }
+
+    /**
+     * Method to kill any Rats that come into contact with the DeathRat excluding other DeathRats.
+     * If the DeathRat meets its max kills then it also kills itself.
+     */
+    private void killRat() {
+        //searches through the list of rats and sees if any are on the same tile
+        for (int i = rats.size()-1; i > -1; i--) {
+            if (Arrays.equals(rats.get(i).location, this.location) &&
+                    !rats.get(i).getRatType().equals("DeathRat")) {
+                //if they are it removes the other rat and adds one to the kill count
+                rats.get(i).ratDeath();
+                killCount++;
+            }
+        }
+        //checks if the kill count is greater or equal to 5 and if so then removes the death rat
+        if (killCount >= 5){
+            ratDeath();
+        }
     }
 }
