@@ -8,10 +8,14 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Gas extends Entity {
+	
+	private final int START_SPREAD = 5;
+	
 	private int spreadLimit;
 	private int timer = 10;
 	private String direction;
 	private boolean hasSpread;
+	private int wait = 2;
 
 	/**
 	 * Constructor to create a Gas object.
@@ -21,7 +25,7 @@ public class Gas extends Entity {
 	 */
 	public Gas(int[] location, boolean hasSpread) {
 		super(location, "Gas.png", "Gas");
-		this.spreadLimit = 4;
+		this.spreadLimit = START_SPREAD;
 		this.hasSpread = hasSpread;
 		this.direction = null;
 	}
@@ -46,9 +50,13 @@ public class Gas extends Entity {
 	 */
 	public void act() {
 		damageRats();
-		if (!hasSpread && spreadLimit > 0) {
-			spread();
-			hasSpread = true;
+		if (wait == 0) {
+			if (!hasSpread && spreadLimit > 0) {
+				spread();
+				hasSpread = true;
+			}
+		} else {
+			wait--;
 		}
 		diffuse();
 	}
