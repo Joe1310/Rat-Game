@@ -1,3 +1,4 @@
+Nick 395
 Nick 333
 Jay 317
 Jay 317
@@ -5,6 +6,5 @@ Joe 315
 Elliot 313
 Elliot 308
 Joe 3
-Joe 2
 Joe 2
 Joe 2
