@@ -7,6 +7,8 @@
 
 public class BabyRat extends Rat {
 
+    private final int MAX_AGE = 14;
+
     private int age;
     private String sex;
 
@@ -67,7 +69,7 @@ public class BabyRat extends Rat {
     private void increaseAge() {
         age++;
         //checks if age is equal to 14 and if so makes an adult rat in its place
-        if (this.age == 14) {
+        if (this.age == MAX_AGE) {
             becomeAdult();
         }
     }
