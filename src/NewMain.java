@@ -469,6 +469,7 @@ public class NewMain extends Application {
 		int score = Level.getLevelScore();
 		Label scoreTitle = new Label("Score: " + score);
 		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), score);
+
 		Level.resetLevelScore();
 		Leaderboard.writeLeaderboards();
 		Button menuButton = new Button("Main Menu");
@@ -568,7 +569,7 @@ public class NewMain extends Application {
 	 */
 	public void level2(){
 		CANVAS_WIDTH = 1100;
-		CANVAS_HEIGHT = 850;
+		CANVAS_HEIGHT = 650;
 		levelStage.setTitle("RAT GAME : LVL2");
 		Pane root = buildGUI();
 		Scene level2Scene = new Scene(root);
