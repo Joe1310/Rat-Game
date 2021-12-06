@@ -1,15 +1,3 @@
-/**
- * <p> 1. File name: Main.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Handling multiple behavior of classes</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Joe, Oliver, Elliot, Nick, Jay
- * @version 2.0
- */
-
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -30,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,29 +26,48 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * <p> 1. File name: Main.java</p>
+ * <p> 3. Creation date: 08.11.2021</p>
+ * <p> 4. Last modification date: 05.12.2021</p>
+ * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
+ * <p> 7. Purpose of the program: Handling multiple behavior of classes</p>
+ * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
+ * @author Joe, Oliver, Elliot, Nick, Jay, Shivraj, Patel
+ * @version 2.0
+ */
 public class NewMain extends Application {
-	
-	// The dimensions of the canvas
-	private static int CANVAS_WIDTH = 1850;
-	private static int CANVAS_HEIGHT = 1000;
-	
-	/*
-	 * We need to create final variables for each levels canvas size
-	 * so that saved game can use it
-	 */
-	
-	public boolean saved = false;
 
+	public boolean saved = false;
 	public Stage levelStage = new Stage();
-	private Canvas canvas;
+
+	private static final int STAGE1_CANVAS_WIDTH = 650;
+	private static final int STAGE1_CANVAS_HEIGHT = 350;
+	private static final int STAGE2_CANVAS_WIDTH = 1100;
+	private static final int STAGE2_CANVAS_HEIGHT = 800;
+	private static final int STAGE3_CANVAS_WIDTH = 950;
+	private static final int STAGE3_CANVAS_HEIGHT = 500;
+	private static final int STAGE4_CANVAS_WIDTH = 1550;
+	private static final int STAGE4_CANVAS_HEIGHT = 700;
+
 	private static PlayerData currentPlayer;
+
+	private Canvas canvas;
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	public static PlayerData getCurrentPlayer() {
+		return currentPlayer;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
 		Stage menuWindow = new Stage();
 		menuWindow.setTitle("Rat Game");
-		Leaderboard leaderboard = new Leaderboard();
+		new Leaderboard();
 
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
@@ -105,12 +111,12 @@ public class NewMain extends Application {
 		quitButton.setOnAction(event -> menuWindow.close());
 		
 		GridPane container = new GridPane();
-		container.setConstraints(MOTD, 0, 1, 3, 1);
-		container.setConstraints(maRatView, 1, 2, 2, 5);
-		container.setConstraints(startButton, 0, 2);
-		container.setConstraints(highScoresButton, 0, 3);
-		container.setConstraints(howToPlayButton, 0, 4);
-		container.setConstraints(quitButton, 0, 5);
+		GridPane.setConstraints(MOTD, 0, 1, 3, 1);
+		GridPane.setConstraints(maRatView, 1, 2, 2, 5);
+		GridPane.setConstraints(startButton, 0, 2);
+		GridPane.setConstraints(highScoresButton, 0, 3);
+		GridPane.setConstraints(howToPlayButton, 0, 4);
+		GridPane.setConstraints(quitButton, 0, 5);
 		container.setPadding(new Insets(40));
 		container.getChildren().addAll(MOTD, maRatView, startButton, highScoresButton,
 				howToPlayButton, quitButton);
@@ -120,7 +126,7 @@ public class NewMain extends Application {
 		border.setMaxWidth(400);
 		border.setPrefWidth(400);
 		border.setTop(logoView);
-		border.setAlignment(logoView, Pos.TOP_CENTER);
+		BorderPane.setAlignment(logoView, Pos.TOP_CENTER);
 		border.setCenter(container);
 		border.setStyle("-fx-background-color: #FFFFFF;");
 
@@ -128,12 +134,12 @@ public class NewMain extends Application {
 		//Launch
 		menuWindow.show();
 	}
-	public void howToPlay(Stage primaryStage){
+	private void howToPlay(Stage primaryStage){
 		Stage howToPlayWindow = new Stage();
 		howToPlayWindow.setResizable(false);
 		howToPlayWindow.setTitle("HOW TO PLAY");
 		TextArea text = new TextArea("Welcome exterminator. The city needs your help; the parks are being overrun" +
-				" with rats, and we need you to eliminate them before it’s too late.\n Aim:\n" +
+				" with rats, and we need you to eliminate them before it's too late.\n Aim:\n" +
 				"To eliminate all the Rats within the time frame, use the items you supplied. If rats of an opposite" +
 				" gender meet, they will procreate and reproduce.\n So, eliminate them quickly.\n Inventory:\n" +
 				"We have equipped you with an arsenal at your disposal, found in your inventory, that can be used by " +
@@ -251,12 +257,13 @@ public class NewMain extends Application {
 		levelScoresWindow.show();
 	}
 	
-	public void profileSelect(Stage primaryStage){
+	private void profileSelect(Stage primaryStage){
 		Stage profileSelectWindow = new Stage();
 		profileSelectWindow.setTitle("RAT GAME: PROFILE SELECT");
 		ComboBox<String> profileSelect = new ComboBox<String>();
 		File profileFolder = new File("src/profiles");
 		File[] profiles = profileFolder.listFiles();
+		assert profiles != null;
 		for(File profile : profiles) {
 			if(profile.getName().endsWith(".txt")) {
 				String profileName = profile.getName();
@@ -304,10 +311,10 @@ public class NewMain extends Application {
 
 		GridPane container = new GridPane();
 		container.getChildren().addAll(profileSelect, submit, delete, create, backButton);
-		container.setConstraints(submit, 1, 0);
-		container.setConstraints(delete, 2, 0);
-		container.setConstraints(backButton, 2, 1);
-		container.setConstraints(create, 1, 1);
+		GridPane.setConstraints(submit, 1, 0);
+		GridPane.setConstraints(delete, 2, 0);
+		GridPane.setConstraints(backButton, 2, 1);
+		GridPane.setConstraints(create, 1, 1);
 		
 		
 		//Style container
@@ -321,7 +328,7 @@ public class NewMain extends Application {
 	}
 	
 	
-	public void profileCreator(Stage primaryStage) {
+	private void profileCreator(Stage primaryStage) {
 		Stage profileCreateWindow = new Stage();
 		GridPane grid = new GridPane();
 		profileCreateWindow.setTitle("RAT GAME: CREATE PROFILE");
@@ -339,9 +346,8 @@ public class NewMain extends Application {
 		submit.setOnAction(event -> {
 			String playerName = name.getText();
 			File file = new File("src/profiles/" + playerName + ".txt");
-			Scanner scan = null;
 			try {
-				scan = new Scanner(file);
+				new Scanner(file);
 			} catch (FileNotFoundException e) {
 				try {
 					if (file.createNewFile()) {
@@ -356,8 +362,8 @@ public class NewMain extends Application {
 			}
 		});
 		
-		grid.setConstraints(submit, 1, 0);
-		grid.setConstraints(backButton, 2, 0);
+		GridPane.setConstraints(submit, 1, 0);
+		GridPane.setConstraints(backButton, 2, 0);
 		grid.getChildren().addAll(name, submit, backButton);
 		//Style container
 		grid.setPadding(new Insets(25));
@@ -369,7 +375,7 @@ public class NewMain extends Application {
 		profileCreateWindow.show();
 	}
 
-	public void levelSelect(Stage primaryStage){
+	private void levelSelect(Stage primaryStage){
 		Stage levelMenuWindow = new Stage();
 		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
 		VBox container = new VBox();
@@ -435,7 +441,7 @@ public class NewMain extends Application {
 		levelMenuWindow.show();
 	}
 
-	public void drawGame(String filename) {
+	private void drawGame(String filename) {
 		// Get the Graphic Context of the canvas. This is what we draw on.
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		Entity.setGC(gc);
@@ -456,20 +462,19 @@ public class NewMain extends Application {
 		// Set the background to beige.
 		gc.setFill(Color.WHITESMOKE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		Map map = gameLevel.getMap();
-		map.setGC(gc); //remove this later
+		Map map = Level.getMap();
+		Map.setGC(gc); //remove this later
 		map.tileOut(gc);
 		map.entityTick();
 	}
 
-	public void win(){
+	private void win(){
 		Stage winScreen = new Stage();
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
 		int score = Level.getLevelScore();
 		Label scoreTitle = new Label("Score: " + score);
 		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), score);
-
 		Level.resetLevelScore();
 		Leaderboard.writeLeaderboards();
 		Button menuButton = new Button("Main Menu");
@@ -494,7 +499,7 @@ public class NewMain extends Application {
 		winScreen.show();
 	}
 
-	public void lose(){
+	private void lose(){
 		Stage loseScreen = new Stage();
 		loseScreen.setTitle("YOU LOST");
 		Label title = new Label("You Lost! Better Luck Next Time");
@@ -520,43 +525,37 @@ public class NewMain extends Application {
 	}
 
 
-	public int mainTick() {
+	private void mainTick() {
 		ScheduledExecutorService test = Executors.newScheduledThreadPool(1);
-		int num = 0;
-		test.scheduleWithFixedDelay(new Runnable() {
-			public void run() {
-				Inventory.act();
-				if (Rat.getRats().size() == 0) {
-					Platform.runLater(() -> levelStage.close());
-					Entity.getEntities().clear();
-					Rat.getRats().clear();
-					Platform.runLater(() -> win());
-					test.shutdown();
-				}else if (Rat.getRats().size() == Level.getMap().maxRat) {
-					Platform.runLater(() -> levelStage.close());
-					Entity.getEntities().clear();
-					Rat.getRats().clear();
-					Platform.runLater(() -> lose());
-					test.shutdown();
-				} else if (saved) {
-					Entity.getEntities().clear();
-					Rat.getRats().clear();
-					saved = false;
-					test.shutdown();
-				}
+		test.scheduleWithFixedDelay(() -> {
+			Inventory.act();
+			if (Rat.getRats().size() == 0) {
+				Platform.runLater(() -> levelStage.close());
+				Entity.getEntities().clear();
+				Rat.getRats().clear();
+				Platform.runLater(this::win);
+				test.shutdown();
+			}else if (Rat.getRats().size() == Level.getMap().maxRat) {
+				Platform.runLater(() -> levelStage.close());
+				Entity.getEntities().clear();
+				Rat.getRats().clear();
+				Platform.runLater(this::lose);
+				test.shutdown();
+			} else if (saved) {
+				Entity.getEntities().clear();
+				Rat.getRats().clear();
+				saved = false;
+				test.shutdown();
 			}
 		}, 0, 250, TimeUnit.MILLISECONDS);
-		return num;
 	}
 
 	/**
 	 *
 	 */
-	public void level1(){
-		CANVAS_WIDTH = 650;
-		CANVAS_HEIGHT = 400;
+	private void level1(){
 		levelStage.setTitle("RAT GAME : LVL1");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE1_CANVAS_WIDTH, STAGE1_CANVAS_HEIGHT);
 		Scene level1Scene = new Scene(root);
 		drawGame("src/levels/level.txt");
 		levelStage.setScene(level1Scene);
@@ -567,11 +566,9 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level2(){
-		CANVAS_WIDTH = 1100;
-		CANVAS_HEIGHT = 650;
+	private void level2(){
 		levelStage.setTitle("RAT GAME : LVL2");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE2_CANVAS_WIDTH, STAGE2_CANVAS_HEIGHT);
 		Scene level2Scene = new Scene(root);
 		drawGame("src/levels/level2.txt");
 		levelStage.setScene(level2Scene);
@@ -582,11 +579,9 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level3(){
-		CANVAS_WIDTH = 950;
-		CANVAS_HEIGHT = 550;
+	private void level3(){
 		levelStage.setTitle("RAT GAME : LVL3");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE3_CANVAS_WIDTH, STAGE3_CANVAS_HEIGHT);
 		Scene level3Scene = new Scene(root);
 		drawGame("src/levels/level3.txt");
 		levelStage.setScene(level3Scene);
@@ -597,79 +592,115 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level4(){
-		CANVAS_WIDTH = 1550;
-		CANVAS_HEIGHT = 750;
+	private void level4(){
 		levelStage.setTitle("RAT GAME : LVL4");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE4_CANVAS_WIDTH, STAGE4_CANVAS_HEIGHT);
 		Scene level4Scene = new Scene(root);
 		drawGame("src/levels/level4.txt");
 		levelStage.setScene(level4Scene);
 		levelStage.show();
 	}
 	
-	public void savedLevel(){
-		CANVAS_WIDTH = 1200;
-		CANVAS_HEIGHT = 800;
-		levelStage.setTitle("RAT GAME : SAVED LEVEL");
-		Pane root = buildGUI();
+	private void savedLevel(){
+		levelStage.setTitle("RAT GAME : LVL" + getSavedLevel());
+		int savedGameCanvasWidth = 0;
+		int savedGameCanvasHeight = 0;
+		switch(getSavedLevel()) {
+			case 1:
+				savedGameCanvasWidth = STAGE1_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE1_CANVAS_HEIGHT;
+				break;
+			case 2:
+				savedGameCanvasWidth = STAGE2_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE2_CANVAS_HEIGHT;
+				break;
+			case 3:
+				savedGameCanvasWidth = STAGE3_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE3_CANVAS_HEIGHT;
+				break;
+			case 4:
+				savedGameCanvasWidth = STAGE4_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE4_CANVAS_HEIGHT;
+				break;
+		}
+		Pane root = buildGUI(savedGameCanvasWidth, savedGameCanvasHeight);
 		Scene savedlevelScene = new Scene(root);
 		drawGame("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
 		levelStage.setScene(savedlevelScene);
+		levelStage.setResizable(false);
 		levelStage.show();
 	}
 
+	private int getSavedLevel() {
+		File f = new File("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
+		Scanner scan = null;
+		try {
+			scan = new Scanner(f);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assert scan != null;
+		int ent = scan.nextInt();
+		scan.nextLine();
+		for (int i = 0; i < ent; i++) {
+			scan.nextLine();
+		}
+		return scan.nextInt();
+	}
+	
 	/**
 	 * @return return Pane for level stage.
 	 */
-	private Pane buildGUI() {
+	private Pane buildGUI(int width, int height) {
 		// Create top-level panel that will hold all GUI
 		BorderPane root = new BorderPane();
 
 		// Create canvas
-		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT + 50);
+		canvas = new Canvas(width, height + 50);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		Entity.setGC(gc);
 		root.setCenter(canvas);
 
 		Image gasImg = new Image("Gas.png");
 		ImageView gasButton = new ImageView(gasImg);
-		gasButton.setX(CANVAS_WIDTH - 100);
+		gasButton.setX(width - 100);
 		gasButton.setY(0);
 
 		Image deathRatImg = new Image("DeathRatN.png");
 		ImageView deathRatButton = new ImageView(deathRatImg);
-		deathRatButton.setX(CANVAS_WIDTH - 100);
+		deathRatButton.setX(width - 100);
 		deathRatButton.setY(50);
 
 		Image poisonImg = new Image("Poison.png");
 		ImageView poisonButton = new ImageView(poisonImg);
-		poisonButton.setX(CANVAS_WIDTH - 100);
+		poisonButton.setX(width - 100);
 		poisonButton.setY(100);
 
 		Image sterilisationImg = new Image("Sterilisation.png");
 		ImageView sterilisationButton = new ImageView(sterilisationImg);
-		sterilisationButton.setX(CANVAS_WIDTH - 100);
+		sterilisationButton.setX(width - 100);
 		sterilisationButton.setY(150);
 
 		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
 		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
-		femaleSexChangeButton.setX(CANVAS_WIDTH - 100);
+		femaleSexChangeButton.setX(width - 100);
 		femaleSexChangeButton.setY(200);
 
 		Image maleSexChangeImg = new Image("MaleSexChange.png");
 		ImageView maleSexChangeButton = new ImageView(maleSexChangeImg);
-		maleSexChangeButton.setX(CANVAS_WIDTH - 100);
+		maleSexChangeButton.setX(width - 100);
 		maleSexChangeButton.setY(250);
 
 		Image noEntrySignImg = new Image("NoEntrySign.png");
 		ImageView noEntrySignButton = new ImageView(noEntrySignImg);
-		noEntrySignButton.setX(CANVAS_WIDTH - 100);
+		noEntrySignButton.setX(width - 100);
 		noEntrySignButton.setY(300);
 
 		Image bombImg = new Image("Bomb.png");
 		ImageView bombButton = new ImageView(bombImg);
-		bombButton.setX(CANVAS_WIDTH - 100);
+		bombButton.setX(width - 100);
 		bombButton.setY(350);
 
 		Button saveButton = new Button("SAVE");
@@ -696,9 +727,9 @@ public class NewMain extends Application {
 		});
 		
 		gasButton.setOnMouseReleased(event -> {
-			gasButton.setX(CANVAS_WIDTH - 100);
+			gasButton.setX(width - 100);
 			gasButton.setY(0);
-			if (Inventory.getGas() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getGas() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeGas();
 				Entity gas = new Gas(getMouseLocation(event), false);
 				gas.draw();
@@ -710,9 +741,9 @@ public class NewMain extends Application {
 			deathRatButton.setY((int)event.getSceneY()-25);
 		});
 		deathRatButton.setOnMouseReleased(event -> {
-			deathRatButton.setX(CANVAS_WIDTH - 100);
+			deathRatButton.setX(width - 100);
 			deathRatButton.setY(50);
-			if (Inventory.getDeathRat() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getDeathRat() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeDeathRat();
 				Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
 				deathRat.draw();
@@ -724,9 +755,9 @@ public class NewMain extends Application {
 			poisonButton.setY((int)event.getSceneY()-25);
 		});
 		poisonButton.setOnMouseReleased(event -> {
-			poisonButton.setX(CANVAS_WIDTH - 100);
+			poisonButton.setX(width - 100);
 			poisonButton.setY(100);
-			if (Inventory.getPoison() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getPoison() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removePoison();
 				Entity poison = new Poison(getMouseLocation(event));
 				poison.draw();
@@ -738,9 +769,9 @@ public class NewMain extends Application {
 			sterilisationButton.setY((int)event.getSceneY()-25);
 		});
 		sterilisationButton.setOnMouseReleased(event -> {
-			sterilisationButton.setX(CANVAS_WIDTH - 100);
+			sterilisationButton.setX(width - 100);
 			sterilisationButton.setY(150);
-			if (Inventory.getSterilisation() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getSterilisation() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeSterilisation();
 				Entity sterilisation = new Sterilisation(getMouseLocation(event));
 				sterilisation.draw();
@@ -752,9 +783,9 @@ public class NewMain extends Application {
 			femaleSexChangeButton.setY((int)event.getSceneY()-25);
 		});
 		femaleSexChangeButton.setOnMouseReleased(event -> {
-			femaleSexChangeButton.setX(CANVAS_WIDTH - 100);
+			femaleSexChangeButton.setX(width - 100);
 			femaleSexChangeButton.setY(200);
-			if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeFemaleSexChange();
 				Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
 				femaleSexChange.draw();
@@ -766,9 +797,9 @@ public class NewMain extends Application {
 			maleSexChangeButton.setY((int)event.getSceneY()-25);
 		});
 		maleSexChangeButton.setOnMouseReleased(event -> {
-			maleSexChangeButton.setX(CANVAS_WIDTH - 100);
+			maleSexChangeButton.setX(width - 100);
 			maleSexChangeButton.setY(250);
-			if (Inventory.getMaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getMaleSexChange() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeMaleSexChange();
 				Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
 				maleSexChange.draw();
@@ -780,9 +811,9 @@ public class NewMain extends Application {
 			noEntrySignButton.setY((int)event.getSceneY()-25);
 		});
 		noEntrySignButton.setOnMouseReleased(event -> {
-			noEntrySignButton.setX(CANVAS_WIDTH - 100);
+			noEntrySignButton.setX(width - 100);
 			noEntrySignButton.setY(300);
-			if (Inventory.getNoEntrySign() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getNoEntrySign() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeNoEntrySign();
 				Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
 				noEntrySign.draw();
@@ -794,20 +825,15 @@ public class NewMain extends Application {
 			bombButton.setY((int)event.getSceneY()-25);
 		});
 		bombButton.setOnMouseReleased(event -> {
-			bombButton.setX(CANVAS_WIDTH - 100);
+			bombButton.setX(width - 100);
 			bombButton.setY(350);
-			if (Inventory.getBomb() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getBomb() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeBomb();
 				Entity bomb = new Bomb(getMouseLocation(event));
 				bomb.draw();
 			}
 		});
-
 		return root;
-	}
-	
-	public static PlayerData getCurrentPlayer() {
-		return currentPlayer;
 	}
 
 	private int[] getMouseLocation(MouseEvent event) {
@@ -820,18 +846,14 @@ public class NewMain extends Application {
 		return new int[]{x,y};
 	}
 
-	//Add something here to try/catch or throw idex out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
-	private boolean checkLegalTile(int[] location) {
+	//Add something here to try/catch or throw index out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
+	private boolean checkLegalTile(MouseEvent event, int width, int height) {
 		boolean result = false;
-		if (!(location[0] > (CANVAS_WIDTH/50)-2) && !(location[1] > (CANVAS_HEIGHT/50)-1)) {
-			if (Map.getTileType(location[0], location[1]) == 'P') {
+		if (((int)event.getSceneX() <= width - 100) && ((int)event.getSceneY() <= height-75)) {
+			if (Map.getTileType(getMouseLocation(event)[0], getMouseLocation(event)[1]) == 'P') {
 				result = true;
 			}
 		}
 		return result;
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 }
