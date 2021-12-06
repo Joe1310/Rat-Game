@@ -296,7 +296,7 @@ public class Main extends Application {
 				File[] saves = saveFolder.listFiles();
 				assert saves != null;
 				for(File save : saves) {
-					if(save.getPath().equals("src/saves/" + name + "SavedGame.txt")) {
+					if(save.getPath().equals(new File("src/saves/" + name + "SavedGame.txt").getPath())) {
 						save.delete();
 					}
 				}
