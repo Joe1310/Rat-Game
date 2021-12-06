@@ -7,8 +7,6 @@ import java.util.Scanner;
 /***
  * The class is responsible for dealing with LeaderBoard and it's functionality.
  *
- * FileName : Leaderboard.java
- *
  * @author Patel, Elliot, Joe, Shivraj.
  * @version 2.0
  */
@@ -52,7 +50,6 @@ public class Leaderboard {
 	 */
 	public Leaderboard() {
 		try {
-			// Reads the text files of LeaderBoards
 			readLeaderboards();
 		} catch (FileNotFoundException e) {
 			System.out.println("Leaderboards not found.");
@@ -67,25 +64,21 @@ public class Leaderboard {
 	 */
 	public void readLeaderboards() throws FileNotFoundException {
 
-		// Reads level 1 data using scanner
 		File first = new File("src/leaderboards/Leaderboard1.txt");
 		Scanner level1;
 		level1 = new Scanner(first);
 		readLeaderboard(level1, ONE);
 
-		// Reads level 2 data using scanner
 		File second = new File("src/leaderboards/Leaderboard2.txt");
 		Scanner level2;
 		level2 = new Scanner(second);
 		readLeaderboard(level2, TWO);
 
-		// Reads level 3 data using scanner
 		File third = new File("src/leaderboards/Leaderboard3.txt");
 		Scanner level3;
 		level3 = new Scanner(third);
 		readLeaderboard(level3, THREE);
 
-		// Reads level 4 data using scanner
 		File fourth = new File("src/leaderboards/Leaderboard4.txt");
 		Scanner level4;
 		level4 = new Scanner(fourth);
@@ -132,7 +125,6 @@ public class Leaderboard {
 	 */
 	public static void writeLeaderboards() {
 
-		// Writes level 1 leader board data in the text file
 		File leaderboard1 = new File("src/leaderboards/Leaderboard1.txt");
 		try {
 			FileWriter lvl1 = new FileWriter(leaderboard1);
@@ -142,7 +134,6 @@ public class Leaderboard {
 			e.printStackTrace();
 		}
 
-		// Writes level 2 leader board data in the text file
 		File leaderboard2 = new File("src/leaderboards/Leaderboard2.txt");
 		try {
 			FileWriter lvl2 = new FileWriter(leaderboard2);
@@ -152,7 +143,6 @@ public class Leaderboard {
 			e.printStackTrace();
 		}
 
-		// Writes level 3 leader board data in the text file
 		File leaderboard3 = new File("src/leaderboards/Leaderboard3.txt");
 		try {
 			FileWriter lvl3 = new FileWriter(leaderboard3);
@@ -162,7 +152,6 @@ public class Leaderboard {
 			e.printStackTrace();
 		}
 
-		// Writes level 4 leader board data in the text file
 		File leaderboard4 = new File("src/leaderboards/Leaderboard4.txt");
 		try {
 			FileWriter lvl4 = new FileWriter(leaderboard4);
@@ -171,7 +160,6 @@ public class Leaderboard {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/***
@@ -208,7 +196,7 @@ public class Leaderboard {
 
 		int loc = TEN;
 
-		// Checks for the location where player stands on.
+		// Checks where in the leaderboard the player should be placed.
 
 		if (levelScores[ZERO] > score) {
 			if (levelScores[ONE] > score) {

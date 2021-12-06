@@ -196,6 +196,9 @@ public class NewMain extends Application {
 		howToPlayWindow.show();
 	}
 
+	/**
+	 * Method to display a gui where users can choose which levels high scores they want to view.
+	 */
 	private void highScores() {
 		Stage highScoresWindow = new Stage();
 		highScoresWindow.setTitle("RAT GAME: HIGH SCORES");
@@ -244,7 +247,12 @@ public class NewMain extends Application {
 		highScoresWindow.setScene(new Scene(container));
 		highScoresWindow.show();
 	}
-	
+
+	/**
+	 * Method to show the high scores of a given level.
+	 *
+	 * @param levelNo Level number of high scores to be displayed.
+	 */
 	private void levelScores(int levelNo) {
 
 		Stage levelScoresWindow = new Stage();
@@ -268,7 +276,10 @@ public class NewMain extends Application {
 		levelScoresWindow.setScene(new Scene(container));
 		levelScoresWindow.show();
 	}
-	
+
+	/**
+	 * Method to display a gui where users can select which profile they want to play as.
+	 */
 	private void profileSelect(){
 		Stage profileSelectWindow = new Stage();
 		profileSelectWindow.setTitle("RAT GAME: PROFILE SELECT");
@@ -338,8 +349,11 @@ public class NewMain extends Application {
 		//Launch
 		profileSelectWindow.show();
 	}
-	
-	
+
+
+	/**
+	 * Method to display a gui for users to create new profiles to play as.
+	 */
 	private void profileCreator() {
 		Stage profileCreateWindow = new Stage();
 		GridPane grid = new GridPane();
@@ -387,6 +401,9 @@ public class NewMain extends Application {
 		profileCreateWindow.show();
 	}
 
+	/**
+	 * Method to display a gui where the user can select a level to play.
+	 */
 	private void levelSelect(){
 		Stage levelMenuWindow = new Stage();
 		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
@@ -453,6 +470,11 @@ public class NewMain extends Application {
 		levelMenuWindow.show();
 	}
 
+	/**
+	 * Method to initialise a level and start the game.
+	 *
+	 * @param filename Level filename.
+	 */
 	private void drawGame(String filename) {
 		// Get the Graphic Context of the canvas. This is what we draw on.
 		GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -480,6 +502,9 @@ public class NewMain extends Application {
 		map.entityTick();
 	}
 
+	/**
+	 * Method to display a win screen.
+	 */
 	private void win(){
 		Stage winScreen = new Stage();
 		winScreen.setTitle("YOU WIN");
@@ -511,6 +536,9 @@ public class NewMain extends Application {
 		winScreen.show();
 	}
 
+	/**
+	 * Method to display a lose screen.
+	 */
 	private void lose(){
 		Stage loseScreen = new Stage();
 		loseScreen.setTitle("YOU LOST");
@@ -537,6 +565,9 @@ public class NewMain extends Application {
 	}
 
 
+	/**
+	 * Method to constantly check if either a win/lose condition has been met or the save button has been pressed.
+	 */
 	private void mainTick() {
 		ScheduledExecutorService test = Executors.newScheduledThreadPool(1);
 		test.scheduleWithFixedDelay(() -> {
@@ -563,7 +594,7 @@ public class NewMain extends Application {
 	}
 
 	/**
-	 *
+	 * Method to initialise level 1.
 	 */
 	private void level1(){
 		levelStage.setTitle("RAT GAME : LVL1");
@@ -576,7 +607,7 @@ public class NewMain extends Application {
 	}
 
 	/**
-	 *
+	 * Method to initialise level 2.
 	 */
 	private void level2(){
 		levelStage.setTitle("RAT GAME : LVL2");
@@ -589,7 +620,7 @@ public class NewMain extends Application {
 	}
 
 	/**
-	 *
+	 * Method to initialise level 3.
 	 */
 	private void level3(){
 		levelStage.setTitle("RAT GAME : LVL3");
@@ -602,7 +633,7 @@ public class NewMain extends Application {
 	}
 
 	/**
-	 *
+	 * Method to initialise level 4.
 	 */
 	private void level4(){
 		levelStage.setTitle("RAT GAME : LVL4");
@@ -612,7 +643,10 @@ public class NewMain extends Application {
 		levelStage.setScene(level4Scene);
 		levelStage.show();
 	}
-	
+
+	/**
+	 * Method to initialise a saved level.
+	 */
 	private void savedLevel(){
 		levelStage.setTitle("RAT GAME : LVL" + getSavedLevel());
 		int savedGameCanvasWidth = 0;
@@ -643,14 +677,18 @@ public class NewMain extends Application {
 		levelStage.show();
 	}
 
+	/**
+	 * Method to get the numeric value of the saved level for the current player.
+	 *
+	 * @return Returns the saved level file name of the current player.
+	 */
 	private int getSavedLevel() {
 		File f = new File("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("File not found.");
 		}
 
 		assert scan != null;
@@ -663,6 +701,8 @@ public class NewMain extends Application {
 	}
 	
 	/**
+	 * Method to build the GUI of the level
+	 *
 	 * @return return Pane for level stage.
 	 */
 	private Pane buildGUI(int width, int height) {
@@ -728,16 +768,15 @@ public class NewMain extends Application {
 				start(levelStage);
 				saved = true;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Failed to save game.");
 			}
 		});
-		
+
 		gasButton.setOnMouseDragged(event -> {
 			gasButton.setX((int)event.getSceneX()-25);
 			gasButton.setY((int)event.getSceneY()-25);
 		});
-		
+
 		gasButton.setOnMouseReleased(event -> {
 			gasButton.setX(width - 100);
 			gasButton.setY(0);
@@ -848,6 +887,12 @@ public class NewMain extends Application {
 		return root;
 	}
 
+	/**
+	 * Method to get the location of the players mouse.
+	 *
+	 * @param event What kind of mouse event has happened.
+	 * @return Returns the tile coordinate values of the event.
+	 */
 	private int[] getMouseLocation(MouseEvent event) {
 		int x = (int)event.getSceneX();
 		int y = (int)event.getSceneY();
@@ -858,7 +903,14 @@ public class NewMain extends Application {
 		return new int[]{x,y};
 	}
 
-	//Add something here to try/catch or throw index out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
+	/**
+	 * Method to check if the tile is a legal location to place an item.
+	 *
+	 * @param event What kind of mouse event has happened.
+	 * @param width Width of the screen.
+	 * @param height Height of the screen.
+	 * @return Returns if the tile is a legal location for an item to be placed.
+	 */
 	private boolean checkLegalTile(MouseEvent event, int width, int height) {
 		boolean result = false;
 		if (((int)event.getSceneX() <= width - 100) && ((int)event.getSceneY() <= height-75)) {

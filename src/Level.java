@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class Level {
 
-	public int remainingTime = 0;
 	public static int maxRats;
 	private static int parTime;
 	private static final int[] ITEM_SPAWN_RATES = new int[8];

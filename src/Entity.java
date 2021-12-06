@@ -74,6 +74,11 @@ public abstract class Entity {
     }
 
 	/**
+	 * Method to run actions for entities every tick.
+	 */
+	public abstract void act();
+
+	/**
 	 * Method to set the image associated with the entity.
 	 *
 	 * @param imageName Name of the image.
@@ -81,9 +86,4 @@ public abstract class Entity {
     protected void setImageName(String imageName) {
     	this.imageName = imageName;
     }
-
-	/**
-	 *
-	 */
-    public abstract void act();
 }
