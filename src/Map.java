@@ -20,7 +20,7 @@ public class Map {
     private final int column;
     private Image tunnelImage;
     private int timer;
-    public static int count = 0;
+    public static int count;
     private static GraphicsContext gc;
 
     /**
@@ -36,6 +36,7 @@ public class Map {
         this.column = y;
         Map.tileLayout = tileLayout;
         this.maxRat = maxRat;
+        count = 0;
     }
 
     /**
