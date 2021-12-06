@@ -210,9 +210,19 @@ public class NewMain extends Application {
 			levelScores(primaryStage, 4);
 		});
 
+		Button backButton = new Button("BACK");
+		backButton.setOnAction(event -> {
+			highScoresWindow.close();
+			try {
+				start(highScoresWindow);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
-		container.getChildren().addAll(title, level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
+		container.getChildren().addAll(title, level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton, backButton);
 		highScoresWindow.setScene(new Scene(container));
 		highScoresWindow.show();
 	}
@@ -516,7 +526,6 @@ public class NewMain extends Application {
 			public void run() {
 				Inventory.act();
 				if (Rat.getRats().size() == 0) {
-					System.out.println("Win");
 					Platform.runLater(() -> levelStage.close());
 					Entity.getEntities().clear();
 					Rat.getRats().clear();
@@ -813,8 +822,6 @@ public class NewMain extends Application {
 	//Add something here to try/catch or throw idex out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
 	private boolean checkLegalTile(int[] location) {
 		boolean result = false;
-		System.out.println(location[0]);
-		System.out.println((CANVAS_WIDTH/50)-2);
 		if (!(location[0] > (CANVAS_WIDTH/50)-2) && !(location[1] > (CANVAS_HEIGHT/50)-1)) {
 			if (Map.getTileType(location[0], location[1]) == 'P') {
 				result = true;
