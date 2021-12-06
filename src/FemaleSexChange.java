@@ -18,7 +18,7 @@ public class FemaleSexChange extends Entity {
     }
 
     /**
-     * Method to change the gender of any male rats that go through the tile it is placed on.
+     * Method to change the sex of any rats that go through the tile it is placed on.
      */
     public void act() {
         for (int i = Rat.getRats().size() - 1; i > -1; i--) {

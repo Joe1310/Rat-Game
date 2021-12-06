@@ -31,6 +31,7 @@ public class DeathRatSpawner extends Entity {
 
     /**
      * Method to run the actions of the entity every tick.
+     * Spawns a death rat after 2.5 seconds.
      */
     public void act() {
         if (countdown == 0) {

@@ -63,7 +63,7 @@ public class Bomb extends Entity {
     }
 
     /**
-     * Method to spawn the explosion images.
+     * Method to spawn the explosion entities.
      */
     private void spawnExplosions() {
         new Explosion(this.location);
@@ -88,7 +88,8 @@ public class Bomb extends Entity {
     }
 
     /**
-     * Method to spawn the explosions to the north of the bomb.
+     * Method to spawn the explosions to the north of the bomb
+     * until it reaches a grass tile.
      *
      * @param exLocation The x, y coordinate of the explosion entity
      */
@@ -101,7 +102,8 @@ public class Bomb extends Entity {
     }
 
     /**
-     * Method to spawn the explosions to the south of the bomb.
+     * Method to spawn the explosions to the south of the bomb
+     * until it reaches a grass tile.
      *
      * @param exLocation The x, y coordinates of the explosion entity.
      */
@@ -114,7 +116,8 @@ public class Bomb extends Entity {
     }
 
     /**
-     * Method to spawn the explosions to the east of the bomb.
+     * Method to spawn the explosions to the east of the bomb
+     * until it reaches a grass tile.
      *
      * @param exLocation The x, y coordinates of the explosion entity.
      */
@@ -127,7 +130,8 @@ public class Bomb extends Entity {
     }
 
     /**
-     * Method to spawn the explosions to the west of the bomb.
+     * Method to spawn the explosions to the west of the bomb
+     * until it reaches a grass tile.
      *
      * @param exLocation The x, y coordinates of the explosion entity.
      */
