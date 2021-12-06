@@ -38,12 +38,23 @@ import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 public class NewMain extends Application {
 	
 	// The dimensions of the canvas
-	private static int CANVAS_WIDTH = 1850;
-	private static int CANVAS_HEIGHT = 1000;
+	private static final int STAGE1_CANVAS_WIDTH = 650;
+	private static final int STAGE1_CANVAS_HEIGHT = 350;
+	
+	private static final int STAGE2_CANVAS_WIDTH = 1100;
+	private static final int STAGE2_CANVAS_HEIGHT = 800;
+	
+	private static final int STAGE3_CANVAS_WIDTH = 950;
+	private static final int STAGE3_CANVAS_HEIGHT = 500;
+	
+	private static final int STAGE4_CANVAS_WIDTH = 1550;
+	private static final int STAGE4_CANVAS_HEIGHT = 700;
+
 	
 	/*
 	 * We need to create final variables for each levels canvas size
@@ -133,7 +144,7 @@ public class NewMain extends Application {
 		howToPlayWindow.setResizable(false);
 		howToPlayWindow.setTitle("HOW TO PLAY");
 		TextArea text = new TextArea("Welcome exterminator. The city needs your help; the parks are being overrun" +
-				" with rats, and we need you to eliminate them before it’s too late.\n Aim:\n" +
+				" with rats, and we need you to eliminate them before it's too late.\n Aim:\n" +
 				"To eliminate all the Rats within the time frame, use the items you supplied. If rats of an opposite" +
 				" gender meet, they will procreate and reproduce.\n So, eliminate them quickly.\n Inventory:\n" +
 				"We have equipped you with an arsenal at your disposal, found in your inventory, that can be used by " +
@@ -552,10 +563,8 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level1(){
-		CANVAS_WIDTH = 650;
-		CANVAS_HEIGHT = 400;
 		levelStage.setTitle("RAT GAME : LVL1");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE1_CANVAS_WIDTH, STAGE1_CANVAS_HEIGHT);
 		Scene level1Scene = new Scene(root);
 		drawGame("src/levels/level.txt");
 		levelStage.setScene(level1Scene);
@@ -567,10 +576,8 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level2(){
-		CANVAS_WIDTH = 1100;
-		CANVAS_HEIGHT = 850;
 		levelStage.setTitle("RAT GAME : LVL2");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE2_CANVAS_WIDTH, STAGE2_CANVAS_HEIGHT);
 		Scene level2Scene = new Scene(root);
 		drawGame("src/levels/level2.txt");
 		levelStage.setScene(level2Scene);
@@ -582,10 +589,8 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level3(){
-		CANVAS_WIDTH = 950;
-		CANVAS_HEIGHT = 550;
 		levelStage.setTitle("RAT GAME : LVL3");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE3_CANVAS_WIDTH, STAGE3_CANVAS_HEIGHT);
 		Scene level3Scene = new Scene(root);
 		drawGame("src/levels/level3.txt");
 		levelStage.setScene(level3Scene);
@@ -597,10 +602,8 @@ public class NewMain extends Application {
 	 *
 	 */
 	public void level4(){
-		CANVAS_WIDTH = 1550;
-		CANVAS_HEIGHT = 750;
 		levelStage.setTitle("RAT GAME : LVL4");
-		Pane root = buildGUI();
+		Pane root = buildGUI(STAGE4_CANVAS_WIDTH, STAGE4_CANVAS_HEIGHT);
 		Scene level4Scene = new Scene(root);
 		drawGame("src/levels/level4.txt");
 		levelStage.setScene(level4Scene);
@@ -608,67 +611,104 @@ public class NewMain extends Application {
 	}
 	
 	public void savedLevel(){
-		CANVAS_WIDTH = 1200;
-		CANVAS_HEIGHT = 800;
-		levelStage.setTitle("RAT GAME : SAVED LEVEL");
-		Pane root = buildGUI();
+		levelStage.setTitle("RAT GAME : LVL" + getSavedLevel());
+		int SAVEDGAME_CANVAS_WIDTH = 0;
+		int SAVEDGAME_CANVAS_HEIGHT = 0;
+		switch(getSavedLevel()) {
+			case 1:
+				SAVEDGAME_CANVAS_WIDTH = STAGE1_CANVAS_WIDTH;
+				SAVEDGAME_CANVAS_HEIGHT = STAGE1_CANVAS_HEIGHT;
+				break;
+			case 2:
+				SAVEDGAME_CANVAS_WIDTH = STAGE2_CANVAS_WIDTH;
+				SAVEDGAME_CANVAS_HEIGHT = STAGE2_CANVAS_HEIGHT;
+				break;
+			case 3:
+				SAVEDGAME_CANVAS_WIDTH = STAGE3_CANVAS_WIDTH;
+				SAVEDGAME_CANVAS_HEIGHT = STAGE3_CANVAS_HEIGHT;
+				break;
+			case 4:
+				SAVEDGAME_CANVAS_WIDTH = STAGE4_CANVAS_WIDTH;
+				SAVEDGAME_CANVAS_HEIGHT = STAGE4_CANVAS_HEIGHT;
+				break;
+		}
+		Pane root = buildGUI(SAVEDGAME_CANVAS_WIDTH, SAVEDGAME_CANVAS_HEIGHT);
 		Scene savedlevelScene = new Scene(root);
 		drawGame("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
 		levelStage.setScene(savedlevelScene);
+		levelStage.setResizable(false);
 		levelStage.show();
 	}
 
+	public int getSavedLevel() {
+		File f = new File("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
+		Scanner scan = null;
+		try {
+			scan = new Scanner(f);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int ent = scan.nextInt();
+		scan.nextLine();
+		for (int i = 0; i < ent; i++) {
+			String str = scan.nextLine();
+		}
+		return scan.nextInt();
+	}
+	
 	/**
 	 * @return return Pane for level stage.
 	 */
-	private Pane buildGUI() {
+	private Pane buildGUI(int width, int height) {
 		// Create top-level panel that will hold all GUI
 		BorderPane root = new BorderPane();
 
 		// Create canvas
-		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT + 50);
+		canvas = new Canvas(width, height + 50);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		Entity.setGC(gc);
 		root.setCenter(canvas);
 
 		Image gasImg = new Image("Gas.png");
 		ImageView gasButton = new ImageView(gasImg);
-		gasButton.setX(CANVAS_WIDTH - 100);
+		gasButton.setX(width - 100);
 		gasButton.setY(0);
 
 		Image deathRatImg = new Image("DeathRatN.png");
 		ImageView deathRatButton = new ImageView(deathRatImg);
-		deathRatButton.setX(CANVAS_WIDTH - 100);
+		deathRatButton.setX(width - 100);
 		deathRatButton.setY(50);
 
 		Image poisonImg = new Image("Poison.png");
 		ImageView poisonButton = new ImageView(poisonImg);
-		poisonButton.setX(CANVAS_WIDTH - 100);
+		poisonButton.setX(width - 100);
 		poisonButton.setY(100);
 
 		Image sterilisationImg = new Image("Sterilisation.png");
 		ImageView sterilisationButton = new ImageView(sterilisationImg);
-		sterilisationButton.setX(CANVAS_WIDTH - 100);
+		sterilisationButton.setX(width - 100);
 		sterilisationButton.setY(150);
 
 		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
 		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
-		femaleSexChangeButton.setX(CANVAS_WIDTH - 100);
+		femaleSexChangeButton.setX(width - 100);
 		femaleSexChangeButton.setY(200);
 
 		Image maleSexChangeImg = new Image("MaleSexChange.png");
 		ImageView maleSexChangeButton = new ImageView(maleSexChangeImg);
-		maleSexChangeButton.setX(CANVAS_WIDTH - 100);
+		maleSexChangeButton.setX(width - 100);
 		maleSexChangeButton.setY(250);
 
 		Image noEntrySignImg = new Image("NoEntrySign.png");
 		ImageView noEntrySignButton = new ImageView(noEntrySignImg);
-		noEntrySignButton.setX(CANVAS_WIDTH - 100);
+		noEntrySignButton.setX(width - 100);
 		noEntrySignButton.setY(300);
 
 		Image bombImg = new Image("Bomb.png");
 		ImageView bombButton = new ImageView(bombImg);
-		bombButton.setX(CANVAS_WIDTH - 100);
+		bombButton.setX(width - 100);
 		bombButton.setY(350);
 
 		Button saveButton = new Button("SAVE");
@@ -695,9 +735,9 @@ public class NewMain extends Application {
 		});
 		
 		gasButton.setOnMouseReleased(event -> {
-			gasButton.setX(CANVAS_WIDTH - 100);
+			gasButton.setX(width - 100);
 			gasButton.setY(0);
-			if (Inventory.getGas() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getGas() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeGas();
 				Entity gas = new Gas(getMouseLocation(event), false);
 				gas.draw();
@@ -709,9 +749,9 @@ public class NewMain extends Application {
 			deathRatButton.setY((int)event.getSceneY()-25);
 		});
 		deathRatButton.setOnMouseReleased(event -> {
-			deathRatButton.setX(CANVAS_WIDTH - 100);
+			deathRatButton.setX(width - 100);
 			deathRatButton.setY(50);
-			if (Inventory.getDeathRat() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getDeathRat() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeDeathRat();
 				Entity deathRat = new DeathRatSpawner(getMouseLocation(event));
 				deathRat.draw();
@@ -723,9 +763,9 @@ public class NewMain extends Application {
 			poisonButton.setY((int)event.getSceneY()-25);
 		});
 		poisonButton.setOnMouseReleased(event -> {
-			poisonButton.setX(CANVAS_WIDTH - 100);
+			poisonButton.setX(width - 100);
 			poisonButton.setY(100);
-			if (Inventory.getPoison() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getPoison() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removePoison();
 				Entity poison = new Poison(getMouseLocation(event));
 				poison.draw();
@@ -737,9 +777,9 @@ public class NewMain extends Application {
 			sterilisationButton.setY((int)event.getSceneY()-25);
 		});
 		sterilisationButton.setOnMouseReleased(event -> {
-			sterilisationButton.setX(CANVAS_WIDTH - 100);
+			sterilisationButton.setX(width - 100);
 			sterilisationButton.setY(150);
-			if (Inventory.getSterilisation() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getSterilisation() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeSterilisation();
 				Entity sterilisation = new Sterilisation(getMouseLocation(event));
 				sterilisation.draw();
@@ -751,9 +791,9 @@ public class NewMain extends Application {
 			femaleSexChangeButton.setY((int)event.getSceneY()-25);
 		});
 		femaleSexChangeButton.setOnMouseReleased(event -> {
-			femaleSexChangeButton.setX(CANVAS_WIDTH - 100);
+			femaleSexChangeButton.setX(width - 100);
 			femaleSexChangeButton.setY(200);
-			if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getFemaleSexChange() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeFemaleSexChange();
 				Entity femaleSexChange = new FemaleSexChange(getMouseLocation(event));
 				femaleSexChange.draw();
@@ -765,9 +805,9 @@ public class NewMain extends Application {
 			maleSexChangeButton.setY((int)event.getSceneY()-25);
 		});
 		maleSexChangeButton.setOnMouseReleased(event -> {
-			maleSexChangeButton.setX(CANVAS_WIDTH - 100);
+			maleSexChangeButton.setX(width - 100);
 			maleSexChangeButton.setY(250);
-			if (Inventory.getMaleSexChange() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getMaleSexChange() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeMaleSexChange();
 				Entity maleSexChange = new MaleSexChange(getMouseLocation(event));
 				maleSexChange.draw();
@@ -779,9 +819,9 @@ public class NewMain extends Application {
 			noEntrySignButton.setY((int)event.getSceneY()-25);
 		});
 		noEntrySignButton.setOnMouseReleased(event -> {
-			noEntrySignButton.setX(CANVAS_WIDTH - 100);
+			noEntrySignButton.setX(width - 100);
 			noEntrySignButton.setY(300);
-			if (Inventory.getNoEntrySign() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getNoEntrySign() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeNoEntrySign();
 				Entity noEntrySign = new NoEntrySign(getMouseLocation(event));
 				noEntrySign.draw();
@@ -793,9 +833,9 @@ public class NewMain extends Application {
 			bombButton.setY((int)event.getSceneY()-25);
 		});
 		bombButton.setOnMouseReleased(event -> {
-			bombButton.setX(CANVAS_WIDTH - 100);
+			bombButton.setX(width - 100);
 			bombButton.setY(350);
-			if (Inventory.getBomb() > 0 && checkLegalTile(getMouseLocation(event))) {
+			if (Inventory.getBomb() > 0 && checkLegalTile(event, width, height)) {
 				Inventory.removeBomb();
 				Entity bomb = new Bomb(getMouseLocation(event));
 				bomb.draw();
@@ -819,11 +859,11 @@ public class NewMain extends Application {
 		return new int[]{x,y};
 	}
 
-	//Add something here to try/catch or throw idex out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
-	private boolean checkLegalTile(int[] location) {
+	//Add something here to try/catch or throw index out of bounds exception <<<<<< IMPORTANT <<<<<< LOOK
+	private boolean checkLegalTile(MouseEvent event, int width, int height) {
 		boolean result = false;
-		if (!(location[0] > (CANVAS_WIDTH/50)-2) && !(location[1] > (CANVAS_HEIGHT/50)-1)) {
-			if (Map.getTileType(location[0], location[1]) == 'P') {
+		if (((int)event.getSceneX() <= width - 100) && ((int)event.getSceneY() <= height-75)) {
+			if (Map.getTileType(getMouseLocation(event)[0], getMouseLocation(event)[1]) == 'P') {
 				result = true;
 			}
 		}
