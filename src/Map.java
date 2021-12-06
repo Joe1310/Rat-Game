@@ -64,25 +64,6 @@ public class Map {
     }
 
     /**
-     * Method to redraw the tunnels so that they are drawn over the rats.
-     *
-     * @param gc Graphics context used to draw tiles.
-     */
-    public void tunnelOut(GraphicsContext gc) {
-        tunnelImage = new Image("Tunnel.png");
-
-        for (int i = 0; i < (row); i++) {
-            for (int j = 0; j < column; j++) {
-                Image tileImage = null;
-                if (Map.tileLayout[j][i].getTileType() == 'T') {
-                    tileImage = tunnelImage;
-                }
-                gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
-            }
-        }
-    }
-
-    /**
      * Method to continuously call the movement method on the rats, redraw the tiles and keep track of how
      * long the level has been played for.
      *
@@ -132,22 +113,6 @@ public class Map {
     }
 
     /**
-     * Method to draw the item counters to the screen.
-     */
-    public void drawCounter() {
-        int SIZE = 400;
-        gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
-        gc.drawImage(new Image(Inventory.getGas() +".png"),((column + 1) * 50), 0);
-        gc.drawImage(new Image(Inventory.getDeathRat() +".png"),((column + 1) * 50), 50);
-        gc.drawImage(new Image(Inventory.getPoison() +".png"),((column + 1) * 50), 100);
-        gc.drawImage(new Image(Inventory.getSterilisation() +".png"),((column + 1) * 50), 150);
-        gc.drawImage(new Image(Inventory.getFemaleSexChange() +".png"),((column + 1) * 50), 200);
-        gc.drawImage(new Image(Inventory.getMaleSexChange() +".png"),((column + 1) * 50), 250);
-        gc.drawImage(new Image(Inventory.getNoEntrySign() +".png"),((column + 1) * 50), 300);
-        gc.drawImage(new Image(Inventory.getBomb() +".png"),((column + 1) * 50), 350);
-    }
-
-    /**
      * Method to set the graphics context that the map is drawn to.
      *
      * @param grc Graphics Context for the map.
@@ -193,5 +158,40 @@ public class Map {
             movementOptions.add("S");
         }
         return movementOptions;
+    }
+
+    /**
+     * Method to draw the item counters to the screen.
+     */
+    private void drawCounter() {
+        int SIZE = 400;
+        gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
+        gc.drawImage(new Image(Inventory.getGas() +".png"),((column + 1) * 50), 0);
+        gc.drawImage(new Image(Inventory.getDeathRat() +".png"),((column + 1) * 50), 50);
+        gc.drawImage(new Image(Inventory.getPoison() +".png"),((column + 1) * 50), 100);
+        gc.drawImage(new Image(Inventory.getSterilisation() +".png"),((column + 1) * 50), 150);
+        gc.drawImage(new Image(Inventory.getFemaleSexChange() +".png"),((column + 1) * 50), 200);
+        gc.drawImage(new Image(Inventory.getMaleSexChange() +".png"),((column + 1) * 50), 250);
+        gc.drawImage(new Image(Inventory.getNoEntrySign() +".png"),((column + 1) * 50), 300);
+        gc.drawImage(new Image(Inventory.getBomb() +".png"),((column + 1) * 50), 350);
+    }
+
+    /**
+     * Method to redraw the tunnels so that they are drawn over the rats.
+     *
+     * @param gc Graphics context used to draw tiles.
+     */
+    private void tunnelOut(GraphicsContext gc) {
+        tunnelImage = new Image("Tunnel.png");
+
+        for (int i = 0; i < (row); i++) {
+            for (int j = 0; j < column; j++) {
+                Image tileImage = null;
+                if (Map.tileLayout[j][i].getTileType() == 'T') {
+                    tileImage = tunnelImage;
+                }
+                gc.drawImage(tileImage, j * GRID_SIZE, i * GRID_SIZE);
+            }
+        }
     }
 }

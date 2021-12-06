@@ -1,15 +1,3 @@
-/**
- * <p> 1. File name: Main.java</p>
- * <p> 3. Creation date: 08.11.2021</p>
- * <p> 4. Last modification date: 05.12.2021</p>
- * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
- * <p> 7. Purpose of the program: Handling multiple behavior of classes</p>
- * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
- * @author Joe, Oliver, Elliot, Nick, Jay
- * @version 2.0
- */
-
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -30,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,41 +25,49 @@ import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.Scanner;
 
+/**
+ * <p> 1. File name: Main.java</p>
+ * <p> 3. Creation date: 08.11.2021</p>
+ * <p> 4. Last modification date: 05.12.2021</p>
+ * <p> 6. Copyright notice: group 02 - CS230 - Swansea University - 2021/22</p>
+ * <p> 7. Purpose of the program: Handling multiple behavior of classes</p>
+ * <p> 8. Version history: 1.0 - pure code; 2.0 - comment added</p>
+ * @author Joe, Oliver, Elliot, Nick, Jay, Shivraj, Patel
+ * @version 2.0
+ */
 public class NewMain extends Application {
-	
-	// The dimensions of the canvas
+
+	public boolean saved = false;
+	public Stage levelStage = new Stage();
+
 	private static final int STAGE1_CANVAS_WIDTH = 650;
 	private static final int STAGE1_CANVAS_HEIGHT = 350;
-	
 	private static final int STAGE2_CANVAS_WIDTH = 1100;
 	private static final int STAGE2_CANVAS_HEIGHT = 800;
-	
 	private static final int STAGE3_CANVAS_WIDTH = 950;
 	private static final int STAGE3_CANVAS_HEIGHT = 500;
-	
 	private static final int STAGE4_CANVAS_WIDTH = 1550;
 	private static final int STAGE4_CANVAS_HEIGHT = 700;
 
-	
-	/*
-	 * We need to create final variables for each levels canvas size
-	 * so that saved game can use it
-	 */
-	
-	public boolean saved = false;
-
-	public Stage levelStage = new Stage();
-	private Canvas canvas;
 	private static PlayerData currentPlayer;
+
+	private Canvas canvas;
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	public static PlayerData getCurrentPlayer() {
+		return currentPlayer;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
 		Stage menuWindow = new Stage();
 		menuWindow.setTitle("Rat Game");
-		Leaderboard leaderboard = new Leaderboard();
+		new Leaderboard();
 
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
@@ -116,12 +111,12 @@ public class NewMain extends Application {
 		quitButton.setOnAction(event -> menuWindow.close());
 		
 		GridPane container = new GridPane();
-		container.setConstraints(MOTD, 0, 1, 3, 1);
-		container.setConstraints(maRatView, 1, 2, 2, 5);
-		container.setConstraints(startButton, 0, 2);
-		container.setConstraints(highScoresButton, 0, 3);
-		container.setConstraints(howToPlayButton, 0, 4);
-		container.setConstraints(quitButton, 0, 5);
+		GridPane.setConstraints(MOTD, 0, 1, 3, 1);
+		GridPane.setConstraints(maRatView, 1, 2, 2, 5);
+		GridPane.setConstraints(startButton, 0, 2);
+		GridPane.setConstraints(highScoresButton, 0, 3);
+		GridPane.setConstraints(howToPlayButton, 0, 4);
+		GridPane.setConstraints(quitButton, 0, 5);
 		container.setPadding(new Insets(40));
 		container.getChildren().addAll(MOTD, maRatView, startButton, highScoresButton,
 				howToPlayButton, quitButton);
@@ -131,7 +126,7 @@ public class NewMain extends Application {
 		border.setMaxWidth(400);
 		border.setPrefWidth(400);
 		border.setTop(logoView);
-		border.setAlignment(logoView, Pos.TOP_CENTER);
+		BorderPane.setAlignment(logoView, Pos.TOP_CENTER);
 		border.setCenter(container);
 		border.setStyle("-fx-background-color: #FFFFFF;");
 
@@ -139,7 +134,7 @@ public class NewMain extends Application {
 		//Launch
 		menuWindow.show();
 	}
-	public void howToPlay(Stage primaryStage){
+	private void howToPlay(Stage primaryStage){
 		Stage howToPlayWindow = new Stage();
 		howToPlayWindow.setResizable(false);
 		howToPlayWindow.setTitle("HOW TO PLAY");
@@ -262,12 +257,13 @@ public class NewMain extends Application {
 		levelScoresWindow.show();
 	}
 	
-	public void profileSelect(Stage primaryStage){
+	private void profileSelect(Stage primaryStage){
 		Stage profileSelectWindow = new Stage();
 		profileSelectWindow.setTitle("RAT GAME: PROFILE SELECT");
 		ComboBox<String> profileSelect = new ComboBox<String>();
 		File profileFolder = new File("src/profiles");
 		File[] profiles = profileFolder.listFiles();
+		assert profiles != null;
 		for(File profile : profiles) {
 			if(profile.getName().endsWith(".txt")) {
 				String profileName = profile.getName();
@@ -315,10 +311,10 @@ public class NewMain extends Application {
 
 		GridPane container = new GridPane();
 		container.getChildren().addAll(profileSelect, submit, delete, create, backButton);
-		container.setConstraints(submit, 1, 0);
-		container.setConstraints(delete, 2, 0);
-		container.setConstraints(backButton, 2, 1);
-		container.setConstraints(create, 1, 1);
+		GridPane.setConstraints(submit, 1, 0);
+		GridPane.setConstraints(delete, 2, 0);
+		GridPane.setConstraints(backButton, 2, 1);
+		GridPane.setConstraints(create, 1, 1);
 		
 		
 		//Style container
@@ -332,7 +328,7 @@ public class NewMain extends Application {
 	}
 	
 	
-	public void profileCreator(Stage primaryStage) {
+	private void profileCreator(Stage primaryStage) {
 		Stage profileCreateWindow = new Stage();
 		GridPane grid = new GridPane();
 		profileCreateWindow.setTitle("RAT GAME: CREATE PROFILE");
@@ -350,9 +346,8 @@ public class NewMain extends Application {
 		submit.setOnAction(event -> {
 			String playerName = name.getText();
 			File file = new File("src/profiles/" + playerName + ".txt");
-			Scanner scan = null;
 			try {
-				scan = new Scanner(file);
+				new Scanner(file);
 			} catch (FileNotFoundException e) {
 				try {
 					if (file.createNewFile()) {
@@ -367,8 +362,8 @@ public class NewMain extends Application {
 			}
 		});
 		
-		grid.setConstraints(submit, 1, 0);
-		grid.setConstraints(backButton, 2, 0);
+		GridPane.setConstraints(submit, 1, 0);
+		GridPane.setConstraints(backButton, 2, 0);
 		grid.getChildren().addAll(name, submit, backButton);
 		//Style container
 		grid.setPadding(new Insets(25));
@@ -380,7 +375,7 @@ public class NewMain extends Application {
 		profileCreateWindow.show();
 	}
 
-	public void levelSelect(Stage primaryStage){
+	private void levelSelect(Stage primaryStage){
 		Stage levelMenuWindow = new Stage();
 		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
 		VBox container = new VBox();
@@ -446,7 +441,7 @@ public class NewMain extends Application {
 		levelMenuWindow.show();
 	}
 
-	public void drawGame(String filename) {
+	private void drawGame(String filename) {
 		// Get the Graphic Context of the canvas. This is what we draw on.
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		Entity.setGC(gc);
@@ -467,13 +462,13 @@ public class NewMain extends Application {
 		// Set the background to beige.
 		gc.setFill(Color.WHITESMOKE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		Map map = gameLevel.getMap();
-		map.setGC(gc); //remove this later
+		Map map = Level.getMap();
+		Map.setGC(gc); //remove this later
 		map.tileOut(gc);
 		map.entityTick();
 	}
 
-	public void win(){
+	private void win(){
 		Stage winScreen = new Stage();
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
@@ -504,7 +499,7 @@ public class NewMain extends Application {
 		winScreen.show();
 	}
 
-	public void lose(){
+	private void lose(){
 		Stage loseScreen = new Stage();
 		loseScreen.setTitle("YOU LOST");
 		Label title = new Label("You Lost! Better Luck Next Time");
@@ -530,39 +525,35 @@ public class NewMain extends Application {
 	}
 
 
-	public int mainTick() {
+	private void mainTick() {
 		ScheduledExecutorService test = Executors.newScheduledThreadPool(1);
-		int num = 0;
-		test.scheduleWithFixedDelay(new Runnable() {
-			public void run() {
-				Inventory.act();
-				if (Rat.getRats().size() == 0) {
-					Platform.runLater(() -> levelStage.close());
-					Entity.getEntities().clear();
-					Rat.getRats().clear();
-					Platform.runLater(() -> win());
-					test.shutdown();
-				}else if (Rat.getRats().size() == Level.getMap().maxRat) {
-					Platform.runLater(() -> levelStage.close());
-					Entity.getEntities().clear();
-					Rat.getRats().clear();
-					Platform.runLater(() -> lose());
-					test.shutdown();
-				} else if (saved) {
-					Entity.getEntities().clear();
-					Rat.getRats().clear();
-					saved = false;
-					test.shutdown();
-				}
+		test.scheduleWithFixedDelay(() -> {
+			Inventory.act();
+			if (Rat.getRats().size() == 0) {
+				Platform.runLater(() -> levelStage.close());
+				Entity.getEntities().clear();
+				Rat.getRats().clear();
+				Platform.runLater(this::win);
+				test.shutdown();
+			}else if (Rat.getRats().size() == Level.getMap().maxRat) {
+				Platform.runLater(() -> levelStage.close());
+				Entity.getEntities().clear();
+				Rat.getRats().clear();
+				Platform.runLater(this::lose);
+				test.shutdown();
+			} else if (saved) {
+				Entity.getEntities().clear();
+				Rat.getRats().clear();
+				saved = false;
+				test.shutdown();
 			}
 		}, 0, 250, TimeUnit.MILLISECONDS);
-		return num;
 	}
 
 	/**
 	 *
 	 */
-	public void level1(){
+	private void level1(){
 		levelStage.setTitle("RAT GAME : LVL1");
 		Pane root = buildGUI(STAGE1_CANVAS_WIDTH, STAGE1_CANVAS_HEIGHT);
 		Scene level1Scene = new Scene(root);
@@ -575,7 +566,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level2(){
+	private void level2(){
 		levelStage.setTitle("RAT GAME : LVL2");
 		Pane root = buildGUI(STAGE2_CANVAS_WIDTH, STAGE2_CANVAS_HEIGHT);
 		Scene level2Scene = new Scene(root);
@@ -588,7 +579,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level3(){
+	private void level3(){
 		levelStage.setTitle("RAT GAME : LVL3");
 		Pane root = buildGUI(STAGE3_CANVAS_WIDTH, STAGE3_CANVAS_HEIGHT);
 		Scene level3Scene = new Scene(root);
@@ -601,7 +592,7 @@ public class NewMain extends Application {
 	/**
 	 *
 	 */
-	public void level4(){
+	private void level4(){
 		levelStage.setTitle("RAT GAME : LVL4");
 		Pane root = buildGUI(STAGE4_CANVAS_WIDTH, STAGE4_CANVAS_HEIGHT);
 		Scene level4Scene = new Scene(root);
@@ -610,29 +601,29 @@ public class NewMain extends Application {
 		levelStage.show();
 	}
 	
-	public void savedLevel(){
+	private void savedLevel(){
 		levelStage.setTitle("RAT GAME : LVL" + getSavedLevel());
-		int SAVEDGAME_CANVAS_WIDTH = 0;
-		int SAVEDGAME_CANVAS_HEIGHT = 0;
+		int savedGameCanvasWidth = 0;
+		int savedGameCanvasHeight = 0;
 		switch(getSavedLevel()) {
 			case 1:
-				SAVEDGAME_CANVAS_WIDTH = STAGE1_CANVAS_WIDTH;
-				SAVEDGAME_CANVAS_HEIGHT = STAGE1_CANVAS_HEIGHT;
+				savedGameCanvasWidth = STAGE1_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE1_CANVAS_HEIGHT;
 				break;
 			case 2:
-				SAVEDGAME_CANVAS_WIDTH = STAGE2_CANVAS_WIDTH;
-				SAVEDGAME_CANVAS_HEIGHT = STAGE2_CANVAS_HEIGHT;
+				savedGameCanvasWidth = STAGE2_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE2_CANVAS_HEIGHT;
 				break;
 			case 3:
-				SAVEDGAME_CANVAS_WIDTH = STAGE3_CANVAS_WIDTH;
-				SAVEDGAME_CANVAS_HEIGHT = STAGE3_CANVAS_HEIGHT;
+				savedGameCanvasWidth = STAGE3_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE3_CANVAS_HEIGHT;
 				break;
 			case 4:
-				SAVEDGAME_CANVAS_WIDTH = STAGE4_CANVAS_WIDTH;
-				SAVEDGAME_CANVAS_HEIGHT = STAGE4_CANVAS_HEIGHT;
+				savedGameCanvasWidth = STAGE4_CANVAS_WIDTH;
+				savedGameCanvasHeight = STAGE4_CANVAS_HEIGHT;
 				break;
 		}
-		Pane root = buildGUI(SAVEDGAME_CANVAS_WIDTH, SAVEDGAME_CANVAS_HEIGHT);
+		Pane root = buildGUI(savedGameCanvasWidth, savedGameCanvasHeight);
 		Scene savedlevelScene = new Scene(root);
 		drawGame("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
 		levelStage.setScene(savedlevelScene);
@@ -640,7 +631,7 @@ public class NewMain extends Application {
 		levelStage.show();
 	}
 
-	public int getSavedLevel() {
+	private int getSavedLevel() {
 		File f = new File("src/saves/" + currentPlayer.getPlayerName() + "SavedGame.txt");
 		Scanner scan = null;
 		try {
@@ -649,11 +640,12 @@ public class NewMain extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		assert scan != null;
 		int ent = scan.nextInt();
 		scan.nextLine();
 		for (int i = 0; i < ent; i++) {
-			String str = scan.nextLine();
+			scan.nextLine();
 		}
 		return scan.nextInt();
 	}
@@ -841,12 +833,7 @@ public class NewMain extends Application {
 				bomb.draw();
 			}
 		});
-
 		return root;
-	}
-	
-	public static PlayerData getCurrentPlayer() {
-		return currentPlayer;
 	}
 
 	private int[] getMouseLocation(MouseEvent event) {
@@ -868,9 +855,5 @@ public class NewMain extends Application {
 			}
 		}
 		return result;
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 }
