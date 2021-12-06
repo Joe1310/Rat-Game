@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  * FileName : Leaderboard.java
  *
- * @author Patel and Elliot.
+ * @author Patel, Elliot, Joe, Shivraj.
  * @version 2.0
  */
 
