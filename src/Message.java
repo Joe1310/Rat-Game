@@ -27,7 +27,7 @@ public class Message {
 		
 		String message = GetHTTP("http://cswebcat.swansea.ac.uk/message?solution=" + passcode);
 		
-		message = message.substring(0, message.indexOf('.') + 1) + " - MaRATma Ghandi";
+		message += " - MaRATma Ghandi";
 	
 		return message;
 	}
