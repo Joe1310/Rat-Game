@@ -61,6 +61,7 @@ public class NewMain extends Application {
 
 		Stage menuWindow = new Stage();
 		menuWindow.setTitle("Rat Game");
+		Leaderboard leaderboard = new Leaderboard();
 
 		Message message = new Message();
 		String messageOfTheDay = message.MessageOfTheDay();
@@ -211,7 +212,7 @@ public class NewMain extends Application {
 
 		container.setSpacing(15);
 		container.setPadding(new Insets(25));
-		container.getChildren().addAll(level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
+		container.getChildren().addAll(title, level1ScoresButton, level2ScoresButton, level3ScoresButton, level4ScoresButton);
 		highScoresWindow.setScene(new Scene(container));
 		highScoresWindow.show();
 	}
