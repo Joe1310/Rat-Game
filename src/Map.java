@@ -15,6 +15,9 @@ public class Map {
     public int maxRat;
     private static Tile[][] tileLayout;
     private final int GRID_SIZE = 50;
+    private final int SECOND = 4;
+    private final int SIZE = 400;
+    private final int DELAY = 250;
     private int row;
     private int column;
     private Image grassImage;
@@ -95,7 +98,7 @@ public class Map {
         exec.scheduleWithFixedDelay(new Runnable() {
             public void run() {
                 drawCounter();
-                RenderBar.drawProgressBar(gc, column * 50, row * 50);
+                RenderBar.drawProgressBar(gc, column * GRID_SIZE, row * GRID_SIZE);
                 ArrayList<Entity> ents = Entity.getEntities();
                 int maxEntities = ents.size();
                 tileOut(Map.gc);
@@ -120,7 +123,7 @@ public class Map {
                 }
                 timer++;
 
-                if (timer % 4 == 0){
+                if (timer % SECOND == 0){
                     count++;
                 }
                 if (Rat.getRats().size() == 0) {
@@ -132,7 +135,7 @@ public class Map {
                     exec.shutdown();
                 }
             }
-        }, 0, 250, TimeUnit.MILLISECONDS);
+        }, 0, DELAY, TimeUnit.MILLISECONDS);
         return tick;
     }
 
@@ -140,7 +143,7 @@ public class Map {
      * Method to draw the item counters to the screen.
      */
     public void drawCounter() {
-        gc.clearRect(((column + 1) * 50), 0, 50, 400);
+        gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
         gc.drawImage(new Image(Integer.toString(Inventory.getGas())+".png"),((column + 1) * 50), 0);
         gc.drawImage(new Image(Integer.toString(Inventory.getDeathRat())+".png"),((column + 1) * 50), 50);
         gc.drawImage(new Image(Integer.toString(Inventory.getPoison())+".png"),((column + 1) * 50), 100);
