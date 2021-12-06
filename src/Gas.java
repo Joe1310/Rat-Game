@@ -8,12 +8,10 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Gas extends Entity {
-	
-	private final int START_SPREAD = 5;
-	
-	private int spreadLimit;
+
+	private final int spreadLimit;
 	private int timer = 10;
-	private String direction;
+	private final String direction;
 	private boolean hasSpread;
 	private int wait = 2;
 
@@ -25,7 +23,7 @@ public class Gas extends Entity {
 	 */
 	public Gas(int[] location, boolean hasSpread) {
 		super(location, "Gas.png", "Gas");
-		this.spreadLimit = START_SPREAD;
+		this.spreadLimit = 5;
 		this.hasSpread = hasSpread;
 		this.direction = null;
 	}
@@ -95,22 +93,22 @@ public class Gas extends Entity {
 				case "N":
 					tempLocation[0] = location[0];
 					tempLocation[1] = location[1] - 1;
-					Entity nGas = new Gas(tempLocation, spreadLimit - 1, "S", false);
+					new Gas(tempLocation, spreadLimit - 1, "S", false);
 					break;
 				case "S":
 					tempLocation[0] = location[0];
 					tempLocation[1] = location[1] + 1;
-					Entity sGas = new Gas(tempLocation, spreadLimit - 1, "N", false);
+					new Gas(tempLocation, spreadLimit - 1, "N", false);
 					break;
 				case "E":
 					tempLocation[0] = location[0] + 1;
 					tempLocation[1] = location[1];
-					Entity eGas = new Gas(tempLocation, spreadLimit - 1, "W", false);
+					new Gas(tempLocation, spreadLimit - 1, "W", false);
 					break;
 				case "W":
 					tempLocation[0] = location[0] - 1;
 					tempLocation[1] = location[1];
-					Entity wGas = new Gas(tempLocation, spreadLimit - 1, "E", false);
+					new Gas(tempLocation, spreadLimit - 1, "E", false);
 					break;
 			}		
 		}

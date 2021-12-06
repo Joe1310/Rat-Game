@@ -16,15 +16,11 @@ public class Map {
     private static Tile[][] tileLayout;
     private final int GRID_SIZE = 50;
     private final int SECOND = 4;
-    private final int SIZE = 400;
-    private final int DELAY = 250;
-    private int row;
-    private int column;
-    private Image grassImage;
-    private Image pathImage;
+    private final int row;
+    private final int column;
     private Image tunnelImage;
     private int timer;
-    public static int count;
+    public static int count = 0;
     private static GraphicsContext gc;
 
     /**
@@ -48,9 +44,9 @@ public class Map {
      * @param gc Graphics context used to draw tiles.
      */
     public void tileOut(GraphicsContext gc) {
-        grassImage = new Image("Grass2.png");
+        Image grassImage = new Image("Grass2.png");
         tunnelImage = new Image("Tunnel.png");
-        pathImage = new Image("PathTile.png");
+        Image pathImage = new Image("PathTile.png");
 
         for (int i = 0; i < (row); i++) {
             for (int j = 0; j < column; j++) {
@@ -90,68 +86,65 @@ public class Map {
      * Method to continuously call the movement method on the rats, redraw the tiles and keep track of how
      * long the level has been played for.
      *
-     * @return Tick which increases by 1 every 0.25 seconds.
      */
-    public int entityTick() {
+    public void entityTick() {
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-        int tick = 0;
-        exec.scheduleWithFixedDelay(new Runnable() {
-            public void run() {
-                drawCounter();
-                RenderBar.drawProgressBar(gc, column * GRID_SIZE, row * GRID_SIZE);
-                ArrayList<Entity> ents = Entity.getEntities();
-                int maxEntities = ents.size();
-                tileOut(Map.gc);
-                //for loop for drawing
-                for (Entity ent : Entity.getEntities()) {
-                    ent.draw();
+        int DELAY = 250;
+        exec.scheduleWithFixedDelay(() -> {
+            drawCounter();
+            RenderBar.drawProgressBar(gc, column * GRID_SIZE, row * GRID_SIZE);
+            ArrayList<Entity> ents = Entity.getEntities();
+            int maxEntities = ents.size();
+            tileOut(Map.gc);
+            //for loop for drawing
+            for (Entity ent : Entity.getEntities()) {
+                ent.draw();
+            }
+            tunnelOut(Map.gc);
+            //for loop for acting
+            for (int i = maxEntities-1; i >= 0; i--) {
+                if (ents.size() > 0) {
+                    ents.get(i).act();
                 }
-                tunnelOut(Map.gc);
-                //for loop for acting
-                for (int i = maxEntities-1; i >= 0; i--) {
-                    if (ents.size() > 0) {
-                        ents.get(i).act();
-                    }
-                    if (i > Entity.getEntities().size()) {
-                        i = Entity.getEntities().size();
-                    }
-                }
-                if (Rat.wait == 1) {
-                    Rat.wait--;
-                } else {
-                    Rat.wait = 1;
-                }
-                timer++;
-
-                if (timer % SECOND == 0){
-                    count++;
-                }
-                if (Rat.getRats().size() == 0) {
-                    exec.shutdown();
-                }else if (Rat.getRats().size() >= Level.getMap().maxRat) {
-                    exec.shutdown();
-                }
-                if (Rat.getRats().size() == 0){
-                    exec.shutdown();
+                if (i > Entity.getEntities().size()) {
+                    i = Entity.getEntities().size();
                 }
             }
+            if (Rat.wait == 1) {
+                Rat.wait--;
+            } else {
+                Rat.wait = 1;
+            }
+            timer++;
+
+            if (timer % SECOND == 0){
+                count++;
+            }
+            if (Rat.getRats().size() == 0) {
+                exec.shutdown();
+            }else if (Rat.getRats().size() >= Level.getMap().maxRat) {
+                exec.shutdown();
+            }
+            if (Rat.getRats().size() == 0){
+                exec.shutdown();
+            }
         }, 0, DELAY, TimeUnit.MILLISECONDS);
-        return tick;
     }
 
     /**
      * Method to draw the item counters to the screen.
      */
     public void drawCounter() {
+        int SIZE = 400;
         gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
-        gc.drawImage(new Image(Integer.toString(Inventory.getGas())+".png"),((column + 1) * 50), 0);
-        gc.drawImage(new Image(Integer.toString(Inventory.getDeathRat())+".png"),((column + 1) * 50), 50);
-        gc.drawImage(new Image(Integer.toString(Inventory.getPoison())+".png"),((column + 1) * 50), 100);
-        gc.drawImage(new Image(Integer.toString(Inventory.getSterilisation())+".png"),((column + 1) * 50), 150);
-        gc.drawImage(new Image(Integer.toString(Inventory.getFemaleSexChange())+".png"),((column + 1) * 50), 200);
-        gc.drawImage(new Image(Integer.toString(Inventory.getMaleSexChange())+".png"),((column + 1) * 50), 250);
-        gc.drawImage(new Image(Integer.toString(Inventory.getNoEntrySign())+".png"),((column + 1) * 50), 300);
-        gc.drawImage(new Image(Integer.toString(Inventory.getBomb())+".png"),((column + 1) * 50), 350);
+        gc.drawImage(new Image(Inventory.getGas() +".png"),((column + 1) * 50), 0);
+        gc.drawImage(new Image(Inventory.getDeathRat() +".png"),((column + 1) * 50), 50);
+        gc.drawImage(new Image(Inventory.getPoison() +".png"),((column + 1) * 50), 100);
+        gc.drawImage(new Image(Inventory.getSterilisation() +".png"),((column + 1) * 50), 150);
+        gc.drawImage(new Image(Inventory.getFemaleSexChange() +".png"),((column + 1) * 50), 200);
+        gc.drawImage(new Image(Inventory.getMaleSexChange() +".png"),((column + 1) * 50), 250);
+        gc.drawImage(new Image(Inventory.getNoEntrySign() +".png"),((column + 1) * 50), 300);
+        gc.drawImage(new Image(Inventory.getBomb() +".png"),((column + 1) * 50), 350);
     }
 
     /**

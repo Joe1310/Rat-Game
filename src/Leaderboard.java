@@ -69,25 +69,25 @@ public class Leaderboard {
 
 		// Reads level 1 data using scanner
 		File first = new File("src/leaderboards/Leaderboard1.txt");
-		Scanner level1 = null;
+		Scanner level1;
 		level1 = new Scanner(first);
 		readLeaderboard(level1, ONE);
 
 		// Reads level 2 data using scanner
 		File second = new File("src/leaderboards/Leaderboard2.txt");
-		Scanner level2 = null;
+		Scanner level2;
 		level2 = new Scanner(second);
 		readLeaderboard(level2, TWO);
 
 		// Reads level 3 data using scanner
 		File third = new File("src/leaderboards/Leaderboard3.txt");
-		Scanner level3 = null;
+		Scanner level3;
 		level3 = new Scanner(third);
 		readLeaderboard(level3, THREE);
 
 		// Reads level 4 data using scanner
 		File fourth = new File("src/leaderboards/Leaderboard4.txt");
-		Scanner level4 = null;
+		Scanner level4;
 		level4 = new Scanner(fourth);
 		readLeaderboard(level4, FOUR);
 	}
@@ -250,8 +250,6 @@ public class Leaderboard {
 				} else {
 					loc = ONE;
 				}
-			} else {
-				loc = ZERO;
 			}
 		}
 

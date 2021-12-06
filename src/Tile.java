@@ -6,8 +6,6 @@
  */
 public class Tile {
     private final char tileType;
-    private final int x;
-    private final int y;
 
     /**
      * Constructor to create a tile entity.
@@ -17,8 +15,6 @@ public class Tile {
      * @param y y coordinate of the tile.
      */
     public Tile(char tileType, int x, int y){
-        this.x = x;
-        this.y = y;
         this.tileType = tileType;
     }
 

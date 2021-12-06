@@ -10,11 +10,10 @@ import java.util.ArrayList;
  */
 public abstract class Entity {
 	
-	private static ArrayList<Entity> entities = new ArrayList<Entity>();
+	private static final ArrayList<Entity> entities = new ArrayList<Entity>();
 	private String imageName;
 	private final String entityType;
 	protected int[] location;
-	private final int IMAGE_SIZE = 50;
 
 	private static GraphicsContext gc;
 
@@ -36,7 +35,8 @@ public abstract class Entity {
 	 * Method to draw the entity to the Graphics context.
 	 */
     public void draw() {
-    	this.gc.drawImage(new Image(imageName), (location[0] * IMAGE_SIZE) , (location[1] * IMAGE_SIZE));
+		int IMAGE_SIZE = 50;
+		gc.drawImage(new Image(imageName), (location[0] * IMAGE_SIZE) , (location[1] * IMAGE_SIZE));
     }
 
 	/**
@@ -71,13 +71,6 @@ public abstract class Entity {
 	 */
     public String getType() {
     	return entityType;
-    }
-
-	/**
-	 * Method to remove all entities from the screen.
-	 */
-    public static void clearEntities() {
-    	gc.clearRect(0, 0, 1850, 1000);
     }
 
 	/**

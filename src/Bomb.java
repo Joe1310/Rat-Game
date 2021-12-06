@@ -7,10 +7,8 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class Bomb extends Entity{
-	
-	private final int START_COUNTDOWN = 16;
-	
-    private int countdown;
+
+	private int countdown;
 
 	/**
 	 * Constructor to create a Bomb entity.
@@ -19,7 +17,7 @@ public class Bomb extends Entity{
 	 */
     public Bomb(int[] location) {
         super(location, "Bomb4.png", "Bomb");
-        this.countdown = START_COUNTDOWN;
+		this.countdown = 16;
     }
 
 	/**
@@ -37,7 +35,7 @@ public class Bomb extends Entity{
 
 	/**
 	 * Method to blow up the bomb if the countdown has finished and reduce the time remaining on the countdown
-	 * if the bomb hasnt already hit 0. Also changes the image of the bomb to match the time remaining.
+	 * if the bomb hasn't already hit 0. Also changes the image of the bomb to match the time remaining.
 	 */
     public void act() {
         if (countdown == 0) {
@@ -66,7 +64,7 @@ public class Bomb extends Entity{
 	 * Method to spawn the explosion images.
 	 */
 	private void spawnExplosions() {
-    	Entity explosion = new Explosion(this.location);
+    	new Explosion(this.location);
     	int[] tempLocation = {this.location[0], this.location[1]};
         ArrayList<String> directions = Map.getMovementOptions(tempLocation[0], tempLocation[1]);
         for (String d : directions) {
@@ -93,7 +91,7 @@ public class Bomb extends Entity{
 	 * @param exLocation The x, y coordinate of the explosion entity
 	 */
 	private void explodeNorthLine(int[] exLocation) {
-    	Entity explosion = new Explosion(exLocation);
+    	new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0], exLocation[1] - 1) != 'G')) {
 	   		int[] newLocation = {exLocation[0], exLocation[1] - 1};
 	   		explodeNorthLine(newLocation);
@@ -106,7 +104,7 @@ public class Bomb extends Entity{
 	 * @param exLocation The x, y coordinates of the explosion entity.
 	 */
 	private void explodeSouthLine(int[] exLocation) {
-    	Entity explosion = new Explosion(exLocation);
+    	new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0], exLocation[1] + 1) != 'G')) {
     		int[] newLocation = {exLocation[0], exLocation[1] + 1};
     		explodeSouthLine(newLocation);
@@ -119,7 +117,7 @@ public class Bomb extends Entity{
 	 * @param exLocation The x, y coordinates of the explosion entity.
 	 */
 	private void explodeEastLine(int[] exLocation) {
-    	Entity explosion = new Explosion(exLocation);
+    	new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0] + 1, exLocation[1]) != 'G')) {
     		int[] newLocation = {exLocation[0] + 1, exLocation[1]};
     		explodeEastLine(newLocation);
@@ -132,7 +130,7 @@ public class Bomb extends Entity{
 	 * @param exLocation The x, y coordinates of the explosion entity.
 	 */
 	private void explodeWestLine(int[] exLocation) {
-    	Entity explosion = new Explosion(exLocation);
+    	new Explosion(exLocation);
     	if((Map.getTileType(exLocation[0] - 1, exLocation[1]) != 'G')) {
     		int[] newLocation = {exLocation[0] - 1, exLocation[1]};
     		explodeWestLine(newLocation);

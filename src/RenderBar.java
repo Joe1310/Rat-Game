@@ -1,9 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.*;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.Group;
-import javafx.scene.canvas.*;
-
 
 /**
  * This class is used to draw a progress bar for the level being played, showing how close to winning/losing you are

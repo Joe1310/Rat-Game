@@ -1,31 +1,33 @@
-/**
- * 
- */
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to model a Level object
+ *
+ * @author Patel, Elliot, Nick, Jay, Joe
+ * @version 1.0
+ */
 public class Level {
 
-	//Variables
-	 static int parTime;
-	 int remainingTime = 0;
-	 static int maxRats;
-	 static int[] itemSpawnRates = new int[8];
-	 static int[] inventoryQuantities = new int[8];
-	 static int[] inventoryTimers = new int[8];
-	 
-	 static Tile[][] tileLayout;
-	 static int levelNumber = 1;
+	public int remainingTime = 0;
+	public static int maxRats;
+	private static int parTime;
+	private static final int[] ITEM_SPAWN_RATES = new int[8];
+	private static final int[] INVENTORY_QUANTITIES = new int[8];
+	private static final int[] INVENTORY_TIMERS = new int[8];
+	private static Tile[][] tileLayout;
+	private static int levelNumber = 1;
+	private static Map map;
+	private static int levelScore = 0;
 
-	 static Map map;
-	 String items;
-	 static int levelScore = 0;
-
-	//Constructor
+	/**
+	 * Constructor to create a Level object.
+	 *
+	 * @param filename Name of file where level data is stored.
+	 */
 	public Level(String filename) {
 		levelScore = 0;
 		File file = new File(filename);
@@ -35,8 +37,9 @@ public class Level {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (filename.contains("SavedGame")) {
+			assert scan != null;
 			readGame(scan);
 		} else {
 			if(filename.contains("1")) {
@@ -48,12 +51,121 @@ public class Level {
 			} else if (filename.contains("4")){
 				levelNumber = 4;
 			}
+			assert scan != null;
 			readFreshLevel(scan);
 		}
 	}
 
-	//Reads fresh level data
-	public  void readFreshLevel(Scanner scan) {
+	/**
+	 * Method to save the current game in a text file using the currentPlayers name to differentiate the game saves.
+	 */
+	public static void saveCurrent() {
+
+		String saveFile = "src/saves/" + NewMain.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
+		try {
+			FileWriter saveGame = new FileWriter(saveFile);
+			saveGame.write(Entity.getEntities().size() +"\n");
+			for (Entity ent : Entity.getEntities()) {
+				saveGame.write(ent + "\n");
+			}
+			saveGame.write(levelNumber + "\n");
+			saveGame.write(levelScore + "\n");
+			saveGame.write(Inventory.returnQuantity() + "\n");
+			saveGame.write(Inventory.returnTimers() + "\n");
+			saveGame.write(parTime + "\n");
+			saveGame.write(maxRats + "\n");
+			saveGame.write(Inventory.returnSpawnRates() + "\n");
+			int row = tileLayout[0].length;
+			int column = tileLayout.length;
+			saveGame.write(column + " ");
+			saveGame.write(row + "\n");
+			for (int i = 0 ; i < row; i++){
+				for (Tile[] tiles : tileLayout) {
+					saveGame.write(tiles[i].getTileType());
+				}
+				saveGame.write("\n");
+			}
+			saveGame.close();
+		} catch (IOException e) {
+			System.out.println("\nAn error occurred while saving the current game.");
+		}
+	}
+
+	/**
+	 * Method to get the Map entity.
+	 *
+	 * @return Returns Map entity.
+	 */
+	public static Map getMap() {
+		return map;
+	}
+
+	/**
+	 * Method to get the spawn rates of items.
+	 *
+	 * @return Returns the spawn rates of items.
+	 */
+	public int[] getItemSpawnRates() {
+		return ITEM_SPAWN_RATES;
+	}
+
+	/**
+	 * Method to get the amounts of each item in the inventory.
+	 *
+	 * @return Returns item counts.
+	 */
+	public int[] getInventoryQuantities() {
+		return INVENTORY_QUANTITIES;
+	}
+
+	/**
+	 * Method to get the amount of times for each item to spawn in the inventory.
+	 *
+	 * @return Return timers before the items spawn
+	 */
+	public int[] getInventoryTimers() {
+		return INVENTORY_TIMERS;
+	}
+
+	/**
+	 * Method to get the Level number.
+	 *
+	 * @return Returns level number.
+	 */
+	public static int getLevelNumber() {
+		return levelNumber;
+	}
+
+	/**
+	 * Method to add to the players score for each rat kill.
+	 */
+	public static void addScore() {
+		levelScore = levelScore + 10;
+	}
+
+	/**
+	 * Method to get the Score the player got in the level.
+	 *
+	 * @return Returns the score on the level.
+	 */
+	public static int getLevelScore() {
+		score();
+		return levelScore;
+	}
+
+	/**
+	 * Method to reset the score on the level.
+	 */
+	public static void resetLevelScore() {
+		levelScore = 0;
+	}
+
+	/**
+	 * Method to Read a fresh level (Not already played on) from a file.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void readFreshLevel(Scanner scan) {
 
 		int bots = scan.nextInt();
 		for(int k = 0; k < bots; k ++) {
@@ -63,8 +175,12 @@ public class Level {
 
 	}
 
-	//Method reads Level data and creates MAP
-	public  void readLevel(Scanner scan) {
+	/**
+	 * Method to read the level data from a saved game file.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void readLevel(Scanner scan) {
 
 		int row, column;
 		String line;
@@ -72,7 +188,7 @@ public class Level {
 		parTime = scan.nextInt();
 		maxRats = scan.nextInt();
 		for(int i = 0; i < 8; i++) {
-			itemSpawnRates[i] = scan.nextInt();
+			ITEM_SPAWN_RATES[i] = scan.nextInt();
 		}
 		column = scan.nextInt();
 		row = scan.nextInt();
@@ -87,8 +203,12 @@ public class Level {
 		map = new Map(tileLayout, row, column, maxRats);
 	}
 
-	//Method reads Game data using Scanner and creates objects
-	public  void readGame(Scanner scan) {
+	/**
+	 * Method to read all the entities from a file and create them.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void readGame(Scanner scan) {
 
 		int entities = scan.nextInt();
 
@@ -125,17 +245,20 @@ public class Level {
 		levelNumber = scan.nextInt();
 		levelScore = scan.nextInt();
 		for (int i = 0; i < 8; i++) {
-			inventoryQuantities[i] = scan.nextInt();
+			INVENTORY_QUANTITIES[i] = scan.nextInt();
 		}
 		for (int i = 0; i < 8; i++) {
-			inventoryTimers[i] = scan.nextInt();
+			INVENTORY_TIMERS[i] = scan.nextInt();
 		}
 		readLevel(scan);
 	}
 
-	//Reads Adult Rat and adds it to Entity
-	public  void MakeAdultRat(Scanner scan) {
-
+	/**
+	 * Method to create an AdultRat entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeAdultRat(Scanner scan) {
 		String sex = scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
@@ -150,12 +273,18 @@ public class Level {
 		int matingCooldown = scan.nextInt();
 		int babyAmount = scan.nextInt();
 		
-		Entity rat = new AdultRat(sex, location,  direction, health, sterile, 
-				isPregnant, isMating, timePregnant, timeMating, matingCooldown, babyAmount);
+		new AdultRat(sex, location,  direction, health, sterile,
+				isPregnant, isMating, timePregnant, timeMating,
+				matingCooldown, babyAmount);
 	}
 
+	/**
+	 * Method to create a BabyRat entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
 	//Reads Rat's properties using scanner and makes an object for Baby Rat
-	public void MakeBabyRat(Scanner scan) {
+	private void MakeBabyRat(Scanner scan) {
 		String sex = scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
@@ -164,11 +293,15 @@ public class Level {
 		int health = scan.nextInt();
 		boolean sterile = scan.nextBoolean();
 
-		Entity rat = new BabyRat(sex, location, direction, health, sterile);
+		new BabyRat(sex, location, direction, health, sterile);
 	}
 
-	//Reads Rat's properties using scanner and makes an object for Dead Rat
-	public  void MakeDeadRat(Scanner scan) {
+	/**
+	 * Method to create a DeathRat entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeDeadRat(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
@@ -177,10 +310,15 @@ public class Level {
 		String direction = scan.next();
 		int killCount = scan.nextInt();
 		
-		Entity rat = new DeathRat(location, direction, killCount);
+		new DeathRat(location, direction, killCount);
 	}
-	
-	public  void MakeDRS(Scanner scan) {
+
+	/**
+	 * Method to create a DeathRatSpawner entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeDRS(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
@@ -188,10 +326,15 @@ public class Level {
 		int[] location = {x,y};
 		int timer = scan.nextInt();
 		
-		Entity drs = new DeathRatSpawner(location, timer);
+		new DeathRatSpawner(location, timer);
 	}
-	
-	public  void MakeBomb(Scanner scan) {
+
+	/**
+	 * Method to create a Bomb entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeBomb(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
@@ -199,20 +342,30 @@ public class Level {
 		int[] location = {x,y};
 		int timer = scan.nextInt();
 		
-		Entity bomb = new Bomb(location, timer);
+		new Bomb(location, timer);
 	}
-	
-	public  void MakeExplosion(Scanner scan) {
+
+	/**
+	 * Method to create an Explosion entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeExplosion(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
 		
-		Entity drs = new Explosion(location);
+		new Explosion(location);
 	}
-	
-	public  void MakeNES(Scanner scan) {
+
+	/**
+	 * Method to create a NoEntrySign entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeNES(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
@@ -220,10 +373,15 @@ public class Level {
 		int[] location = {x,y};
 		int health = scan.nextInt();
 		
-		Entity nes = new NoEntrySign(location, health);
+		new NoEntrySign(location, health);
 	}
-	
-	public  void MakeGas(Scanner scan) {
+
+	/**
+	 * Method to create a Gas entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeGas(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
@@ -233,123 +391,76 @@ public class Level {
 		String direction = scan.next();
 		boolean hasSpread = scan.nextBoolean();
 		
-		Entity gas = new Gas(location, spreadLimit, direction, hasSpread);
+		new Gas(location, spreadLimit, direction, hasSpread);
 	}
-	
-	public  void MakePoison(Scanner scan) {
+
+	/**
+	 * Method to create a Poison entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakePoison(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
 		
-		Entity poison = new Poison(location);
+		new Poison(location);
 	}
-	
-	public  void MakeMSC(Scanner scan) {
+
+	/**
+	 * Method to create a MaleSexChange entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeMSC(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
 		
-		Entity msc = new MaleSexChange(location);
+		new MaleSexChange(location);
 	}
-	
-	public  void MakeFSC(Scanner scan) {
+	/**
+	 * Method to create a FemaleSexChange entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeFSC(Scanner scan) {
 
 		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
 		
-		Entity fsc = new FemaleSexChange(location);
+		new FemaleSexChange(location);
 	}
-	
-	public  void MakeSteriliser(Scanner scan) {
 
+	/**
+	 * Method to create a Steriliser entity.
+	 *
+	 * @param scan Scanner accessing the file of the level.
+	 */
+	private void MakeSteriliser(Scanner scan) {
 		scan.next();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
 		int[] location = {x,y};
 		int timer = scan.nextInt();
 		
-		Entity steriliser = new Sterilisation(location, timer);
+		new Sterilisation(location, timer);
 	}
 
-
-	//Method saves the ongoing Game using playerID
-	public static void saveCurrent() {
-
-		String saveFile = "src/saves/" + NewMain.getCurrentPlayer().getPlayerName() + "SavedGame.txt";
-		try {
-			FileWriter saveGame = new FileWriter(saveFile);
-			saveGame.write(Entity.getEntities().size() +"\n");
-			for (Entity ent : Entity.getEntities()) {
-				saveGame.write(ent + "\n");
-			}
-			saveGame.write(levelNumber + "\n");
-			saveGame.write(levelScore + "\n");
-			saveGame.write(Inventory.returnQuantity() + "\n");
-			saveGame.write(Inventory.returnTimers() + "\n");
-			saveGame.write(parTime + "\n");
-			saveGame.write(maxRats + "\n");
-			saveGame.write(Inventory.returnSpawnRates() + "\n");
-			int row = tileLayout[0].length;
-			int column = tileLayout.length;
-			saveGame.write(column + " ");
-			saveGame.write(row + "\n");
-			for (int i = 0 ; i < row; i++){
-				for(int j = 0 ; j < column; j++){
-					saveGame.write(tileLayout[j][i].getTileType());
-				}
-				saveGame.write("\n");
-			}
-			saveGame.close();
-		} catch (IOException e) {
-			System.out.println("\nAn error occurred while saving the current game.");
-		}
-	}
-
-	//Get methods
-	public static Map getMap() {
-		return map;
-	}
-
-	public int[] getItemSpawnRates() {
-		return itemSpawnRates;
-	}
-	
-	public int[] getInventoryQuantities() {
-		return inventoryQuantities;
-	}
-	
-	public int[] getInventoryTimers() {
-		return inventoryTimers;
-	}
-	
-	public static int getLevelNumber() {
-		return levelNumber;
-	}
-
-	public static void addScore() {
-		levelScore = levelScore + 10;
-	}
-
-	public static void score() {
+	/**
+	 * Method to calculate the final score (including bonus score from time remaining).
+	 */
+	private static void score() {
 		int bonus = Level.parTime - Map.count;
 		if(bonus < 0) {
 			bonus = 0;
 		}
 		levelScore = levelScore + bonus;
-	}
-	
-	public static int getLevelScore() {
-		score();
-		return levelScore;
-	}
-	
-	public static void resetLevelScore() {
-		levelScore = 0;
 	}
 }
