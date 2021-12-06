@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 /***
  * The class is responsible for dealing with LeaderBoard and it's functionality.
- * 
+ *
  * FileName : Leaderboard.java
- * 
+ *
  * @author Patel and Elliot.
  * @version 2.0
  */
@@ -62,7 +62,7 @@ public class Leaderboard {
 	/***
 	 * Method passes the leaderboards of each levels from the mentioned text files,
 	 * using scanner to readLeaderboard method.
-	 * 
+	 *
 	 * @throws FileNotFoundException If the method fails to locate the required file
 	 */
 	public void readLeaderboards() throws FileNotFoundException {
@@ -95,7 +95,7 @@ public class Leaderboard {
 	/***
 	 * Method Reads all the data of the leaderboard and stores them in the
 	 * appropriate level array
-	 * 
+	 *
 	 * @param board   Leader board
 	 * @param levelNo Number of the Level
 	 */
@@ -128,7 +128,7 @@ public class Leaderboard {
 	/***
 	 * Method to write the leaderboards data in the appropriate text files and catch
 	 * IOExceptions if any.
-	 * 
+	 *
 	 */
 	public static void writeLeaderboards() {
 
@@ -177,7 +177,7 @@ public class Leaderboard {
 	/***
 	 * Method calls updatePosition method while checking particular conditions and
 	 * passes the parameter to it.
-	 * 
+	 *
 	 * @param level      Number of the Level
 	 * @param playerName Name of the Player
 	 * @param score      Score of the Player
@@ -197,7 +197,7 @@ public class Leaderboard {
 	/***
 	 * Method checks for the ranking of the player on the basis of their scores and
 	 * updates by passing them to updateLeaderboard method.
-	 * 
+	 *
 	 * @param levelScores Array of player's scores on the leader board
 	 * @param levelNames  Array of player's names on the leader board
 	 * @param playerID    Player's name
@@ -261,7 +261,7 @@ public class Leaderboard {
 	/***
 	 * Method updates the Leader board of the given level using the passed
 	 * parameters.
-	 * 
+	 *
 	 * @param scores   Array of player's scores on the leader board
 	 * @param names    Array of player's names on the leader board
 	 * @param loc      Location where the Recent winner's player is going to be
@@ -273,11 +273,12 @@ public class Leaderboard {
 	private static void updateLeaderboard(int[] scores, String[] names, int loc, String playerID, int score,
 			int levelNo) {
 
-		if(loc == ZERO){
-			scores[0] = score;
-			names[0] = playerID;
-
+		for (int i = LEVEL_DATA_SIZE - ONE; i > loc; i--) {
+			scores[i] = scores[i - ONE];
+			names[i] = names[i - ONE];
 		}
+		scores[loc] = score;
+		names[loc] = playerID;
 
 		if (levelNo == ONE) {
 			firstScores = scores;
@@ -297,7 +298,7 @@ public class Leaderboard {
 	/***
 	 * Get method for storing Leader board data in a specific format, in the text
 	 * file.
-	 * 
+	 *
 	 * @param levelNo Number of the Level
 	 * @return line Output line for text file
 	 */

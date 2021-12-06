@@ -456,9 +456,9 @@ public class NewMain extends Application {
 		Stage winScreen = new Stage();
 		winScreen.setTitle("YOU WIN");
 		Label title = new Label("You Won! Congrats");
-		Label scoreTitle = new Label("Score: " + Level.getLevelScore());
-		new Leaderboard();
-		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), Level.getLevelScore());
+		int score = Level.getLevelScore();
+		Label scoreTitle = new Label("Score: " + score);
+		Leaderboard.inputPlayerScore(Level.getLevelNumber(), getCurrentPlayer().getPlayerName(), score);
 		Level.resetLevelScore();
 		Leaderboard.writeLeaderboards();
 		Button menuButton = new Button("Main Menu");
