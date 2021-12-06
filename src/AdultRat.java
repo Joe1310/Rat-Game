@@ -75,22 +75,7 @@ public class AdultRat extends Rat {
     	return this.isPregnant;
 	}
 
-	/**
-	 * Method to kill the rat entity and increase the players score.
-	 */
-	@Override
-	protected void ratDeath() {
-		// adultRat rat death
-		rats.remove(this);
-		removeEntity();
-		//checks if the mother is pregnant if so adds the unborn children to the score
-		if(this.isPregnant){
-			for (int i = 0; i < babyAmount; i++){
-				Level.addScore();
-			}
-		}
-		Level.addScore();
-	}
+
 
 	/**
 	 * Method to complete actions every tick to do mating, procreating and moving.
@@ -232,4 +217,20 @@ public class AdultRat extends Rat {
         			+ sterile + " " + isPregnant + " " + isMating + " " + timePregnant + " " + timeMating + " " 
         				+ matingCooldown + " " + babyAmount);
     }
+	/**
+	 * Method to kill the rat entity and increase the players score.
+	 */
+	@Override
+	protected void ratDeath() {
+		// adultRat rat death
+		rats.remove(this);
+		removeEntity();
+		//checks if the mother is pregnant if so adds the unborn children to the score
+		if(this.isPregnant){
+			for (int i = 0; i < babyAmount; i++){
+				Level.addScore();
+			}
+		}
+		Level.addScore();
+	}
 }
