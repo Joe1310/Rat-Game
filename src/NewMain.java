@@ -58,10 +58,20 @@ public class NewMain extends Application {
 		launch(args);
 	}
 
+	/**
+	 * Method to get the current players PlayerData object.
+	 *
+	 * @return Returns the current players PlayerData object.
+	 */
 	public static PlayerData getCurrentPlayer() {
 		return currentPlayer;
 	}
 
+	/**
+	 * Setup the new application and display the main menu.
+	 *
+	 * @param primaryStage The stage that is to be used for the application.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -97,16 +107,16 @@ public class NewMain extends Application {
 
 		startButton.setOnAction(event -> {
 			menuWindow.close();
-			profileSelect(primaryStage);
+			profileSelect();
 		});
 		highScoresButton.setOnAction(event -> {
 			menuWindow.close();
-			highScores(primaryStage);
+			highScores();
 		});
 		
 		howToPlayButton.setOnAction(event -> {
 			menuWindow.close();
-			howToPlay(primaryStage);
+			howToPlay();
 		});
 		quitButton.setOnAction(event -> menuWindow.close());
 		
@@ -134,7 +144,11 @@ public class NewMain extends Application {
 		//Launch
 		menuWindow.show();
 	}
-	private void howToPlay(Stage primaryStage){
+
+	/**
+	 * Method to display a new menu telling the players how to play the game.
+	 */
+	private void howToPlay(){
 		Stage howToPlayWindow = new Stage();
 		howToPlayWindow.setResizable(false);
 		howToPlayWindow.setTitle("HOW TO PLAY");
@@ -167,7 +181,7 @@ public class NewMain extends Application {
 		menuButton.setOnAction(event -> {
 			howToPlayWindow.close();
 			try {
-				start(primaryStage);
+				start(howToPlayWindow);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -184,7 +198,7 @@ public class NewMain extends Application {
 		howToPlayWindow.show();
 	}
 
-	private void highScores(Stage primaryStage) {
+	private void highScores() {
 		Stage highScoresWindow = new Stage();
 		highScoresWindow.setTitle("RAT GAME: HIGH SCORES");
 		VBox container = new VBox();
@@ -194,26 +208,26 @@ public class NewMain extends Application {
 		Button level1ScoresButton = new Button("LEVEL 1");
 		level1ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
-			levelScores(primaryStage, 1);
+			levelScores(1);
 		});
 		
 		Button level2ScoresButton = new Button("LEVEL 2");
 		level2ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
-			levelScores(primaryStage, 2);
+			levelScores(2);
 		});
 		
 		Button level3ScoresButton = new Button("LEVEL 3");
 		level3ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
-			levelScores(primaryStage, 3);
+			levelScores(3);
 		});
 		
 
 		Button level4ScoresButton = new Button("LEVEL 4");
 		level4ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
-			levelScores(primaryStage, 4);
+			levelScores(4);
 		});
 
 		Button backButton = new Button("BACK");
@@ -233,7 +247,7 @@ public class NewMain extends Application {
 		highScoresWindow.show();
 	}
 	
-	private void levelScores(Stage primaryStage, int levelNo) {
+	private void levelScores(int levelNo) {
 
 		Stage levelScoresWindow = new Stage();
 		VBox container = new VBox();
@@ -249,7 +263,7 @@ public class NewMain extends Application {
 
 		backButton.setOnAction(event -> {
 			levelScoresWindow.close();
-			highScores(primaryStage);
+			highScores();
 		});
 		
 		container.getChildren().addAll(text, backButton);
@@ -257,7 +271,7 @@ public class NewMain extends Application {
 		levelScoresWindow.show();
 	}
 	
-	private void profileSelect(Stage primaryStage){
+	private void profileSelect(){
 		Stage profileSelectWindow = new Stage();
 		profileSelectWindow.setTitle("RAT GAME: PROFILE SELECT");
 		ComboBox<String> profileSelect = new ComboBox<String>();
@@ -279,7 +293,7 @@ public class NewMain extends Application {
 				File profile = new File("src/profiles/" + name + ".txt");
 				currentPlayer = new PlayerData(profile);
 				profileSelectWindow.close();
-				levelSelect(primaryStage);
+				levelSelect();
 			}
 		});
 
@@ -296,14 +310,14 @@ public class NewMain extends Application {
 		Button create = new Button("CREATE");
 		create.setOnAction(event -> {
 			profileSelectWindow.close();
-			profileCreator(primaryStage);
+			profileCreator();
 		});
 		
 		Button backButton = new Button(" BACK ");
 		backButton.setOnAction(event -> {
 			profileSelectWindow.close();
 			try {
-				start(primaryStage);
+				start(profileSelectWindow);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -328,7 +342,7 @@ public class NewMain extends Application {
 	}
 	
 	
-	private void profileCreator(Stage primaryStage) {
+	private void profileCreator() {
 		Stage profileCreateWindow = new Stage();
 		GridPane grid = new GridPane();
 		profileCreateWindow.setTitle("RAT GAME: CREATE PROFILE");
@@ -341,7 +355,7 @@ public class NewMain extends Application {
 		Button backButton = new Button("BACK");
 		backButton.setOnAction(event -> {
 			profileCreateWindow.close();
-			profileSelect(primaryStage);
+			profileSelect();
 		});
 		submit.setOnAction(event -> {
 			String playerName = name.getText();
@@ -353,7 +367,7 @@ public class NewMain extends Application {
 					if (file.createNewFile()) {
 						file.createNewFile();
 						profileCreateWindow.close();
-						profileSelect(primaryStage);
+						profileSelect();
 					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -375,7 +389,7 @@ public class NewMain extends Application {
 		profileCreateWindow.show();
 	}
 
-	private void levelSelect(Stage primaryStage){
+	private void levelSelect(){
 		Stage levelMenuWindow = new Stage();
 		levelMenuWindow.setTitle("RAT GAME: LEVEL SELECT");
 		VBox container = new VBox();
@@ -425,7 +439,7 @@ public class NewMain extends Application {
 		backButton.setOnAction(event -> {
 			levelMenuWindow.close();
 			try {
-				start(primaryStage);
+				start(levelMenuWindow);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
