@@ -93,13 +93,13 @@ public class NewMain extends Application {
 		Button howToPlayButton = new Button("HOW TO PLAY");
 		Button quitButton = new Button("QUIT");
 
-		Image image = new Image("Logo.png");
+		Image image = new Image("images/Logo.png");
 		ImageView logoView = new ImageView();
 		logoView.setImage(image);
 		logoView.setFitWidth(200);
 		logoView.setPreserveRatio(true);
 
-		Image maRat = new Image("MaRAT.png"); //Praise be
+		Image maRat = new Image("images/MaRAT.png"); //Praise be
 		ImageView maRatView = new ImageView();
 		maRatView.setImage(maRat);
 		maRatView.setFitWidth(200);
@@ -677,42 +677,42 @@ public class NewMain extends Application {
 		Entity.setGC(gc);
 		root.setCenter(canvas);
 
-		Image gasImg = new Image("Gas.png");
+		Image gasImg = new Image("sprites/Gas.png");
 		ImageView gasButton = new ImageView(gasImg);
 		gasButton.setX(width - 100);
 		gasButton.setY(0);
 
-		Image deathRatImg = new Image("DeathRatN.png");
+		Image deathRatImg = new Image("sprites/DeathRatN.png");
 		ImageView deathRatButton = new ImageView(deathRatImg);
 		deathRatButton.setX(width - 100);
 		deathRatButton.setY(50);
 
-		Image poisonImg = new Image("Poison.png");
+		Image poisonImg = new Image("sprites/Poison.png");
 		ImageView poisonButton = new ImageView(poisonImg);
 		poisonButton.setX(width - 100);
 		poisonButton.setY(100);
 
-		Image sterilisationImg = new Image("Sterilisation.png");
+		Image sterilisationImg = new Image("sprites/Sterilisation.png");
 		ImageView sterilisationButton = new ImageView(sterilisationImg);
 		sterilisationButton.setX(width - 100);
 		sterilisationButton.setY(150);
 
-		Image femaleSexChangeImg = new Image("FemaleSexChange.png");
+		Image femaleSexChangeImg = new Image("sprites/FemaleSexChange.png");
 		ImageView femaleSexChangeButton = new ImageView(femaleSexChangeImg);
 		femaleSexChangeButton.setX(width - 100);
 		femaleSexChangeButton.setY(200);
 
-		Image maleSexChangeImg = new Image("MaleSexChange.png");
+		Image maleSexChangeImg = new Image("sprites/MaleSexChange.png");
 		ImageView maleSexChangeButton = new ImageView(maleSexChangeImg);
 		maleSexChangeButton.setX(width - 100);
 		maleSexChangeButton.setY(250);
 
-		Image noEntrySignImg = new Image("NoEntrySign.png");
+		Image noEntrySignImg = new Image("sprites/NoEntrySign.png");
 		ImageView noEntrySignButton = new ImageView(noEntrySignImg);
 		noEntrySignButton.setX(width - 100);
 		noEntrySignButton.setY(300);
 
-		Image bombImg = new Image("Bomb.png");
+		Image bombImg = new Image("sprites/Bomb.png");
 		ImageView bombButton = new ImageView(bombImg);
 		bombButton.setX(width - 100);
 		bombButton.setY(350);

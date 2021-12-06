@@ -157,7 +157,7 @@ public abstract class Rat extends Entity{
      */
     private void updateRatImage() {
         //creates the rat image name
-        setImageName(ratType + directionFacing + ".png");
+        setImageName("sprites/" + ratType + directionFacing + ".png");
     }
 
     /**

@@ -17,7 +17,7 @@ public class DeathRat extends Rat {
      * @param directionFacing Direction the rat is currently facing.
      */
     public DeathRat(int[] location, String directionFacing) {
-        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"),
+        super(1000, true, location, directionFacing, ("sprites/DeathRat" + directionFacing + ".png"),
                 "DeathRat");
         killCount = 0;
     }
@@ -30,7 +30,7 @@ public class DeathRat extends Rat {
      * @param killCount The number of rats this death rat has killed.
      */
     public DeathRat(int[] location, String directionFacing, int killCount) {
-        super(1000, true, location, directionFacing, ("DeathRat" + directionFacing + ".png"),
+        super(1000, true, location, directionFacing, ("sprites/DeathRat" + directionFacing + ".png"),
                 "DeathRat");//add file for rat image
         this.killCount = killCount;
     }

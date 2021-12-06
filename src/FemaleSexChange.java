@@ -14,7 +14,7 @@ public class FemaleSexChange extends Entity {
 	 * @param location The x, y coordinates of the MaleSexChange object.
 	 */
 	public FemaleSexChange(int[] location) {
-		super(location, "FemaleSexChange.png", "FSC");
+		super(location, "sprites/FemaleSexChange.png", "FSC");
 	}
 
 	/**

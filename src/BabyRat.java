@@ -18,7 +18,7 @@ public class BabyRat extends Rat {
      * @param sterile If rat is sterile or not.
      */
     public BabyRat(int[] location, String directionFacing, boolean sterile){
-        super(100, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
+        super(100, sterile, location, directionFacing, "sprites/BabyRat.png", "BabyRat");
         this.age = 0;
         //assigns random sex
         this.sex = randomSex();
@@ -33,7 +33,7 @@ public class BabyRat extends Rat {
      * @param sterile If rat is sterile or not
      */
     public BabyRat(String sex, int[] location, String directionFacing, int health, boolean sterile){
-        super(health, sterile, location, directionFacing, "BabyRat.png", "BabyRat");
+        super(health, sterile, location, directionFacing, "sprites/BabyRat.png", "BabyRat");
         this.age = 0;
         if (sex.equals("F") || (sex.equals("BF"))) {
             this.sex = "F";

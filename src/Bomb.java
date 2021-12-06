@@ -16,7 +16,7 @@ public class Bomb extends Entity{
 	 * @param location The x, y coordinates of the bomb on the map.
 	 */
     public Bomb(int[] location) {
-        super(location, "Bomb4.png", "Bomb");
+        super(location, "sprites/Bomb4.png", "Bomb");
 		this.countdown = 16;
     }
 
@@ -28,7 +28,7 @@ public class Bomb extends Entity{
 	 * @param countdown The time remaining before the bomb blows up in quarter seconds.
 	 */
     public Bomb(int[] location, int countdown) {
-        super(location, "Bomb.png", "Bomb");
+        super(location, "sprites/Bomb.png", "Bomb");
         this.countdown = countdown;
         updateBombImage();
     }
@@ -46,16 +46,16 @@ public class Bomb extends Entity{
         
         switch(countdown) {
 			case 16:
-				setImageName("Bomb4.png");
+				setImageName("sprites/Bomb4.png");
 				break;
 			case 12:
-				setImageName("Bomb3.png");
+				setImageName("sprites/Bomb3.png");
 				break;
 			case 8:
-				setImageName("Bomb2.png");
+				setImageName("sprites/Bomb2.png");
 				break;
 			case 4:
-				setImageName("Bomb1.png");
+				setImageName("sprites/Bomb1.png");
 				break;
         }
     }

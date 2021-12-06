@@ -72,7 +72,7 @@ public class Level {
 			saveGame.write(levelScore + "\n");
 			saveGame.write(Inventory.returnQuantity() + "\n");
 			saveGame.write(Inventory.returnTimers() + "\n");
-			saveGame.write(parTime + "\n");
+			saveGame.write(parTime - map.count + "\n");
 			saveGame.write(maxRats + "\n");
 			saveGame.write(Inventory.returnSpawnRates() + "\n");
 			int row = tileLayout[0].length;

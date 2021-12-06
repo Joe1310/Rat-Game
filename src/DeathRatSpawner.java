@@ -14,7 +14,7 @@ public class DeathRatSpawner extends Entity {
      * @param location The x, y coordinates of the object.
      */
     public DeathRatSpawner(int[] location) {
-        super(location, "DeathRatN.png", "DRS");
+        super(location, "sprites/DeathRatN.png", "DRS");
         this.countdown = 6;
     }
 
@@ -25,7 +25,7 @@ public class DeathRatSpawner extends Entity {
      * @param countdown The time remaining before the spawner creates a deathRat.
      */
     public DeathRatSpawner(int[] location, int countdown) {
-        super(location, "DeathRatN.png", "DRS");
+        super(location, "sprites/DeathRatN.png", "DRS");
         this.countdown = countdown;
     }
 
