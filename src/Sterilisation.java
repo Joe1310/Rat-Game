@@ -15,7 +15,7 @@ class Sterilisation extends Entity {
      * @param location The x, y coordinates that the sterilisation object is to be placed at.
      */
     public Sterilisation(int[] location) {
-        super(location, "Sterilisation.png", "Steriliser");
+        super(location, "sprites/Sterilisation.png", "Steriliser");
     }
 
     /**
@@ -26,7 +26,7 @@ class Sterilisation extends Entity {
      * @param timer Time left before the sterilisation object is deleted.
      */
     public Sterilisation(int[] location, int timer) {
-        super(location, "Sterilisation.png", "Steriliser");
+        super(location, "sprites/Sterilisation.png", "Steriliser");
         this.timer = timer;
     }
 

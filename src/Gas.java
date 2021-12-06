@@ -22,7 +22,7 @@ public class Gas extends Entity {
 	 * @param hasSpread Boolean of if the gas has expanded or not.
 	 */
 	public Gas(int[] location, boolean hasSpread) {
-		super(location, "Gas.png", "Gas");
+		super(location, "sprites/Gas.png", "Gas");
 		this.spreadLimit = 5;
 		this.hasSpread = hasSpread;
 		this.direction = null;
@@ -37,7 +37,7 @@ public class Gas extends Entity {
 	 * @param hasSpread Boolean of if the gas has expanded or not.
 	 */
 	public Gas(int[] location, int spreadLimit, String direction, boolean hasSpread) {
-		super(location, "Gas.png", "Gas");
+		super(location, "sprites/Gas.png", "Gas");
 		this.spreadLimit = spreadLimit;
 		this.hasSpread = hasSpread;
 		this.direction = direction;

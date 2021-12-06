@@ -44,9 +44,9 @@ public class Map {
      * @param gc Graphics context used to draw tiles.
      */
     public void tileOut(GraphicsContext gc) {
-        Image grassImage = new Image("Grass2.png");
-        tunnelImage = new Image("Tunnel.png");
-        Image pathImage = new Image("PathTile.png");
+        Image grassImage = new Image("sprites/Grass2.png");
+        tunnelImage = new Image("sprites/Tunnel.png");
+        Image pathImage = new Image("sprites/PathTile.png");
 
         for (int i = 0; i < (row); i++) {
             for (int j = 0; j < column; j++) {
@@ -166,14 +166,14 @@ public class Map {
     private void drawCounter() {
         int SIZE = 400;
         gc.clearRect(((column + 1) * GRID_SIZE), 0, GRID_SIZE, SIZE);
-        gc.drawImage(new Image(Inventory.getGas() +".png"),((column + 1) * 50), 0);
-        gc.drawImage(new Image(Inventory.getDeathRat() +".png"),((column + 1) * 50), 50);
-        gc.drawImage(new Image(Inventory.getPoison() +".png"),((column + 1) * 50), 100);
-        gc.drawImage(new Image(Inventory.getSterilisation() +".png"),((column + 1) * 50), 150);
-        gc.drawImage(new Image(Inventory.getFemaleSexChange() +".png"),((column + 1) * 50), 200);
-        gc.drawImage(new Image(Inventory.getMaleSexChange() +".png"),((column + 1) * 50), 250);
-        gc.drawImage(new Image(Inventory.getNoEntrySign() +".png"),((column + 1) * 50), 300);
-        gc.drawImage(new Image(Inventory.getBomb() +".png"),((column + 1) * 50), 350);
+        gc.drawImage(new Image("sprites/" + Inventory.getGas() +".png"),((column + 1) * 50), 0);
+        gc.drawImage(new Image("sprites/" + Inventory.getDeathRat() +".png"),((column + 1) * 50), 50);
+        gc.drawImage(new Image("sprites/" + Inventory.getPoison() +".png"),((column + 1) * 50), 100);
+        gc.drawImage(new Image("sprites/" + Inventory.getSterilisation() +".png"),((column + 1) * 50), 150);
+        gc.drawImage(new Image("sprites/" + Inventory.getFemaleSexChange() +".png"),((column + 1) * 50), 200);
+        gc.drawImage(new Image("sprites/" + Inventory.getMaleSexChange() +".png"),((column + 1) * 50), 250);
+        gc.drawImage(new Image("sprites/" + Inventory.getNoEntrySign() +".png"),((column + 1) * 50), 300);
+        gc.drawImage(new Image("sprites/" + Inventory.getBomb() +".png"),((column + 1) * 50), 350);
     }
 
     /**
@@ -182,7 +182,7 @@ public class Map {
      * @param gc Graphics context used to draw tiles.
      */
     private void tunnelOut(GraphicsContext gc) {
-        tunnelImage = new Image("Tunnel.png");
+        tunnelImage = new Image("sprites/Tunnel.png");
 
         for (int i = 0; i < (row); i++) {
             for (int j = 0; j < column; j++) {

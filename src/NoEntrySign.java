@@ -13,7 +13,7 @@ public class NoEntrySign extends Entity {
 	 * @param location The coordinates x, y of the entity.
 	 */
 	public NoEntrySign(int[] location) {
-		super(location, "NoEntrySign.png", "NES");
+		super(location, "sprites/NoEntrySign.png", "NES");
 		health = 5;
 	}
 
@@ -24,7 +24,7 @@ public class NoEntrySign extends Entity {
 	 * @param health The remaining number of rats that can hit the sign before it breaks.
 	 */
 	public NoEntrySign(int[] location, int health) {
-		super(location, "NoEntrySign.png", "NES");
+		super(location, "sprites/NoEntrySign.png", "NES");
 		this.health = health;
 	}
 
@@ -45,16 +45,16 @@ public class NoEntrySign extends Entity {
 		}
 		switch(health) {
 			case 4:
-				setImageName("NoEntrySign2.png");
+				setImageName("sprites/NoEntrySign2.png");
 				break;
 			case 3:
-				setImageName("NoEntrySign3.png");
+				setImageName("sprites/NoEntrySign3.png");
 				break;
 			case 2:
-				setImageName("NoEntrySign4.png");
+				setImageName("sprites/NoEntrySign4.png");
 				break;
 			case 1:
-				setImageName("NoEntrySign5.png");
+				setImageName("sprites/NoEntrySign5.png");
 				break;
 		}
 	}

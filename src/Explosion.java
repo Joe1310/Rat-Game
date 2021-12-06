@@ -15,7 +15,7 @@ public class Explosion extends Entity {
 	 * @param location The x, y coordinates of the explosion.
 	 */
     public Explosion(int[] location) {
-        super(location, "Explosion.png", "Explosion");
+        super(location, "sprites/Explosion.png", "Explosion");
     }
 
 	/**

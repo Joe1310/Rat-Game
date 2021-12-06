@@ -26,7 +26,7 @@ public class AdultRat extends Rat {
 	 * @param sterile If rat is sterile or not
 	 */
     public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile){
-    	super(health, sterile, location, directionFacing, (sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
+    	super(health, sterile, location, directionFacing, ("sprites/" + sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
         this.sex = sex;
         this.isPregnant = false;
         this.timeMating = 0;
@@ -52,7 +52,7 @@ public class AdultRat extends Rat {
 	 */
     public AdultRat(String sex, int[] location, String directionFacing, int health, boolean sterile, boolean pregnant, 
     			boolean mating, int timePregnant, int timeMating, int matingCooldown, int babyAmount){
-    	super(health, sterile, location, directionFacing, (sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
+    	super(health, sterile, location, directionFacing, ("sprites/" + sex + "Rat" + directionFacing + ".png"), (sex + "Rat"));
         this.sex = sex;
         this.isPregnant = pregnant;
         this.isMating = mating;
