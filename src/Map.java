@@ -24,7 +24,7 @@ public class Map {
     private Image pathImage;
     private Image tunnelImage;
     private int timer;
-    public static int count;
+    public static int count = 0;
     private static GraphicsContext gc;
 
     /**
