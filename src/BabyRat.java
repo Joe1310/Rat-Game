@@ -7,10 +7,8 @@
 
 public class BabyRat extends Rat {
 
-    private final int MAX_AGE = 14;
-
     private int age;
-    private String sex;
+    private final String sex;
 
     /**
      * Constructor to create a BabyRat object.
@@ -69,6 +67,7 @@ public class BabyRat extends Rat {
     private void increaseAge() {
         age++;
         //checks if age is equal to 14 and if so makes an adult rat in its place
+        int MAX_AGE = 14;
         if (this.age == MAX_AGE) {
             becomeAdult();
         }
@@ -79,7 +78,7 @@ public class BabyRat extends Rat {
      */
     private void becomeAdult(){
         //removes the baby rat and spawns an adult rat in its place with all the same attributes
-        Entity newAdultRat = new AdultRat(this.sex, this.location, this.directionFacing,
+        new AdultRat(this.sex, this.location, this.directionFacing,
                 this.health, this.sterile);
         //removes the baby rat
         removeEntity();

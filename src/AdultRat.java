@@ -153,23 +153,23 @@ public class AdultRat extends Rat {
 	private void procreateCheck(){
 
 		for (int i = Rat.getRats().size()-1; i > -1; i--) {
-			int COOLDOWN = 60;
+			int cooldown = 60;
 			if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
 					(Rat.getRats().get(i).getRatType().equals("FRat") && this.sex.equals("M")) && !this.sterile && !Rat.getRats().get(i).sterile
 					&& !((AdultRat)Rat.getRats().get(i)).isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
 				isMating = true;
-				matingCooldown = COOLDOWN;
+				matingCooldown = cooldown;
 				((AdultRat)Rat.getRats().get(i)).isMating = true;
 				((AdultRat)Rat.getRats().get(i)).isPregnant = true;
-				((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
+				((AdultRat)Rat.getRats().get(i)).matingCooldown = cooldown;
 			} else if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
 					(Rat.getRats().get(i).getRatType().equals("MRat") && this.sex.equals("F")) && !Rat.getRats().get(i).sterile
 					&& !this.sterile && !this.isPregnant && ((AdultRat)Rat.getRats().get(i)).matingCooldown == 0) {
 				isPregnant = true;
 				isMating = true;
-				matingCooldown = COOLDOWN;
+				matingCooldown = cooldown;
 				((AdultRat)Rat.getRats().get(i)).isMating = true;
-				((AdultRat)Rat.getRats().get(i)).matingCooldown = COOLDOWN;
+				((AdultRat)Rat.getRats().get(i)).matingCooldown = cooldown;
 			}
 		}
 	}
@@ -178,8 +178,8 @@ public class AdultRat extends Rat {
 	 * Method to check if the rats have been mating for long enough.
 	 */
 	private void mating() {
-		int MATING_TIME = 6;
-		if (timeMating == MATING_TIME) {
+		int matingTime = 6;
+		if (timeMating == matingTime) {
 			isMating = false;
 			timeMating = 0;
 		} else {
@@ -192,8 +192,8 @@ public class AdultRat extends Rat {
 	 */
 	private void pregnancy() {
 		// checks if the mother has been pregnant for long enough
-		int PREGNANCY_TIME = 4;
-		if(timePregnant != PREGNANCY_TIME) {
+		int pregnancyTime = 4;
+		if(timePregnant != pregnancyTime) {
 			timePregnant++;
 		} else {
 			//starts spawning baby rats

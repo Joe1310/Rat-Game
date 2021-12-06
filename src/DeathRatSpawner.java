@@ -5,10 +5,8 @@
  * @version 1.0
  */
 public class DeathRatSpawner extends Entity {
-    
-	private final int START_COUNTDOWN = 6;
-	
-	private int countdown;
+
+    private int countdown;
 
     /**
      * Constructor to create the DeathRatSpawner object.
@@ -17,7 +15,7 @@ public class DeathRatSpawner extends Entity {
      */
     public DeathRatSpawner(int[] location) {
         super(location, "DeathRatN.png", "DRS");
-        this.countdown = START_COUNTDOWN;
+        this.countdown = 6;
     }
 
     /**
@@ -36,7 +34,7 @@ public class DeathRatSpawner extends Entity {
      */
     public void act() {
     	if (countdown == 0) {
-            Entity deathRat = new DeathRat(this.location, "N");
+            new DeathRat(this.location, "N");
             removeEntity();
         } else {
         	countdown--;
