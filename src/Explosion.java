@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
  * Class to model an Explosion entity.
  *
- * @author Elliot, Ollie
+ * @author Elliot
  * @version 1.0
  */
 public class Explosion extends Entity {
