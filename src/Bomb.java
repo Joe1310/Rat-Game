@@ -15,8 +15,8 @@ public class Bomb extends Entity{
 	 * @param location The x, y coordinates of the bomb on the map.
 	 */
     public Bomb(int[] location) {
-        super(location, "Bomb5.png", "Bomb");
-        this.countdown = 20;
+        super(location, "Bomb4.png", "Bomb");
+        this.countdown = 16;
     }
 
 	/**
