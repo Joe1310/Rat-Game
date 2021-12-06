@@ -21,7 +21,7 @@ public class DeathRatSpawner extends Entity {
     /**
      * Constructor to create a DeathRatSpawner object from a saved game file.
      *
-     * @param location The x, y coordinates of the object.
+     * @param location  The x, y coordinates of the object.
      * @param countdown The time remaining before the spawner creates a deathRat.
      */
     public DeathRatSpawner(int[] location, int countdown) {
@@ -33,11 +33,11 @@ public class DeathRatSpawner extends Entity {
      * Method to run the actions of the entity every tick.
      */
     public void act() {
-    	if (countdown == 0) {
+        if (countdown == 0) {
             new DeathRat(this.location, "N");
             removeEntity();
         } else {
-        	countdown--;
+            countdown--;
         }
     }
 
@@ -47,6 +47,6 @@ public class DeathRatSpawner extends Entity {
      * @return Returns attribute values as single String.
      */
     public String toString() {
-    	return (this.getType() + " " + location[0] + " " + location[1] + " " + countdown);
+        return (this.getType() + " " + location[0] + " " + location[1] + " " + countdown);
     }
 }

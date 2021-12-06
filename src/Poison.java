@@ -8,41 +8,41 @@ import java.util.Arrays;
  */
 public class Poison extends Entity {
 
-	/**
-	 * Constructor to create a poison object.
-	 *
-	 * @param location The x, y coordinates of the poison object.
-	 */
-	public Poison(int[] location) {
-		super(location, "sprites/Poison.png", "Poison");
-	}
+    /**
+     * Constructor to create a poison object.
+     *
+     * @param location The x, y coordinates of the poison object.
+     */
+    public Poison(int[] location) {
+        super(location, "sprites/Poison.png", "Poison");
+    }
 
-	/**
-	 * Method to run the actions of the entity every tick.
-	 */
-	public void act() {
-		killRats();
-	}
+    /**
+     * Method to run the actions of the entity every tick.
+     */
+    public void act() {
+        killRats();
+    }
 
-	/**
-	 * Method to kill rats that enter the gas.
-	 */
-	private void killRats() {
-		for (int i = Rat.getRats().size()-1; i > -1; i--) {
-			if (Arrays.equals(Rat.getRats().get(i).location, this.location) && 
-					!(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
-				(Rat.getRats().get(i)).ratDeath();
-				removeEntity();
-	        }
+    /**
+     * Method to kill rats that enter the gas.
+     */
+    private void killRats() {
+        for (int i = Rat.getRats().size() - 1; i > -1; i--) {
+            if (Arrays.equals(Rat.getRats().get(i).location, this.location) &&
+                    !(Rat.getRats().get(i).getRatType().equals("DeathRat"))) {
+                (Rat.getRats().get(i)).ratDeath();
+                removeEntity();
+            }
         }
-	}
+    }
 
-	/**
-	 * Method to return the attribute values of the Poison entity.
-	 *
-	 * @return Returns attribute values as single String.
-	 */
-	public String toString() {
-    	return (this.getType() + " " + location[0] + " " + location[1]);
+    /**
+     * Method to return the attribute values of the Poison entity.
+     *
+     * @return Returns attribute values as single String.
+     */
+    public String toString() {
+        return (this.getType() + " " + location[0] + " " + location[1]);
     }
 }

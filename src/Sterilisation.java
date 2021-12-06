@@ -23,7 +23,7 @@ class Sterilisation extends Entity {
      * it was when the game was saved).
      *
      * @param location The x, y coordinates that the sterilisation object is to be placed at.
-     * @param timer Time left before the sterilisation object is deleted.
+     * @param timer    Time left before the sterilisation object is deleted.
      */
     public Sterilisation(int[] location, int timer) {
         super(location, "sprites/Sterilisation.png", "Steriliser");
@@ -52,16 +52,16 @@ class Sterilisation extends Entity {
      * Method to sterilise a rat that goes through the Sterilisation entity.
      */
     private void steriliseRats() {
-    	int[] corner = {this.location[0] - 1, this.location[1] - 1}; //Sets the radius to northwest of the steriliser
-        for (int i = Rat.getRats().size()-1; i > -1; i--) {
-        	for(int k = corner[1]; k <= (this.location[1] + 1); k++) {
-        		for(int j = corner[0]; j <= (this.location[0] + 1); j++) {
-        			int [] testLocation = {j, k};
-        			if (checkRat(testLocation, i)) {
-        				Rat.getRats().get(i).sterilise();
-        			}
-        		}
-        	}
+        int[] corner = {this.location[0] - 1, this.location[1] - 1}; //Sets the radius to northwest of the steriliser
+        for (int i = Rat.getRats().size() - 1; i > -1; i--) {
+            for (int k = corner[1]; k <= (this.location[1] + 1); k++) {
+                for (int j = corner[0]; j <= (this.location[0] + 1); j++) {
+                    int[] testLocation = {j, k};
+                    if (checkRat(testLocation, i)) {
+                        Rat.getRats().get(i).sterilise();
+                    }
+                }
+            }
         }
     }
 
@@ -69,7 +69,7 @@ class Sterilisation extends Entity {
      * Method to check if a rat is on the Sterilisation entity.
      *
      * @param tempLocation Sterilisation entity location.
-     * @param index Rat index.
+     * @param index        Rat index.
      * @return Boolean of whether the given rat is on the same tile as the Sterilisation Entity.
      */
     private boolean checkRat(int[] tempLocation, int index) {
@@ -82,6 +82,6 @@ class Sterilisation extends Entity {
      * @return Returns attribute values as single String.
      */
     public String toString() {
-    	return (getType() + " " + location[0] + " " + location[1] + " " + timer);
+        return (getType() + " " + location[0] + " " + location[1] + " " + timer);
     }
 }

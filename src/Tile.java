@@ -11,10 +11,10 @@ public class Tile {
      * Constructor to create a tile entity.
      *
      * @param tileType The type of tile (Grass, Tunnel, Path).
-     * @param x x coordinate of the tile.
-     * @param y y coordinate of the tile.
+     * @param x        x coordinate of the tile.
+     * @param y        y coordinate of the tile.
      */
-    public Tile(char tileType, int x, int y){
+    public Tile(char tileType, int x, int y) {
         this.tileType = tileType;
     }
 
@@ -23,7 +23,7 @@ public class Tile {
      *
      * @return Tile type associated with the tile.
      */
-    public char getTileType(){
+    public char getTileType() {
         return this.tileType;
     }
 }

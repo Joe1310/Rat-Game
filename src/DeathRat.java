@@ -7,13 +7,13 @@ import java.util.Arrays;
  * @version 2.0
  */
 public class DeathRat extends Rat {
-	
+
     private int killCount;
 
     /**
      * Constructor to create a DeathRat entity.
      *
-     * @param location Location of the rat.
+     * @param location        Location of the rat.
      * @param directionFacing Direction the rat is currently facing.
      */
     public DeathRat(int[] location, String directionFacing) {
@@ -25,9 +25,9 @@ public class DeathRat extends Rat {
     /**
      * Constructor to create a DeathRat entity with attributes pulled from a saved game file.
      *
-     * @param location Location of the rat.
+     * @param location        Location of the rat.
      * @param directionFacing Direction the rat is currently facing.
-     * @param killCount The number of rats this death rat has killed.
+     * @param killCount       The number of rats this death rat has killed.
      */
     public DeathRat(int[] location, String directionFacing, int killCount) {
         super(1000, true, location, directionFacing, ("sprites/DeathRat" + directionFacing + ".png"),
@@ -42,7 +42,7 @@ public class DeathRat extends Rat {
         //checks if their is another rat on its tile and kills any that are.
         killRat();
         if (wait == 1) {
-        	move();
+            move();
         }
     }
 
@@ -62,7 +62,7 @@ public class DeathRat extends Rat {
      */
     private void killRat() {
         //searches through the list of rats and sees if any are on the same tile
-        for (int i = rats.size()-1; i > -1; i--) {
+        for (int i = rats.size() - 1; i > -1; i--) {
             if (Arrays.equals(rats.get(i).location, this.location) &&
                     !rats.get(i).getRatType().equals("DeathRat")) {
                 //if they are it removes the other rat and adds one to the kill count
@@ -71,7 +71,7 @@ public class DeathRat extends Rat {
             }
         }
         //checks if the kill count is greater or equal to 5 and if so then removes the death rat
-        if (killCount >= 5){
+        if (killCount >= 5) {
             ratDeath();
         }
     }
