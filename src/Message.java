@@ -39,7 +39,7 @@ public class Message {
 	 * @return returns the result of the GET request
 	 * @throws IOException Throws an IOException if the HTTP request fails.
 	 */
-	public String GetHTTP(String link) throws IOException {
+	private String GetHTTP(String link) throws IOException {
 		
 		URL url = new URL(link);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -57,7 +57,7 @@ public class Message {
 	 * @param code Cipher text to be decoded.
 	 * @return returns the result of decoding the string.
 	 */
-	public static String decode(String code) {
+	private static String decode(String code) {
 		
 		String passcode = "";
 	
@@ -78,7 +78,7 @@ public class Message {
 	 * @param shift Amount to shift the character by.
 	 * @return Deciphered character.
 	 */
-	public static char cipher(char c, int shift) {
+	private static char cipher(char c, int shift) {
 		
 		if(shift % 2 != 0) {
 			if(c - shift < 65) {
