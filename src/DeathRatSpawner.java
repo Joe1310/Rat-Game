@@ -1,7 +1,7 @@
 /**
  * Class to model a DeathRatSpawner entity.
  *
- * @author Elliot, Ollie
+ * @author Ollie
  * @version 1.0
  */
 public class DeathRatSpawner extends Entity {
