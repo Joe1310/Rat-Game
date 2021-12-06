@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Class to model a Map of Tile objects.
  *
- * @author Joe, Jay
+ * @author Joe, Jay, Elliot
  * @version 1.0
  */
 public class Map {

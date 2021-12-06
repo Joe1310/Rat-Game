@@ -4,7 +4,7 @@ import java.util.Arrays;
 /**
  * Class to model the sterilisation item.
  *
- * @author Elliot, Ollie, Jay
+ * @author Jay, Elliot
  * @version 1.0
  */
 class Sterilisation extends Entity {

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Class to model a Bomb item
  *
- * @author Elliot, Ollie
+ * @author Ollie, Elliot
  * @version 1.0
  */
 public class Bomb extends Entity{

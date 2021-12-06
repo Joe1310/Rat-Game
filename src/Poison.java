@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
  * Class to model the Poison item.
  *
- * @author Elliot, Ollie
+ * @author Shivraj, Elliot
  * @version 1.0
  */
 public class Poison extends Entity {

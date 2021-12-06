@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
  * Class to model a MaleSexChange entity.
  *
- * @author Elliot, Ollie
+ * @author Shivraj, Elliot
  * @version 1.0
  */
 public class MaleSexChange extends Entity {

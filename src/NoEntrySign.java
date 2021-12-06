@@ -1,7 +1,7 @@
 /**
  * Class to model a NoEntrySign item.
  *
- * @author Elliot, Ollie
+ * @author Elliot
  * @version 1.0
  */
 public class NoEntrySign extends Entity {
