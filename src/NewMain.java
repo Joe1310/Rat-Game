@@ -191,20 +191,20 @@ public class NewMain extends Application {
 		});
 		
 		Button level2ScoresButton = new Button("LEVEL 2");
-		level1ScoresButton.setOnAction(event -> {
+		level2ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
 			levelScores(primaryStage, 2);
 		});
 		
 		Button level3ScoresButton = new Button("LEVEL 3");
-		level1ScoresButton.setOnAction(event -> {
+		level3ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
 			levelScores(primaryStage, 3);
 		});
 		
 
 		Button level4ScoresButton = new Button("LEVEL 4");
-		level1ScoresButton.setOnAction(event -> {
+		level4ScoresButton.setOnAction(event -> {
 			highScoresWindow.close();
 			levelScores(primaryStage, 4);
 		});
