@@ -123,6 +123,29 @@ public abstract class Rat extends Entity{
     }
 
     /**
+     * Method to get the rat type.
+     *
+     * @return Returns rat type.
+     */
+    public String getRatType() {
+        return ratType;
+    }
+
+    /**
+     * Method to update the rat image dependant on the way the rat is facing.
+     */
+    public void updateRatImage() {
+        //creates the rat image name
+        setImageName(ratType + directionFacing + ".png");
+    }
+    /**
+     * Method to set the rat to sterile.
+     */
+    protected void sterilise() {
+        sterile = true;
+    }
+
+    /**
      * Method to remove rat entity.
      */
     protected void ratDeath() {
@@ -136,34 +159,10 @@ public abstract class Rat extends Entity{
     }
 
     /**
-     * Method to set the rat to sterile.
-     */
-    protected void sterilise() {
-       sterile = true;
-    }
-
-    /**
-     * Method to get the rat type.
-     *
-     * @return Returns rat type.
-     */
-    public String getRatType() {
-        return ratType;
-    }
-
-    /**
      * Method to set the type of rat.
      */
     protected void setRatType(String ratType) {
     	this.ratType = ratType;
-    }
-
-    /**
-     * Method to update the rat image dependant on the way the rat is facing.
-     */
-    public void updateRatImage() {
-        //creates the rat image name
-    	setImageName(ratType + directionFacing + ".png");
     }
 
     /**
