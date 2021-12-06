@@ -47,7 +47,7 @@ public class Main extends Application {
     private static final int STAGE1_CANVAS_WIDTH = 650;
     private static final int STAGE1_CANVAS_HEIGHT = 350;
     private static final int STAGE2_CANVAS_WIDTH = 1100;
-    private static final int STAGE2_CANVAS_HEIGHT = 800;
+    private static final int STAGE2_CANVAS_HEIGHT = 700;
     private static final int STAGE3_CANVAS_WIDTH = 950;
     private static final int STAGE3_CANVAS_HEIGHT = 500;
     private static final int STAGE4_CANVAS_WIDTH = 1400;
