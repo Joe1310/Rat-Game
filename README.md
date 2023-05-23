@@ -1,10 +1,11 @@
 # CS230 - A2
 
- Rat game project
+Rat game project
 
 ## Description
 
 A game where the aim is to eliminate all the rats that are on the map to gain as much score as possible.
+The project itself is based on the game Rats! (1998)
 
 ## Getting Started
 
@@ -28,7 +29,7 @@ A game where the aim is to eliminate all the rats that are on the map to gain as
 
 ## Authors
 
-* Joseph Henry 2035032
+* Joseph Henry - 2035032
 * Elliot Thomas - 2005195
 * Oliver Richardson - 2009566
 * Nicholas Kumik - 2016290
