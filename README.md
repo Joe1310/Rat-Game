@@ -5,7 +5,7 @@ Rat game project
 ## Description
 
 A game where the aim is to eliminate all the rats that are on the map to gain as much score as possible.
-The project itself is based on the game Rats! (1998)
+The project itself is based on the game Rats! (1994)
 
 ## Getting Started
 
